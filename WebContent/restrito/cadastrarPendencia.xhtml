@@ -1,0 +1,120 @@
+
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="menu">
+		<ui:include src="/WEB-INF/partials/menu.xhtml" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<center>
+			<div>
+				<h:form acceptcharset="ISO-8859-1" id="form1">
+					<p:panel header="Cadastro de Pendências">
+						<h:panelGrid columns="2" columnClasses="label, value"
+							style="text-align:left">
+							<h:outputText value="Titulo:*" />
+							<p:inputText value="#{pendenciaMB.pendencia.titulo}"
+								required="true" requiredMessage="O campo Título é obrigatório!"
+								label="Título" size="48" maxlength="255"/>
+
+							<h:outputText value="Setor:* " />
+							<p:selectOneMenu id="setor"
+								value="#{pendenciaMB.pendencia.setor}"
+								converter="setorConverter" required="true"
+								requiredMessage="O campo Setor é obrigatório!">
+								<f:param value="Setor" />
+								<f:selectItem itemLabel="---Selecione---" itemValue="#{null}"
+									noSelectionOption="true" />
+								<f:selectItems value="#{setorMB.allSetores}" var="setor"
+									itemLabel="#{setor.nome}" itemValue="#{setor}" />
+							</p:selectOneMenu>
+
+							<h:outputText value="Projeto:* " />
+							<p:selectOneMenu id="projeto"
+								value="#{pendenciaMB.pendencia.projeto}"
+								converter="projetoConverter" required="true"
+								requiredMessage="O campo Projeto é obrigatório!">
+								<f:selectItem itemLabel="---Selecione---" itemValue="#{null}"
+									noSelectionOption="true" />
+								<f:selectItems value="#{projetoMB.allProjetos}" var="projeto"
+									itemLabel="#{projeto.nome}" itemValue="#{projeto}" />
+							</p:selectOneMenu>
+
+							<h:outputText value="Responsável:* " />
+							<p:selectOneMenu id="responsavel"
+								value="#{pendenciaMB.pendencia.responsavel}" required="true"
+								requiredMessage="O campo Responsável é obrigatório!">
+								<f:selectItem itemLabel="---Selecione---" itemValue="#{null}"
+									noSelectionOption="true" />
+								<f:selectItems value="#{responsavelBean.responsavelList}" var="responsavel"
+									itemLabel="#{responsavel.label}" itemValue="#{responsavel}" />
+							</p:selectOneMenu>
+							
+							<h:outputText value="Categoria:* " />
+							<p:selectOneMenu id="categoria"
+								value="#{pendenciaMB.pendencia.categoria}" required="true"
+								requiredMessage="O campo Categoria é obrigatório!">
+								<f:selectItem itemLabel="---Selecione---" itemValue="#{null}"
+									noSelectionOption="true" />
+								<f:selectItems value="#{categoriaBean.categoriaList}" var="categoria"
+									itemLabel="#{categoria.label}" itemValue="#{categoria}" />
+							</p:selectOneMenu>
+							
+							<h:outputText value="Status:* " />
+							<p:selectOneMenu id="status"
+								value="#{pendenciaMB.pendencia.status}" required="true"
+								requiredMessage="O campo Status é obrigatório!">
+								<f:selectItems value="#{statusBean.statusAberto}" var="status"
+									itemLabel="#{status.label}" itemValue="#{status}" />
+							</p:selectOneMenu>
+
+							<h:outputText value="Prioridade:* " />
+							<p:selectOneMenu id="prioridade"
+								value="#{pendenciaMB.pendencia.prioridade}" required="true"
+								requiredMessage="O campo Prioridade é obrigatório!">
+								<f:selectItem itemLabel="---Selecione---" itemValue="#{null}"
+									noSelectionOption="true" />
+								<f:selectItems value="#{prioridadeBean.prioridadeList}"
+									var="prioridade" itemLabel="#{prioridade.label}"
+									itemValue="#{prioridade}" />
+							</p:selectOneMenu>
+
+							<h:outputText value="Item do edital: " />
+							<p:inputText value="#{pendenciaMB.pendencia.itemDoEdital}"
+								required="false" label="" maxlength="255"/>
+
+							<h:outputText value="Descricao: *" />
+							<p:inputTextarea rows="10" cols="50"
+								value="#{pendenciaMB.pendencia.descricao}" queryDelay="750"
+								minQueryLength="4" required="true"
+								requiredMessage="O campo Descrição é obrigatório!" />
+
+							<h:outputText value="Observações: " />
+							<p:inputTextarea rows="5" cols="50"
+								value="#{pendenciaMB.pendencia.obs}" queryDelay="750"
+								minQueryLength="4" />
+
+							<p:columnGroup>
+							</p:columnGroup>
+
+							<p:columnGroup>
+								<p:commandButton value="Enviar" ajax="false"
+									icon="ui-icon-check" action="#{pendenciaMB.createPendencia}" />
+								<p:commandButton value="Limpar" icon="ui-icon-cancel">
+									<p:ajax update=":form1" resetValues="true" />
+								</p:commandButton>
+							</p:columnGroup>
+						</h:panelGrid>
+					</p:panel>
+				</h:form>
+			</div>
+		</center>
+
+	</ui:define>
+
+</ui:composition>

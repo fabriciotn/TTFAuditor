@@ -1,0 +1,134 @@
+
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="menu">
+		<ui:include src="/WEB-INF/partials/menu.xhtml" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<center>
+			<h:form>
+				<p:dataTable id="tbl" var="pendencia"
+					value="#{pendenciaMB.allPendencias}"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+					paginator="true" rows="10" style="margin-bottom:20px" filterEvent="enter">
+
+					<f:facet name="{Exporters}">
+						<h:commandLink>
+							<img name="logo" src="../images/excel.png" width="24px"
+								title="Exportar para Excel" alt="Exportar para Excel" />
+							<p:dataExporter type="xls" target="tbl" fileName="Pendencias" />
+						</h:commandLink>
+
+						<h:commandLink>
+							<img name="logo" src="../images/pdf.png" width="24px"
+								title="Exportar para PDF" alt="Exportar para PDF" />
+							<p:dataExporter type="pdf" target="tbl" fileName="Pendencias" />
+						</h:commandLink>
+
+						<h:commandLink>
+							<img name="logo" src="../images/csv.png" width="24px"
+								title="Exportar para CSV" alt="Exportar para CSV" />
+							<p:dataExporter type="csv" target="tbl" fileName="Pendencias" />
+						</h:commandLink>
+
+						<h:commandLink>
+							<img name="logo" src="../images/xml.png" width="24px"
+								title="Exportar para XML" alt="Exportar para XML" />
+							<p:dataExporter type="xml" target="tbl" fileName="Pendencias" />
+						</h:commandLink>
+					</f:facet>
+
+					<p:column width="80" filterBy="#{pendencia.id}"
+						sortBy="#{pendencia.id}" style="text-align: center;">
+						<f:facet name="header">
+							<h:outputText value="Id" />
+						</f:facet>
+						<h:outputText value="#{pendencia.id}" />
+					</p:column>
+
+					<p:column wifilterBy="#{pendencia.titulo}"
+						sortBy="#{pendencia.titulo}">
+						<f:facet name="header">
+							<h:outputText value="Título" />
+						</f:facet>
+						<h:outputText value="#{pendencia.titulo}" />
+					</p:column>
+					
+					<p:column filterBy="#{pendencia.descricao}"
+						sortBy="#{pendencia.descricao}">
+						<f:facet name="header">
+							<h:outputText value="Descricão" />
+						</f:facet>
+						<h:outputText value="#{pendencia.descricao}" />
+					</p:column>
+
+					<p:column filterBy="#{pendencia.setor.nome}"
+						sortBy="#{pendencia.setor.nome}">
+						<f:facet name="header">
+							<h:outputText value="Setor" />
+						</f:facet>
+						<h:outputText value="#{pendencia.setor.nome}" />
+					</p:column>
+
+					<p:column width="150" filterBy="#{pendencia.prioridade}"
+						sortBy="#{pendencia.prioridade}">
+						<f:facet name="header">
+							<h:outputText value="Prioridade" />
+						</f:facet>
+						<h:outputText value="#{pendencia.prioridade}" />
+					</p:column>
+					
+					<p:column width="150" filterBy="#{pendencia.categoria}"
+						sortBy="#{pendencia.categoria}">
+						<f:facet name="header">
+							<h:outputText value="Categoria" />
+						</f:facet>
+						<h:outputText value="#{pendencia.categoria}" />
+					</p:column>
+
+					<p:column width="150" filterBy="#{pendencia.status}"
+						sortBy="#{pendencia.status}">
+						<f:facet name="header">
+							<h:outputText value="Status" />
+						</f:facet>
+						<h:outputText value="#{pendencia.status}" />
+					</p:column>
+
+					<p:column width="120" sortBy="#{pendencia.dataDaPendencia}"
+						style="text-align: center;">
+						<f:facet name="header">
+							<h:outputText value="Data" />
+						</f:facet>
+						<h:outputText value="#{pendencia.dataDaPendencia.timeInMillis}">
+							<f:convertDateTime type="date" dateStyle="short"
+								pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+
+					<p:column width="50" exportable="false" style="text-align: center;">
+						<f:facet name="header">
+							<h:outputText value="Editar" />
+						</f:facet>
+
+
+						<p:lightBox iframe="true" id="lighbox3" width="800px" height="600px">
+							<h:outputLink value="cadastrarIteracao.xhtml"
+								title="Detalhes da pendência #{pendencia.id}">
+								<img src="../images/edit.png" width="25" />
+								<f:param name="id" value="#{pendencia.id}" />
+								<f:param name="titulo" value="#{pendencia.titulo}" />
+							</h:outputLink>
+						</p:lightBox>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</center>
+	</ui:define>
+
+</ui:composition>

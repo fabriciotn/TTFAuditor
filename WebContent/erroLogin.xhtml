@@ -1,0 +1,33 @@
+
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="conteudo">
+		<center>
+			<div id="header" align="center">
+				<img name="logo" src="../images/accessDenied.png" width="200px" />
+				<h1>Seu acesso expirou! Favor logar novamente.</h1>
+				<h:form>
+				<h:outputLink ></h:outputLink>
+				
+				
+					<p:growl id="messages" showDetail="true" />
+					<p:commandButton id="dynaButton" value="Exibir Menu" type="button"
+						icon="ui-icon-extlink" />
+					<p:menu overlay="true" trigger="dynaButton" my="left top"
+						at="left bottom">
+						<p:submenu label="Login">
+							<p:menuitem value="Logar novamente" outcome="index.xhtml"
+								icon="ui-icon-power" />
+						</p:submenu>
+					</p:menu>
+				</h:form>
+			</div>
+		</center>
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+      
+	<h:head>
+		<title>Hemominas - Gerenciador de Projetos</title>
+	</h:head>
+
+	<h:body style="font-family: arial; margin: 0;">
+		<div id="header" align="center">
+			<img name="logo" src="images/logoHemominas.png" width="550px" />
+		</div>
+		
+		<div style="padding: 1.5em; background-color: #41AADA; color: white">
+		</div>
+
+		<br />
+
+		<center>
+            <h:form>
+                <p:panelGrid columns="2">
+                    <f:facet name="header">
+                        <h:outputText value="Login" />
+                    </f:facet>
+
+                    <h:outputLabel for="masp" value="Masp: " />
+                    <p:inputText id="masp" value="#{loginMB.masp}" required="true" label="masp">
+                        <f:validateLength minimum="2"/>
+                        <p:clientValidator />
+                    </p:inputText>
+
+                    <h:outputLabel for="password" value="Senha: " />
+                    <p:password id="password" value="#{loginMB.password}" required="true" label="password">
+                        <f:validateLength minimum="2"/>
+                    </p:password>
+                </p:panelGrid>
+                <br/>
+                <p:commandButton value="Entrar" ajax="false" icon="ui-icon-check" action="#{loginMB.login}"  />
+            </h:form>
+        </center>
+
+		<br />
+		<br />
+		<br />
+		<div id="footer"
+			style="text-align: center; background-color: dimgray; font-size: 15px; height: 3em; color: white; position: fixed; bottom: 0; width: 100%; margin: 0;">
+			<br /> &copy;Fundação Hemominas - 2015. Todos os direitos reservados.
+		</div>
+	</h:body>
+</html>

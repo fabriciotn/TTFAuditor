@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title></title>
+</h:head>
+
+<h:body style="font-family: arial; margin: 0; background-color: white;">
+	<ui:param
+		value="#{pendenciaMB.pendenciaFacade.findPendencia(request.getParameter('id'))}"
+		name="pendencia" />
+	<p:tabView id="tabview">
+		<p:tab title="Visualização">
+			<h:panelGrid columns="2" cellpadding="3">
+				<h:outputLabel value="Código: " style="font-weight: bold; " />
+				<h:outputText value="#{pendencia.id}" />
+				<h:outputLabel value="Título: " style="font-weight: bold;" />
+				<h:outputText value="#{pendencia.titulo}" />
+				<h:outputLabel value="Setor: " style="font-weight: bold;" />
+				<h:outputText value="#{pendencia.setor.nome}" />
+				<h:outputLabel value="Prioridade: " style="font-weight: bold;" />
+				<h:outputText value="#{pendencia.prioridade.label}" />
+				<h:outputLabel value="Status: " style="font-weight: bold;" />
+				<h:outputText value="#{pendencia.status.label}" />
+				<h:outputLabel value="Descrição:  " style="font-weight: bold;" />
+				<h:outputText value="#{pendencia.descricao}" />
+				<h:outputLabel value="Prioridade:  " style="font-weight: bold;" />
+				<h:outputText value="#{pendencia.categoria.label}" />
+				<h:outputLabel value="Item do edital:  " style="font-weight: bold;" />
+				<h:outputText value="#{pendencia.itemDoEdital}" />
+				<h:outputLabel value="Observação:  " style="font-weight: bold;" />
+				<h:outputText value="#{pendencia.obs}" />
+				<h:outputLabel value="Responsável:  " style="font-weight: bold;" />
+				<h:outputText value="#{pendencia.responsavel}" />
+				<h:outputLabel value="Data da criação:  " style="font-weight: bold;" />
+				<h:outputText value="#{pendencia.dataDaPendencia.timeInMillis}">
+					<f:convertDateTime type="date" dateStyle="short"
+						pattern="dd/MM/yyyy HH:mm:ss" />
+				</h:outputText>
+				<h:outputLabel value="Usuário:  " style="font-weight: bold;" />
+				<h:outputText value="#{pendencia.usuario.name}" />
+			</h:panelGrid>
+		</p:tab>
+
+		<p:tab title="Anexos">
+			<h:panelGrid columns="2" cellpadding="10">
+				<h:column style="width:50%">
+					<h:form id="dataList">
+						<p:dataList value="#{treeBasicView.listaDeArquivos}" var="arquivo"
+							type="ordered">
+							<f:facet name="header">
+					            Arquivos já anexados
+					        </f:facet>
+							<h:commandLink action="#{treeBasicView.downLoad(arquivo)}"
+								value="#{arquivo}" />
+						</p:dataList>
+					</h:form>
+				</h:column>
+				<h:column style="width:50%">
+					<h:form enctype="multipart/form-data">
+						<p:growl id="mensagens" showDetail="true" />
+						<h:outputText value="Anexe arquivos: " />
+
+						<p:fileUpload fileUploadListener="#{fileUploadView.upload}"
+							fileLimit="5" fileLimitMessage="Excedido o limite de arquivos"
+							cancelLabel="Cancelar" label="Arquivo" uploadLabel="Enviar"
+							value="#{teste.file}" mode="advanced" skinSimple="false"
+							update=":tabview:dataList" />
+					</h:form>
+
+				</h:column>
+			</h:panelGrid>
+		</p:tab>
+
+		<p:tab title="Ações">
+			<h:panelGrid id="atualizar" width="100%">
+				<h:form acceptcharset="ISO-8859-1" id="form1">
+					<p:growl id="growl" showDetail="true" sticky="false" />
+					<h:panelGrid columns="2" columnClasses="label, value"
+						style="text-align:left">
+
+						<h:outputText value="Categoria: " />
+						<p:selectOneMenu id="categoria"
+							value="#{iteracaoMB.iteracao.categoria}" required="false"
+							requiredMessage="O campo Categoria é obrigatório!">
+							<f:selectItem itemLabel="---Selecione---" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{categoriaBean.categoriaList}"
+								var="categoria" itemLabel="#{categoria.label}"
+								itemValue="#{categoria}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Status: " />
+						<p:selectOneMenu id="status" value="#{iteracaoMB.iteracao.status}"
+							required="false" requiredMessage="O campo Status é obrigatório!">
+							<f:selectItem itemLabel="---Selecione---" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{statusBean.statusList}" var="status"
+								itemLabel="#{status.label}" itemValue="#{status}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Prioridade: " />
+						<p:selectOneMenu id="prioridade"
+							value="#{iteracaoMB.iteracao.prioridade}">
+							<f:selectItem itemLabel="---Selecione---" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{prioridadeBean.prioridadeList}"
+								var="prioridade" itemLabel="#{prioridade.label}"
+								itemValue="#{prioridade}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Descricao: " />
+						<p:inputTextarea rows="5" cols="50"
+							value="#{iteracaoMB.iteracao.descricao}" queryDelay="750"
+							minQueryLength="4" required="false"
+							requiredMessage="O campo Descrição é obrigatório!" />
+
+						<h:outputText binding="#{iteracaoMB.pendenciaId}"
+							value="#{iteracaoMB.setaPendencia()}">
+							<f:attribute name="pendenciaId" value="#{pendencia}" />
+						</h:outputText>
+
+						<p:columnGroup>
+						</p:columnGroup>
+
+						<h:outputText value="Data Estimada: " />
+						<p:calendar id="dataEstimada"
+							value="#{iteracaoMB.iteracao.dataEstimada}">
+							<p:ajax event="dateSelect" update="dataRealizada" />
+						</p:calendar>
+
+						<h:outputText value="Data realizada: " />
+						<p:calendar id="dataRealizada"
+							value="#{iteracaoMB.iteracao.dataRealizada}"
+							mindate="#{iteracaoMB.iteracao.dataEstimada}" />
+
+						<p:columnGroup>
+						</p:columnGroup>
+
+						<p:columnGroup>
+							<p:commandButton value="Enviar" ajax="true" icon="ui-icon-check"
+								actionListener="#{iteracaoMB.createIteracao}"
+								update=":tabview:atualizar">
+								<f:param name="id" value="#{pendencia.id}" />
+							</p:commandButton>
+
+							<p:commandButton value="Limpar" icon="ui-icon-cancel">
+								<p:ajax update=":tabview:form1" resetValues="true" />
+								<f:param name="id" value="#{pendencia.id}" />
+							</p:commandButton>
+						</p:columnGroup>
+					</h:panelGrid>
+				</h:form>
+
+				<br />
+				<br />
+
+				<p:dataScroller value="#{pendencia.iteracoes}" var="iteracao"
+					id="data">
+					<f:facet name="header">
+            						Ações já realizadas para a pendencia : ##{pendencia.id} - Total #{pendencia.iteracoes.size()}
+        				</f:facet>
+					<h:panelGrid id="grid">
+						<h:outputLabel value="#{iteracao.dataDaPendencia.timeInMillis}">
+							<f:convertDateTime type="date" dateStyle="short"
+								pattern="'Data: 'dd/MM/yyyy 'às' HH:mm:ss" />
+						</h:outputLabel>
+						<h:outputFormat
+							value="O usuário {0} realizou a seguinte ação na pendencia {1}:">
+							<f:param value="#{iteracao.usuario.name}" />
+							<f:param value="##{pendencia.id}" />
+						</h:outputFormat>
+						<ul>
+							<li>Categoria: #{iteracao.categoria}</li>
+							<li>Prioridade: #{iteracao.prioridade}</li>
+							<li>Status: #{iteracao.status}</li>
+							<li>Descrição: #{iteracao.descricao}</li>
+						</ul>
+						<h:outputLabel value="#{iteracao.dataEstimada}">
+							<f:convertDateTime type="date" dateStyle="short"
+								pattern="'Data Estimada 'dd/MM/yyyy" />
+						</h:outputLabel>
+						<h:outputLabel value="#{iteracao.dataRealizada}">
+							<f:convertDateTime type="date" dateStyle="short"
+								pattern="'Data Realizada: 'dd/MM/yyyy" />
+						</h:outputLabel>
+					</h:panelGrid>
+					<p:separator />
+				</p:dataScroller>
+			</h:panelGrid>
+		</p:tab>
+	</p:tabView>
+</h:body>
+</html>

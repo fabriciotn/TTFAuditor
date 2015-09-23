@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+<style>
+body {
+	font-family: verdana;
+	font-size: 0.9em;
+}
+</style>
+</head>
+<body>
+	<img
+		src="http://10.14.124.101:8080/HemoProjectApp/images/logoHemominasEmail.png">
+	<br>
+	<h3>assunto</h3>
+	<p>
+		Olá, <br>A pendência número <b>
+			iteracao.getPendencia().getId() + </b> foi encerrada!<br> Por favor
+		verifique se está tudo de acordo!
+	</p>
+
+	Seguem os dados da pendência:
+	<ul>
+		<li><b>ID:</b> id +</li>
+		<li><b>Setor:</b> setor</li>
+		<li><b>Categoria:</b> categoria</li>
+		<li><b>Prioridade:</b> prioridade</li>
+		<li><b>Descrição:</b> descricao</li>
+	</ul>
+	<br>
+	<table border="1">
+		<thead>
+			<tr>
+				<td>Ações realizadas na pendencia ID</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				No dia, DATA, o usuário USUARIO realizou a seguinte ação
+					nesta pendência:
+					<ul>
+						<li>Categoria: #{iteracao.categoria}</li>
+						<li>Prioridade: #{iteracao.prioridade}</li>
+						<li>Status: #{iteracao.status}</li>
+						<li>Descrição: #{iteracao.descricao}</li>
+					</ul>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<p>
+		Atenciosamente,<br> <b>Equipe GTC</b>
+	</p>
+	<small>Este relatório foi gerado automaticamente pelo sistema.</small>
+</body>
+</html>

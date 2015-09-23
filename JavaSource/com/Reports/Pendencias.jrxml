@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pendencias" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="071fc8a2-4bd6-4732-8b23-7af31fc76456">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\12546446\\Desktop\\Projetos Fabricio\\workspace\\HemoProjectApp\\JavaSource\\com\\Reports\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SETOR" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="PRIORIDADE" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+  p.id,
+  p.descricao,
+  s.nome AS setor,
+  p.status,
+  p.prioridade
+FROM
+  pendencia p
+JOIN setor s
+ON
+  p.setor_id=s.id
+WHERE STATUS <> 'FECHADO'
+AND p.prioridade = $P{PRIORIDADE}
+ORDER BY
+  p.id]]>
+	</queryString>
+	<field name="ID" class="java.math.BigDecimal"/>
+	<field name="DESCRICAO" class="java.lang.String"/>
+	<field name="SETOR" class="java.lang.String"/>
+	<field name="STATUS" class="java.lang.String"/>
+	<field name="PRIORIDADE" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="53" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="d8ee0a30-68de-4a86-a619-1cc81ef5f8d0" x="296" y="5" width="243" height="42"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Pendências]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="f9f29aa7-da58-4ae8-8a7d-89c415745c67" x="0" y="0" width="239" height="53"/>
+				<imageExpression><![CDATA["C:\\Users\\12546446\\Pictures\\logoHemominas (2).png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement uuid="81d3185e-ad5c-4042-91a6-ac51a011cc0d" mode="Opaque" x="0" y="1" width="802" height="20" backcolor="#CCCCCC"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement uuid="cb3851fc-5822-4334-a77a-b3863bed9784" x="5" y="1" width="20" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e81b02db-294e-4383-b426-2b3a32afe0eb" x="27" y="1" width="593" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRICAO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3ce37a0b-ff8c-4c6e-bfad-b41be2745165" x="630" y="1" width="91" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SETOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="abb6b7a7-ece9-4c20-8de1-f4cccd616238" x="732" y="1" width="66" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[STATUS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="9c7d3264-91bf-4711-8b23-c3b1cd4f0a96" stretchType="RelativeToBandHeight" x="2" y="3" width="798" height="15" backcolor="#E4E9F1">
+					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement uuid="d6eea25e-7a0f-4091-8806-25d68abd0911" x="5" y="3" width="20" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="1ef41368-7467-4a5e-b607-bf579ee98555" x="27" y="3" width="593" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DESCRICAO}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="6105ad0a-1e69-4198-91f8-f7cd1516c75a" x="630" y="3" width="91" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SETOR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="712923bc-83e9-4b59-9939-8a62f6c5fa6f" x="732" y="3" width="66" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{STATUS}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="14">
+			<rectangle>
+				<reportElement uuid="fc4ae050-0678-4924-9b30-be3d8acc58a7" stretchType="RelativeToBandHeight" x="2" y="-1" width="798" height="15" backcolor="#E4E9F1">
+					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<subreport>
+				<reportElement uuid="e7114558-16a9-409d-ac47-a15fd4511a95" positionType="Float" stretchType="RelativeToBandHeight" x="2" y="1" width="799" height="12" isRemoveLineWhenBlank="true"/>
+				<subreportParameter name="id_pendencia">
+					<subreportParameterExpression><![CDATA[$F{ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "Pendencias_subreport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement uuid="9e19e283-841c-4533-af54-b9795897dff8" x="680" y="5" width="80" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement uuid="f6386522-bf13-4c0a-9d2d-4461c9ecae68" x="760" y="5" width="40" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement uuid="7b93c2bb-054f-468a-8cfa-3dde055363de" x="2" y="5" width="136" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="56">
+			<textField>
+				<reportElement uuid="bd4b3172-0638-4e9c-afb6-3633f800b143" x="0" y="36" width="427" height="20"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Total de pendências: " + $V{REPORT_COUNT} + " com prioridade "+ $F{PRIORIDADE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

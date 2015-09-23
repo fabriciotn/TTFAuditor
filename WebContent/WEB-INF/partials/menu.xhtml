@@ -1,0 +1,27 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+    <h:form>
+        <p:growl id="messages" showDetail="true"/>
+        <p:commandButton id="dynaButton" value="Exibir Menu" type="button" icon="ui-icon-extlink"/>
+        <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
+            <p:submenu label="Home">
+                <p:menuitem value="Página inicial" outcome="home" icon="ui-icon-home"/>
+            </p:submenu>
+            
+            <p:submenu label="Pendências">
+                <p:menuitem value="Cadastrar" outcome="cadastrarPendencia" icon="ui-icon-disk" />
+                <p:menuitem value="Pesquisar" outcome="pesquisarPendencia" icon="ui-icon-search"/>
+            </p:submenu>
+
+            <p:submenu label="Sair">
+                <p:menuitem value="Sair do sistema" outcome="../sair.xhtml" icon="ui-icon-power"/>
+            </p:submenu>
+        </p:menu>
+    </h:form>
+
+</ui:composition>

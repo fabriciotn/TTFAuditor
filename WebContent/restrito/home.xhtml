@@ -1,0 +1,28 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="menu">
+		<ui:include src="/WEB-INF/partials/menu.xhtml" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<center>
+			<h:panelGrid columns="1">
+				<p:chart type="bar" model="#{chartView.animatedModel2}"
+					style="width:75em;" />
+				<br />
+			</h:panelGrid>
+			<h:panelGrid columns="2">
+				<p:chart type="pie" model="#{chartView.pieModel1}"
+					style="width:400px;height:300px" />
+				<p:chart type="pie" model="#{chartView.pieModel2}"
+					style="width:400px;height:300px" />
+			</h:panelGrid>
+		</center>
+	</ui:define>
+
+</ui:composition>
