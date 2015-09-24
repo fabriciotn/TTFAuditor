@@ -35,6 +35,11 @@ public class LoginMB extends AbstractMB {
 	}
 
 	public String login() {
+		MessagesView ms = new MessagesView();
+        ms.info("teste", "Bem vindo!");
+		return "/restrito/home.xhtml";
+		
+		/*
 		UserFacade userFacade = new UserFacade();
 
 		User user = new User();
@@ -49,11 +54,12 @@ public class LoginMB extends AbstractMB {
 			MessagesView ms = new MessagesView();
 	        ms.info(user.getName(), "Bem vindo!");
 			return "/restrito/home.xhtml";
+		
 		}
 
 		displayErrorMessageToUser("Check your email/password");
 		
-		return "/erro.xhtml";
+		return "/erro.xhtml";*/
 	}
 
 	public void setUserMB(UserMB userMB) {

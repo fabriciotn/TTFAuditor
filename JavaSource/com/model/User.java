@@ -18,19 +18,18 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "USERS")
-@NamedQuery(name = "User.findUserByMasp", query = "select u from User u where u.masp = :masp")
+@NamedQuery(name = "User.findUserByLogin", query = "select u from User u where u.login = :login")
 @SequenceGenerator(name="SEQ_USER", sequenceName="SEQ_USER")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	public static final String FIND_BY_MASP = "User.findUserByMasp";
+	public static final String FIND_BY_LOGIN = "User.findUserByLogin";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SEQ_USER")
 	private int id;
-
 	@Column(unique = true)
-	private String masp;
+	private String login;
 	private String password;
 	private String name;
 	@Enumerated(EnumType.STRING)
@@ -113,10 +112,10 @@ public class User implements Serializable {
 	}
 
 	public String getMasp() {
-		return masp;
+		return login;
 	}
 
 	public void setMasp(String masp) {
-		this.masp = masp;
+		this.login = masp;
 	}
 }

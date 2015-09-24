@@ -17,6 +17,6 @@ public class UserDAO extends GenericDAO<User> {
         Map<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("masp", masp);     
  
-        return super.findOneResult(User.FIND_BY_MASP, parameters);
+        return super.findOneResult(User.FIND_BY_LOGIN, parameters);
     }
 }

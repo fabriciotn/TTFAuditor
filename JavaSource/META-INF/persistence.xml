@@ -9,7 +9,7 @@
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/hemoproject?zeroDateTimeBehavior=convertToNull" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/auditoria_db?zeroDateTimeBehavior=convertToNull" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="root" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
