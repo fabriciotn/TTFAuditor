@@ -15,15 +15,15 @@ public class LoginMB extends AbstractMB {
 	@ManagedProperty(value = UserMB.INJECTION_NAME)
 	private UserMB userMB;
 
-	private String masp;
+	private String login;
 	private String password;
 
-	public String getMasp() {
-		return masp;
+	public String getLogin() {
+		return login;
 	}
 
-	public void setMasp(String email) {
-		this.masp = email;
+	public void setLogin(String email) {
+		this.login = email;
 	}
 
 	public String getPassword() {
@@ -35,15 +35,10 @@ public class LoginMB extends AbstractMB {
 	}
 
 	public String login() {
-		MessagesView ms = new MessagesView();
-        ms.info("teste", "Bem vindo!");
-		return "/restrito/home.xhtml";
-		
-		/*
 		UserFacade userFacade = new UserFacade();
 
 		User user = new User();
-		user = userFacade.isValidLogin(masp, password);
+		user = userFacade.isValidLogin(login, password);
 		
 		if(user != null){
 			userMB.setUser(user);
@@ -59,7 +54,7 @@ public class LoginMB extends AbstractMB {
 
 		displayErrorMessageToUser("Check your email/password");
 		
-		return "/erro.xhtml";*/
+		return "/erro.xhtml";
 	}
 
 	public void setUserMB(UserMB userMB) {

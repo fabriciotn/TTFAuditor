@@ -14,14 +14,14 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@SequenceGenerator(name="SEQ_PROJETO", sequenceName="SEQ_PROJETO")
+//@SequenceGenerator(name="SEQ_PROJETO", sequenceName="SEQ_PROJETO")
 public class Projeto implements Serializable{
 
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SEQ_PROJETO")
+	@GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String nome;
 

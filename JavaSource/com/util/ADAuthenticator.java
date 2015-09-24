@@ -33,11 +33,11 @@ public class ADAuthenticator {
         this.searchBase = dn;
     }
 
-    public User authenticate(String masp, String pass) {
+    public User authenticate(String login, String pass) {
     	User usuarioAd = new User();
     	
         String returnedAtts[] = {"sn", "givenName", "mail", "displayName"};
-        String searchFilter = "(&(objectClass=user)(sAMAccountName=" + masp + "))";
+        String searchFilter = "(&(objectClass=user)(sAMAccountName=" + login + "))";
         String displayName = "";
         
         //Create the search controls
@@ -51,7 +51,7 @@ public class ADAuthenticator {
         env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
         env.put(Context.PROVIDER_URL, ldapHost);
         env.put(Context.SECURITY_AUTHENTICATION, "simple");
-        env.put(Context.SECURITY_PRINCIPAL, masp + "@" + domain);
+        env.put(Context.SECURITY_PRINCIPAL, login + "@" + domain);
         env.put(Context.SECURITY_CREDENTIALS, pass);
 
         LdapContext ctxGC = null;
@@ -70,7 +70,7 @@ public class ADAuthenticator {
             attrCN = attributes.get("mail");
             usuarioAd.setEmail((String) attrCN.get());
             
-            usuarioAd.setMasp(masp);
+            usuarioAd.setLogin(login);
             
             usuarioAd.setRole(Role.ADMIN);
             

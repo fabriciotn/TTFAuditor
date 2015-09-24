@@ -9,19 +9,19 @@ import com.util.ADAuthenticator;
 public class UserFacade {
 	private UserDAO userDAO = new UserDAO();
 
-	public User isValidLogin(String masp, String password) {
+	public User isValidLogin(String login, String password) {
 		userDAO.beginTransaction();
-		User userBD = userDAO.findUserByMasp(masp);
+		User userBD = userDAO.findUserByLogin(login);
 		
-		if(masp.equals("teste")){
+		if(login.equals("teste")){
 			userBD.setId(999);
 			userBD.setName("teste");
 			userBD.setEmail("teste");
-			userBD.setMasp("teste");
+			userBD.setLogin("teste");
 			return userBD;
 		}
 
-		User userAD = validaAD(masp, password);
+		User userAD = validaAD(login, password);
 
 		if (userBD == null)
 			return null;
@@ -41,12 +41,12 @@ public class UserFacade {
 		return userBD;
 	}
 
-	public User validaAD(String masp, String password) {
+	public User validaAD(String login, String password) {
 		// instanciando a classe ADAuthenticator para fazer
-		// a validação do MASP e senha no servidor do AD
+		// a validação do Login e senha no servidor do AD
 		ADAuthenticator autenticador = new ADAuthenticator();
 
-		User usuarioAd = autenticador.authenticate(masp, password);
+		User usuarioAd = autenticador.authenticate(login, password);
 
 		return usuarioAd;
 	}

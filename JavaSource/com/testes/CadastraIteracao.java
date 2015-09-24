@@ -72,7 +72,7 @@ public class CadastraIteracao {
 		
 
 	private static void insereIteracao(Pendencia pendencia) {
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("hemoproject");
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("auditoria_db");
 		EntityManager manager = factory.createEntityManager();
 		
 		manager.getTransaction().begin();
@@ -81,7 +81,7 @@ public class CadastraIteracao {
 		
 		//obtem o usuário
 		usuariodao.beginTransaction();
-		User usuario = usuariodao.findUserByMasp("@Importacao");
+		User usuario = usuariodao.findUserByLogin("@Importacao");
 		usuariodao.closeTransaction();
 		
 		Iteracao iteracao = new Iteracao();

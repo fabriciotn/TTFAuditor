@@ -21,13 +21,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@SequenceGenerator(name = "SEQ_PENDENCIA", sequenceName = "SEQ_PENDENCIA", initialValue=1, allocationSize=1)
+//@SequenceGenerator(name = "SEQ_PENDENCIA", sequenceName = "SEQ_PENDENCIA", initialValue=1, allocationSize=1)
 public class Pendencia implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_PENDENCIA")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String titulo;
 	@OneToOne

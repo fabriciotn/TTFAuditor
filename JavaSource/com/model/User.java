@@ -19,14 +19,15 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "USERS")
 @NamedQuery(name = "User.findUserByLogin", query = "select u from User u where u.login = :login")
-@SequenceGenerator(name="SEQ_USER", sequenceName="SEQ_USER")
+//@SequenceGenerator(name="SEQ_USER", sequenceName="SEQ_USER")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public static final String FIND_BY_LOGIN = "User.findUserByLogin";
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SEQ_USER")
+	//@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SEQ_USER")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@Column(unique = true)
 	private String login;
@@ -111,11 +112,11 @@ public class User implements Serializable {
 		return false;
 	}
 
-	public String getMasp() {
+	public String getLogin() {
 		return login;
 	}
 
-	public void setMasp(String masp) {
-		this.login = masp;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 }

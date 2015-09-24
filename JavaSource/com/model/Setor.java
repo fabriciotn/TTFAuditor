@@ -13,13 +13,13 @@ import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 
 @Entity
-@SequenceGenerator(name="SEQ_SETOR", sequenceName="SEQ_SETOR")
+//@SequenceGenerator(name="SEQ_SETOR", sequenceName="SEQ_SETOR")
 public class Setor implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SEQ_SETOR")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String nome;
 	@ManyToMany

@@ -9,7 +9,7 @@ import com.model.Setor;
 
 public class CadastraSetores {
 	public static void main(String[] args) {
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("hemoproject");
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("auditoria_db");
 		EntityManager manager = factory.createEntityManager();
 
 		manager.getTransaction().begin();
