@@ -26,7 +26,7 @@ public class TesteDeEnvioDeEmail {
 							"</style>" +
 							"</head>" +
 							"<body>" +
-								"<img src=\"http://localhost:8080/HemoProjectApp/images/logoHemominasEmail.png\">" +
+								"<img src=\"http://localhost:8080/TTFAuditor/images/logoHemominasEmail.png\">" +
 								"<br>" +
 								"<h2>Nova pendência cadastrada</h2>" +
 								"<p>" +

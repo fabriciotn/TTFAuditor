@@ -49,7 +49,7 @@ public class PendenciaAlterada {
 				"</style>" +
 				"</head>" +
 				"<body>" +
-					"<img src=\"http://10.14.124.101:8080/HemoProjectApp/images/logoHemominasEmail.png\">" +
+					"<img src=\"http://10.14.124.101:8080/TTFAuditor/images/logoHemominasEmail.png\">" +
 					"<br>" +
 					"<h3> " + assunto + "</h3>" +
 					"<p>Olá, <br>A pendência número <b>" + iteracao.getPendencia().getId() + "</b> foi alterada por: <b> " + usuario + "</b>!<br>" +
