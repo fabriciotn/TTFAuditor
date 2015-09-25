@@ -22,8 +22,8 @@ public class LoginMB extends AbstractMB {
 		return login;
 	}
 
-	public void setLogin(String email) {
-		this.login = email;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	public String getPassword() {
@@ -37,17 +37,17 @@ public class LoginMB extends AbstractMB {
 	public String login() {
 		UserFacade userFacade = new UserFacade();
 
-		User user = new User();
-		user = userFacade.isValidLogin(login, password);
+		User usuario = new User();
+		usuario = userFacade.isValidLogin(login, password);
 		
-		if(user != null){
-			userMB.setUser(user);
+		if(usuario != null){
+			userMB.setUser(usuario);
 			FacesContext context = FacesContext.getCurrentInstance();
 			HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
-			request.getSession().setAttribute("user", user);
+			request.getSession().setAttribute("user", usuario);
 			//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user",user);
 			MessagesView ms = new MessagesView();
-	        ms.info(user.getName(), "Bem vindo!");
+	        ms.info(usuario.getName(), "Bem vindo!");
 			return "/restrito/home.xhtml";
 		
 		}

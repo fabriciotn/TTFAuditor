@@ -6,9 +6,12 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 
-<h:head>
-	<title></title>
-</h:head>
+	<f:loadBundle basename="messages" var="msg"/>
+	<h:head>
+		<title>#{msg.titulo}</title>
+		<link rel="icon" href="images/ttf.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="images/ttf.ico" type="image/x-icon" />
+	</h:head>
 
 <h:body style="font-family: arial; margin: 0; background-color: white;">
 	<ui:param
