@@ -14,23 +14,27 @@
 	</h:head>
 	
 	<h:body style="font-family: arial; margin: 0;">
-		<div id="header" align="center">
-			<img name="logo" src="images/logo.png" width="550px" />
+		
+		<div style="padding: 0.5em; background-color: #8B7E66; color: white">
 		</div>
 	
-		<div style="padding: 1.5em; background-color: #41AADA; color: white">
-		</div>
-	
-		<br />
+		<br/>
+		<br/>
+		<br/>
 	
 		<center>
+			<img name="logo" src="images/logo.png" width="350px" />
+			<br/>
+			<br/>
+			<br/>
+		
 			<h:form>
 				<p:panelGrid columns="2">
 					<f:facet name="header">
-						<h:outputText value="#{msg.loginHello}" />
+						#{msg.loginHello}
 					</f:facet>
 	
-					<h:outputLabel for="login" value="#{msg.loginUserName}" />
+					<h:outputLabel for="login" value="#{msg.loginUserName}"/>
 					<p:inputText id="login" value="#{loginMB.login}" required="true"
 						label="login">
 						<f:validateLength minimum="2" />
@@ -48,13 +52,7 @@
 					action="#{loginMB.login}" />
 			</h:form>
 		</center>
-	
-		<br />
-		<br />
-		<br />
-		<div id="footer"
-			style="text-align: center; background-color: dimgray; font-size: 1em; height: 3em; color: white; position: fixed; bottom: 0; width: 100%; margin: 0;">
-			<br /> #{msg.rodape}
+		<div id="footer" style="text-align: center; background-color: #8B7E66; font-size: 0.5em; height: 3em; color: white; position: fixed; bottom: 0; width: 100%; margin: 0;">
 		</div>
 	</h:body>
 </html>

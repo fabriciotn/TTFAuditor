@@ -19,9 +19,9 @@
 			{
 				var userAgent = navigator.userAgent.toLowerCase();
 				if( userAgent.search(/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i)!= -1 )
-					window.location.href = "http://localhost:8080/TTFAuditor/index_mobile.xhtml";
+					location.href = "index_mobile.xhtml";
 				else
-					window.location.href = "http://localhost:8080/TTFAuditor/index_padrao.xhtml";
+					location.href = "index_padrao.xhtml";
 			}
 		</script>
 		<link rel="icon" href="images/ttf.ico" type="image/x-icon" />

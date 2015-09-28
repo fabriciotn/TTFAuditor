@@ -12,27 +12,12 @@ public class UserFacade {
 	public User isValidLogin(String login, String password) {
 		userDAO.beginTransaction();
 		User userBD = userDAO.findUserByLogin(login);
-		
-		if(login.equals("teste")){
-			userBD.setId(999);
-			userBD.setName("teste");
-			userBD.setEmail("teste");
-			userBD.setLogin("teste");
-			return userBD;
-		}
 
-		User userAD = validaAD(login, password);
-
-		if (userBD == null)
-			return null;
-
-		if (userAD == null) {
+		if (userBD == null){
 			if (userBD.getPassword() == null || !userBD.getPassword().equals(password)) {
 				return null;
 			}
 		}else{
-			userBD.setName(userAD.getName());
-			userBD.setEmail(userAD.getEmail());
 			userBD.setUltimoAcesso(Calendar.getInstance());
 			userDAO.commit();
 		}
