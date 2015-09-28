@@ -5,18 +5,18 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
+	<f:loadBundle basename="messages" var="msg" />
 	<h:form>
 		<p:growl id="messages" />
 
+		<img src="images/logo.png" width="150px" />
+
 		<p:menubar>
-			<p:submenu label="File" icon="ui-icon-document">
-				<p:submenu label="New" icon="ui-icon-contact">
-					<p:menuitem value="Project" url="#" />
-					<p:menuitem value="Other" url="#" />
-				</p:submenu>
-				<p:menuitem value="Open" url="#" />
-				<p:separator />
-				<p:menuitem value="Quit" url="#" />
+			<p:menuitem value="#{msg.inicio}" url="#" icon="ui-icon-home" />
+
+			<p:submenu label="#{msg.auditorias}" icon="ui-icon-contact">
+				<p:menuitem value="#{msg.gerenciar}" url="#" icon="ui-icon-gear" />
+				<p:menuitem value="#{msg.auditar}" url="#" icon="ui-icon-check" />
 			</p:submenu>
 
 			<p:submenu label="Edit" icon="ui-icon-pencil">
@@ -47,13 +47,8 @@
 				</p:submenu>
 			</p:submenu>
 
-			<p:menuitem value="Quit" url="http://www.primefaces.org"
-				icon="ui-icon-close" />
-
-			<f:facet name="options">
-				<p:inputText style="margin-right:10px" placeholder="Search" />
-				<p:commandButton type="button" value="Logout" icon="ui-icon-extlink" />
-			</f:facet>
+			<p:menuitem value="#{msg.logOut}" url="sair.xhtml"
+				icon="ui-icon-power" />
 		</p:menubar>
 	</h:form>
 
