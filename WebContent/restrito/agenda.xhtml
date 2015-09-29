@@ -12,10 +12,12 @@
 	<ui:define name="conteudo">
 		<center>
 			<h:form>
+				<f:loadBundle basename="messages" var="msg" />
+			
 				<p:growl id="messages" showDetail="true" />
 
 				<h:panelGrid columnClasses="value">
-					<h3 style="margin-top: 0">Editable Schedule</h3>
+					<h3 style="margin-top: 0">Agenda de auditorias</h3>
 					<p:schedule id="schedule" value="#{scheduleView.eventModel}"
 						widgetVar="myschedule" timeZone="GMT+2" locale="pt">
 
@@ -31,32 +33,64 @@
 					</p:schedule>
 				</h:panelGrid>
 
-				<p:dialog widgetVar="eventDialog" header="Event Details"
+				<p:dialog widgetVar="eventDialog" header="#{msg.detalhesDoEvento}"
 					showEffect="clip" hideEffect="clip">
 					<h:panelGrid id="eventDetails" columns="2">
-						<p:outputLabel for="title" value="Titles:" />
+						<p:outputLabel for="title" value="#{msg.titulo}" />
 						<p:inputText id="title" value="#{scheduleView.event.title}"
 							required="true" />
 
-						<p:outputLabel for="from" value="From:" />
+						<p:outputLabel for="from" value="#{msg.de}" />
 						<p:calendar id="from" value="#{scheduleView.event.startDate}"
-							timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm" />
+							timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm" locale="pt"/>
 
-						<p:outputLabel for="to" value="To:" />
+						<p:outputLabel for="to" value="#{msg.para}" />
 						<p:calendar id="to" value="#{scheduleView.event.endDate}"
-							timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm" />
+							timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm" locale="pt"/>
 
-						<p:outputLabel for="allDay" value="All Day:" />
+						<p:outputLabel for="allDay" value="#{msg.todosOsDias}" />
 						<h:selectBooleanCheckbox id="allDay"
 							value="#{scheduleView.event.allDay}" />
 
-						<p:commandButton type="reset" value="Reset" />
-						<p:commandButton id="addButton" value="Save"
+						<p:commandButton type="reset" value="#{msg.limpar}" />
+						<p:commandButton id="addButton" value="#{msg.salvar}"
 							actionListener="#{scheduleView.addEvent}"
 							oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
 					</h:panelGrid>
 				</p:dialog>
 			</h:form>
+			
+			<script type="text/javascript">
+				PrimeFaces.locales['pt'] = {
+	                closeText: 'Fechar',
+	                prevText: 'Anterior',
+	                nextText: 'Próximo',
+	                currentText: 'Começo',
+	                monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+	                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],
+	                dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+	                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+	                dayNamesMin: ['D','S','T','Q','Q','S','S'],
+	                weekHeader: 'Semana',
+	                firstDay: 1,
+	                isRTL: false,
+	                showMonthAfterYear: false,
+	                yearSuffix: '',
+	                timeOnlyTitle: 'Só Horas',
+	                timeText: 'Tempo',
+	                hourText: 'Hora',
+	                minuteText: 'Minuto',
+	                secondText: 'Segundo',
+	                currentText: 'Data Atual',
+	                ampm: false,
+	                month: 'Mês',
+	                week: 'Semana',
+	                day: 'Dia',
+	                allDayText : 'Todo Dia'
+	            };
+			</script>
+		
+			
 		</center>
 	</ui:define>
 
