@@ -1,5 +1,7 @@
 package com.mb;
 
+import java.util.ResourceBundle;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -35,6 +37,8 @@ public class LoginMB extends AbstractMB {
 	}
 
 	public String login() {
+		ResourceBundle bundle = ResourceBundle.getBundle("messages");
+		
 		UserFacade userFacade = new UserFacade();
 
 		User usuario = new User();
@@ -52,7 +56,7 @@ public class LoginMB extends AbstractMB {
 		
 		}
 
-		displayErrorMessageToUser("Check your email/password");
+		displayErrorMessageToUser(bundle.getString("verificarUsuarioESenha"));
 		
 		return "/erro.xhtml";
 	}

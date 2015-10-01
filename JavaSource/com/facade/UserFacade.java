@@ -1,30 +1,43 @@
 package com.facade;
 
 import java.util.Calendar;
+import java.util.ResourceBundle;
 
 import com.dao.UserDAO;
+import com.mb.MessagesView;
 import com.model.User;
 import com.util.ADAuthenticator;
+import com.util.Criptografia;
 
 public class UserFacade {
 	private UserDAO userDAO = new UserDAO();
 
 	public User isValidLogin(String login, String password) {
+		password = Criptografia.criptografa(password);
+		
 		userDAO.beginTransaction();
-		User userBD = userDAO.findUserByLogin(login);
+		User user = userDAO.findUserByLogin(login);
 
-		if (userBD == null){
-			if (userBD.getPassword() == null || !userBD.getPassword().equals(password)) {
+		if (user != null){
+			if (user.getPassword() == null) {
+				return null;
+			}
+			if(user.getPassword().equals(password)){
+				user.setUltimoAcesso(Calendar.getInstance());
+				userDAO.commit();
+			}else{
 				return null;
 			}
 		}else{
-			userBD.setUltimoAcesso(Calendar.getInstance());
-			userDAO.commit();
+			return null;
 		}
+		
 		userDAO.closeTransaction();
 		
-		return userBD;
+		return user;
 	}
+	
+	
 
 	public User validaAD(String login, String password) {
 		// instanciando a classe ADAuthenticator para fazer

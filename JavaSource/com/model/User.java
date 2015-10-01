@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.util.Criptografia;
+
 @Entity
 @Table(name = "USERS")
 @NamedQuery(name = "User.findUserByLogin", query = "select u from User u where u.login = :login")
@@ -69,7 +71,7 @@ public class User implements Serializable {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = Criptografia.criptografa(password);
 	}
 
 	public String getName() {

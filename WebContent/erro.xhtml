@@ -7,8 +7,18 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:define name="conteudo">
+		<f:loadBundle basename="messages" var="msg" />
 		<center>
-			Erro
+			<div id="header" align="center">
+				<br /> <br /> <br /> <img name="logo"
+					src="images/accessDenied1.png" width="200px" />
+				<h1>#{msg.acessoNegado}</h1>
+				<h:form>
+					<p:growl id="messages" showDetail="true" />
+					<p:commandButton value="#{msg.tentarNovamente}" ajax="false"
+						icon="ui-icon-check" action="index.xhtml" />
+				</h:form>
+			</div>
 		</center>
 	</ui:define>
 
