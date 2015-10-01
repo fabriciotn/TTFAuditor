@@ -162,7 +162,7 @@
 				<p:dataScroller value="#{pendencia.iteracoes}" var="iteracao"
 					id="data">
 					<f:facet name="header">
-            						Ações já realizadas para a pendencia : ##{pendencia.id} - Total #{pendencia.iteracoes.size()}
+            						Ações já realizadas para a pendencia : #{pendencia.id} - Total #{pendencia.iteracoes.size()}
         				</f:facet>
 					<h:panelGrid id="grid">
 						<h:outputLabel value="#{iteracao.dataDaPendencia.timeInMillis}">
@@ -172,7 +172,7 @@
 						<h:outputFormat
 							value="O usuário {0} realizou a seguinte ação na pendencia {1}:">
 							<f:param value="#{iteracao.usuario.name}" />
-							<f:param value="##{pendencia.id}" />
+							<f:param value="#{pendencia.id}" />
 						</h:outputFormat>
 						<ul>
 							<li>Categoria: #{iteracao.categoria}</li>

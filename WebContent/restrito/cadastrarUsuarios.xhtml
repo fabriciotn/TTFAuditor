@@ -11,10 +11,11 @@
 	</ui:define>
 
 	<ui:define name="conteudo">
+		<f:loadBundle basename="messages" var="msg" />
 		<center>
 			<div>
 				<h:form acceptcharset="ISO-8859-1" id="form1">
-					<p:panel header="Cadastro de Pendências">
+					<p:panel header="#{msg.cadastroDeUsuarios}">
 						<h:panelGrid columns="2" columnClasses="label, value"
 							style="text-align:left">
 							<h:outputText value="Titulo:*" />
