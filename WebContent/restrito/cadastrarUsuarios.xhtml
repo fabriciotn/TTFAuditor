@@ -18,87 +18,10 @@
 					<p:panel header="#{msg.cadastroDeUsuarios}">
 						<h:panelGrid columns="2" columnClasses="label, value"
 							style="text-align:left">
-							<h:outputText value="Titulo:*" />
-							<p:inputText value="#{pendenciaMB.pendencia.titulo}"
-								required="true" requiredMessage="O campo Título é obrigatório!"
-								label="Título" size="48" maxlength="255"/>
-
-							<h:outputText value="Setor:* " />
-							<p:selectOneMenu id="setor"
-								value="#{pendenciaMB.pendencia.setor}"
-								converter="setorConverter" required="true"
-								requiredMessage="O campo Setor é obrigatório!">
-								<f:param value="Setor" />
-								<f:selectItem itemLabel="---Selecione---" itemValue="#{null}"
-									noSelectionOption="true" />
-								<f:selectItems value="#{setorMB.allSetores}" var="setor"
-									itemLabel="#{setor.nome}" itemValue="#{setor}" />
-							</p:selectOneMenu>
-
-							<h:outputText value="Projeto:* " />
-							<p:selectOneMenu id="projeto"
-								value="#{pendenciaMB.pendencia.projeto}"
-								converter="projetoConverter" required="true"
-								requiredMessage="O campo Projeto é obrigatório!">
-								<f:selectItem itemLabel="---Selecione---" itemValue="#{null}"
-									noSelectionOption="true" />
-								<f:selectItems value="#{projetoMB.allProjetos}" var="projeto"
-									itemLabel="#{projeto.nome}" itemValue="#{projeto}" />
-							</p:selectOneMenu>
-
-							<h:outputText value="Responsável:* " />
-							<p:selectOneMenu id="responsavel"
-								value="#{pendenciaMB.pendencia.responsavel}" required="true"
-								requiredMessage="O campo Responsável é obrigatório!">
-								<f:selectItem itemLabel="---Selecione---" itemValue="#{null}"
-									noSelectionOption="true" />
-								<f:selectItems value="#{responsavelBean.responsavelList}" var="responsavel"
-									itemLabel="#{responsavel.label}" itemValue="#{responsavel}" />
-							</p:selectOneMenu>
-							
-							<h:outputText value="Categoria:* " />
-							<p:selectOneMenu id="categoria"
-								value="#{pendenciaMB.pendencia.categoria}" required="true"
-								requiredMessage="O campo Categoria é obrigatório!">
-								<f:selectItem itemLabel="---Selecione---" itemValue="#{null}"
-									noSelectionOption="true" />
-								<f:selectItems value="#{categoriaBean.categoriaList}" var="categoria"
-									itemLabel="#{categoria.label}" itemValue="#{categoria}" />
-							</p:selectOneMenu>
-							
-							<h:outputText value="Status:* " />
-							<p:selectOneMenu id="status"
-								value="#{pendenciaMB.pendencia.status}" required="true"
-								requiredMessage="O campo Status é obrigatório!">
-								<f:selectItems value="#{statusBean.statusAberto}" var="status"
-									itemLabel="#{status.label}" itemValue="#{status}" />
-							</p:selectOneMenu>
-
-							<h:outputText value="Prioridade:* " />
-							<p:selectOneMenu id="prioridade"
-								value="#{pendenciaMB.pendencia.prioridade}" required="true"
-								requiredMessage="O campo Prioridade é obrigatório!">
-								<f:selectItem itemLabel="---Selecione---" itemValue="#{null}"
-									noSelectionOption="true" />
-								<f:selectItems value="#{prioridadeBean.prioridadeList}"
-									var="prioridade" itemLabel="#{prioridade.label}"
-									itemValue="#{prioridade}" />
-							</p:selectOneMenu>
-
-							<h:outputText value="Item do edital: " />
-							<p:inputText value="#{pendenciaMB.pendencia.itemDoEdital}"
-								required="false" label="" maxlength="255"/>
-
-							<h:outputText value="Descricao: *" />
-							<p:inputTextarea rows="10" cols="50"
-								value="#{pendenciaMB.pendencia.descricao}" queryDelay="750"
-								minQueryLength="4" required="true"
-								requiredMessage="O campo Descrição é obrigatório!" />
-
-							<h:outputText value="Observações: " />
-							<p:inputTextarea rows="5" cols="50"
-								value="#{pendenciaMB.pendencia.obs}" queryDelay="750"
-								minQueryLength="4" />
+							<h:outputText value="#{msg.nome}" />
+							<p:inputText value="#{userMB.user.name}"
+								required="true" requiredMessage="#{msg.campoObrigatorio}"
+								label="#{msg.nome}" size="48" maxlength="255"/>
 
 							<p:columnGroup>
 							</p:columnGroup>

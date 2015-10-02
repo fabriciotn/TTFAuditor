@@ -1,5 +1,6 @@
 package com.mb;
 
+import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 import javax.faces.bean.ManagedBean;
@@ -51,7 +52,8 @@ public class LoginMB extends AbstractMB {
 			request.getSession().setAttribute("user", usuario);
 			//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user",user);
 			MessagesView ms = new MessagesView();
-	        ms.info(usuario.getName(), "Bem vindo!");
+			String mensagem = MessageFormat.format(bundle.getString("loginWelcomeMessage"), usuario.getName());
+	        ms.info(null, mensagem);
 			return "/restrito/home.xhtml";
 		
 		}
