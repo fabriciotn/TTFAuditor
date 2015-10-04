@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import com.model.Role;
 import com.model.User;
 
 public class CadastraUsuarios {
@@ -14,10 +15,11 @@ public class CadastraUsuarios {
 		manager.getTransaction().begin();
 		
 		User user = new User();
-		user.setName("123");
-		user.setLogin("123");
+		user.setName("Adriano Eustáquio Amaral");
+		user.setLogin("adriano.amaral");
 		user.setPassword("123");
-		user.setEmail("fabriciotn@yahoo.com.br");
+		user.setEmail("adrianoeamaral@gmail.com");
+		user.setRole(Role.ADMIN);
 		manager.persist(user);
 
 		manager.getTransaction().commit();

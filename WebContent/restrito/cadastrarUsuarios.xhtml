@@ -13,30 +13,59 @@
 	<ui:define name="conteudo">
 		<f:loadBundle basename="messages" var="msg" />
 		<center>
-			<div>
-				<h:form acceptcharset="ISO-8859-1" id="form1">
-					<p:panel header="#{msg.cadastroDeUsuarios}">
-						<h:panelGrid columns="2" columnClasses="label, value"
-							style="text-align:left">
-							<h:outputText value="#{msg.nome}" />
-							<p:inputText value="#{userMB.user.name}"
-								required="true" requiredMessage="#{msg.campoObrigatorio}"
-								label="#{msg.nome}" size="48" maxlength="255"/>
+			<h:form>
+				<p:dataTable id="tbl" var="usuario" value="#{userMB.usuarios}"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+					paginator="true" rows="10" style="margin-bottom:20px">
 
-							<p:columnGroup>
-							</p:columnGroup>
+					<f:facet name="header">
+            			Cadastro de Usuários
+        			</f:facet>
 
-							<p:columnGroup>
-								<p:commandButton value="Enviar" ajax="false"
-									icon="ui-icon-check" action="#{pendenciaMB.createPendencia}" />
-								<p:commandButton value="Limpar" icon="ui-icon-cancel">
-									<p:ajax update=":form1" resetValues="true" />
-								</p:commandButton>
-							</p:columnGroup>
-						</h:panelGrid>
-					</p:panel>
-				</h:form>
-			</div>
+					<f:facet name="{Exporters}">
+						<h:commandLink>
+							<img name="logo" src="../images/excel.png" width="24px"
+								title="Exportar para Excel" alt="Exportar para Excel" />
+							<p:dataExporter type="xls" target="tbl" fileName="#{msg.usuarios}" />
+						</h:commandLink>
+					</f:facet>
+
+					<p:column filterBy="#{usuario.id}" sortBy="#{usuario.id}" style="text-align: center;">
+						<f:facet name="header">
+							<h:outputText value="Id" />
+						</f:facet>
+						<h:outputText value="#{usuario.id}" />
+					</p:column>
+
+					<p:column filterBy="#{usuario.name}" sortBy="#{usuario.name}" style="text-align: center;">
+						<f:facet name="header">
+							<h:outputText value="Nome" />
+						</f:facet>
+						<h:outputText value="#{usuario.name}" />
+					</p:column>
+					
+					<p:column filterBy="#{usuario.login}" sortBy="#{usuario.login}" style="text-align: center;">
+						<f:facet name="header">
+							<h:outputText value="Login" />
+						</f:facet>
+						<h:outputText value="#{usuario.login}" />
+					</p:column>
+					
+					<p:column filterBy="#{usuario.email}" sortBy="#{usuario.email}" style="text-align: center;">
+						<f:facet name="header">
+							<h:outputText value="E-Mail" />
+						</f:facet>
+						<h:outputText value="#{usuario.email}" />
+					</p:column>
+					
+					<p:column filterBy="#{usuario.role}" sortBy="#{usuario.role}" style="text-align: center;">
+						<f:facet name="header">
+							<h:outputText value="Perfil" />
+						</f:facet>
+						<h:outputText value="#{usuario.role}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
 		</center>
 
 	</ui:define>

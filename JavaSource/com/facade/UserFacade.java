@@ -1,10 +1,12 @@
 package com.facade;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.dao.UserDAO;
 import com.mb.MessagesView;
+import com.model.Pendencia;
 import com.model.User;
 import com.util.ADAuthenticator;
 import com.util.Criptografia;
@@ -36,8 +38,6 @@ public class UserFacade {
 		
 		return user;
 	}
-	
-	
 
 	public User validaAD(String login, String password) {
 		// instanciando a classe ADAuthenticator para fazer
@@ -47,5 +47,12 @@ public class UserFacade {
 		User usuarioAd = autenticador.authenticate(login, password);
 
 		return usuarioAd;
+	}
+	
+	public List<User> listAll() {
+		userDAO.beginTransaction();
+		List<User> result = userDAO.findAllAsc();
+		userDAO.closeTransaction();
+		return result;
 	}
 }
