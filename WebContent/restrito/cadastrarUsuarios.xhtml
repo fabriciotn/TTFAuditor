@@ -14,13 +14,9 @@
 		<f:loadBundle basename="messages" var="msg" />
 		<center>
 			<h:form>
-				<p:dataTable id="tbl" var="usuario" value="#{userMB.usuarios}"
+				<p:dataTable id="tbl" var="usuario" value="#{userMB.allUsuarios}"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
 					paginator="true" rows="10" style="margin-bottom:20px">
-
-					<f:facet name="header">
-            			Cadastro de Usuários
-        			</f:facet>
 
 					<f:facet name="{Exporters}">
 						<h:commandLink>
@@ -30,39 +26,40 @@
 						</h:commandLink>
 					</f:facet>
 
-					<p:column filterBy="#{usuario.id}" sortBy="#{usuario.id}" style="text-align: center;">
-						<f:facet name="header">
-							<h:outputText value="Id" />
-						</f:facet>
+					<p:column headerText="ID" filterBy="#{usuario.id}" sortBy="#{usuario.id}" style="text-align: center; width:6em;">
 						<h:outputText value="#{usuario.id}" />
 					</p:column>
 
-					<p:column filterBy="#{usuario.name}" sortBy="#{usuario.name}" style="text-align: center;">
-						<f:facet name="header">
-							<h:outputText value="Nome" />
-						</f:facet>
+					<p:column headerText="NOME" filterBy="#{usuario.name}" sortBy="#{usuario.name}" style="text-align: center;">
 						<h:outputText value="#{usuario.name}" />
 					</p:column>
 					
-					<p:column filterBy="#{usuario.login}" sortBy="#{usuario.login}" style="text-align: center;">
-						<f:facet name="header">
-							<h:outputText value="Login" />
-						</f:facet>
+					<p:column headerText="LOGIN" filterBy="#{usuario.login}" sortBy="#{usuario.login}" style="text-align: center;">
 						<h:outputText value="#{usuario.login}" />
 					</p:column>
 					
-					<p:column filterBy="#{usuario.email}" sortBy="#{usuario.email}" style="text-align: center;">
-						<f:facet name="header">
-							<h:outputText value="E-Mail" />
-						</f:facet>
+					<p:column headerText="E-MAIL" filterBy="#{usuario.email}" sortBy="#{usuario.email}" style="text-align: center;">
 						<h:outputText value="#{usuario.email}" />
 					</p:column>
 					
-					<p:column filterBy="#{usuario.role}" sortBy="#{usuario.role}" style="text-align: center;">
-						<f:facet name="header">
-							<h:outputText value="Perfil" />
-						</f:facet>
+					<p:column headerText="PERFIL" filterBy="#{usuario.role}" sortBy="#{usuario.role}" style="text-align:center; width:6em;">
 						<h:outputText value="#{usuario.role}" />
+					</p:column>
+					
+					<p:column exportable="false" style="text-align: center; width:3em;">
+						<f:facet name="header">
+							<h:outputText value="Editar" />
+						</f:facet>
+
+
+						<p:lightBox iframe="true" id="lighbox3" width="800px" height="600px">
+							<h:outputLink value="cadastrarIteracao.xhtml"
+								title="Detalhes da pendência #{pendencia.id}">
+								<img src="../images/edit.png" width="25" />
+								<f:param name="id" value="#{pendencia.id}" />
+								<f:param name="titulo" value="#{pendencia.titulo}" />
+							</h:outputLink>
+						</p:lightBox>
 					</p:column>
 				</p:dataTable>
 			</h:form>

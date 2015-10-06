@@ -10,7 +10,9 @@ import javax.faces.context.FacesContext;
 import javax.jws.soap.SOAPBinding.Use;
 import javax.servlet.http.HttpServletRequest;
 
+import com.facade.PendenciaFacade;
 import com.facade.UserFacade;
+import com.model.Pendencia;
 import com.model.User;
 
 @SessionScoped
@@ -21,11 +23,29 @@ public class UserMB implements Serializable {
 
 	private User user;
 	private List<User> usuarios;
+	private UserFacade userFacade;
 	
+	
+	public List<User> getAllUsuarios() {
+		if (usuarios == null) {
+			loadUsuarios();
+		}
+
+		return usuarios;	}
+	
+	public UserFacade getUserFacade() {
+		if (userFacade == null) {
+			userFacade = new UserFacade();
+		}
+
+		return userFacade;
+	}
+	
+	private void loadUsuarios() {
+		usuarios = getUserFacade().listAll();
+	}
 
 	public List<User> getUsuarios() {
-		UserFacade userFacade = new UserFacade();
-		usuarios = userFacade.listAll();
 		return usuarios;
 	}
 

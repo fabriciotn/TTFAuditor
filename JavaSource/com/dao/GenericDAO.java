@@ -3,6 +3,7 @@ package com.dao;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.Map.Entry;
 
 import javax.persistence.EntityManager;
@@ -14,20 +15,22 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import com.model.Pendencia;
-
 abstract class GenericDAO<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("auditoria_db");
 	private EntityManager em;
+	private ResourceBundle bundle = ResourceBundle.getBundle("messages");
 
 	private Class<T> entityClass;
 
 	public void beginTransaction() {
-		em = emf.createEntityManager();
-
-		em.getTransaction().begin();
+		try {
+			em = emf.createEntityManager();
+			em.getTransaction().begin();
+		} catch (Exception e) {
+			throw new RuntimeException(bundle.getString("falhaAoConectarAoBancoDeDados"));
+		}
 	}
 
 	public void commit() {
