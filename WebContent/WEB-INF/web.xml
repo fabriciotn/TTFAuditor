@@ -32,7 +32,7 @@
 	</context-param>
 		<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>pepper-grinder</param-value>
+		<param-value>#{ThemeBeam.applicationTheme}</param-value>
 	</context-param>
 	<filter>
 		<filter-name>VerificaSession</filter-name>
