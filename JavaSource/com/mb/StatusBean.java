@@ -35,11 +35,6 @@ public class StatusBean {
 		statusList = new ArrayList<Status>(Arrays.asList(Status.values()));
 		return statusList;
 	}
-	
-	public List<Status> getStatusAberto() {
-		statusList = new ArrayList<Status>(Arrays.asList(Status.ABERTO));
-		return statusList;
-	}
 
 /*	public void setStatusList(Map<String, String> statusList) {
 		this.statusList = statusList;

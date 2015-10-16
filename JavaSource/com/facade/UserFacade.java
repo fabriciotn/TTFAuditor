@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import com.dao.UserDAO;
 import com.mb.MessagesView;
 import com.model.Pendencia;
+import com.model.Status;
 import com.model.User;
 import com.util.ADAuthenticator;
 import com.util.Criptografia;
@@ -22,6 +23,8 @@ public class UserFacade {
 
 		if (user != null){
 			if (user.getPassword() == null) {
+				return null;
+			}if(user.getStatus() != Status.ATIVO){
 				return null;
 			}
 			if(user.getPassword().equals(password)){

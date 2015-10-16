@@ -9,40 +9,51 @@
 	<h:form>
 		<p:growl id="messages" />
 
-		<a href="home.xhtml">
-			<img src="images/logo.png" width="150px" border="0"/>
-		</a>
+		<img src="images/logo.png" width="150px" border="0" />
 
 		<p:menubar>
-			<p:menuitem value="#{msg.inicio}" outcome="home.xhtml" icon="ui-icon-home" />
+			<p:menuitem value="#{msg.inicio}" outcome="home.xhtml"
+				icon="ui-icon-home" />
 
 			<p:submenu label="#{msg.cadastros}" icon="ui-icon-disk">
-				<p:menuitem value="#{msg.instituicoes}" outcome="home.xhtml" icon="ui-icon-stop" />
-				<p:menuitem value="#{msg.responsaveis}" outcome="home.xhtml" icon="ui-icon-stop" />
+				<p:menuitem value="#{msg.instituicoes}" outcome="home.xhtml"
+					icon="ui-icon-stop" />
+				<p:menuitem value="#{msg.responsaveis}" outcome="home.xhtml"
+					icon="ui-icon-stop" />
 			</p:submenu>
-			
+
 			<p:submenu label="#{msg.auditorias}" icon="ui-icon-contact">
-				<p:menuitem value="#{msg.gerenciar}" outcome="home.xhtml" icon="ui-icon-wrench" />
-				<p:menuitem value="#{msg.auditar}" outcome="home.xhtml" icon="ui-icon-check" />
+				<p:menuitem value="#{msg.gerenciar}" outcome="home.xhtml"
+					icon="ui-icon-wrench" />
+				<p:menuitem value="#{msg.auditar}" outcome="home.xhtml"
+					icon="ui-icon-check" />
 			</p:submenu>
 
-			<p:menuitem value="#{msg.agenda}" outcome="agenda.xhtml" icon="ui-icon-calendar" />
+			<p:menuitem value="#{msg.agenda}" outcome="agenda.xhtml"
+				icon="ui-icon-calendar" />
 
-			<p:menuitem value="#{msg.relatorios}" outcome="agenda.xhtml" icon="ui-icon-note" />
+			<p:menuitem value="#{msg.relatorios}" outcome="agenda.xhtml"
+				icon="ui-icon-note" />
 
 			<p:submenu label="#{msg.configuracoes}" icon="ui-icon-gear">
-				<p:menuitem value="#{msg.confGerais}" outcome="agenda.xhtml" icon="ui-icon-newwin"/>
-				<p:menuitem value="#{msg.usuarios}" outcome="cadastrarUsuarios.xhtml" icon="ui-icon-person"/>
-				<p:separator/>
+				<p:menuitem value="#{msg.confGerais}" outcome="agenda.xhtml"
+					icon="ui-icon-newwin" />
+				<p:menuitem value="#{msg.usuarios}"
+					outcome="cadastrarUsuarios.xhtml" icon="ui-icon-person" />
+				<p:separator />
 				<p:submenu label="#{msg.auditOff}" icon="ui-icon-signal-diag">
-					<p:menuitem value="#{msg.exportAuditoria}" outcome="home.xhtml" icon="ui-icon-arrowreturnthick-1-n"/>
-					<p:menuitem value="#{msg.importAuditoria}" outcome="home.xhtml" icon="ui-icon-arrowreturnthick-1-s"/>
+					<p:menuitem value="#{msg.exportAuditoria}" outcome="home.xhtml"
+						icon="ui-icon-arrowreturnthick-1-n" />
+					<p:menuitem value="#{msg.importAuditoria}" outcome="home.xhtml"
+						icon="ui-icon-arrowreturnthick-1-s" />
 				</p:submenu>
-				<p:separator/>
-				<p:menuitem value="#{msg.sobre}" outcome="agenda.xhtml" icon="ui-icon-help"/>
+				<p:separator />
+				<p:menuitem value="#{msg.sobre}" outcome="agenda.xhtml"
+					icon="ui-icon-help" />
 			</p:submenu>
 
-			<p:menuitem value="#{msg.logOut}" outcome="../sair.xhtml" icon="ui-icon-power" />
+			<p:menuitem value="#{msg.logOut}" outcome="../sair.xhtml"
+				icon="ui-icon-power" />
 		</p:menubar>
 	</h:form>
 

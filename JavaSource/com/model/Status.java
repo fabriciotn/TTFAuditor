@@ -1,12 +1,8 @@
 package com.model;
 
 public enum Status {
-    ABERTO("Aberto"),
-    FECHADO("Fechado"),
-    ANALISE("Em análise"),
-    EXECUCAO("Em execução"),
-    PENDENTE_USUARIO("Pendente usuário"),
-    CANCELADO("Cancelado");
+    ATIVO("Ativo"),
+    INATIVO("Inativo");
     
     private String label;
     

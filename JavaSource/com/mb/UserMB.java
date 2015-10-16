@@ -2,44 +2,37 @@ package com.mb;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.jws.soap.SOAPBinding.Use;
+import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpServletRequest;
 
-import com.email.PendenciaAlterada;
-import com.email.PendenciaFechada;
-import com.facade.PendenciaFacade;
 import com.facade.UserFacade;
-import com.model.Pendencia;
-import com.model.Prioridade;
 import com.model.Status;
 import com.model.User;
 
 @ViewScoped
-@ManagedBean(name="userMB")
+@ManagedBean(name = "userMB")
 public class UserMB extends AbstractMB implements Serializable {
-	
+
 	public static final String INJECTION_NAME = "#{userMB}";
 	private static final long serialVersionUID = 1L;
 
 	private User user;
 	private List<User> usuarios;
 	private UserFacade userFacade;
-	
-	
+
 	public List<User> getAllUsuarios() {
 		if (usuarios == null) {
 			loadUsuarios();
 		}
 
-		return usuarios;	}
-	
+		return usuarios;
+	}
+
 	public UserFacade getUserFacade() {
 		if (userFacade == null) {
 			userFacade = new UserFacade();
@@ -47,7 +40,7 @@ public class UserMB extends AbstractMB implements Serializable {
 
 		return userFacade;
 	}
-	
+
 	private void loadUsuarios() {
 		usuarios = getUserFacade().listAll();
 	}
@@ -71,7 +64,7 @@ public class UserMB extends AbstractMB implements Serializable {
 	public void logOut() throws IOException {
 		getRequest().getSession().invalidate();
 		FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
-		//return "/restrito/index.xhtml";
+		// return "/restrito/index.xhtml";
 	}
 
 	private HttpServletRequest getRequest() {
@@ -79,7 +72,7 @@ public class UserMB extends AbstractMB implements Serializable {
 	}
 
 	public User getUser() {
-		if(user == null){
+		if (user == null) {
 			user = new User();
 		}
 		return user;
@@ -88,25 +81,38 @@ public class UserMB extends AbstractMB implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	public String createUser() {
 		try {
 			UserFacade uf = getUserFacade();
-			uf.createUsuario(user);			
+			user.setPassword(user.getLogin());
+			user.setStatus(Status.ATIVO);
+			uf.createUsuario(user);
 			closeDialog();
 			displayInfoMessageToUser("Registrado com sucesso!");
 			loadUsers();
 			resetUser();
+		} catch (PersistenceException e) {
+			keepDialogOpen();
+			displayErrorMessageToUser(
+					"Ocorreu algum problema ao salvar o registro! Verifique se já existe algum usuário com o login " 
+							+ user.getLogin() + ", ou tente novamente.");
+			displayErrorMessageToUser(
+					"Caso o problema persista, entre em contato com o administrador do sistema.");
+			e.printStackTrace();
+			return "";
 		} catch (Exception e) {
 			keepDialogOpen();
-			displayErrorMessageToUser("Ops, ocorreu algum problema. Tente novamente!");
+			displayErrorMessageToUser("Ocorreu algum problema. Tente novamente!");
+			displayErrorMessageToUser(
+					"Caso o problema persista, entre em contato com o administrador do sistema.");
 			e.printStackTrace();
-			return "/restrito/erro.xhtml";
+			return "";
 		}
 
 		return "";
 	}
-	
+
 	private void loadUsers() {
 		usuarios = getUserFacade().listAll();
 	}

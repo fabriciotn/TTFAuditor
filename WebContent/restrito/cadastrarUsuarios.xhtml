@@ -13,36 +13,39 @@
 	<ui:define name="conteudo">
 		<f:loadBundle basename="messages" var="msg" />
 		<center>
-			<div>
-				<h:form acceptcharset="ISO-8859-1" id="form1">
-					<p:panel header="Cadastro de Usuários">
+			<h:form acceptcharset="ISO-8859-1" id="form1">
+				<p:accordionPanel>
+					<p:tab title="Cadastro de usuários">
 						<h:panelGrid columns="2" columnClasses="label, value"
 							style="text-align:left">
 
-							<h:outputText value="Nome completo:*" />
+							<h:outputText value="Nome completo:* " />
 							<p:inputText value="#{userMB.user.name}" required="true"
 								requiredMessage="O campo Nome é obrigatório!" label="Nome"
-								size="50" maxlength="255" />
+								size="50" maxlength="255" converter="toUpperCaseConverter">
+								<f:ajax event="blur" render="@this" />
+							</p:inputText>
 
-							<h:outputText value="E-mail:*" />
+							<h:outputText value="E-mail:* " />
 							<p:inputText value="#{userMB.user.email}" required="true"
 								requiredMessage="O campo E-mail é obrigatório!" label="Email"
-								size="50" maxlength="255" />
+								size="35" maxlength="255" />
 
-							<h:outputText value="Login:*" />
+							<h:outputText value="Login:* " />
 							<p:inputText value="#{userMB.user.login}" required="true"
-								requiredMessage="O campo Login é obrigatório!" label="Login"
-								size="50" maxlength="255" />
+								requiredMessage="O campo Login é obrigatório!"
+								validatorMessage="O campo Login aceita somente letras e números"
+								label="Login" size="35" maxlength="255">
+								<f:validateRegex pattern="^[a-zA-Z0-9]+$" />
+							</p:inputText>
 
 							<h:outputText value="Perfil:* " />
-							<p:selectOneMenu id="role"
-								value="#{userMB.user.role}"
-								converter="roleConverter" required="true"
-								requiredMessage="O campo Perfil é obrigatório!">
+							<p:selectOneMenu id="role" value="#{userMB.user.role}"
+								required="true" requiredMessage="O campo Perfil é obrigatório!" style="width:50%">
 								<f:selectItem itemLabel="---Selecione---" itemValue="#{null}"
-									noSelectionOption="true" />
+									noSelectionOption="true"/>
 								<f:selectItems value="#{roleMB.roleList}" var="role"
-									itemLabel="#{role.label}" itemValue="#{role}" />
+									itemLabel="#{role.label}" itemValue="#{role}"/>
 							</p:selectOneMenu>
 
 
@@ -52,15 +55,68 @@
 							<p:columnGroup>
 								<p:commandButton value="Enviar" ajax="false"
 									icon="ui-icon-check" action="#{userMB.createUser}" />
-								<p:commandButton value="Limpar" icon="ui-icon-cancel">
-									<p:ajax update=":form1" resetValues="true" />
-								</p:commandButton>
 							</p:columnGroup>
 						</h:panelGrid>
-					</p:panel>
-				</h:form>
-			</div>
+					</p:tab>
+					<p:tab title="Listar/editar usuários">
+						<h:panelGrid columns="1" style="text-align:left">
+							<p:dataTable id="tbl" var="usuario" value="#{userMB.allUsuarios}"								
+								paginator="true" rows="10" style="margin-bottom:20px">
 
+								<p:column headerText="ID" filterBy="#{usuario.id}"
+									sortBy="#{usuario.id}" style="text-align: center; width:6em;">
+									<h:outputText value="#{usuario.id}" />
+								</p:column>
+
+								<p:column headerText="NOME" filterBy="#{usuario.name}"
+									sortBy="#{usuario.name}" style="text-align: center;">
+									<h:outputText value="#{usuario.name}" />
+								</p:column>
+
+								<p:column headerText="LOGIN" filterBy="#{usuario.login}"
+									sortBy="#{usuario.login}" style="text-align: center;">
+									<h:outputText value="#{usuario.login}" />
+								</p:column>
+
+								<p:column headerText="E-MAIL" filterBy="#{usuario.email}"
+									sortBy="#{usuario.email}" style="text-align: center;">
+									<h:outputText value="#{usuario.email}" />
+								</p:column>
+
+								<p:column headerText="PERFIL" filterBy="#{usuario.role.label}"
+									sortBy="#{usuario.role.label}"
+									style="text-align:center; width:6em;">
+									<h:outputText value="#{usuario.role.label}" />
+								</p:column>
+
+								<p:column headerText="STATUS" filterBy="#{usuario.status.label}"
+									sortBy="#{usuario.status.label}"
+									style="text-align:center; width:6em;">
+									<h:outputText value="#{usuario.status.label}" />
+								</p:column>
+
+								<p:column exportable="false"
+									style="text-align: center; width:3em;">
+									<f:facet name="header">
+										<h:outputText value="Editar" />
+									</f:facet>
+
+
+									<p:lightBox iframe="true" id="lighbox3" width="800px"
+										height="600px">
+										<h:outputLink value="editarUsuario.xhtml"
+											title="Editar Usuário #{usuario.name}">
+											<img src="../images/editUser.png" width="25" />
+											<f:param name="id" value="#{usuario.id}" />
+											<f:param name="titulo" value="#{usuario.name}" />
+										</h:outputLink>
+									</p:lightBox>
+								</p:column>
+							</p:dataTable>
+						</h:panelGrid>
+					</p:tab>
+				</p:accordionPanel>
+			</h:form>
 		</center>
 
 	</ui:define>

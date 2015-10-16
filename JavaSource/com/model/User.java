@@ -40,7 +40,17 @@ public class User implements Serializable {
 	private String email;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar ultimoAcesso;
+	@Enumerated(EnumType.STRING)
+	private Status status;
 	
+	
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 
 	public Calendar getUltimoAcesso() {
 		return ultimoAcesso;

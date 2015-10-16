@@ -137,7 +137,7 @@ public class IteracaoMB extends AbstractMB implements Serializable {
 			getIteracaoFacade().createIteracao(iteracao);
 			
 			//envia o e-mail
-			if(iteracao.getStatus() == Status.FECHADO)
+			if(iteracao.getStatus() == Status.ATIVO)
 				PendenciaFechada.enviaEmail(iteracao);
 			else if(prioridadeAnterior == Prioridade.GRAVE || prioridadeAtual == Prioridade.GRAVE)
 				PendenciaAlterada.enviaEmail(iteracao);
