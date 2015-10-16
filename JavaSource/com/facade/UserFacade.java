@@ -38,6 +38,12 @@ public class UserFacade {
 		
 		return user;
 	}
+	
+	public void createUsuario(User user) {
+		userDAO.beginTransaction();
+		userDAO.save(user);
+		userDAO.commitAndCloseTransaction();
+	}
 
 	public User validaAD(String login, String password) {
 		// instanciando a classe ADAuthenticator para fazer

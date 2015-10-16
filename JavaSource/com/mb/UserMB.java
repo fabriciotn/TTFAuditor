@@ -2,22 +2,29 @@ package com.mb;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.jws.soap.SOAPBinding.Use;
 import javax.servlet.http.HttpServletRequest;
 
+import com.email.PendenciaAlterada;
+import com.email.PendenciaFechada;
 import com.facade.PendenciaFacade;
 import com.facade.UserFacade;
 import com.model.Pendencia;
+import com.model.Prioridade;
+import com.model.Status;
 import com.model.User;
 
-@SessionScoped
+@ViewScoped
 @ManagedBean(name="userMB")
-public class UserMB implements Serializable {
+public class UserMB extends AbstractMB implements Serializable {
+	
 	public static final String INJECTION_NAME = "#{userMB}";
 	private static final long serialVersionUID = 1L;
 
@@ -72,10 +79,39 @@ public class UserMB implements Serializable {
 	}
 
 	public User getUser() {
+		if(user == null){
+			user = new User();
+		}
 		return user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public String createUser() {
+		try {
+			UserFacade uf = getUserFacade();
+			uf.createUsuario(user);			
+			closeDialog();
+			displayInfoMessageToUser("Registrado com sucesso!");
+			loadUsers();
+			resetUser();
+		} catch (Exception e) {
+			keepDialogOpen();
+			displayErrorMessageToUser("Ops, ocorreu algum problema. Tente novamente!");
+			e.printStackTrace();
+			return "/restrito/erro.xhtml";
+		}
+
+		return "";
+	}
+	
+	private void loadUsers() {
+		usuarios = getUserFacade().listAll();
+	}
+
+	public void resetUser() {
+		user = new User();
 	}
 }
