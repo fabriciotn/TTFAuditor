@@ -1,0 +1,50 @@
+
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="menu">
+		<ui:include src="/WEB-INF/partials/menu.xhtml" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<f:loadBundle basename="messages" var="msg" />
+		<center>
+			<h:form acceptcharset="ISO-8859-1" id="form1">
+				<p:panel id="basic" header="Alterar minha senha"
+					style="margin-bottom:20px">
+					<h:panelGrid columns="2" columnClasses="label, value"
+						style="text-align:left">
+						<h:outputLabel for="password" value="Senha atual:* " />
+						<p:password id="password" value="#{userMB.senhaDigitada}"
+							required="true" label="password">
+							<f:validateLength minimum="2" />
+						</p:password>
+
+						<h:outputLabel for="pwd1" value="Nova senha: *" />
+						<p:password id="pwd1" value="#{userMB.novasenha}"
+							match="pwd2" label="As senhas digitadas não conferem" required="true" />
+
+						<h:outputLabel for="pwd2" value="Repetir nova senha: *" />
+						<p:password id="pwd2" value="#{userMB.novasenha}"
+							label="Password 2" required="true" />
+
+
+						<p:columnGroup>
+						</p:columnGroup>
+
+						<p:columnGroup>
+							<p:commandButton value="Enviar" ajax="false" icon="ui-icon-check"
+								action="#{userMB.mudarMinhaSenha}" />
+						</p:columnGroup>
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+		</center>
+
+	</ui:define>
+
+</ui:composition>

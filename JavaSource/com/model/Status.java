@@ -14,5 +14,11 @@ public enum Status {
     	return label;
     }
     
-    
+    public boolean isAtivo(){
+    	if(this.label.equals("Ativo")){
+    		return true;
+    	}
+    	
+    	return false;
+    }
 }

@@ -15,11 +15,12 @@ public class CadastraUsuarios {
 		manager.getTransaction().begin();
 		
 		User user = new User();
-		user.setName("Adriano Eustáquio Amaral");
-		user.setLogin("adriano.amaral");
+		user.setName("master");
+		user.setLogin("123");
 		user.setPassword("123");
-		user.setEmail("adrianoeamaral@gmail.com");
+		user.setEmail("master@master.com");
 		user.setRole(Role.ADMIN);
+		user.setAtivo(true);
 		manager.persist(user);
 
 		manager.getTransaction().commit();

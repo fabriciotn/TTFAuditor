@@ -40,16 +40,15 @@ public class User implements Serializable {
 	private String email;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar ultimoAcesso;
-	@Enumerated(EnumType.STRING)
-	private Status status;
+	private boolean ativo;
 	
 	
-	public Status getStatus() {
-		return status;
+	public boolean getAtivo() {
+		return ativo;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setAtivo(boolean status) {
+		this.ativo = status;
 	}
 
 	public Calendar getUltimoAcesso() {
@@ -82,6 +81,10 @@ public class User implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = Criptografia.criptografa(password);
+	}
+	
+	public void setPasswordSemCriptografia(String password) {
+		this.password = password;
 	}
 
 	public String getName() {

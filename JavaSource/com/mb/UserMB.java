@@ -2,19 +2,26 @@ package com.mb;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.lang.ProcessBuilder.Redirect;
+import java.nio.file.attribute.UserPrincipalLookupService;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.eclipse.jdt.internal.compiler.ast.ThrowStatement;
+
 import com.facade.UserFacade;
 import com.model.Status;
 import com.model.User;
+import com.util.Criptografia;
 
-@ViewScoped
+@RequestScoped
 @ManagedBean(name = "userMB")
 public class UserMB extends AbstractMB implements Serializable {
 
@@ -24,6 +31,32 @@ public class UserMB extends AbstractMB implements Serializable {
 	private User user;
 	private List<User> usuarios;
 	private UserFacade userFacade;
+	private String novasenha;
+	private String senhaDigitada;
+	private User usuarioLogado;
+
+	public UserMB() {
+		usuarioLogado = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+
+		if (usuarioLogado == null)
+			throw new RuntimeException("Problemas com usuário");
+	}
+
+	public String getSenhaDigitada() {
+		return senhaDigitada;
+	}
+
+	public void setSenhaDigitada(String senhaDigitada) {
+		this.senhaDigitada = senhaDigitada;
+	}
+
+	public String getNovasenha() {
+		return novasenha;
+	}
+
+	public void setNovasenha(String novasenha) {
+		this.novasenha = novasenha;
+	}
 
 	public List<User> getAllUsuarios() {
 		if (usuarios == null) {
@@ -64,7 +97,6 @@ public class UserMB extends AbstractMB implements Serializable {
 	public void logOut() throws IOException {
 		getRequest().getSession().invalidate();
 		FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
-		// return "/restrito/index.xhtml";
 	}
 
 	private HttpServletRequest getRequest() {
@@ -84,9 +116,11 @@ public class UserMB extends AbstractMB implements Serializable {
 
 	public String createUser() {
 		try {
+			System.out.println("Usuário: " + user.getName() + " criado pelo usuário: " + usuarioLogado.getName());
+
 			UserFacade uf = getUserFacade();
 			user.setPassword(user.getLogin());
-			user.setStatus(Status.ATIVO);
+			user.setAtivo(true);
 			uf.createUsuario(user);
 			closeDialog();
 			displayInfoMessageToUser("Registrado com sucesso!");
@@ -95,22 +129,59 @@ public class UserMB extends AbstractMB implements Serializable {
 		} catch (PersistenceException e) {
 			keepDialogOpen();
 			displayErrorMessageToUser(
-					"Ocorreu algum problema ao salvar o registro! Verifique se já existe algum usuário com o login " 
+					"Ocorreu algum problema ao salvar o registro! Verifique se já existe algum usuário com o login "
 							+ user.getLogin() + ", ou tente novamente.");
-			displayErrorMessageToUser(
-					"Caso o problema persista, entre em contato com o administrador do sistema.");
+			displayErrorMessageToUser("Caso o problema persista, entre em contato com o administrador do sistema.");
 			e.printStackTrace();
 			return "";
 		} catch (Exception e) {
 			keepDialogOpen();
 			displayErrorMessageToUser("Ocorreu algum problema. Tente novamente!");
-			displayErrorMessageToUser(
-					"Caso o problema persista, entre em contato com o administrador do sistema.");
+			displayErrorMessageToUser("Caso o problema persista, entre em contato com o administrador do sistema.");
 			e.printStackTrace();
 			return "";
 		}
 
 		return "";
+	}
+
+	public void updateUser() {
+		try {
+			if (user.getId() == 0) {
+				createUser();
+			} else {
+				UserFacade uf = getUserFacade();
+				uf.updateUsuario(user);
+				closeDialog();
+				displayInfoMessageToUser("Atualizado com sucesso!");
+				loadUsers();
+				resetUser();
+
+				// retorna para a listagem de usuários
+				ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
+				context.redirect("listarUsuarios.xhtml");
+			}
+		} catch (Exception e) {
+			keepDialogOpen();
+			displayErrorMessageToUser("Ops, ocorreu algum problema. Tente novamente!");
+			e.printStackTrace();
+		}
+	}
+
+	public void mudarMinhaSenha() {
+		if(usuarioLogado.getPassword().equals(Criptografia.criptografa(senhaDigitada))){
+			usuarioLogado.setPasswordSemCriptografia(getNovasenha());
+			user = usuarioLogado;
+			UserFacade uf = getUserFacade();
+			uf.updateUsuario(user);
+			closeDialog();
+			displayInfoMessageToUser("Atualizado com sucesso!");
+			loadUsers();
+			resetUser();
+		}else{
+			closeDialog();
+			displayErrorMessageToUser("Você não digitou sua senha corretamente!");
+		}
 	}
 
 	private void loadUsers() {

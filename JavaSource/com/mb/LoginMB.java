@@ -1,22 +1,26 @@
 package com.mb;
 
+import java.io.Serializable;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
 import com.facade.UserFacade;
 import com.model.User;
 
-@RequestScoped
+@SessionScoped
 @ManagedBean
-public class LoginMB extends AbstractMB {
-	@ManagedProperty(value = UserMB.INJECTION_NAME)
-	private UserMB userMB;
+public class LoginMB extends AbstractMB implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	//@ManagedProperty(value = UserMB.INJECTION_NAME)
+	//private UserMB userMB;
 
 	private String login;
 	private String password;
@@ -46,7 +50,7 @@ public class LoginMB extends AbstractMB {
 		usuario = userFacade.isValidLogin(login, password);
 		
 		if(usuario != null){
-			userMB.setUser(usuario);
+			//userMB.setUser(usuario);
 			FacesContext context = FacesContext.getCurrentInstance();
 			HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
 			request.getSession().setAttribute("user", usuario);
@@ -63,7 +67,7 @@ public class LoginMB extends AbstractMB {
 		return "/erro.xhtml";
 	}
 
-	public void setUserMB(UserMB userMB) {
-		this.userMB = userMB;
-	}	
+	//public void setUserMB(UserMB userMB) {
+	//	this.userMB = userMB;
+	//}	
 }

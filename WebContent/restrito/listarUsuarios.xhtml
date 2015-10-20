@@ -1,0 +1,96 @@
+
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="menu">
+		<ui:include src="/WEB-INF/partials/menu.xhtml" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<f:loadBundle basename="messages" var="msg" />
+		<h:form acceptcharset="ISO-8859-1" id="form1">
+			<p:button value="NOVO USUARIO" icon="ui-icon-plusthick"
+				outcome="cadastrarUsuarios.xhtml">
+			</p:button>
+		</h:form>
+		<br/>
+		<center>
+			<h:form acceptcharset="ISO-8859-1" id="form2">
+
+				<h:panelGrid columns="1" style="text-align:left">
+					<p:dataTable id="tbl" var="usuario" value="#{userMB.allUsuarios}"
+						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+						paginator="true" rows="10" style="margin-bottom:20px">
+
+						<f:facet name="{Exporters}">
+							<h:commandLink>
+								<img name="logo" src="../images/excel.png" width="24px"
+									title="Exportar para Excel" alt="Exportar para Excel" />
+								<p:dataExporter type="xls" target="tbl" fileName="Usuarios" />
+							</h:commandLink>
+
+							<h:commandLink>
+								<img name="logo" src="../images/pdf.png" width="24px"
+									title="Exportar para PDF" alt="Exportar para PDF" />
+								<p:dataExporter type="pdf" target="tbl" fileName="Usuarios" />
+							</h:commandLink>
+						</f:facet>
+
+
+
+						<p:column headerText="ID" filterBy="#{usuario.id}"
+							sortBy="#{usuario.id}" style="text-align: center; width:6em;">
+							<h:outputText value="#{usuario.id}" />
+						</p:column>
+
+						<p:column headerText="NOME" filterBy="#{usuario.name}"
+							sortBy="#{usuario.name}" style="text-align: center;">
+							<h:outputText value="#{usuario.name}" />
+						</p:column>
+
+						<p:column headerText="LOGIN" filterBy="#{usuario.login}"
+							sortBy="#{usuario.login}" style="text-align: center;">
+							<h:outputText value="#{usuario.login}" />
+						</p:column>
+
+						<p:column headerText="E-MAIL" filterBy="#{usuario.email}"
+							sortBy="#{usuario.email}" style="text-align: center;">
+							<h:outputText value="#{usuario.email}" />
+						</p:column>
+
+						<p:column headerText="PERFIL" filterBy="#{usuario.role.label}"
+							sortBy="#{usuario.role.label}"
+							style="text-align:center; width:6em;">
+							<h:outputText value="#{usuario.role.label}" />
+						</p:column>
+
+						<p:column headerText="ATIVO" filterBy="#{usuario.ativo}"
+							sortBy="#{usuario.ativo}"
+							style="text-align:center; width:6em;">
+							<p:inputSwitch value="#{usuario.ativo}" disabled="true"/>
+						</p:column>
+
+						<p:column exportable="false"
+							style="text-align: center; width:3em;">
+							<f:facet name="header">
+								<h:outputText value="Editar" />
+							</f:facet>
+
+							<p:commandLink action="cadastrarUsuarios.xhtml" ajax="false">
+								<img src="../images/editUser.png" width="25" />
+								<f:setPropertyActionListener value="#{usuario}"
+									target="#{userMB.user}" />
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+				</h:panelGrid>
+			</h:form>
+		</center>
+
+	</ui:define>
+
+</ui:composition>
