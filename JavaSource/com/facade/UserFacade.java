@@ -3,12 +3,8 @@ package com.facade;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import com.dao.UserDAO;
-import com.mb.MessagesView;
-import com.model.Pendencia;
-import com.model.Status;
 import com.model.User;
 import com.util.ADAuthenticator;
 import com.util.Criptografia;
