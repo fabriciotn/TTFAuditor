@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -22,12 +21,9 @@ public class Pergunta implements Serializable{
 	@OneToOne
 	private User user;
 	private String pergunta;
-	private String resposta;
-	@Lob
-	private String obs;
-	//@ManyToOne
-    //@JoinColumn(name="id_questionario",nullable=false)
-	//private Questionario questionario;
+	@ManyToOne
+    @JoinColumn(name="id_auditoria",nullable=false)
+	private Auditoria auditoria;
 	
 	public int getId() {
 		return id;
@@ -47,17 +43,11 @@ public class Pergunta implements Serializable{
 	public void setPergunta(String pergunta) {
 		this.pergunta = pergunta;
 	}
-	public String getResposta() {
-		return resposta;
+	public Auditoria getAuditoria() {
+		return auditoria;
 	}
-	public void setResposta(String resposta) {
-		this.resposta = resposta;
-	}
-	public String getObs() {
-		return obs;
-	}
-	public void setObs(String obs) {
-		this.obs = obs;
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
 	}
 	
 	@Override

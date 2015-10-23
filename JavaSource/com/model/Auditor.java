@@ -26,9 +26,6 @@ public class Auditor implements Serializable{
 	private String telefone;
 	private String celular;
 	private String cargo;
-	@ManyToOne
-    @JoinColumn(name="id_auditoria",nullable=false)
-	private Auditoria auditoria;
 	
 	public int getId() {
 		return id;
@@ -77,12 +74,6 @@ public class Auditor implements Serializable{
 	}
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
-	}
-	public Auditoria getAuditoria() {
-		return auditoria;
-	}
-	public void setAuditoria(Auditoria auditoria) {
-		this.auditoria = auditoria;
 	}
 	
 	@Override

@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -18,8 +19,11 @@ public class Resposta implements Serializable{
 	private int id;
 	@OneToOne
 	private User user;
-	private Auditoria auditoria;
+	@OneToOne
 	private Pergunta pergunta;
+	private String resposta;
+	@Lob
+	private String obs;
 
 	public int getId() {
 		return id;
@@ -36,15 +40,23 @@ public class Resposta implements Serializable{
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	public Auditoria getAuditoria() {
-		return auditoria;
+	
+	public String getResposta() {
+		return resposta;
 	}
 
-	public void setAuditoria(Auditoria auditoria) {
-		this.auditoria = auditoria;
+	public void setResposta(String resposta) {
+		this.resposta = resposta;
 	}
 
+	public String getObs() {
+		return obs;
+	}
+
+	public void setObs(String obs) {
+		this.obs = obs;
+	}
+	
 	public Pergunta getPergunta() {
 		return pergunta;
 	}
