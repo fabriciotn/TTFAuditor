@@ -2,11 +2,8 @@ package com.mb;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.lang.ProcessBuilder.Redirect;
-import java.nio.file.attribute.UserPrincipalLookupService;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
@@ -14,10 +11,7 @@ import javax.faces.context.FacesContext;
 import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpServletRequest;
 
-import org.eclipse.jdt.internal.compiler.ast.ThrowStatement;
-
 import com.facade.UserFacade;
-import com.model.Status;
 import com.model.User;
 import com.util.Criptografia;
 
