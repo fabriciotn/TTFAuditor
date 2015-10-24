@@ -24,7 +24,7 @@ public class PhoneConverter implements Converter{
     }
 	
 	private String converte(String phoneNumber) {
-		MaskFormatter phoneFormatter;
+		/*MaskFormatter phoneFormatter;
 		JFormattedTextField txtPhone = null;
 		
 		try {
@@ -35,6 +35,7 @@ public class PhoneConverter implements Converter{
 			e.printStackTrace();
 		}
 		
-		return txtPhone.getText();
+		return txtPhone.getText();*/
+		return phoneNumber;
 	}
 }

@@ -25,6 +25,14 @@ public class UnidadeMB extends AbstractMB implements Serializable {
 	private Unidade unidade;
 	private List<Unidade> unidades;
 	private UnidadeFacade unidadeFacade;
+	private User usuarioLogado;
+	
+	public UnidadeMB() {
+		usuarioLogado = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+
+		if (usuarioLogado == null)
+			throw new RuntimeException("Problemas com usuário");
+	}
 
 	public UnidadeFacade getUnidadeFacade() {
 		if (unidadeFacade == null) {
@@ -48,12 +56,7 @@ public class UnidadeMB extends AbstractMB implements Serializable {
 
 	public String createUnidade() {
 		try {
-			User user = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-
-			if (user == null)
-				throw new RuntimeException("Problemas com usuário");
-
-			unidade.setUser(user);
+			unidade.setUser(usuarioLogado);
 
 			getUnidadeFacade().createUnidade(unidade);
 			closeDialog();
@@ -74,6 +77,7 @@ public class UnidadeMB extends AbstractMB implements Serializable {
 			if (unidade.getId() == 0) {
 				createUnidade();
 			} else {
+				unidade.setUser(usuarioLogado);
 				getUnidadeFacade().updateUnidade(unidade);
 				closeDialog();
 				displayInfoMessageToUser("Atualizado com sucesso!");

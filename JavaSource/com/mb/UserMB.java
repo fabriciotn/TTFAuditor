@@ -110,8 +110,6 @@ public class UserMB extends AbstractMB implements Serializable {
 
 	public String createUser() {
 		try {
-			System.out.println("Usuário: " + user.getName() + " criado pelo usuário: " + usuarioLogado.getName());
-
 			UserFacade uf = getUserFacade();
 			user.setPassword(user.getLogin());
 			user.setAtivo(true);
