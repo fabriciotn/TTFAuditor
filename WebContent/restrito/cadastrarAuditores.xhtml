@@ -1,0 +1,78 @@
+
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="menu">
+		<ui:include src="/WEB-INF/partials/menu.xhtml" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<f:loadBundle basename="messages" var="msg" />
+		<center>
+			<h:form acceptcharset="ISO-8859-1" id="form1">
+				<p:panel id="basic" header="Cadastro de auditores"
+					style="margin-bottom:20px">
+					<h:panelGrid columns="2" columnClasses="label, value"
+						style="text-align:left">
+						<h:inputHidden value="#{auditorMB.auditor.id}" />
+						<p:columnGroup>
+						</p:columnGroup>
+
+						<h:outputText value="Nome:* " />
+						<p:inputText value="#{auditorMB.auditor.nome}" required="true"
+							requiredMessage="O campo Nome é obrigatório!" label="Nome"
+							size="50" maxlength="255" converter="toUpperCaseConverter">
+							<f:ajax event="blur" render="@this" />
+						</p:inputText>
+
+						<h:outputText value="Masp:* " />
+						<p:inputText value="#{auditorMB.auditor.masp}" required="true"
+							requiredMessage="O campo MASP é obrigatório!" label="Masp"
+							size="50" maxlength="255" converter="toUpperCaseConverter">
+							<f:ajax event="blur" render="@this" />
+						</p:inputText>
+
+						<h:outputText value="Telefone:* " />
+						<p:inputMask value="#{auditorMB.auditor.telefone}" required="true"
+							requiredMessage="O campo Telefone é obrigatório!" label="Telefone"
+							mask="(99)9999-9999" />
+
+						<h:outputText value="Celular:* " />
+						<p:inputMask value="#{auditorMB.auditor.celular}" required="true"
+							requiredMessage="O campo Celular é obrigatório!" label="Celular"
+							mask="(99)9999-9999" />
+							
+						<h:outputText value="E-mail:* " />
+						<p:inputText value="#{auditorMB.auditor.email}" required="true"
+							requiredMessage="O campo E-mail é obrigatório!" label="Email"
+							size="35" maxlength="255" />
+							
+						<h:outputText value="Cargo:* " />
+						<p:inputText value="#{auditorMB.auditor.cargo}" required="true"
+							requiredMessage="O campo Cargo é obrigatório!" label="Cargo"
+							size="35" maxlength="255"  converter="toUpperCaseConverter">
+							<f:ajax event="blur" render="@this" />
+						</p:inputText>
+
+
+						<p:columnGroup>
+						</p:columnGroup>
+
+						<p:columnGroup>
+							<p:commandButton value="Enviar" ajax="false" icon="ui-icon-check"
+								action="#{auditorMB.updateAuditor}" />
+							<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+								outcome="listarAuditores.xhtml" />
+						</p:columnGroup>
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+		</center>
+
+	</ui:define>
+
+</ui:composition>
