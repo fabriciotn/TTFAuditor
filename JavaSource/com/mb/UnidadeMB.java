@@ -15,6 +15,7 @@ import org.primefaces.context.RequestContext;
 import com.facade.UnidadeFacade;
 import com.model.Unidade;
 import com.model.User;
+import com.util.RetiraMascaras;
 
 @RequestScoped
 @ManagedBean
@@ -74,6 +75,8 @@ public class UnidadeMB extends AbstractMB implements Serializable {
 
 	public void updateUnidade() {
 		try {
+			unidade.setTelefone(RetiraMascaras.retirar(unidade.getTelefone()));
+			
 			if (unidade.getId() == 0) {
 				createUnidade();
 			} else {

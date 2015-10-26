@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.facade.AuditorFacade;
 import com.model.Auditor;
 import com.model.User;
+import com.util.RetiraMascaras;
 
 @RequestScoped
 @ManagedBean
@@ -71,6 +72,9 @@ public class AuditorMB extends AbstractMB implements Serializable {
 
 	public void updateAuditor() {
 		try {
+			auditor.setTelefone(RetiraMascaras.retirar(auditor.getTelefone()));
+			auditor.setCelular(RetiraMascaras.retirar(auditor.getCelular()));
+			
 			if (auditor.getId() == 0) {
 				createAuditor();
 			} else {
