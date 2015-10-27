@@ -24,7 +24,16 @@ public class EstabelecimentoMB extends AbstractMB implements Serializable {
 	private List<Estabelecimento> estabelecimentos;
 	private EstabelecimentoFacade estabelecimentoFacade;
 	private User usuarioLogado;
-	
+	private boolean mostrar;
+
+	public boolean isMostrar() {
+		return mostrar;
+	}
+
+	public void setMostrar(boolean mostrar) {
+		this.mostrar = mostrar;
+	}
+
 	public EstabelecimentoMB() {
 		usuarioLogado = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
 
@@ -72,12 +81,13 @@ public class EstabelecimentoMB extends AbstractMB implements Serializable {
 
 	public void updateEstabelecimento() {
 		try {
-			//estabelecimento.setTelefone1(RetiraMascaras.telefone(estabelecimento.getTelefone1()));
-			//estabelecimento.setTelefone2(RetiraMascaras.telefone(estabelecimento.getTelefone2()));
-			//estabelecimento.setTelefone3(RetiraMascaras.telefone(estabelecimento.getTelefone3()));
-			//estabelecimento.setTelefone4(RetiraMascaras.telefone(estabelecimento.getTelefone4()));
 			estabelecimento.setCnpj(RetiraMascaras.retirar(estabelecimento.getCnpj()));
-			
+			estabelecimento.setCep(RetiraMascaras.retirar(estabelecimento.getCep()));
+			estabelecimento.setTelefone1(RetiraMascaras.retirar(estabelecimento.getTelefone1()));
+			estabelecimento.setTelefone2(RetiraMascaras.retirar(estabelecimento.getTelefone2()));
+			estabelecimento.setTelefone3(RetiraMascaras.retirar(estabelecimento.getTelefone3()));
+			estabelecimento.setTelefone4(RetiraMascaras.retirar(estabelecimento.getTelefone4()));
+
 			if (estabelecimento.getId() == 0) {
 				createEstabelecimento();
 			} else {
@@ -144,5 +154,13 @@ public class EstabelecimentoMB extends AbstractMB implements Serializable {
 		estabelecimento = estabelecimentoFacade.findEstabelecimento(estabelecimentoId);
 
 		return estabelecimento;
+	}
+
+	public void exibir() {
+		if (estabelecimento.isCirurgiaGrandePorte()) {
+			mostrar = true;
+		} else {
+			mostrar = false;
+		}
 	}
 }

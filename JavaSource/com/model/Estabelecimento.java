@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -42,8 +40,7 @@ public class Estabelecimento implements Serializable{
 	private String CrmRtAgenciaTransfusional;
 	private String nomeResponsavelAT;
 	private String cargoResponsavelAT;
-	@Enumerated(EnumType.STRING)
-	private TipoServico tipoServico;
+	private String tipoServico;
 	private String horarioDeFuncionamento;
 	private int numeroDeFuncionarios;
 	private int mediaDeTransfusoes;
@@ -194,10 +191,10 @@ public class Estabelecimento implements Serializable{
 	public void setCargoResponsavelAT(String cargoResponsavelAT) {
 		this.cargoResponsavelAT = cargoResponsavelAT;
 	}
-	public TipoServico getTipoServico() {
+	public String getTipoServico() {
 		return tipoServico;
 	}
-	public void setTipoServico(TipoServico tipoServico) {
+	public void setTipoServico(String tipoServico) {
 		this.tipoServico = tipoServico;
 	}
 	public String getHorarioDeFuncionamento() {

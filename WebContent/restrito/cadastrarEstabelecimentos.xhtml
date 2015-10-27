@@ -17,6 +17,10 @@
 				<p:panel id="basic" header="Cadastro de Estabelecimentos"
 					style="margin-bottom:20px">
 					<p:tabView style="border:1">
+
+						<!--
+							Início ta TAB Identificação do estabelecimento
+						 -->
 						<p:tab title="Identificação do estabelecimento">
 							<h:panelGrid columns="2" columnClasses="label, value"
 								style="text-align:left">
@@ -43,24 +47,267 @@
 									<f:ajax event="blur" render="@this" />
 								</p:inputText>
 
+								<h:outputText value="Nome Fantasia:*  " />
+								<p:inputText
+									value="#{estabelecimentoMB.estabelecimento.nomeFantasia}"
+									required="true"
+									requiredMessage="O campo Nome fantasia é obrigatório!"
+									size="50" maxlength="255" converter="toUpperCaseConverter">
+									<f:ajax event="blur" render="@this" />
+								</p:inputText>
 
+								<h:outputText value="Endereço:* " />
+								<p:inputText
+									value="#{estabelecimentoMB.estabelecimento.endereco}"
+									required="true"
+									requiredMessage="O campo Endereço é obrigatório!" size="50"
+									maxlength="255" converter="toUpperCaseConverter">
+									<f:ajax event="blur" render="@this" />
+								</p:inputText>
+
+								<h:outputText value="Complemento: " />
+								<p:inputText
+									value="#{estabelecimentoMB.estabelecimento.complementoEndereco}"
+									required="false" size="18" maxlength="255"
+									converter="toUpperCaseConverter">
+									<f:ajax event="blur" render="@this" />
+								</p:inputText>
+
+								<h:outputText value="Cidade:* " />
+								<p:column>
+									<p:inputText
+										value="#{estabelecimentoMB.estabelecimento.cidade}"
+										required="true"
+										requiredMessage="O campo Cidade é obrigatório!" size="40"
+										maxlength="255" converter="toUpperCaseConverter">
+										<f:ajax event="blur" render="@this" />
+									</p:inputText>
+
+									<p:spacer width="10" height="10" />
+
+									<p:selectOneMenu id="uf"
+										value="#{estabelecimentoMB.estabelecimento.uf}"
+										required="true" requiredMessage="O campo UF é obrigatório!">
+										<f:selectItem itemLabel="UF" itemValue="#{null}"
+											noSelectionOption="true" />
+										<f:selectItems value="#{uFMB.UFList}" var="uf"
+											itemLabel="#{uf}" itemValue="#{uf}" />
+									</p:selectOneMenu>
+								</p:column>
+
+								<h:outputText value="CEP:* " />
+								<p:inputMask value="#{estabelecimentoMB.estabelecimento.cep}"
+									required="true" requiredMessage="O campo CEP é obrigatório!"
+									label="Cep" mask="99.999-999" size="18" />
+
+								<h:outputText value="Fone:* " />
+								<p:column>
+									<p:inputMask
+										value="#{estabelecimentoMB.estabelecimento.telefone1}"
+										required="true"
+										requiredMessage="O campo Telefone é obrigatório!"
+										label="Telefone" mask="(99)9999-9999" style="width:7.5em" />
+
+									<h:outputText value="  Fone: " />
+									<p:inputMask
+										value="#{estabelecimentoMB.estabelecimento.telefone2}"
+										required="false"
+										requiredMessage="O campo Telefone é obrigatório!"
+										label="Telefone" mask="(99)9999-9999" style="width:7.5em" />
+								</p:column>
+
+								<h:outputText value="Fone: " />
+								<p:column>
+									<p:inputMask
+										value="#{estabelecimentoMB.estabelecimento.telefone3}"
+										required="false"
+										requiredMessage="O campo Telefone é obrigatório!"
+										label="Telefone" mask="(99)9999-9999" style="width:7.5em" />
+
+									<h:outputText value=" Fone: " />
+									<p:inputMask
+										value="#{estabelecimentoMB.estabelecimento.telefone4}"
+										required="false"
+										requiredMessage="O campo Telefone é obrigatório!"
+										label="Telefone" mask="(99)9999-9999" style="width:7.5em" />
+								</p:column>
+
+								<h:outputText value="E-mail: " />
+								<p:inputText value="#{estabelecimentoMB.estabelecimento.email}"
+									required="false"
+									requiredMessage="O campo E-mail é obrigatório!" size="40"
+									maxlength="255">
+									<f:ajax event="blur" render="@this" />
+								</p:inputText>
+
+								<h:outputText value="Site: " />
+								<p:inputText value="#{estabelecimentoMB.estabelecimento.site}"
+									required="false" requiredMessage="O campo Site é obrigatório!"
+									size="40" maxlength="255">
+									<f:ajax event="blur" render="@this" />
+								</p:inputText>
+
+								<h:outputText value="N. de Leitos: " />
+								<p:spinner id="leitos"
+									value="#{estabelecimentoMB.estabelecimento.numeroDeLeitos}"
+									min="0" max="999999" size="13" />
 							</h:panelGrid>
 						</p:tab>
+
+						<!--
+							Início ta TAB Responsáveis 
+						 -->
 						<p:tab title="Responsáveis">
-							<h:outputText value="Nome Fantasia:* " />
-							<p:inputText
-								value="#{estabelecimentoMB.estabelecimento.nomeFantasia}"
-								required="true"
-								requiredMessage="O campo Nome fantasia é obrigatório!" size="50"
-								maxlength="255" converter="toUpperCaseConverter">
-								<f:ajax event="blur" render="@this" />
-							</p:inputText>
+							<h:panelGrid columns="2" columnClasses="label, value">
+								<h:outputText value="RT pela AT (Médico):* " />
+								<p:inputText
+									value="#{estabelecimentoMB.estabelecimento.nomeRtAgenciaTransfusional}"
+									required="true"
+									requiredMessage="O nome do médico RT é obrigatório!" size="40"
+									maxlength="255" converter="toUpperCaseConverter">
+									<f:ajax event="blur" render="@this" />
+								</p:inputText>
+
+								<h:outputText value="CRM:* " />
+								<p:inputText
+									value="#{estabelecimentoMB.estabelecimento.crmRtAgenciaTransfusional}"
+									required="true" requiredMessage="O campo CRM é obrigatório!"
+									size="10" maxlength="255">
+									<f:ajax event="blur" render="@this" />
+								</p:inputText>
+
+								<h:outputText value="Responsável AT:* " />
+								<p:inputText
+									value="#{estabelecimentoMB.estabelecimento.nomeResponsavelAT}"
+									required="true"
+									requiredMessage="O nome do Responsável pelo gerenciamento é obrigatório!"
+									size="40" maxlength="255" converter="toUpperCaseConverter">
+									<f:ajax event="blur" render="@this" />
+								</p:inputText>
+
+								<h:outputText value="Cargo:* " />
+								<p:inputText
+									value="#{estabelecimentoMB.estabelecimento.cargoResponsavelAT}"
+									required="true" requiredMessage="O campo Cargo é obrigatório!"
+									size="40" maxlength="255" converter="toUpperCaseConverter">
+									<f:ajax event="blur" render="@this" />
+								</p:inputText>
+							</h:panelGrid>
 						</p:tab>
+
+
+						<!--
+							Início ta TAB Dados do serviço 
+						 -->
 						<p:tab title="Dados do serviço">
 
-						</p:tab>
-						<p:tab title="Setores do establecimento">
+							<h:panelGrid columns="2" columnClasses="label, value">
+								<h:outputText value="Tipo do serviço: " />
+								<p:selectOneRadio id="console"
+									value="#{estabelecimentoMB.estabelecimento.tipoServico}"
+									layout="grid" columns="1">
+									<f:selectItem itemLabel="Agência Transfusional" itemValue="AT" />
+									<f:selectItem itemLabel="Assistência Hemoterápica"
+										itemValue="AH" />
+									<f:selectItem itemLabel="Outro" itemValue="Outro" />
+								</p:selectOneRadio>
 
+								<h:outputText value="Horário de funcionamento: " />
+								<p:inputText
+									value="#{estabelecimentoMB.estabelecimento.horarioDeFuncionamento}"
+									required="false"
+									requiredMessage="O campo Horário de funcionamento é obrigatório!"
+									size="20" maxlength="255" />
+
+								<h:outputText value="Nº de funcionários: " />
+								<p:spinner id="numFuncionarios"
+									value="#{estabelecimentoMB.estabelecimento.numeroDeFuncionarios}"
+									min="0" max="999999" size="13" />
+
+								<h:outputText value="Média de transfusões (mês): " />
+								<p:spinner id="mediaTransfusoes"
+									value="#{estabelecimentoMB.estabelecimento.mediaDeTransfusoes}"
+									min="0" max="999999" size="13" />
+
+								<h:outputText value="Média de reações imediatas (mês): " />
+								<p:spinner id="mediaReacoes"
+									value="#{estabelecimentoMB.estabelecimento.mediaDeReacoesImediatas}"
+									min="0" max="999999" size="13" />
+							</h:panelGrid>
+						</p:tab>
+
+
+						<!--
+							Início ta TAB Setores do estabelecimento 
+						 -->
+						<p:tab title="Setores do establecimento">
+							<h:panelGrid columns="2" columnClasses="label, value">
+
+								<h:outputText value="Pronto atendimento: " />
+								<p:selectBooleanCheckbox
+									value="#{estabelecimentoMB.estabelecimento.prontoAtendimento}" />
+
+								<h:outputText value="Bloco cirúrgico: " />
+								<p:selectBooleanCheckbox
+									value="#{estabelecimentoMB.estabelecimento.blocoCirurgico}" />
+
+								<h:outputText value="Cirúrgia de grande porte: " />
+								<p:column>
+									<p:selectBooleanCheckbox
+										value="#{estabelecimentoMB.estabelecimento.cirurgiaGrandePorte}">
+										<p:ajax update="mediaCirurgiasGPorte" />
+									</p:selectBooleanCheckbox>
+
+									<h:outputText value=" Média/mês: " />
+									<p:spinner id="mediaCirurgiasGPorte"
+										value="#{estabelecimentoMB.estabelecimento.mediaCirurgiaGrandePorte}"
+										min="0" max="99999" size="5"/>
+										<!--disabled="#{!estabelecimentoMB.estabelecimento.cirurgiaGrandePorte}" />-->
+								</p:column>
+
+								<h:outputText value="Pacientes internados: " />
+								<p:selectBooleanCheckbox
+									value="#{estabelecimentoMB.estabelecimento.pacientesInternados}" />
+
+								<h:outputText value="Maternidade: " />
+								<p:selectBooleanCheckbox
+									value="#{estabelecimentoMB.estabelecimento.maternidade}" />
+
+								<h:outputText value="Hemodiálise: " />
+								<p:selectBooleanCheckbox
+									value="#{estabelecimentoMB.estabelecimento.hemodialise}" />
+
+								<h:outputText value="CTI: " />
+								<p:column>
+									<p:selectBooleanCheckbox
+										value="#{estabelecimentoMB.estabelecimento.cti}">
+										<p:ajax update="numDeLeitosCti" />
+									</p:selectBooleanCheckbox>
+
+									<h:outputText value=" Nº de leitos: " />
+									<p:spinner id="numDeLeitosCti"
+										value="#{estabelecimentoMB.estabelecimento.numeroLeitosCti}"
+										min="0" max="99999" size="5"/>
+										<!--disabled="#{!estabelecimentoMB.estabelecimento.cti}" />-->
+								</p:column>
+
+								<h:outputText value="CTI Neo natal: " />
+								<p:selectBooleanCheckbox
+									value="#{estabelecimentoMB.estabelecimento.ctiNeoNatal}" />
+
+								<h:outputText value="Oncologia: " />
+								<p:selectBooleanCheckbox
+									value="#{estabelecimentoMB.estabelecimento.oncologia}" />
+
+								<h:outputText value="Transplantes: " />
+								<p:selectBooleanCheckbox
+									value="#{estabelecimentoMB.estabelecimento.transplantes}" />
+
+								<h:outputText value="Pediatria: " />
+								<p:selectBooleanCheckbox
+									value="#{estabelecimentoMB.estabelecimento.pediatria}" />
+
+							</h:panelGrid>
 						</p:tab>
 					</p:tabView>
 
