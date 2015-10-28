@@ -1,10 +1,9 @@
 package com.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,17 +27,20 @@ public class Auditoria implements Serializable {
 	private User user;
 	@OneToOne
 	private Estabelecimento estabelecimento;
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(name = "auditoria_auditor",
 		joinColumns = @JoinColumn(name = "auditoria_id"),
 		inverseJoinColumns = @JoinColumn(name = "auditor_id") )
 	private List<Auditor> auditores;
+	@ManyToMany
+	@JoinTable(name = "auditoria_questionario",
+		joinColumns = @JoinColumn(name = "auditoria_id"),
+		inverseJoinColumns = @JoinColumn(name = "questionario_id") )
+	private List<Questionario> questionarios;
 	@OneToOne
 	private Unidade unidade;
-	@OneToMany(mappedBy = "auditoria")
-	private List<Pergunta> pergunta;
 	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar dataDaVerificacao;
+	private Date dataDaVerificacao;
 	private String tipo; // visita / revisita
 
 	public int getId() {
@@ -82,11 +83,11 @@ public class Auditoria implements Serializable {
 		this.unidade = unidade;
 	}
 
-	public Calendar getDataDaVerificacao() {
+	public Date getDataDaVerificacao() {
 		return dataDaVerificacao;
 	}
 
-	public void setDataDaVerificacao(Calendar dataDaVerificacao) {
+	public void setDataDaVerificacao(Date dataDaVerificacao) {
 		this.dataDaVerificacao = dataDaVerificacao;
 	}
 
@@ -98,12 +99,12 @@ public class Auditoria implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public List<Pergunta> getPergunta() {
-		return pergunta;
+	public List<Questionario> getQuestionarios() {
+		return questionarios;
 	}
 
-	public void setPergunta(List<Pergunta> pergunta) {
-		this.pergunta = pergunta;
+	public void setQuestionarios(List<Questionario> questionarios) {
+		this.questionarios = questionarios;
 	}
 
 	@Override
@@ -127,4 +128,5 @@ public class Auditoria implements Serializable {
 			return false;
 		return true;
 	}
+
 }

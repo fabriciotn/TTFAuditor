@@ -21,6 +21,8 @@ public class Resposta implements Serializable{
 	private User user;
 	@OneToOne
 	private Pergunta pergunta;
+	@OneToOne
+	private Auditoria auditoria;
 	private String resposta;
 	@Lob
 	private String obs;
@@ -65,6 +67,14 @@ public class Resposta implements Serializable{
 		this.pergunta = pergunta;
 	}
 
+	public Auditoria getAuditoria() {
+		return auditoria;
+	}
+
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -86,7 +96,4 @@ public class Resposta implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
 }

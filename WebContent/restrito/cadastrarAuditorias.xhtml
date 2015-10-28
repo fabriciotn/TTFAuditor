@@ -1,0 +1,202 @@
+
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="menu">
+		<ui:include src="/WEB-INF/partials/menu.xhtml" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<f:loadBundle basename="messages" var="msg" />
+		<center>
+			<h:form acceptcharset="ISO-8859-1" id="form1">
+				<p:panel id="basic" header="Cadastro de auditorias"
+					style="margin-bottom:20px">
+
+					<h:panelGrid columns="2" columnClasses="label, value"
+						style="text-align:left">
+
+						<h:inputHidden value="#{auditoriaMB.auditoria.id}" />
+
+						<p:columnGroup>
+						</p:columnGroup>
+
+						<h:outputText value="Estabelecimento:* " />
+						<p:selectOneMenu id="estabelecimento"
+							value="#{auditoriaMB.auditoria.estabelecimento}" required="true"
+							requiredMessage="O campo Estabelecimento é obrigatório!"
+							converter="estabelecimentoConverter" style="width:13em">
+							<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{estabelecimentoMB.allEstabelecimentos}"
+								var="estabelecimento"
+								itemLabel="#{estabelecimento.id} | #{estabelecimento.nomeFantasia}"
+								itemValue="#{estabelecimento}" />
+						</p:selectOneMenu>
+
+						<h:outputLabel for="menu" value="Auditores:" />
+						<p:selectCheckboxMenu id="menu"
+							value="#{auditoriaMB.auditoria.auditores}" label="Auditores"
+							filter="true" filterMatchMode="startsWith"
+							panelStyle="width:250px" converter="auditorConverter"
+							style="width:13em">
+							<f:selectItems value="#{auditorMB.allAuditores}" var="auditor"
+								itemLabel="#{auditor.nome}" itemValue="#{auditor}" />
+						</p:selectCheckboxMenu>
+
+						<h:outputText value="Data da auditoria: " />
+						<p:calendar id="dataAuditoria" pattern="dd/MM/yyyy" locale="pt"
+							value="#{auditoriaMB.auditoria.dataDaVerificacao}"
+							mindate="#{auditoriaMB.hoje}" />
+
+						<h:outputText value="Questionários: " />
+						<p:selectCheckboxMenu id="questionario"
+							value="#{auditoriaMB.auditoria.questionarios}"
+							label="Questionários" filter="true" filterMatchMode="startsWith"
+							panelStyle="width:250px" converter="questionarioConverter"
+							style="width:13em">
+							<f:selectItems value="#{questionarioMB.allQuestionarios}"
+								var="questionario" itemLabel="#{questionario.titulo}"
+								itemValue="#{questionario}" />
+						</p:selectCheckboxMenu>
+						
+						<h:outputText value="Unidade:* " />
+						<p:selectOneMenu id="unidade"
+							value="#{auditoriaMB.auditoria.unidade}" required="true"
+							requiredMessage="O campo Unidade é obrigatório!"
+							converter="unidadeConverter" style="width:13em">
+							<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{unidadeMB.allUnidades}"
+								var="unidade"
+								itemLabel="#{unidade.id} | #{unidade.sigla}"
+								itemValue="#{unidade}" />
+						</p:selectOneMenu>
+
+						<p:columnGroup>
+						</p:columnGroup>
+
+						<p:columnGroup>
+							<p:commandButton value="Enviar" ajax="false" icon="ui-icon-check"
+								action="#{auditoriaMB.updateAuditoria}" />
+							<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+								outcome="gerenciarAuditorias.xhtml" />
+						</p:columnGroup>
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+
+			<h:form acceptcharset="ISO-8859-1" id="form2">
+
+				<h:panelGrid columns="1" style="text-align:left">
+					<p:dataTable id="tbl" var="auditoria"
+						value="#{auditoriaMB.allAuditorias}"
+						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+						paginator="true" rows="10" style="margin-bottom:20px">
+
+						<f:facet name="{Exporters}">
+							<h:commandLink>
+								<img name="logo" src="../images/excel.png" width="24px"
+									title="Exportar para Excel" alt="Exportar para Excel" />
+								<p:dataExporter type="xls" target="tbl" fileName="Auditorias" />
+							</h:commandLink>
+
+							<h:commandLink>
+								<img name="logo" src="../images/pdf.png" width="24px"
+									title="Exportar para PDF" alt="Exportar para PDF" />
+								<p:dataExporter type="pdf" target="tbl" fileName="Auditorias" />
+							</h:commandLink>
+						</f:facet>
+
+						<p:column headerText="ID" filterBy="#{auditoria.id}"
+							sortBy="#{auditoria.id}" style="text-align: center;">
+							<h:outputText value="#{auditoria.id}" />
+						</p:column>
+
+						<p:column headerText="ESTABELECIMENTO"
+							filterBy="#{auditoria.estabelecimento.nomeFantasia}"
+							sortBy="#{auditoria.estabelecimento.nomeFantasia}"
+							style="text-align: center;">
+							<h:outputText value="#{auditoria.estabelecimento.nomeFantasia}" />
+						</p:column>
+
+						<p:column headerText="TIPO" filterBy="#{auditoria.tipo}"
+							sortBy="#{auditoria.tipo}" style="text-align: center;">
+							<h:outputText value="#{auditoria.tipo}" />
+						</p:column>
+
+						<p:column headerText="UIDADE"
+							filterBy="#{auditoria.unidade.sigla}"
+							sortBy="#{auditoria.unidade.sigla}" style="text-align: center;">
+							<h:outputText value="#{auditoria.unidade.sigla}" />
+						</p:column>
+
+						<p:column headerText="DATA"
+							filterBy="#{auditoria.dataDaVerificacao}"
+							sortBy="#{auditoria.dataDaVerificacao}"
+							style="text-align: center;">
+							<h:outputText value="#{auditoria.dataDaVerificacao}">
+								<f:convertDateTime type="date" dateStyle="short"
+									pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:column>
+
+						<p:column exportable="false"
+							style="text-align: center; width:3em;">
+							<f:facet name="header">
+								<h:outputText value="Editar" />
+							</f:facet>
+
+							<p:commandLink action="cadastrarAuditorias.xhtml" ajax="false">
+								<img src="../images/editUser.png" width="25" />
+								<f:setPropertyActionListener value="#{auditoria}"
+									target="#{auditoriaMB.auditoria}" />
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+				</h:panelGrid>
+			</h:form>
+
+			<script type="text/javascript">
+				PrimeFaces.locales['pt'] = {
+					closeText : 'Fechar',
+					prevText : 'Anterior',
+					nextText : 'Próximo',
+					currentText : 'Começo',
+					monthNames : [ 'Janeiro', 'Fevereiro', 'Março', 'Abril',
+							'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
+							'Outubro', 'Novembro', 'Dezembro' ],
+					monthNamesShort : [ 'Jan', 'Fev', 'Mar', 'Abr', 'Mai',
+							'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez' ],
+					dayNames : [ 'Domingo', 'Segunda', 'Terça', 'Quarta',
+							'Quinta', 'Sexta', 'Sábado' ],
+					dayNamesShort : [ 'Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex',
+							'Sáb' ],
+					dayNamesMin : [ 'D', 'S', 'T', 'Q', 'Q', 'S', 'S' ],
+					weekHeader : 'Semana',
+					firstDay : 1,
+					isRTL : false,
+					showMonthAfterYear : false,
+					yearSuffix : '',
+					timeOnlyTitle : 'Só Horas',
+					timeText : 'Tempo',
+					hourText : 'Hora',
+					minuteText : 'Minuto',
+					secondText : 'Segundo',
+					currentText : 'Data Atual',
+					ampm : false,
+					month : 'Mês',
+					week : 'Semana',
+					day : 'Dia',
+					allDayText : 'Todo Dia'
+				};
+			</script>
+		</center>
+
+	</ui:define>
+
+</ui:composition>

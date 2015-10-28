@@ -25,6 +25,7 @@ public class Auditor implements Serializable{
 	private String celular;
 	private String cargo;
 	
+
 	public int getId() {
 		return id;
 	}

@@ -1,0 +1,122 @@
+
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="menu">
+		<ui:include src="/WEB-INF/partials/menu.xhtml" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<f:loadBundle basename="messages" var="msg" />
+		<center>
+			<h:form acceptcharset="ISO-8859-1" id="form1">
+				<p:panel id="basic" header="Cadastro de perguntas"
+					style="margin-bottom:20px">
+					<h:panelGrid columns="2" columnClasses="label, value"
+						style="text-align:left">
+						<h:inputHidden value="#{perguntaMB.pergunta.id}" />
+						<p:columnGroup>
+						</p:columnGroup>
+
+						<h:outputText value="ID: " />
+						<p:inputText value="#{perguntaMB.pergunta.id}" size="5"
+							disabled="true" />
+
+
+						<h:outputText value="Pergunta:* " />
+						<p:inputTextarea rows="10" cols="50"
+							value="#{perguntaMB.pergunta.pergunta}" required="true"
+							requiredMessage="O campo Pregunta é obrigatório!"
+							converter="toUpperCaseConverter">
+							<f:ajax event="blur" render="@this" />
+						</p:inputTextarea>
+
+						<h:outputText value="Questionário:* " />
+						<p:selectOneMenu id="questionario"
+							value="#{perguntaMB.pergunta.questionario}" required="true"
+							requiredMessage="O campo Questionário é obrigatório!"
+							converter="questionarioConverter" style="width:13em">
+							<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{questionarioMB.allQuestionarios}"
+								var="questionario"
+								itemLabel="#{questionario.id} | #{questionario.titulo}"
+								itemValue="#{questionario}" />
+						</p:selectOneMenu>
+
+						<p:columnGroup>
+						</p:columnGroup>
+
+						<p:columnGroup>
+							<p:commandButton value="Enviar" ajax="false" icon="ui-icon-check"
+								action="#{perguntaMB.updatePergunta}" />
+							<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+								outcome="gerenciarAuditorias.xhtml" />
+						</p:columnGroup>
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+
+			<h:form acceptcharset="ISO-8859-1" id="form2">
+
+				<h:panelGrid columns="1" style="text-align:left">
+					<p:dataTable id="tbl" var="pergunta"
+						value="#{perguntaMB.allPerguntas}"
+						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+						paginator="true" rows="10" style="margin-bottom:20px">
+
+						<f:facet name="{Exporters}">
+							<h:commandLink>
+								<img name="logo" src="../images/excel.png" width="24px"
+									title="Exportar para Excel" alt="Exportar para Excel" />
+								<p:dataExporter type="xls" target="tbl" fileName="Perguntas" />
+							</h:commandLink>
+
+							<h:commandLink>
+								<img name="logo" src="../images/pdf.png" width="24px"
+									title="Exportar para PDF" alt="Exportar para PDF" />
+								<p:dataExporter type="pdf" target="tbl" fileName="Perguntas" />
+							</h:commandLink>
+						</f:facet>
+
+						<p:column headerText="ID" filterBy="#{pergunta.id}"
+							sortBy="#{pergunta.id}" style="text-align: center; width:6em">
+							<h:outputText value="#{pergunta.id}" />
+						</p:column>
+
+						<p:column headerText="PERGUNTA" filterBy="#{pergunta.pergunta}"
+							sortBy="#{pergunta.pergunta}">
+							<h:outputText value="#{pergunta.pergunta}" escape="false"/>
+						</p:column>
+
+						<p:column headerText="QUESTIONÁRIO"
+							filterBy="#{pergunta.questionario.titulo}"
+							sortBy="#{pergunta.questionario.titulo}"
+							style="text-align: center; width:13em">
+							<h:outputText value="#{pergunta.questionario.titulo}" />
+						</p:column>
+
+						<p:column exportable="false"
+							style="text-align: center; width:3em;">
+							<f:facet name="header">
+								<h:outputText value="Editar" />
+							</f:facet>
+
+							<p:commandLink action="cadastrarPerguntas.xhtml" ajax="false">
+								<img src="../images/editUser.png" width="25" />
+								<f:setPropertyActionListener value="#{pergunta}"
+									target="#{perguntaMB.pergunta}" />
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+				</h:panelGrid>
+			</h:form>
+		</center>
+
+	</ui:define>
+
+</ui:composition>

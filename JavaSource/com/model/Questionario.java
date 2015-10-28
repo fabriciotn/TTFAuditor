@@ -2,7 +2,6 @@ package com.model;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,15 +9,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.OrderBy;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-//@Entity
+@Entity
 public class Questionario implements Serializable{
-/*
+	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -31,12 +28,9 @@ public class Questionario implements Serializable{
 	private Calendar dataDaAvaliacao;
 	@OneToOne
 	private Auditor auditor;
-	@OneToMany(mappedBy = "questionario")
-	private List<Perguntas> perguntas;
-	@ManyToOne
-    @JoinColumn(name="id_auditoria",nullable=false)
-	private Auditoria auditoria;
-	
+//	@OneToMany(mappedBy = "questionario")
+//	private List<Pergunta> pergunta;
+
 	public int getId() {
 		return id;
 	}
@@ -67,18 +61,12 @@ public class Questionario implements Serializable{
 	public void setAuditor(Auditor auditor) {
 		this.auditor = auditor;
 	}
-	public List<Perguntas> getPerguntas() {
-		return perguntas;
-	}
-	public void setPerguntas(List<Perguntas> perguntas) {
-		this.perguntas = perguntas;
-	}
-	public Auditoria getAuditoria() {
-		return auditoria;
-	}
-	public void setAuditoria(Auditoria auditoria) {
-		this.auditoria = auditoria;
-	}
+//	public List<Pergunta> getPergunta() {
+//		return pergunta;
+//	}
+//	public void setPergunta(List<Pergunta> pergunta) {
+//		this.pergunta = pergunta;
+//	}
 	
 	@Override
 	public int hashCode() {
@@ -100,5 +88,4 @@ public class Questionario implements Serializable{
 			return false;
 		return true;
 	}
-	*/
 }
