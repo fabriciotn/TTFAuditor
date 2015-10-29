@@ -76,6 +76,17 @@
 								itemLabel="#{unidade.id} | #{unidade.sigla}"
 								itemValue="#{unidade}" />
 						</p:selectOneMenu>
+						
+						<h:outputText value="Tipo:* " />
+						<p:selectOneMenu id="tipo"
+							value="#{auditoriaMB.auditoria.tipo}" required="true"
+							requiredMessage="O campo Tipo é obrigatório!"
+							style="width:13em">
+							<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItem itemLabel="Visita" itemValue="VISITA"/>
+							<f:selectItem itemLabel="Revisita" itemValue="REVISITA"/>
+						</p:selectOneMenu>
 
 						<p:columnGroup>
 						</p:columnGroup>

@@ -26,7 +26,16 @@ public class Pergunta implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="questionario_id")
 	private Questionario questionario;
+	@OneToOne(mappedBy = "pergunta")
+	Resposta resposta;
 	
+	
+	public Resposta getResposta() {
+		return resposta;
+	}
+	public void setResposta(Resposta resposta) {
+		this.resposta = resposta;
+	}
 	public int getId() {
 		return id;
 	}

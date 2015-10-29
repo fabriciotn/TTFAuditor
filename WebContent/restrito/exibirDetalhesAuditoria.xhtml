@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title></title>
+</h:head>
+
+<h:body style="font-family: arial; margin: 0; background-color: white;">
+	<ui:param
+		value="#{auditoriaMB.auditoriaFacade.findAuditoria(request.getParameter('id'))}"
+		name="auditoria" />
+	<p:tabView id="tabview">
+		<p:tab title="Detalhes">
+			<h:panelGrid columns="1" cellpadding="3">
+
+				<p:columnGroup>
+					<h:outputLabel value="ID: " style="font-weight: bold; " />
+					<h:outputText value="#{auditoria.id}" />
+				</p:columnGroup>
+				<p:columnGroup>
+					<h:outputLabel value="Estabelecimento: " style="font-weight: bold;" />
+					<h:outputText value="#{auditoria.estabelecimento.nomeFantasia}" />
+				</p:columnGroup>
+				<p:columnGroup>
+					<h:outputLabel value="Unidade: " style="font-weight: bold;" />
+					<h:outputText value="#{auditoria.unidade.sigla}" />
+				</p:columnGroup>
+				<p:columnGroup>
+					<h:outputLabel value="Tipo: " style="font-weight: bold;" />
+					<h:outputText value="#{auditoria.tipo}" />
+				</p:columnGroup>
+				<p:columnGroup>
+					<h:outputLabel value="Data: " style="font-weight: bold;" />
+					<h:outputText value="#{auditoria.dataDaVerificacao}">
+						<f:convertDateTime type="date" dateStyle="short"
+							pattern="dd/MM/yyyy" />
+					</h:outputText>
+				</p:columnGroup>
+				<p:columnGroup>
+					<p:dataList value="#{auditoria.auditores}" var="auditor"
+						type="ordered">
+						<f:facet name="header">
+			            Auditores participantes
+			        	</f:facet>
+						<h:outputText value="#{auditor.nome}" style="display:inline-block" />
+					</p:dataList>
+				</p:columnGroup>
+			</h:panelGrid>
+		</p:tab>
+
+		<p:tab title="Questionários/Perguntas">
+			<h:outputText value="Questionários" />
+			<p:tree value="#{auditoriaMB.root}" var="questionario">
+				<p:treeNode>
+					<h:outputText value="#{questionario}" />
+				</p:treeNode>
+			</p:tree>
+		</p:tab>
+	</p:tabView>
+</h:body>
+</html>
