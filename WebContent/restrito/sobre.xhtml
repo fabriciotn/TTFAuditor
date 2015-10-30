@@ -1,0 +1,67 @@
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="menu">
+		<ui:include src="/WEB-INF/partials/menu.xhtml" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<center>
+			<h:panelGrid columns="1">
+				<p:outputPanel>
+					<div style="text-align: center">
+						<h:outputText value="Desenvolvido por TTF Informática"
+							style="font-size:2em" />
+						<br/>
+						<small><i>“Comodidade e confiança para você, com uma linguagem que você conhece!”</i></small>
+						<br/>
+						<br/>
+						<br/>
+						<img src="../images/logottf.jpg" width="200em" />
+					</div>
+					<br/>
+					<div style="color:#696969; 
+								font-family: arial; 
+								font-size: 0.8em; 
+								background-color: #E8E8E8; 
+								padding:1em">
+
+						<h:outputText value="Contato:" style="font-size:1.3em;"/><br/><br/>
+						<div>
+							<strong>(31) 3889-7259 - </strong>GVT<br/>
+							<strong>(31) 8789-8552 - </strong>OI<br/>
+							<strong>(31) 8436-9785 - </strong>CLARO<br/>
+							<strong>(31) 9652-4512 - </strong>VIVO<br/>
+							<strong>(31) 9478-0253 - </strong>TIM<br/>
+
+							<br/>
+							<img src="../images/skype.png" width="15em" />
+							<p:spacer width="5" height="20" />
+							<h:outputText value="adrianoeamaral"/>
+							
+							<br/>
+							<img src="../images/home.png" width="15em" /> 
+							<p:spacer width="5" height="20" />
+							<p:link href="http://www.ttfinformatica.com.br"
+								value="www.ttfinformatica.com.br" target="blank"/>
+								
+							<br/>
+							<img src="../images/mail.png" width="15em" />
+							<p:spacer width="5" height="20" />
+							<p:link href="mailto:contato@ttfinformatica.com.br"
+								value="contato@ttfinformatica.com.br" />							
+						</div>
+					</div>
+
+					<small><i>“...e se na minha frente o mar não se abrir... Deus me fará andar sobre as águas...”</i></small>
+						
+				</p:outputPanel>
+			</h:panelGrid>
+		</center>
+	</ui:define>
+
+</ui:composition>
