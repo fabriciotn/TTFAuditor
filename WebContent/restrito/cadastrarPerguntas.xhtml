@@ -26,11 +26,18 @@
 						<p:inputText value="#{perguntaMB.pergunta.id}" size="5"
 							disabled="true" />
 
-
 						<h:outputText value="Pergunta:* " />
-						<p:inputTextarea rows="10" cols="50"
+						<p:inputTextarea rows="7" cols="70"
 							value="#{perguntaMB.pergunta.pergunta}" required="true"
 							requiredMessage="O campo Pregunta é obrigatório!"
+							converter="toUpperCaseConverter">
+							<f:ajax event="blur" render="@this" />
+						</p:inputTextarea>
+						
+						<h:outputText value="Explicação da pergunta: " />
+						<p:inputTextarea rows="3" cols="70"
+							value="#{perguntaMB.pergunta.hint}" required="false"
+							requiredMessage="O campo Explicação é obrigatório!"
 							converter="toUpperCaseConverter">
 							<f:ajax event="blur" render="@this" />
 						</p:inputTextarea>
@@ -67,7 +74,7 @@
 					<p:dataTable id="tbl" var="pergunta"
 						value="#{perguntaMB.allPerguntas}"
 						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
-						paginator="true" rows="10" style="margin-bottom:20px">
+						paginator="true" rows="10" style="margin-bottom:20px;font-size:0.9em;">
 
 						<f:facet name="{Exporters}">
 							<h:commandLink>
@@ -89,8 +96,15 @@
 						</p:column>
 
 						<p:column headerText="PERGUNTA" filterBy="#{pergunta.pergunta}"
-							sortBy="#{pergunta.pergunta}">
-							<h:outputText value="#{pergunta.pergunta}" escape="false"/>
+							sortBy="#{pergunta.pergunta}" style="width:40em;">
+							<h:outputText value="#{pergunta.pergunta}" escape="false"
+								style="white-space: pre-wrap;word-wrap: break-word;" />
+						</p:column>
+						
+						<p:column headerText="EXPLICAÇÃO" filterBy="#{pergunta.hint}"
+							sortBy="#{pergunta.hint}" style="width:20em;">
+							<h:outputText value="#{pergunta.hint}" escape="false"
+								style="white-space: pre-wrap;word-wrap: break-word;" />
 						</p:column>
 
 						<p:column headerText="QUESTIONÁRIO"

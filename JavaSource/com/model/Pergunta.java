@@ -27,8 +27,8 @@ public class Pergunta implements Serializable{
 	@JoinColumn(name="questionario_id")
 	private Questionario questionario;
 	@OneToOne(mappedBy = "pergunta")
-	Resposta resposta;
-	
+	private Resposta resposta;
+	private String hint;
 	
 	public Resposta getResposta() {
 		return resposta;
@@ -59,6 +59,12 @@ public class Pergunta implements Serializable{
 	}
 	public void setQuestionario(Questionario questionario) {
 		this.questionario = questionario;
+	}
+	public String getHint() {
+		return hint;
+	}
+	public void setHint(String hint) {
+		this.hint = hint;
 	}
 	@Override
 	public int hashCode() {

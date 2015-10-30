@@ -18,20 +18,41 @@
 				<c:forEach items="#{auditoriaMB.auditoria.questionarios}"
 					var="questionario">
 					<p:tab title="#{questionario.titulo}">
-						<h:panelGrid columns="1" cellpadding="10">
-							<p:dataTable var="p" value="#{questionario.perguntas}">
-								<p:column headerText="Pergunta">
-									<h:outputText value="#{p.pergunta}" />
-								</p:column>
-								<p:column headerText="Resposta">
-									<p:selectOneRadio id="resposta" value="#{p.resposta}">
-										<f:selectItem itemLabel="Conforme" itemValue="C" />
-										<f:selectItem itemLabel="Não confome" itemValue="NC" />
-										<f:selectItem itemLabel="Não se aplica" itemValue="NA" />
-									</p:selectOneRadio>
-								</p:column>
-							</p:dataTable>
-						</h:panelGrid>
+						<p:dataTable var="p" value="#{questionario.perguntas}"
+							style="border:0">
+
+							<p:column headerText="Pergunta" style="width:41em;">
+								<p:graphicImage value="/images/hint1.png" id="hint" width="20em" />
+								<p:tooltip id="toolTipTrack" for="hint" value="#{p.hint}"
+									trackMouse="true" escape="false"
+									style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
+								<br />
+								<h:outputText id="pergunta" value="#{p.pergunta}" escape="false"
+									style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
+							</p:column>
+
+							<p:column headerText="Respostas"
+								style="width:8em;text-align:center">
+								<p:selectOneMenu id="resposta" value="#{p.resposta}"
+									required="true"
+									requiredMessage="O campo Resposta é obrigatório!">
+									<f:selectItem itemLabel="Resposta" itemValue="#{null}"
+										noSelectionOption="true" />
+									<f:selectItem itemLabel="C" itemValue="C" />
+									<f:selectItem itemLabel="NC" itemValue="NC" />
+									<f:selectItem itemLabel="NA" itemValue="NA" />
+								</p:selectOneMenu>
+							</p:column>
+
+							<p:column headerText="Recomendações" style="text-align:center;">
+								<p:inputTextarea rows="8" cols="40"
+									value="#{p.resposta.recomendacao}" required="true"
+									requiredMessage="O campo Recomendação é obrigatório!"
+									converter="toUpperCaseConverter">
+									<f:ajax event="blur" render="@this" />
+								</p:inputTextarea>
+							</p:column>
+						</p:dataTable>
 					</p:tab>
 				</c:forEach>
 			</p:accordionPanel>

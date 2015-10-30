@@ -25,7 +25,7 @@ public class Resposta implements Serializable{
 	private Auditoria auditoria;
 	private String resposta;
 	@Lob
-	private String obs;
+	private String recomendacao;
 
 	public int getId() {
 		return id;
@@ -51,12 +51,12 @@ public class Resposta implements Serializable{
 		this.resposta = resposta;
 	}
 
-	public String getObs() {
-		return obs;
+	public String getRecomendacao() {
+		return recomendacao;
 	}
 
-	public void setObs(String obs) {
-		this.obs = obs;
+	public void setRecomendacao(String obs) {
+		this.recomendacao = obs;
 	}
 	
 	public Pergunta getPergunta() {
