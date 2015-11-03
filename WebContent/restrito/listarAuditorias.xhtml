@@ -22,9 +22,9 @@
 						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
 						paginator="true" rows="10" style="margin-bottom:20px">
 
-						<p:column headerText="ID" filterBy="#{auditoria.id}"
-							sortBy="#{auditoria.id}" style="text-align: center; width:6em">
-							<h:outputText value="#{auditoria.id}" />
+						<p:column headerText="CÓDIGO" filterBy="#{auditoria.codigo}"
+							sortBy="#{auditoria.codigo}" style="text-align: center; width:6em">
+							<h:outputText value="#{auditoria.codigo}" />
 						</p:column>
 
 						<p:column headerText="ESTABELECIMENTO"
@@ -54,21 +54,6 @@
 								<f:convertDateTime type="date" dateStyle="short"
 									pattern="dd/MM/yyyy" />
 							</h:outputText>
-						</p:column>
-
-						<p:column style="text-align: center; width:5em;">
-							<f:facet name="header">
-								<h:outputText value="DETALHES" />
-							</f:facet>
-
-							<p:lightBox iframe="true" id="lighbox3" width="800px"
-								height="600px">
-								<h:outputLink value="exibirDetalhesAuditoria.xhtml"
-									title="Detalhes da auditoria #{auditoria.id}">
-									<img src="../images/editUser.png" width="25" />
-									<f:param name="id" value="#{auditoria.id}" />
-								</h:outputLink>
-							</p:lightBox>
 						</p:column>
 
 						<p:column style="text-align: center; width:5em;">

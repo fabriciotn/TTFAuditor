@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +24,8 @@ public class Auditoria implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	@Column(unique=true, nullable=false)
+	private String codigo;
 	@OneToOne
 	private User user;
 	@OneToOne
@@ -105,6 +108,14 @@ public class Auditoria implements Serializable {
 
 	public void setQuestionarios(List<Questionario> questionarios) {
 		this.questionarios = questionarios;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 	@Override

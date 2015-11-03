@@ -24,6 +24,13 @@
 
 						<p:columnGroup>
 						</p:columnGroup>
+						
+						<h:outputText value="CÓDIGO:* " />
+						<p:inputText value="#{auditoriaMB.auditoria.codigo}" required="true"
+							requiredMessage="O campo Código é obrigatório!" label="Código"
+							size="15" maxlength="20" converter="toUpperCaseConverter">
+							<f:ajax event="blur" render="@this" />
+						</p:inputText>
 
 						<h:outputText value="Estabelecimento:* " />
 						<p:selectOneMenu id="estabelecimento"
@@ -123,9 +130,9 @@
 							</h:commandLink>
 						</f:facet>
 
-						<p:column headerText="ID" filterBy="#{auditoria.id}"
-							sortBy="#{auditoria.id}" style="text-align: center;">
-							<h:outputText value="#{auditoria.id}" />
+						<p:column headerText="CÓDIGO" filterBy="#{auditoria.codigo}"
+							sortBy="#{auditoria.codigo}" style="text-align: center;">
+							<h:outputText value="#{auditoria.codigo}" />
 						</p:column>
 
 						<p:column headerText="ESTABELECIMENTO"
