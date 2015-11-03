@@ -44,13 +44,13 @@
 
 
 						<p:column headerText="CNPJ" filterBy="#{estabelecimento.cnpj}"
-							sortBy="#{estabelecimento.cnpj}" style="text-align: center;">
+							sortBy="#{estabelecimento.cnpj}" style="text-align:center; width:10em;">
 							<h:outputText value="#{estabelecimento.cnpj}" 
 							converter="cnpjConverter" />
 						</p:column>
 
 						<p:column headerText="CNES" filterBy="#{estabelecimento.cnes}"
-							sortBy="#{estabelecimento.cnes}" style="text-align: center;">
+							sortBy="#{estabelecimento.cnes}" style="text-align:center; width:8em;">
 							<h:outputText value="#{estabelecimento.cnes}" />
 						</p:column>
 
@@ -67,6 +67,13 @@
 							style="text-align: center;">
 							<h:outputText value="#{estabelecimento.nomeFantasia}" />
 						</p:column>
+
+						<p:column headerText="UIDADE"
+							filterBy="#{estabelecimento.unidade.sigla}"
+							sortBy="#{estabelecimento.unidade.sigla}" style="text-align:center; width:8em">
+							<h:outputText value="#{estabelecimento.unidade.sigla}" />
+						</p:column>
+						
 
 						<p:column exportable="false"
 							style="text-align: center; width:3em;">

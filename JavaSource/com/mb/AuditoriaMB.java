@@ -10,12 +10,10 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
 import com.facade.AuditoriaFacade;
 import com.model.Auditoria;
-import com.model.Questionario;
 import com.model.User;
 
 @RequestScoped
@@ -35,32 +33,6 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 		if (usuarioLogado == null)
 			throw new RuntimeException("Problemas com usuário");
-		
-		carrgaTreeNode();
-	}
-
-	private void carrgaTreeNode() {
-		root = new DefaultTreeNode("Root", null);
-		TreeNode node0 = new DefaultTreeNode("INFORMAÇÕES GERAIS", root);
-		TreeNode node1 = new DefaultTreeNode("CAPTAÇÃO", root);
-		TreeNode node2 = new DefaultTreeNode("COLETA DE AMOSTRAS E CADASTRO", root);
-		TreeNode node3 = new DefaultTreeNode("IMUNO RECEPTOR", root);
-		TreeNode node4 = new DefaultTreeNode("TRANSFUSÃO", root);
-		TreeNode node5 = new DefaultTreeNode("GARANTIA DA QUALIDADE", root);
-		TreeNode node6 = new DefaultTreeNode("COMITÊ - HEMOVIGILÂNCIA", root);
-		TreeNode node7 = new DefaultTreeNode("ESTRUTURA FÍSICA - INSTALAÇÕES", root);
-		TreeNode node8 = new DefaultTreeNode("FATURAMENTO", root);
-
-		node0.getChildren().add(new DefaultTreeNode("PERGUNTA 1"));
-		node0.getChildren().add(new DefaultTreeNode("PERGUNTA 2"));
-		node0.getChildren().add(new DefaultTreeNode("PERGUNTA 3"));
-		
-		node1.getChildren().add(new DefaultTreeNode("PERGUNTA 1"));
-		node1.getChildren().add(new DefaultTreeNode("PERGUNTA 2"));
-		node1.getChildren().add(new DefaultTreeNode("PERGUNTA 3"));
-		
-		node2.getChildren().add(new DefaultTreeNode("PERGUNTA 1"));
-		node2.getChildren().add(new DefaultTreeNode("PERGUNTA 2"));
 	}
 
 	public TreeNode getRoot() {

@@ -25,7 +25,7 @@
 						<p:columnGroup>
 						</p:columnGroup>
 						
-						<h:outputText value="CÓDIGO:* " />
+						<h:outputText value="Código:* " />
 						<p:inputText value="#{auditoriaMB.auditoria.codigo}" required="true"
 							requiredMessage="O campo Código é obrigatório!" label="Código"
 							size="15" maxlength="20" converter="toUpperCaseConverter">
@@ -70,19 +70,6 @@
 								var="questionario" itemLabel="#{questionario.titulo}"
 								itemValue="#{questionario}" />
 						</p:selectCheckboxMenu>
-						
-						<h:outputText value="Unidade:* " />
-						<p:selectOneMenu id="unidade"
-							value="#{auditoriaMB.auditoria.unidade}" required="true"
-							requiredMessage="O campo Unidade é obrigatório!"
-							converter="unidadeConverter" style="width:13em">
-							<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
-								noSelectionOption="true" />
-							<f:selectItems value="#{unidadeMB.allUnidades}"
-								var="unidade"
-								itemLabel="#{unidade.id} | #{unidade.sigla}"
-								itemValue="#{unidade}" />
-						</p:selectOneMenu>
 						
 						<h:outputText value="Tipo:* " />
 						<p:selectOneMenu id="tipo"
@@ -146,13 +133,7 @@
 							sortBy="#{auditoria.tipo}" style="text-align: center;">
 							<h:outputText value="#{auditoria.tipo}" />
 						</p:column>
-
-						<p:column headerText="UIDADE"
-							filterBy="#{auditoria.unidade.sigla}"
-							sortBy="#{auditoria.unidade.sigla}" style="text-align: center;">
-							<h:outputText value="#{auditoria.unidade.sigla}" />
-						</p:column>
-
+						
 						<p:column headerText="DATA"
 							filterBy="#{auditoria.dataDaVerificacao}"
 							sortBy="#{auditoria.dataDaVerificacao}"

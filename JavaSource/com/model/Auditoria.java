@@ -40,8 +40,6 @@ public class Auditoria implements Serializable {
 		joinColumns = @JoinColumn(name = "auditoria_id"),
 		inverseJoinColumns = @JoinColumn(name = "questionario_id") )
 	private List<Questionario> questionarios;
-	@OneToOne
-	private Unidade unidade;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataDaVerificacao;
 	private String tipo; // visita / revisita
@@ -76,14 +74,6 @@ public class Auditoria implements Serializable {
 
 	public void setAuditores(List<Auditor> auditores) {
 		this.auditores = auditores;
-	}
-
-	public Unidade getUnidade() {
-		return unidade;
-	}
-
-	public void setUnidade(Unidade unidade) {
-		this.unidade = unidade;
 	}
 
 	public Date getDataDaVerificacao() {

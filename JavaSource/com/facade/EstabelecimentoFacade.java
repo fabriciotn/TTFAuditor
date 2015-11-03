@@ -30,6 +30,7 @@ public class EstabelecimentoFacade implements Serializable {
 		persistedEstabelecimento.setCnes(estabelecimento.getCnes());
 		persistedEstabelecimento.setNomeFantasia(estabelecimento.getNomeFantasia());
 		persistedEstabelecimento.setRazaoSocial(estabelecimento.getRazaoSocial());
+		persistedEstabelecimento.setUnidade(estabelecimento.getUnidade());
 		persistedEstabelecimento.setUser(estabelecimento.getUser());
 		persistedEstabelecimento.setEndereco(estabelecimento.getEndereco());
 		persistedEstabelecimento.setComplementoEndereco(estabelecimento.getComplementoEndereco());

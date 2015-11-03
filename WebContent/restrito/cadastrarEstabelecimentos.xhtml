@@ -56,6 +56,18 @@
 									<f:ajax event="blur" render="@this" />
 								</p:inputText>
 
+								<h:outputText value="Unidade:* " />
+								<p:selectOneMenu id="unidade"
+									value="#{estabelecimentoMB.estabelecimento.unidade}" required="true"
+									requiredMessage="O campo Unidade é obrigatório!"
+									converter="unidadeConverter" style="width:13em">
+									<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
+										noSelectionOption="true" />
+									<f:selectItems value="#{unidadeMB.allUnidades}" var="unidade"
+										itemLabel="#{unidade.id} | #{unidade.sigla}"
+										itemValue="#{unidade}" />
+								</p:selectOneMenu>
+
 								<h:outputText value="Endereço:* " />
 								<p:inputText
 									value="#{estabelecimentoMB.estabelecimento.endereco}"

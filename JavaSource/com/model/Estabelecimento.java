@@ -58,6 +58,8 @@ public class Estabelecimento implements Serializable{
 	private boolean oncologia;
 	private boolean transplantes;
 	private boolean pediatria;
+	@OneToOne
+	private Unidade unidade;
 	
 	public int getId() {
 		return id;
@@ -298,6 +300,12 @@ public class Estabelecimento implements Serializable{
 	}
 	public void setPediatria(boolean pediatria) {
 		this.pediatria = pediatria;
+	}	
+	public Unidade getUnidade() {
+		return unidade;
+	}
+	public void setUnidade(Unidade unidade) {
+		this.unidade = unidade;
 	}
 	
 	@Override
