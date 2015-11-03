@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -23,11 +22,10 @@ public class Pergunta implements Serializable{
 	private User user;
 	@Lob
 	private String pergunta;
-	@ManyToOne
-	@JoinColumn(name="questionario_id")
-	private Questionario questionario;
 	@OneToOne(mappedBy = "pergunta")
 	private Resposta resposta;
+	@ManyToOne
+	private Questionario questionario;
 	private String hint;
 	
 	public Resposta getResposta() {
@@ -54,17 +52,17 @@ public class Pergunta implements Serializable{
 	public void setPergunta(String pergunta) {
 		this.pergunta = pergunta;
 	}
-	public Questionario getQuestionario() {
-		return questionario;
-	}
-	public void setQuestionario(Questionario questionario) {
-		this.questionario = questionario;
-	}
 	public String getHint() {
 		return hint;
 	}
 	public void setHint(String hint) {
 		this.hint = hint;
+	}
+	public Questionario getQuestionario() {
+		return questionario;
+	}
+	public void setQuestionario(Questionario questionario) {
+		this.questionario = questionario;
 	}
 	@Override
 	public int hashCode() {

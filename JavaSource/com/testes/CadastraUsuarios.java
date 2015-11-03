@@ -21,11 +21,11 @@ import com.model.User;
 
 public class CadastraUsuarios {
 	public static void main(String[] args) {
-		//criaUsuarios();
+		criaUsuarios();
 		//criaAuditoria();
 		
-		Pergunta p = new PerguntaFacade().findPergunta(22);
-		System.out.println(p.getPergunta());
+		//Pergunta p = new PerguntaFacade().findPergunta(22);
+		//System.out.println(p.getPergunta());
 	}
 
 	private static void criaUsuarios() {

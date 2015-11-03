@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -29,6 +30,7 @@ public class Questionario implements Serializable{
 	@OneToOne
 	private Auditor auditor;
 	@OneToMany
+	@JoinColumn(name="questionario_id")
 	private List<Pergunta> perguntas;
 
 	public List<Pergunta> getPerguntas() {

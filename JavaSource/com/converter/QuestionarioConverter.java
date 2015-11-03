@@ -15,16 +15,16 @@ public class QuestionarioConverter implements Converter{
 
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
-		QuestionarioFacade setorFacade = new QuestionarioFacade();
-		int setorId;
+		QuestionarioFacade questionarioFacade = new QuestionarioFacade();
+		int questionarioId;
 
 		try {
-			setorId = Integer.parseInt(arg2);
+			questionarioId = Integer.parseInt(arg2);
 		} catch (NumberFormatException exception) {
 			throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro na conversão", "Erro na conversão!"));
 		}
 
-		return setorFacade.findQuestionario(setorId);
+		return questionarioFacade.findQuestionario(questionarioId);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class QuestionarioConverter implements Converter{
 		if (arg2 == null) {
 			return "";
 		}
-		Questionario setor = (Questionario) arg2;
-		return String.valueOf(setor.getId());
+		Questionario questionario = (Questionario) arg2;
+		return String.valueOf(questionario.getId());
 	}
 }
