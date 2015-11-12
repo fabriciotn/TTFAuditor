@@ -15,60 +15,64 @@
 		<br />
 		<center>
 			<h:form acceptcharset="ISO-8859-1" id="form2">
+				<p:panel id="basic" header="Selecione a auditoria"
+					style="margin-bottom:20px">
+					<h:panelGrid columns="1" style="text-align:left">
+						<p:dataTable id="tbl" var="auditoria"
+							value="#{auditoriaMB.allAuditorias}"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+							paginator="true" rows="10" style="margin-bottom:20px">
 
-				<h:panelGrid columns="1" style="text-align:left">
-					<p:dataTable id="tbl" var="auditoria"
-						value="#{auditoriaMB.allAuditorias}"
-						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-						paginator="true" rows="10" style="margin-bottom:20px">
+							<p:column headerText="CÓDIGO" filterBy="#{auditoria.codigo}"
+								sortBy="#{auditoria.codigo}"
+								style="text-align: center; width:6em">
+								<h:outputText value="#{auditoria.codigo}" />
+							</p:column>
 
-						<p:column headerText="CÓDIGO" filterBy="#{auditoria.codigo}"
-							sortBy="#{auditoria.codigo}" style="text-align: center; width:6em">
-							<h:outputText value="#{auditoria.codigo}" />
-						</p:column>
+							<p:column headerText="ESTABELECIMENTO"
+								filterBy="#{auditoria.estabelecimento.nomeFantasia}"
+								sortBy="#{auditoria.estabelecimento.nomeFantasia}"
+								style="text-align: center;">
+								<h:outputText value="#{auditoria.estabelecimento.nomeFantasia}" />
+							</p:column>
 
-						<p:column headerText="ESTABELECIMENTO"
-							filterBy="#{auditoria.estabelecimento.nomeFantasia}"
-							sortBy="#{auditoria.estabelecimento.nomeFantasia}"
-							style="text-align: center;">
-							<h:outputText value="#{auditoria.estabelecimento.nomeFantasia}" />
-						</p:column>
+							<p:column headerText="TIPO" filterBy="#{auditoria.tipo}"
+								sortBy="#{auditoria.tipo}"
+								style="text-align: center; width:10em">
+								<h:outputText value="#{auditoria.tipo}" />
+							</p:column>
 
-						<p:column headerText="TIPO" filterBy="#{auditoria.tipo}"
-							sortBy="#{auditoria.tipo}" style="text-align: center; width:10em">
-							<h:outputText value="#{auditoria.tipo}" />
-						</p:column>
+							<p:column headerText="UIDADE"
+								filterBy="#{auditoria.estabelecimento.unidade.sigla}"
+								sortBy="#{auditoria.estabelecimento.unidade.sigla}"
+								style="text-align:center; width:6em">
+								<h:outputText value="#{auditoria.estabelecimento.unidade.sigla}" />
+							</p:column>
 
-						<p:column headerText="UIDADE"
-							filterBy="#{auditoria.unidade.sigla}"
-							sortBy="#{auditoria.unidade.sigla}"
-							style="text-align:center; width:6em">
-							<h:outputText value="#{auditoria.unidade.sigla}" />
-						</p:column>
+							<p:column headerText="DATA"
+								filterBy="#{auditoria.dataDaVerificacao}"
+								sortBy="#{auditoria.dataDaVerificacao}"
+								style="text-align: center; width:8em">
+								<h:outputText value="#{auditoria.dataDaVerificacao}">
+									<f:convertDateTime type="date" dateStyle="short"
+										pattern="dd/MM/yyyy" />
+								</h:outputText>
+							</p:column>
 
-						<p:column headerText="DATA"
-							filterBy="#{auditoria.dataDaVerificacao}"
-							sortBy="#{auditoria.dataDaVerificacao}"
-							style="text-align: center; width:8em">
-							<h:outputText value="#{auditoria.dataDaVerificacao}">
-								<f:convertDateTime type="date" dateStyle="short"
-									pattern="dd/MM/yyyy" />
-							</h:outputText>
-						</p:column>
+							<p:column style="text-align: center; width:5em;">
+								<f:facet name="header">
+									<h:outputText value="AUDITAR" />
+								</f:facet>
 
-						<p:column style="text-align: center; width:5em;">
-							<f:facet name="header">
-								<h:outputText value="AUDITAR" />
-							</f:facet>
-
-							<p:commandLink action="realizarAuditoria.xhtml" ajax="false">
-								<img src="../images/edit.png" width="25" />
-								<f:setPropertyActionListener value="#{auditoria}"
-									target="#{auditoriaMB.auditoria}" />
-							</p:commandLink>
-						</p:column>
-					</p:dataTable>
-				</h:panelGrid>
+								<p:commandLink action="listarQuestionarios.xhtml" ajax="false">
+									<img src="../images/edit.png" width="25" />
+									<f:setPropertyActionListener value="#{auditoria}"
+										target="#{auditoriaMB.auditoria}" />
+								</p:commandLink>
+							</p:column>
+						</p:dataTable>
+					</h:panelGrid>
+				</p:panel>
 			</h:form>
 		</center>
 

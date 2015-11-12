@@ -1,0 +1,82 @@
+
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="menu">
+		<ui:include src="/WEB-INF/partials/menu.xhtml" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<f:loadBundle basename="messages" var="msg" />
+		<br />
+		<center>
+			<h:form acceptcharset="ISO-8859-1" id="form2">
+				<p:panel id="basic" header="Selecione o questionário"
+					style="margin-bottom:20px">
+
+					<h:panelGrid columns="1" style="text-align:left">
+
+						<p:dataTable id="tbl" var="q"
+							value="#{auditoriaMB.auditoria.questionarios}" paginator="false"
+							rows="15" style="margin-bottom:20px; width:50%;">
+
+							<p:column headerText="QUESTIONARIO">
+								<h:outputText value="#{q.titulo}" />
+							</p:column>
+
+							<p:column headerText="STATUS"
+								style="text-align: center; width:3.5em;">
+
+								<p:graphicImage value="/images/ok.png" rendered="#{q.auditado}"
+									width="25em" id="ok" />
+								<p:tooltip id="toolTipTrack" for="ok"
+									value="Questionário já respondido." trackMouse="true"
+									escape="false"
+									style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
+
+								<p:graphicImage value="/images/cadeadoAberto.png"
+									rendered="#{!q.auditado}" width="25em" id="aberto" />
+								<p:tooltip id="toolTipTrack1" for="aberto"
+									value="Questionário em aberto." trackMouse="true"
+									escape="false"
+									style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
+							</p:column>
+
+							<p:column exportable="false"
+								style="text-align: center; width:3.5em;">
+								<f:facet name="header">
+									<h:outputText value="Auditar" />
+								</f:facet>
+
+								<h:outputLink value="realizarAuditoria.xhtml">
+									<img src="../images/edit.png" width="25" />
+									<f:param name="auditoriaId" value="#{auditoriaMB.auditoria.id}" />
+									<f:param name="questionarioId" value="#{q.id}" />
+								</h:outputLink>
+							</p:column>
+							
+							<p:column exportable="false"
+								style="text-align: center; width:3.5em;">
+								<f:facet name="header">
+									<h:outputText value="TESTE" />
+								</f:facet>
+
+								<p:commandLink ajax="false" actionListener="#{auditoriaMB.session}">
+									<img src="../images/edit.png" width="25" />
+									<f:setPropertyActionListener value="#{auditoria}"
+										target="#{auditoriaMB.auditoria}" />
+								</p:commandLink>
+							</p:column>
+						</p:dataTable>
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+		</center>
+
+	</ui:define>
+
+</ui:composition>

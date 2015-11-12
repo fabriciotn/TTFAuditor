@@ -32,7 +32,22 @@ public class Questionario implements Serializable{
 	@OneToMany
 	@JoinColumn(name="questionario_id")
 	private List<Pergunta> perguntas;
-
+	@OneToOne(mappedBy = "questionario")
+	private ObservacaoPorQuestionario observacao;
+	private boolean auditado;
+	
+	public boolean isAuditado() {
+		return auditado;
+	}
+	public void setAuditado(boolean auditado) {
+		this.auditado = auditado;
+	}
+	public ObservacaoPorQuestionario getObservacao() {
+		return observacao;
+	}
+	public void setObservacao(ObservacaoPorQuestionario observacao) {
+		this.observacao = observacao;
+	}
 	public List<Pergunta> getPerguntas() {
 		return perguntas;
 	}
@@ -69,12 +84,6 @@ public class Questionario implements Serializable{
 	public void setAuditor(Auditor auditor) {
 		this.auditor = auditor;
 	}
-//	public List<Pergunta> getPergunta() {
-//		return pergunta;
-//	}
-//	public void setPergunta(List<Pergunta> pergunta) {
-//		this.pergunta = pergunta;
-//	}
 	
 	@Override
 	public int hashCode() {

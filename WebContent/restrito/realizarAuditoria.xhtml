@@ -13,50 +13,79 @@
 
 	<ui:define name="conteudo">
 		<f:loadBundle basename="messages" var="msg" />
-		<h:form acceptcharset="ISO-8859-1" id="form1">
-			<p:accordionPanel>
-				<c:forEach items="#{auditoriaMB.auditoria.questionarios}"
-					var="questionario">
-					<p:tab title="#{questionario.titulo}">
-						<p:dataTable var="p" value="#{questionario.perguntas}"
-							style="border:0">
 
-							<p:column headerText="Pergunta" style="width:41em;">
-								<p:graphicImage value="/images/hint1.png" id="hint" width="20em" />
-								<p:tooltip id="toolTipTrack" for="hint" value="#{p.hint}"
-									trackMouse="true" escape="false"
-									style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
-								<br />
-								<h:outputText id="pergunta" value="#{p.pergunta}" escape="false"
-									style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
-							</p:column>
+		<ui:param
+			value="#{auditoriaMB.questionarioFacade.findQuestionario(request.getParameter('questionarioId'))}"
+			name="questionario" />
 
-							<p:column headerText="Respostas"
-								style="width:8em;text-align:center">
-								<p:selectOneMenu id="resposta" value="#{p.resposta}"
-									required="true"
-									requiredMessage="O campo Resposta é obrigatório!">
+		<ui:param
+			value="#{auditoriaMB.auditoriaFacade.findAuditoria(request.getParameter('auditoriaId'))}"
+			name="auditoria" />
+
+		<p:panel id="basic" header="Você está respondendo o questionário"
+			style="margin-bottom:20px">
+
+			<h:form acceptcharset="ISO-8859-1" id="form">
+				<p:growl id="msgs" showDetail="true" />
+				<p:dataTable var="p" value="#{questionario.perguntas}"
+					style="border:0" editable="true">
+
+					<p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}"
+						update=":form:msgs" />
+					<p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}"
+						update=":form:msgs" />
+
+					<p:column headerText="Pergunta" style="width:39em;">
+						<p:graphicImage value="/images/hint1.png" id="hint" width="20em" />
+						<p:tooltip id="toolTipTrack" for="hint" value="#{p.hint}"
+							trackMouse="true" escape="false"
+							style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
+						<br />
+						<h:outputText id="pergunta" value="#{p.pergunta}" escape="false"
+							style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
+					</p:column>
+
+					<p:column headerText="Respostas"
+						style="width:8em;text-align:center">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{questionario.titulo}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:selectOneMenu id="resposta#{p.id}"
+									value="#{auditoriaMB.resposta.resposta}" required="true"
+									requiredMessage="O campo Resposta é obrigatório!"
+									style="width:8em;">
 									<f:selectItem itemLabel="Resposta" itemValue="#{null}"
 										noSelectionOption="true" />
 									<f:selectItem itemLabel="C" itemValue="C" />
 									<f:selectItem itemLabel="NC" itemValue="NC" />
 									<f:selectItem itemLabel="NA" itemValue="NA" />
 								</p:selectOneMenu>
-							</p:column>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
 
-							<p:column headerText="Recomendações" style="text-align:center;">
-								<p:inputTextarea rows="8" cols="40"
-									value="#{p.resposta.recomendacao}" required="true"
-									requiredMessage="O campo Recomendação é obrigatório!"
-									converter="toUpperCaseConverter">
-									<f:ajax event="blur" render="@this" />
-								</p:inputTextarea>
-							</p:column>
-						</p:dataTable>
-					</p:tab>
-				</c:forEach>
-			</p:accordionPanel>
-		</h:form>
+
+
+					<p:column headerText="Recomendações" style="text-align:center;">
+						<p:inputTextarea rows="6" cols="35"
+							value="#{auditoriaMB.resposta.recomendacao}" required="true"
+							requiredMessage="O campo Recomendação é obrigatório!"
+							converter="toUpperCaseConverter" id="recomendacao#{p.id}">
+							<f:ajax event="blur" render="@this" />
+						</p:inputTextarea>
+					</p:column>
+
+					<p:column style="width:32px">
+						<p:rowEditor />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+
+		</p:panel>
+
+
 	</ui:define>
 
 </ui:composition>

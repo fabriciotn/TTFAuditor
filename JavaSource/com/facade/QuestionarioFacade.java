@@ -7,7 +7,9 @@ import javax.persistence.Query;
 
 import org.hibernate.SessionFactory;
 
+import com.dao.AuditoriaDAO;
 import com.dao.QuestionarioDAO;
+import com.model.Auditoria;
 import com.model.Questionario;
 
 public class QuestionarioFacade implements Serializable {
@@ -40,6 +42,17 @@ public class QuestionarioFacade implements Serializable {
 		Questionario questionario = questionarioDAO.find(questionarioId);
 		questionarioDAO.closeTransaction();
 		return questionario;
+	}
+	
+	public List<Questionario> findQuestionarios(int auditoriaId) {
+		questionarioDAO.beginTransaction();
+		AuditoriaDAO auditoriaDAO = new AuditoriaDAO();
+		auditoriaDAO.beginTransaction();
+		Auditoria auditoria = auditoriaDAO.find(auditoriaId);
+		auditoriaDAO.closeTransaction();
+		List<Questionario> questionarios = auditoria.getQuestionarios();
+		questionarioDAO.closeTransaction();
+		return questionarios;
 	}
 
 	public List<Questionario> listAll() {
