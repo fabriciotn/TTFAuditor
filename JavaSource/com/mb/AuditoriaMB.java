@@ -223,8 +223,9 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		}
 	}
 
-	public void realizaAuditoria(ActionEvent actionEvent) {
+	public String realizaAuditoria(ActionEvent actionEvent) {
 		System.out.println("teste1");
+		return "/restrito/cadastrarAuditoria.xhtml";
 	}
 
 	public void deleteAuditoria(String id) {

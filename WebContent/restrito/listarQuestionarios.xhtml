@@ -65,11 +65,11 @@
 									<h:outputText value="TESTE" />
 								</f:facet>
 
-								<p:commandLink ajax="false" actionListener="#{auditoriaMB.session}">
+								<h:outputLink value="teste.xhtml">
 									<img src="../images/edit.png" width="25" />
-									<f:setPropertyActionListener value="#{auditoria}"
-										target="#{auditoriaMB.auditoria}" />
-								</p:commandLink>
+									<f:param name="auditoriaId" value="#{auditoriaMB.auditoria.id}" />
+									<f:param name="questionarioId" value="#{q.id}" />
+								</h:outputLink>
 							</p:column>
 						</p:dataTable>
 					</h:panelGrid>

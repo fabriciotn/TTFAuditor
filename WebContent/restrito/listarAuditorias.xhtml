@@ -70,6 +70,18 @@
 										target="#{auditoriaMB.auditoria}" />
 								</p:commandLink>
 							</p:column>
+
+							<p:column style="text-align: center; width:5em;">
+								<f:facet name="header">
+									<h:outputText value="teste" />
+								</f:facet>
+
+								<p:commandLink action="teste.xhtml" ajax="false">
+									<img src="../images/edit.png" width="25" />
+									<f:setPropertyActionListener value="#{auditoria}"
+										target="#{auditoriaMB.auditoria}" />
+								</p:commandLink>
+							</p:column>
 						</p:dataTable>
 					</h:panelGrid>
 				</p:panel>

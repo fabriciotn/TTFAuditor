@@ -11,16 +11,26 @@
 	</ui:define>
 
 	<ui:define name="conteudo">
-		<f:loadBundle basename="messages" var="msg" />
 		<br />
 		<center>
-			<p:panel id="basic" header="Selecione o questionário"
-				style="margin-bottom:20px">
+			<p:accordionPanel value="#{auditoriaMB.auditoria.questionarios}"
+				var="questionario">
+				<p:tab title="Questionario - #{questionario.titulo}">
 
-				<h:inputHidden value="#{auditoriaMB.auditoria.id}" />
-				
-				<h:outputText value="TESTESSSSSS"/>
-			</p:panel>
+					<ui:repeat var="pergunta" value="#{questionario.perguntas}"
+						varStatus="status">
+						<h:form id="form#{pergunta.id}">
+							<p:growl id="growl" life="2000" />
+							<h:outputText value="#{pergunta.id}" />
+							<h:outputText value="#{pergunta.pergunta}" />
+							<p:inputText value="#{pergunta.resposta}" />
+							<h:commandButton value="Ajax Submit" id="ajax" update="growl" 
+								action="#{auditoriaMB.createAuditoria" immediate="true" />
+						</h:form>
+					</ui:repeat>
+
+				</p:tab>
+			</p:accordionPanel>
 		</center>
 
 	</ui:define>
