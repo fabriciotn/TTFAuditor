@@ -59,17 +59,6 @@
 						<p:calendar id="dataAuditoria" pattern="dd/MM/yyyy" locale="pt"
 							value="#{auditoriaMB.auditoria.dataDaVerificacao}"
 							mindate="#{auditoriaMB.hoje}" />
-
-						<h:outputText value="Questionários: " />
-						<p:selectCheckboxMenu id="questionario"
-							value="#{auditoriaMB.auditoria.questionarios}"
-							label="Questionários" filter="true" filterMatchMode="startsWith"
-							panelStyle="width:250px" converter="questionarioConverter"
-							style="width:13em">
-							<f:selectItems value="#{questionarioMB.allQuestionarios}"
-								var="questionario" itemLabel="#{questionario.titulo}"
-								itemValue="#{questionario}" />
-						</p:selectCheckboxMenu>
 						
 						<h:outputText value="Tipo:* " />
 						<p:selectOneMenu id="tipo"

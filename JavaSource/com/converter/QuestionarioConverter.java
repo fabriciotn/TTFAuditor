@@ -9,7 +9,7 @@ import javax.faces.convert.FacesConverter;
 
 import com.facade.QuestionarioFacade;
 import com.model.Questionario;
-
+/*
 @FacesConverter(forClass = com.model.Questionario.class, value="questionarioConverter")
 public class QuestionarioConverter implements Converter{
 
@@ -36,4 +36,5 @@ public class QuestionarioConverter implements Converter{
 		Questionario questionario = (Questionario) arg2;
 		return String.valueOf(questionario.getId());
 	}
-}
+	
+}*/

@@ -14,11 +14,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity
+//@Entity
 public class Questionario implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	
+	/*
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -105,4 +105,5 @@ public class Questionario implements Serializable{
 			return false;
 		return true;
 	}
+	*/
 }

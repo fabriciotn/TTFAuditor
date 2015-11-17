@@ -30,17 +30,17 @@ public class RealizarAuditoria {
 	private static void responderAuditoria(Auditoria auditoria) {
 		//manager.getTransaction().begin();
 		
-		Resposta resposta = new Resposta();
-		
-		
-		
-		for (Questionario q : auditoria.getQuestionarios()) {
-			for (Pergunta p : q.getPerguntas()) {
-				resposta.setResposta("C");
-				resposta.setRecomendacao("Teste de recomendação " + p.getId());
-				p.setResposta(resposta);
-			}
-		}
+//		Resposta resposta = new Resposta();
+//		
+//		
+//		
+//		for (Questionario q : auditoria.getQuestionarios()) {
+//			for (Pergunta p : q.getPerguntas()) {
+//				resposta.setResposta("C");
+//				resposta.setRecomendacao("Teste de recomendação " + p.getId());
+//				p.setResposta(resposta);
+//			}
+//		}
 		
 		//manager.persist(resposta);
 

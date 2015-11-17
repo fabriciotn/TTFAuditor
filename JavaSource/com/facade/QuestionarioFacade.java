@@ -1,19 +1,9 @@
 package com.facade;
 
 import java.io.Serializable;
-import java.util.List;
-
-import javax.persistence.Query;
-
-import org.hibernate.SessionFactory;
-
-import com.dao.AuditoriaDAO;
-import com.dao.QuestionarioDAO;
-import com.model.Auditoria;
-import com.model.Questionario;
 
 public class QuestionarioFacade implements Serializable {
-
+/*
 	private static final long serialVersionUID = 1L;
 
 	private QuestionarioDAO questionarioDAO = new QuestionarioDAO();
@@ -44,6 +34,7 @@ public class QuestionarioFacade implements Serializable {
 		return questionario;
 	}
 	
+	
 	public List<Questionario> findQuestionarios(int auditoriaId) {
 		questionarioDAO.beginTransaction();
 		AuditoriaDAO auditoriaDAO = new AuditoriaDAO();
@@ -54,6 +45,7 @@ public class QuestionarioFacade implements Serializable {
 		questionarioDAO.closeTransaction();
 		return questionarios;
 	}
+	
 
 	public List<Questionario> listAll() {
 		questionarioDAO.beginTransaction();
@@ -77,5 +69,5 @@ public class QuestionarioFacade implements Serializable {
 		questionarioDAO.closeTransaction();
 		return list;
 	}
-
+*/
 }

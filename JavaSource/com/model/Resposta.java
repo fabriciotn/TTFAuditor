@@ -19,11 +19,14 @@ public class Resposta implements Serializable{
 	private int id;
 	@OneToOne
 	private User user;
-	@OneToOne
-	private Pergunta pergunta;
+	
+	
 	@OneToOne
 	private Auditoria auditoria;
+	@Lob
 	private String resposta;
+	@Lob
+	private String hint;
 	@Lob
 	private String recomendacao;
 
@@ -42,7 +45,15 @@ public class Resposta implements Serializable{
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
+	public Auditoria getAuditoria() {
+		return auditoria;
+	}
+
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
+	}
+
 	public String getResposta() {
 		return resposta;
 	}
@@ -51,28 +62,20 @@ public class Resposta implements Serializable{
 		this.resposta = resposta;
 	}
 
+	public String getHint() {
+		return hint;
+	}
+
+	public void setHint(String hint) {
+		this.hint = hint;
+	}
+
 	public String getRecomendacao() {
 		return recomendacao;
 	}
 
-	public void setRecomendacao(String obs) {
-		this.recomendacao = obs;
-	}
-	
-	public Pergunta getPergunta() {
-		return pergunta;
-	}
-
-	public void setPergunta(Pergunta pergunta) {
-		this.pergunta = pergunta;
-	}
-
-	public Auditoria getAuditoria() {
-		return auditoria;
-	}
-
-	public void setAuditoria(Auditoria auditoria) {
-		this.auditoria = auditoria;
+	public void setRecomendacao(String recomendacao) {
+		this.recomendacao = recomendacao;
 	}
 
 	@Override

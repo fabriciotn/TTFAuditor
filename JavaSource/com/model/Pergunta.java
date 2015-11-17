@@ -22,18 +22,11 @@ public class Pergunta implements Serializable{
 	private User user;
 	@Lob
 	private String pergunta;
-	@OneToOne(mappedBy = "pergunta")
-	private Resposta resposta;
-	@ManyToOne
-	private Questionario questionario;
+	@Lob
 	private String hint;
+	@ManyToOne
+	private Auditoria auditoria;
 	
-	public Resposta getResposta() {
-		return resposta;
-	}
-	public void setResposta(Resposta resposta) {
-		this.resposta = resposta;
-	}
 	public int getId() {
 		return id;
 	}
@@ -57,13 +50,14 @@ public class Pergunta implements Serializable{
 	}
 	public void setHint(String hint) {
 		this.hint = hint;
+	}	
+	public Auditoria getAuditoria() {
+		return auditoria;
 	}
-	public Questionario getQuestionario() {
-		return questionario;
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
 	}
-	public void setQuestionario(Questionario questionario) {
-		this.questionario = questionario;
-	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

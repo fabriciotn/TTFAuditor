@@ -10,12 +10,13 @@ import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "observacao_por_questionario")
+//@Entity
+//@Table(name = "observacao_por_questionario")
 public class ObservacaoPorQuestionario implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	/*
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -77,4 +78,5 @@ public class ObservacaoPorQuestionario implements Serializable {
 			return false;
 		return true;
 	}
+	*/
 }

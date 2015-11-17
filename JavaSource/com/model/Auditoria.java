@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,25 +25,31 @@ public class Auditoria implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@Column(unique=true, nullable=false)
+	@Column(unique = true, nullable = false)
 	private String codigo;
 	@OneToOne
 	private User user;
 	@OneToOne
 	private Estabelecimento estabelecimento;
-	@ManyToMany
-	@JoinTable(name = "auditoria_auditor",
-		joinColumns = @JoinColumn(name = "auditoria_id"),
-		inverseJoinColumns = @JoinColumn(name = "auditor_id") )
-	private List<Auditor> auditores;
-	@ManyToMany
-	@JoinTable(name = "auditoria_questionario",
-		joinColumns = @JoinColumn(name = "auditoria_id"),
-		inverseJoinColumns = @JoinColumn(name = "questionario_id") )
-	private List<Questionario> questionarios;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataDaVerificacao;
-	private String tipo; // visita / revisita
+	
+	@OneToMany
+	@JoinTable(name = "auditoria_resposta", 
+	joinColumns = @JoinColumn(name = "auditoria_id"), 
+	inverseJoinColumns = @JoinColumn(name = "resposta_id"))
+	private List<Resposta> respostas;
+	
+	@ManyToMany
+	@JoinTable(name = "auditoria_auditor", 
+	joinColumns = @JoinColumn(name = "auditoria_id"), 
+	inverseJoinColumns = @JoinColumn(name = "auditor_id"))
+	private List<Auditor> auditores;
+	/*
+	 * Visita ou Revisita
+	 */
+	private String tipo;
+	
 
 	public int getId() {
 		return id;
@@ -50,6 +57,14 @@ public class Auditoria implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
 	public User getUser() {
@@ -66,6 +81,14 @@ public class Auditoria implements Serializable {
 
 	public void setEstabelecimento(Estabelecimento estabelecimento) {
 		this.estabelecimento = estabelecimento;
+	}
+
+	public List<Resposta> getRespostas() {
+		return respostas;
+	}
+
+	public void setRespostas(List<Resposta> respostas) {
+		this.respostas = respostas;
 	}
 
 	public List<Auditor> getAuditores() {
@@ -90,22 +113,6 @@ public class Auditoria implements Serializable {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
-	}
-
-	public List<Questionario> getQuestionarios() {
-		return questionarios;
-	}
-
-	public void setQuestionarios(List<Questionario> questionarios) {
-		this.questionarios = questionarios;
-	}
-
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
 	}
 
 	@Override
