@@ -11,26 +11,50 @@
 	</ui:define>
 
 	<ui:define name="conteudo">
+		<f:loadBundle basename="messages" var="msg" />
 		<br />
 		<center>
-			<p:accordionPanel value="#{auditoriaMB.auditoria.questionarios}"
-				var="questionario">
-				<p:tab title="Questionario - #{questionario.titulo}">
+			<h:form acceptcharset="ISO-8859-1" id="form2">
 
-					<ui:repeat var="pergunta" value="#{questionario.perguntas}"
-						varStatus="status">
-						<h:form id="form#{pergunta.id}">
-							<p:growl id="growl" life="2000" />
-							<h:outputText value="#{pergunta.id}" />
-							<h:outputText value="#{pergunta.pergunta}" />
-							<p:inputText value="#{pergunta.resposta}" />
-							<h:commandButton value="Ajax Submit" id="ajax" update="growl" 
-								action="#{auditoriaMB.createAuditoria" immediate="true" />
-						</h:form>
-					</ui:repeat>
+				<p:accordionPanel id="basic" var="q"
+					value="#{auditoriaMB.allQuestionarios}" style="margin-bottom:20px">
 
-				</p:tab>
-			</p:accordionPanel>
+					<p:tab title="Questionario #{q.titulo}">
+
+						<h:panelGrid columns="1" style="text-align:left">
+
+							<p:dataTable id="tbl" var="p" value="#{q.perguntas}"
+								paginator="false" rows="15"
+								style="margin-bottom:20px; width:50%;">
+
+								<p:column headerText="QUESTIONARIO">
+									<p:graphicImage value="/images/hint1.png" id="hint"
+										width="20em" />
+									<p:tooltip id="toolTipTrack" for="hint" value="#{p.hint}"
+										trackMouse="true" escape="false"
+										style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
+									<br />
+									<h:outputText id="pergunta" value="#{p.pergunta}"
+										escape="false"
+										style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
+								</p:column>
+
+								<p:column>
+									<p:lightBox iframe="true" id="lighbox3" width="800px"
+										height="600px">
+										<h:outputLink value="teste1.xhtml"
+											title="Responder">
+											<img src="../images/edit.png" width="25" />
+											<f:param name="idAuditoria" value="#{auditoriaMB.auditoria.id}" />
+											<f:param name="idPergunta" value="#{p.id}" />
+										</h:outputLink>
+									</p:lightBox>
+								</p:column>
+							</p:dataTable>
+						</h:panelGrid>
+					</p:tab>
+				</p:accordionPanel>
+			</h:form>
 		</center>
 
 	</ui:define>

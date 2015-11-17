@@ -15,7 +15,7 @@ import com.model.Pergunta;
 import com.model.Resposta;
 import com.model.User;
 
-@SessionScoped
+@RequestScoped
 @ManagedBean
 public class RespostaMB extends AbstractMB implements Serializable {
 
@@ -74,8 +74,6 @@ public class RespostaMB extends AbstractMB implements Serializable {
 	public void updateResposta() {
 		try {
 //			resposta.setTelefone(RetiraMascaras.retirar(resposta.getTelefone()));
-//			resposta.setCelular(RetiraMascaras.retirar(resposta.getCelular()));
-			
 			if (resposta.getId() == 0) {
 				createResposta();
 			} else {

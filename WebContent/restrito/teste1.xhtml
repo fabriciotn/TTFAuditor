@@ -6,33 +6,60 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-	<ui:define name="menu">
-		<ui:include src="/WEB-INF/partials/menu.xhtml" />
-	</ui:define>
-
 	<ui:define name="conteudo">
 		<f:loadBundle basename="messages" var="msg" />
-		<br />
+
+		<ui:param
+			value="#{auditoriaMB.auditoriaFacade.findAuditoria(request.getParameter('idAuditoria'))}"
+			name="auditoria" />
+
+		<ui:param
+			value="#{perguntaMB.perguntaFacade.findPergunta(request.getParameter('idPergunta'))}"
+			name="pergunta" />
+
 		<center>
-			<h:form acceptcharset="ISO-8859-1" id="form2">
-			
-			<ui:param
-					value="#{FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get('auditoria')}"
-					name="auditoria" />
-					
-				<p:panel id="basic" header="Selecione o " style="margin-bottom:20px">
+			<h:form acceptcharset="ISO-8859-1" id="form1">
+				<p:panel id="basic" header="Respostas" style="margin-bottom:20px">
+					<h:panelGrid columns="2" columnClasses="label, value"
+						style="text-align:left">
+						<h:inputHidden value="#{respostaMB.resposta.id}" />
 
-					<h:panelGrid columns="1" style="text-align:left">
+						<p:columnGroup>
+						</p:columnGroup>
 
-						<h:inputHidden value="#{auditoria.questionario.id}" />
+						<h:outputText value="Resposta* " />
+						<p:selectOneMenu id="resposta"
+							value="#{respostaMB.resposta.resposta}" required="true"
+							requiredMessage="O campo Resposta é obrigatório!"
+							style="width:8em;">
+							<f:selectItem itemLabel="Resposta" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItem itemLabel="C" itemValue="C" />
+							<f:selectItem itemLabel="NC" itemValue="NC" />
+							<f:selectItem itemLabel="NA" itemValue="NA" />
+						</p:selectOneMenu>
 
-						<h:outputText value="#{auditoria.questionario.titulo}" />
+						<h:outputText value="Recomendaçã:* " />
+						<p:inputText value="#{respostaMB.resposta.recomendacao}"
+							required="true" requiredMessage="O campo Resposta é obrigatório!"
+							label="Resposta" size="50" maxlength="255"
+							converter="toUpperCaseConverter">
+							<f:ajax event="blur" render="@this" />
+						</p:inputText>
 
-						<p:commandLink action="teste1.xhtml" ajax="false">
-							<img src="../images/edit.png" width="25" />
 
-						</p:commandLink>
+						<p:columnGroup>
+						</p:columnGroup>
 
+						<p:columnGroup>
+							<p:commandButton value="Enviar" ajax="false" icon="ui-icon-check"
+								action="#{respostaMB.updateResposta}">
+								<f:setPropertyActionListener
+									target="#{respostaMB.resposta.auditoria}" value="#{auditoria}" />
+								<f:setPropertyActionListener
+									target="#{respostaMB.resposta.pergunta}" value="#{pergunta}" />
+							</p:commandButton>
+						</p:columnGroup>
 					</h:panelGrid>
 				</p:panel>
 			</h:form>

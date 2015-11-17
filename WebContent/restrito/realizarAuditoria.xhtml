@@ -24,18 +24,13 @@
 
 		<p:panel id="basic" header="Você está respondendo o questionário"
 			style="margin-bottom:20px">
+			
+			<h:inputHidden value="#{auditoriaMB.auditoria.id}"/>
 
 			<h:form acceptcharset="ISO-8859-1" id="form">
-				<p:growl id="msgs" showDetail="true" />
 				<p:dataTable var="p" value="#{questionario.perguntas}"
 					style="border:0" editable="true">
-
-					<p:ajax event="rowEdit" listener="#{dtEditView.onRowEdit}"
-						update=":form:msgs" />
-					<p:ajax event="rowEditCancel" listener="#{dtEditView.onRowCancel}"
-						update=":form:msgs" />
-
-					<p:column headerText="Pergunta" style="width:39em;">
+					<p:column headerText="Pergunta" style="width:30em;">
 						<p:graphicImage value="/images/hint1.png" id="hint" width="20em" />
 						<p:tooltip id="toolTipTrack" for="hint" value="#{p.hint}"
 							trackMouse="true" escape="false"
@@ -44,39 +39,15 @@
 						<h:outputText id="pergunta" value="#{p.pergunta}" escape="false"
 							style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
 					</p:column>
-
-					<p:column headerText="Respostas"
-						style="width:8em;text-align:center">
-						<p:cellEditor>
-							<f:facet name="output">
-								<h:outputText value="#{questionario.titulo}" />
-							</f:facet>
-							<f:facet name="input">
-								<p:selectOneMenu id="resposta#{p.id}"
-									value="#{auditoriaMB.resposta.resposta}" required="true"
-									requiredMessage="O campo Resposta é obrigatório!"
-									style="width:8em;">
-									<f:selectItem itemLabel="Resposta" itemValue="#{null}"
-										noSelectionOption="true" />
-									<f:selectItem itemLabel="C" itemValue="C" />
-									<f:selectItem itemLabel="NC" itemValue="NC" />
-									<f:selectItem itemLabel="NA" itemValue="NA" />
-								</p:selectOneMenu>
-							</f:facet>
-						</p:cellEditor>
+					
+					<p:column headerText="Resposta" style="width:6em;">						
+						<h:outputText id="resposta" value="#{p.resposta.resposta}" escape="false"
+							style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
 					</p:column>
-
-					<p:column headerText="Recomendações" style="text-align:center;">
-						<p:inputTextarea rows="6" cols="35"
-							value="#{auditoriaMB.resposta.recomendacao}" required="true"
-							requiredMessage="O campo Recomendação é obrigatório!"
-							converter="toUpperCaseConverter" id="recomendacao#{p.id}">
-							<f:ajax event="blur" render="@this" />
-						</p:inputTextarea>
-					</p:column>
-
-					<p:column style="width:32px">
-						<p:rowEditor />
+					
+					<p:column headerText="Recomendação" style="width:15em;">					
+						<h:outputText id="recomendacao" value="#{p.resposta.recomendacao}" escape="false"
+							style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
 					</p:column>
 				</p:dataTable>
 			</h:form>

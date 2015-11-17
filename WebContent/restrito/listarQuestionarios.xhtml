@@ -28,24 +28,6 @@
 								<h:outputText value="#{q.titulo}" />
 							</p:column>
 
-							<p:column headerText="STATUS"
-								style="text-align: center; width:3.5em;">
-
-								<p:graphicImage value="/images/ok.png" rendered="#{q.auditado}"
-									width="25em" id="ok" />
-								<p:tooltip id="toolTipTrack" for="ok"
-									value="Questionário já respondido." trackMouse="true"
-									escape="false"
-									style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
-
-								<p:graphicImage value="/images/cadeadoAberto.png"
-									rendered="#{!q.auditado}" width="25em" id="aberto" />
-								<p:tooltip id="toolTipTrack1" for="aberto"
-									value="Questionário em aberto." trackMouse="true"
-									escape="false"
-									style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
-							</p:column>
-
 							<p:column exportable="false"
 								style="text-align: center; width:3.5em;">
 								<f:facet name="header">
@@ -53,19 +35,6 @@
 								</f:facet>
 
 								<h:outputLink value="realizarAuditoria.xhtml">
-									<img src="../images/edit.png" width="25" />
-									<f:param name="auditoriaId" value="#{auditoriaMB.auditoria.id}" />
-									<f:param name="questionarioId" value="#{q.id}" />
-								</h:outputLink>
-							</p:column>
-							
-							<p:column exportable="false"
-								style="text-align: center; width:3.5em;">
-								<f:facet name="header">
-									<h:outputText value="TESTE" />
-								</f:facet>
-
-								<h:outputLink value="teste.xhtml">
 									<img src="../images/edit.png" width="25" />
 									<f:param name="auditoriaId" value="#{auditoriaMB.auditoria.id}" />
 									<f:param name="questionarioId" value="#{q.id}" />
