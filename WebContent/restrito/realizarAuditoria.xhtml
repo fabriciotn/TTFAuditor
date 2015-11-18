@@ -13,43 +13,51 @@
 
 	<ui:define name="conteudo">
 		<f:loadBundle basename="messages" var="msg" />
-
-		<ui:param
-			value="#{auditoriaMB.questionarioFacade.findQuestionario(request.getParameter('questionarioId'))}"
-			name="questionario" />
-
-		<ui:param
-			value="#{auditoriaMB.auditoriaFacade.findAuditoria(request.getParameter('auditoriaId'))}"
-			name="auditoria" />
-
 		<p:panel id="basic" header="Você está respondendo o questionário"
 			style="margin-bottom:20px">
-			
-			<h:inputHidden value="#{auditoriaMB.auditoria.id}"/>
+
 
 			<h:form acceptcharset="ISO-8859-1" id="form">
-				<p:dataTable var="p" value="#{questionario.perguntas}"
+				<h:inputHidden value="#{auditoriaMB.auditoria.id}" />
+
+				<p:dataTable var="r" value="#{auditoriaMB.auditoria.respostas}"
 					style="border:0" editable="true">
+
 					<p:column headerText="Pergunta" style="width:30em;">
 						<p:graphicImage value="/images/hint1.png" id="hint" width="20em" />
-						<p:tooltip id="toolTipTrack" for="hint" value="#{p.hint}"
+						<p:tooltip id="toolTipTrack" for="hint" value="#{r.hint}"
 							trackMouse="true" escape="false"
 							style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
 						<br />
-						<h:outputText id="pergunta" value="#{p.pergunta}" escape="false"
+						<h:outputText id="asdfsd" value="#{r.id}" escape="false"
+							style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
+						<h:outputText id="pergunta" value="#{r.pergunta}" escape="false"
 							style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
 					</p:column>
-					
-					<p:column headerText="Resposta" style="width:6em;">						
-						<h:outputText id="resposta" value="#{p.resposta.resposta}" escape="false"
-							style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
+
+					<p:column>
+						<h:outputText value="Recomendação: " />
+						<p:inputTextarea rows="7" cols="50" value="#{r.recomendacao}"
+							required="false"
+							requiredMessage="O campo Pregunta é obrigatório!"
+							converter="toUpperCaseConverter">
+							<f:ajax event="blur" render="@this" />
+						</p:inputTextarea>
 					</p:column>
-					
-					<p:column headerText="Recomendação" style="width:15em;">					
-						<h:outputText id="recomendacao" value="#{p.resposta.recomendacao}" escape="false"
-							style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
+
+					<p:column>
+						<p:lightBox iframe="true" id="lighbox3" width="800px"
+							height="600px">
+							<p:commandLink action="teste1.xhtml" ajax="false">
+									<img src="../images/edit.png" width="25" />
+									<f:setPropertyActionListener value="#{r.id}"
+										target="#{respostaMB.resposta.id}" />
+								</p:commandLink>
+						</p:lightBox>
 					</p:column>
+
 				</p:dataTable>
+
 			</h:form>
 
 		</p:panel>

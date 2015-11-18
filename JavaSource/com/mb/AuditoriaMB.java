@@ -28,6 +28,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	private List<Auditoria> auditorias;
 	private AuditoriaFacade auditoriaFacade;
 	private User usuarioLogado;
+	private String recomendacao;
 
 	public AuditoriaMB() {
 		usuarioLogado = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
@@ -36,6 +37,14 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			throw new RuntimeException("Problemas com usuário");
 	}
 	
+	public String getRecomendacao() {
+		return recomendacao;
+	}
+
+	public void setRecomendacao(String recomendacao) {
+		this.recomendacao = recomendacao;
+	}
+
 	public AuditoriaFacade getAuditoriaFacade() {
 		if (auditoriaFacade == null) {
 			auditoriaFacade = new AuditoriaFacade();

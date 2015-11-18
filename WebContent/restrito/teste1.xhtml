@@ -9,21 +9,14 @@
 	<ui:define name="conteudo">
 		<f:loadBundle basename="messages" var="msg" />
 
-		<ui:param
-			value="#{auditoriaMB.auditoriaFacade.findAuditoria(request.getParameter('idAuditoria'))}"
-			name="auditoria" />
-
-		<ui:param
-			value="#{perguntaMB.perguntaFacade.findPergunta(request.getParameter('idPergunta'))}"
-			name="pergunta" />
-
+		
 		<center>
 			<h:form acceptcharset="ISO-8859-1" id="form1">
 				<p:panel id="basic" header="Respostas" style="margin-bottom:20px">
 					<h:panelGrid columns="2" columnClasses="label, value"
 						style="text-align:left">
 						<h:inputHidden value="#{respostaMB.resposta.id}" />
-
+						
 						<p:columnGroup>
 						</p:columnGroup>
 
@@ -39,13 +32,13 @@
 							<f:selectItem itemLabel="NA" itemValue="NA" />
 						</p:selectOneMenu>
 
-						<h:outputText value="Recomendaçã:* " />
-						<p:inputText value="#{respostaMB.resposta.recomendacao}"
-							required="true" requiredMessage="O campo Resposta é obrigatório!"
-							label="Resposta" size="50" maxlength="255"
+						<h:outputText value="Recomendação: " />
+						<p:inputTextarea rows="7" cols="50" value="#{respostaMB.resposta.recomendacao}"
+							required="false"
+							requiredMessage="O campo Pregunta é obrigatório!"
 							converter="toUpperCaseConverter">
 							<f:ajax event="blur" render="@this" />
-						</p:inputText>
+						</p:inputTextarea>
 
 
 						<p:columnGroup>
@@ -55,9 +48,7 @@
 							<p:commandButton value="Enviar" ajax="false" icon="ui-icon-check"
 								action="#{respostaMB.updateResposta}">
 								<f:setPropertyActionListener
-									target="#{respostaMB.resposta.auditoria}" value="#{auditoria}" />
-								<f:setPropertyActionListener
-									target="#{respostaMB.resposta.pergunta}" value="#{pergunta}" />
+									target="#{respostaMB.resposta}" value="#{resposta}" />
 							</p:commandButton>
 						</p:columnGroup>
 					</h:panelGrid>
