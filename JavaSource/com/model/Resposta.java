@@ -6,7 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -27,6 +29,9 @@ public class Resposta implements Serializable{
 	private String resposta;
 	@Lob
 	private String recomendacao;
+	@ManyToOne
+	@JoinColumn(name="auditoria_id")
+	private Auditoria auditoria;
 
 	
 	public int getId() {
@@ -75,6 +80,14 @@ public class Resposta implements Serializable{
 
 	public void setRecomendacao(String recomendacao) {
 		this.recomendacao = recomendacao;
+	}
+
+	public Auditoria getAuditoria() {
+		return auditoria;
+	}
+
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
 	}
 
 	@Override

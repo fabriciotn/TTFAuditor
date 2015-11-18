@@ -31,10 +31,10 @@ public class CadastraUsuarios {
 	}
 
 	public static void main(String[] args) {
-		//criaUsuarios();
-		//criaUnidades();
-		//criaAuditores();
-		//criaEstabelecimento();
+		criaUsuarios();
+		criaUnidades();
+		criaAuditores();
+		criaEstabelecimento();
 		criaAuditoria();
 
 		// Pergunta p = new PerguntaFacade().findPergunta(22);
