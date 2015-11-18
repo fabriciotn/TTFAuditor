@@ -7,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -24,8 +23,6 @@ public class Pergunta implements Serializable{
 	private String pergunta;
 	@Lob
 	private String hint;
-	@ManyToOne
-	private Auditoria auditoria;
 	
 	public int getId() {
 		return id;
@@ -51,12 +48,6 @@ public class Pergunta implements Serializable{
 	public void setHint(String hint) {
 		this.hint = hint;
 	}	
-	public Auditoria getAuditoria() {
-		return auditoria;
-	}
-	public void setAuditoria(Auditoria auditoria) {
-		this.auditoria = auditoria;
-	}
 	
 	@Override
 	public int hashCode() {

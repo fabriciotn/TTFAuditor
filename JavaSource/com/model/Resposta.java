@@ -19,17 +19,16 @@ public class Resposta implements Serializable{
 	private int id;
 	@OneToOne
 	private User user;
-	
-	
-	@OneToOne
-	private Auditoria auditoria;
-	@Lob
-	private String resposta;
 	@Lob
 	private String hint;
 	@Lob
+	private String pergunta;
+	@Lob
+	private String resposta;
+	@Lob
 	private String recomendacao;
 
+	
 	public int getId() {
 		return id;
 	}
@@ -38,20 +37,20 @@ public class Resposta implements Serializable{
 		this.id = id;
 	}
 
+	public String getPergunta() {
+		return pergunta;
+	}
+
+	public void setPergunta(String pergunta) {
+		this.pergunta = pergunta;
+	}
+
 	public User getUser() {
 		return user;
 	}
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	public Auditoria getAuditoria() {
-		return auditoria;
-	}
-
-	public void setAuditoria(Auditoria auditoria) {
-		this.auditoria = auditoria;
 	}
 
 	public String getResposta() {

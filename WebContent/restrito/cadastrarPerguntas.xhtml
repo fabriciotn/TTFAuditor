@@ -42,19 +42,6 @@
 							<f:ajax event="blur" render="@this" />
 						</p:inputTextarea>
 
-						<h:outputText value="Questionário:* " />
-						<p:selectOneMenu id="questionario"
-							value="#{perguntaMB.pergunta.questionario}" required="true"
-							requiredMessage="O campo Questionário é obrigatório!"
-							converter="questionarioConverter" style="width:13em">
-							<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
-								noSelectionOption="true" />
-							<f:selectItems value="#{questionarioMB.allQuestionarios}"
-								var="questionario"
-								itemLabel="#{questionario.id} | #{questionario.titulo}"
-								itemValue="#{questionario}" />
-						</p:selectOneMenu>
-
 						<p:columnGroup>
 						</p:columnGroup>
 
@@ -105,13 +92,6 @@
 							sortBy="#{pergunta.hint}" style="width:20em;">
 							<h:outputText value="#{pergunta.hint}" escape="false"
 								style="white-space: pre-wrap;word-wrap: break-word;" />
-						</p:column>
-
-						<p:column headerText="QUESTIONÁRIO"
-							filterBy="#{pergunta.questionario.titulo}"
-							sortBy="#{pergunta.questionario.titulo}"
-							style="text-align: center; width:13em">
-							<h:outputText value="#{pergunta.questionario.titulo}" />
 						</p:column>
 
 						<p:column exportable="false"

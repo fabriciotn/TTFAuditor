@@ -11,7 +11,11 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import com.facade.AuditoriaFacade;
+import com.facade.PerguntaFacade;
+import com.facade.RespostaFacade;
 import com.model.Auditoria;
+import com.model.Pergunta;
+import com.model.Resposta;
 import com.model.User;
 
 @RequestScoped
@@ -57,6 +61,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			auditoria.setUser(usuarioLogado);
 
 			getAuditoriaFacade().createAuditoria(auditoria);
+			adicionaPerguntas(auditoria);
 			closeDialog();
 			displayInfoMessageToUser("Auditoria gravada com sucesso!");
 			loadAuditorias();
@@ -68,6 +73,21 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			return "/restrito/erro.xhtml";
 		}
 		return "/restrito/cadastrarAuditoria.xhtml";
+	}
+
+	private void adicionaPerguntas(Auditoria auditoria) {
+		List<Pergunta> perguntas = new PerguntaMB().getAllPerguntas();
+		
+		for (Pergunta pergunta : perguntas) {
+			Resposta resposta = new Resposta();
+			resposta.setPergunta(pergunta.getPergunta());
+			resposta.setHint(pergunta.getHint());
+			new RespostaFacade().createResposta(resposta);
+		}
+		
+		List<Resposta> respostas = new RespostaMB().getAllRespostas();
+		auditoria.setRespostas(respostas);
+		updateAuditoria();
 	}
 
 	public void updateAuditoria() {
