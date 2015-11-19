@@ -5,13 +5,11 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import com.facade.RespostaFacade;
-import com.model.Pergunta;
 import com.model.Resposta;
 import com.model.User;
 
@@ -19,13 +17,13 @@ import com.model.User;
 @ManagedBean
 public class RespostaMB extends AbstractMB implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long	serialVersionUID	= 1L;
 
-	private Resposta resposta;
-	private List<Resposta> respostas;
-	private RespostaFacade respostaFacade;
-	private User usuarioLogado;
-	
+	private Resposta			resposta;
+	private List<Resposta>		respostas;
+	private RespostaFacade		respostaFacade;
+	private User				usuarioLogado;
+
 	public RespostaMB() {
 		usuarioLogado = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
 
@@ -45,7 +43,7 @@ public class RespostaMB extends AbstractMB implements Serializable {
 		if (resposta == null) {
 			resposta = new Resposta();
 		}
-		
+
 		return resposta;
 	}
 
@@ -54,7 +52,7 @@ public class RespostaMB extends AbstractMB implements Serializable {
 	}
 
 	public String createResposta() {
-		try {			
+		try {
 			resposta.setUser(usuarioLogado);
 
 			getRespostaFacade().createResposta(resposta);
@@ -72,8 +70,17 @@ public class RespostaMB extends AbstractMB implements Serializable {
 	}
 
 	public void updateResposta() {
+		int auditoria_id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("auditoria_id"));
+		int resposta_id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("resposta_id"));
+
+		System.out.println("auditoria: " + auditoria_id);
+		System.out.println("resposta: " + resposta_id);
+		
+		resposta.setId(resposta_id);
+		resposta.setAuditoria(new AuditoriaMB().getAuditoriaFacade().findAuditoria(auditoria_id));
+
 		try {
-//			resposta.setTelefone(RetiraMascaras.retirar(resposta.getTelefone()));
+			// resposta.setTelefone(RetiraMascaras.retirar(resposta.getTelefone()));
 			if (resposta.getId() == 0) {
 				createResposta();
 			} else {
@@ -83,10 +90,6 @@ public class RespostaMB extends AbstractMB implements Serializable {
 				displayInfoMessageToUser("Atualizado com sucesso!");
 				loadRespostas();
 				resetResposta();
-
-				// retorna para a listagem de Respostas
-				ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-				context.redirect("cadastrarRespostas.xhtml");
 			}
 		} catch (Exception e) {
 			keepDialogOpen();

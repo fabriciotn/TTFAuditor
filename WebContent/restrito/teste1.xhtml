@@ -9,16 +9,22 @@
 	<ui:define name="conteudo">
 		<f:loadBundle basename="messages" var="msg" />
 
-		
+		<ui:param
+			value="#{respostaMB.respostaFacade.findResposta(request.getParameter('resposta_id'))}"
+			name="resposta" />
+
+		<ui:param
+			value="#{auditoriaMB.auditoriaFacade.findAuditoria(request.getParameter('auditoria_id'))}"
+			name="auditoria" />
+
 		<center>
 			<h:form acceptcharset="ISO-8859-1" id="form1">
 				<p:panel id="basic" header="Respostas" style="margin-bottom:20px">
 					<h:panelGrid columns="2" columnClasses="label, value"
 						style="text-align:left">
 						<h:inputHidden value="#{respostaMB.resposta.id}" />
-						
-						<p:columnGroup>
-						</p:columnGroup>
+						<h:outputText value="ID: #{resposta.id}" />
+
 
 						<h:outputText value="Resposta* " />
 						<p:selectOneMenu id="resposta"
@@ -33,8 +39,8 @@
 						</p:selectOneMenu>
 
 						<h:outputText value="Recomendação: " />
-						<p:inputTextarea rows="7" cols="50" value="#{respostaMB.resposta.recomendacao}"
-							required="false"
+						<p:inputTextarea rows="7" cols="50"
+							value="#{respostaMB.resposta.recomendacao}" required="false"
 							requiredMessage="O campo Pregunta é obrigatório!"
 							converter="toUpperCaseConverter">
 							<f:ajax event="blur" render="@this" />
@@ -45,11 +51,12 @@
 						</p:columnGroup>
 
 						<p:columnGroup>
-							<p:commandButton value="Enviar" ajax="false" icon="ui-icon-check"
-								action="#{respostaMB.updateResposta}">
-								<f:setPropertyActionListener
-									target="#{respostaMB.resposta}" value="#{resposta}" />
-							</p:commandButton>
+							<h:commandButton value="Enviar"
+								actionListener="#{respostaMB.updateResposta}">
+								<f:param name="auditoria_id" value="#{auditoria.id}" />
+								<f:param name="resposta_id" value="#{resposta.id}" />
+							</h:commandButton>
+
 						</p:columnGroup>
 					</h:panelGrid>
 				</p:panel>

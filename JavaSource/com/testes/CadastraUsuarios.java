@@ -15,6 +15,7 @@ import com.facade.UserFacade;
 import com.model.Auditor;
 import com.model.Auditoria;
 import com.model.Estabelecimento;
+import com.model.Pergunta;
 import com.model.Role;
 import com.model.Unidade;
 import com.model.User;
@@ -35,10 +36,39 @@ public class CadastraUsuarios {
 		criaUnidades();
 		criaAuditores();
 		criaEstabelecimento();
-		criaAuditoria();
+		criaPerguntas();
+		//criaAuditoria();
 
 		// Pergunta p = new PerguntaFacade().findPergunta(22);
 		// System.out.println(p.getPergunta());
+	}
+
+	private static void criaPerguntas() {
+		factory = Persistence.createEntityManagerFactory("auditoria_db");
+		manager = factory.createEntityManager();
+		manager.getTransaction().begin();
+
+		user = new UserFacade().findUsuario(1);
+		
+		Pergunta pergunta = new Pergunta();
+		pergunta.setPergunta("PERGUNTA 1");
+		pergunta.setHint("EXPLICAÇAO PERGUNTA1");
+		pergunta.setUser(user);
+
+		Pergunta pergunta1 = new Pergunta();
+		pergunta1.setPergunta("PERGUNTA 2");
+		pergunta1.setHint("EXPLICAÇAO PERGUNTA2");
+		pergunta1.setUser(user);
+		
+		manager.persist(pergunta);
+		manager.persist(pergunta1);
+
+		manager.getTransaction().commit();
+
+		manager.close();
+		factory.close();
+		
+		System.out.println("perguntas criadas");
 	}
 
 	private static void criaUnidades() {

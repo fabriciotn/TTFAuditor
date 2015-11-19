@@ -70,7 +70,6 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			auditoria.setUser(usuarioLogado);
 
 			getAuditoriaFacade().createAuditoria(auditoria);
-			adicionaPerguntas(auditoria);
 			closeDialog();
 			displayInfoMessageToUser("Auditoria gravada com sucesso!");
 			loadAuditorias();
@@ -82,22 +81,6 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			return "/restrito/erro.xhtml";
 		}
 		return "/restrito/cadastrarAuditoria.xhtml";
-	}
-
-	private void adicionaPerguntas(Auditoria auditoria) {
-		List<Pergunta> perguntas = new PerguntaMB().getAllPerguntas();
-		
-		for (Pergunta pergunta : perguntas) {
-			Resposta resposta = new Resposta();
-			resposta.setPergunta(pergunta.getPergunta());
-			resposta.setHint(pergunta.getHint());
-			resposta.setAuditoria(auditoria);
-			new RespostaFacade().createResposta(resposta);
-		}
-		
-		List<Resposta> respostas = new RespostaMB().getAllRespostas();
-		auditoria.setRespostas(respostas);
-		updateAuditoria();
 	}
 
 	public void updateAuditoria() {

@@ -12,10 +12,10 @@ import com.model.Resposta;
 
 public class RespostaFacade implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long		serialVersionUID	= 1L;
 
-	private RespostaDAO respostaDAO = new RespostaDAO();
-	private static SessionFactory factory; 
+	private RespostaDAO				respostaDAO			= new RespostaDAO();
+	private static SessionFactory	factory;
 
 	public void createResposta(Resposta resposta) {
 		respostaDAO.beginTransaction();
@@ -26,8 +26,12 @@ public class RespostaFacade implements Serializable {
 	public void updateResposta(Resposta resposta) {
 		respostaDAO.beginTransaction();
 		Resposta persistedResposta = respostaDAO.find(resposta.getId());
-		//persistedResposta.setResposta(resposta.getResposta()); NAO DEVE ATUALIZAR AS RESPOSTAS		
-		persistedResposta.setUser(resposta.getUser());
+		if (resposta.getResposta() != null)
+			persistedResposta.setResposta(resposta.getResposta());
+		if (resposta.getRecomendacao() != null)
+			persistedResposta.setRecomendacao(resposta.getRecomendacao());
+		if (resposta.getUser() != null)
+			persistedResposta.setUser(resposta.getUser());
 
 		respostaDAO.update(persistedResposta);
 		respostaDAO.commitAndCloseTransaction();
@@ -49,8 +53,7 @@ public class RespostaFacade implements Serializable {
 
 	public void deleteResposta(Resposta resposta) {
 		respostaDAO.beginTransaction();
-		Resposta persistedResposta = respostaDAO.findReferenceOnly(resposta
-				.getId());
+		Resposta persistedResposta = respostaDAO.findReferenceOnly(resposta.getId());
 		respostaDAO.delete(persistedResposta);
 		respostaDAO.commitAndCloseTransaction();
 	}
@@ -58,7 +61,7 @@ public class RespostaFacade implements Serializable {
 	public List<Object[]> buscaComQuery(String sql) {
 		respostaDAO.beginTransaction();
 		Query query = respostaDAO.selectComQuery(sql);
-		List<Object[]> list = (List<Object[]>)query.getResultList();
+		List<Object[]> list = (List<Object[]>) query.getResultList();
 		respostaDAO.closeTransaction();
 		return list;
 	}

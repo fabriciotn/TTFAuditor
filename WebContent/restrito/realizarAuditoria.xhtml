@@ -46,13 +46,13 @@
 					</p:column>
 
 					<p:column>
-						<p:lightBox iframe="true" id="lighbox3" width="800px"
-							height="600px">
-							<p:commandLink action="teste1.xhtml" ajax="false">
-									<img src="../images/edit.png" width="25" />
-									<f:setPropertyActionListener value="#{r.id}"
-										target="#{respostaMB.resposta.id}" />
-								</p:commandLink>
+						<p:lightBox iframe="true" id="lighbox3">
+							<h:outputLink value="teste1.xhtml"
+								title="Responder">
+								<img src="../images/edit.png" width="25" />
+								<f:param name="auditoria_id" value="#{auditoriaMB.auditoria.id}" />
+								<f:param name="resposta_id" value="#{r.id}" />
+							</h:outputLink>
 						</p:lightBox>
 					</p:column>
 
