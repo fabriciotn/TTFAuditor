@@ -23,7 +23,7 @@
 				<p:dataTable var="r" value="#{auditoriaMB.auditoria.respostas}"
 					style="border:0" editable="true">
 
-					<p:column headerText="Pergunta" style="width:30em;">
+					<p:column headerText="Pergunta" style="width:35em;">
 						<p:graphicImage value="/images/hint1.png" id="hint" width="20em" />
 						<p:tooltip id="toolTipTrack" for="hint" value="#{r.hint}"
 							trackMouse="true" escape="false"
@@ -34,20 +34,10 @@
 						<h:outputText id="pergunta" value="#{r.pergunta}" escape="false"
 							style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
 					</p:column>
-
-					<p:column>
-						<h:outputText value="Recomendação: " />
-						<p:inputTextarea rows="7" cols="50" value="#{r.recomendacao}"
-							required="false"
-							requiredMessage="O campo Pregunta é obrigatório!"
-							converter="toUpperCaseConverter">
-							<f:ajax event="blur" render="@this" />
-						</p:inputTextarea>
-					</p:column>
-
-					<p:column>
+					
+					<p:column headerText="Responder" style="width:5em; text-align:center">
 						<p:lightBox iframe="true" id="lighbox3">
-							<h:outputLink value="teste1.xhtml"
+							<h:outputLink value="respondePergunta.xhtml"
 								title="Responder">
 								<img src="../images/edit.png" width="25" />
 								<f:param name="auditoria_id" value="#{auditoriaMB.auditoria.id}" />
