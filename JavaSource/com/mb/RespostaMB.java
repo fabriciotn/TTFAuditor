@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -75,7 +74,7 @@ public class RespostaMB extends AbstractMB implements Serializable {
 
 		System.out.println("auditoria: " + auditoria_id);
 		System.out.println("resposta: " + resposta_id);
-		
+
 		resposta.setId(resposta_id);
 		resposta.setAuditoria(new AuditoriaMB().getAuditoriaFacade().findAuditoria(auditoria_id));
 

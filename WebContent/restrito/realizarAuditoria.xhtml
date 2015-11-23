@@ -34,16 +34,29 @@
 						<h:outputText id="pergunta" value="#{r.pergunta}" escape="false"
 							style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
 					</p:column>
-					
-					<p:column headerText="Responder" style="width:5em; text-align:center">
-						<p:lightBox iframe="true" id="lighbox3">
-							<h:outputLink value="respondePergunta.xhtml"
-								title="Responder">
+
+					<p:column headerText="Resposta"
+						style="width:4em; text-align:center;">
+						<h:outputText value="#{r.resposta}" />
+					</p:column>
+
+					<p:column headerText="Recomendação">
+						<h:outputText value="#{r.recomendacao}" />
+					</p:column>
+
+					<p:column headerText="Responder"
+						style="width:5em; text-align:center">
+						<p:lightBox iframe="true" id="lighbox3" height="300px"
+							rendered="#{r.resposta == null}" widgetVar="dlg">
+							<h:outputLink value="respondePergunta.xhtml" title="Responder">
 								<img src="../images/edit.png" width="25" />
 								<f:param name="auditoria_id" value="#{auditoriaMB.auditoria.id}" />
 								<f:param name="resposta_id" value="#{r.id}" />
 							</h:outputLink>
 						</p:lightBox>
+
+						<p:graphicImage value="/images/ok.png" width="25em"
+							rendered="#{r.resposta != null}" title="Pergunta já respondida!"/>
 					</p:column>
 
 				</p:dataTable>

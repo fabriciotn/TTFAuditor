@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -37,6 +38,7 @@ public class Auditoria implements Serializable {
 	private Date dataDaVerificacao;
 	
 	@OneToMany(mappedBy = "auditoria", targetEntity = Resposta.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	//@OrderBy(value = "id ASC")
 	private List<Resposta> respostas;
 	
 	@ManyToMany
