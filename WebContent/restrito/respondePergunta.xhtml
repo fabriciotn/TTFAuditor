@@ -59,8 +59,7 @@
 
 					<p:columnGroup>
 						<p:commandButton value="Enviar"
-							actionListener="#{respostaMB.updateResposta}"
-							onclick="javascript:window.parent.location.reload(true);">
+							actionListener="#{respostaMB.updateResposta}" oncomplete="javascript:window.parent.location.reload();">
 							<f:param name="auditoria_id" value="#{auditoria.id}" />
 							<f:param name="resposta_id" value="#{resposta.id}" />
 						</p:commandButton>
