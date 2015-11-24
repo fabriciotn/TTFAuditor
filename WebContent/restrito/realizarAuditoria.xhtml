@@ -8,7 +8,7 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 	<ui:define name="menu">
-		<ui:include src="/WEB-INF/partials/menu.xhtml" />
+		<ui:include src="/WEB-INF/partials/menu.xhtml"/>
 	</ui:define>
 
 	<ui:define name="conteudo">
@@ -17,7 +17,7 @@
 			style="margin-bottom:20px">
 
 
-			<h:form acceptcharset="ISO-8859-1" id="form">
+			<h:form acceptcharset="ISO-8859-1" id="form" ondblclick="javascript:window.location.reload(true);">
 				<h:inputHidden value="#{auditoriaMB.auditoria.id}" />
 
 				<p:dataTable var="r" value="#{auditoriaMB.auditoria.respostas}"
@@ -47,7 +47,7 @@
 					<p:column headerText="Responder"
 						style="width:5em; text-align:center">
 						<p:lightBox iframe="true" id="lighbox3" height="300px"
-							rendered="#{r.resposta == null}" widgetVar="dlg">
+							rendered="#{r.resposta == null}" widgetVar="var#{r.id}">
 							<h:outputLink value="respondePergunta.xhtml" title="Responder">
 								<img src="../images/edit.png" width="25" />
 								<f:param name="auditoria_id" value="#{auditoriaMB.auditoria.id}" />

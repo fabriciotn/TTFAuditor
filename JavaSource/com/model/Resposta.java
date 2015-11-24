@@ -2,6 +2,7 @@ package com.model;
 
 import java.io.Serializable;
 
+import javax.faces.bean.SessionScoped;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
+@SessionScoped
 public class Resposta implements Serializable{
 
 	private static final long serialVersionUID = 1L;
