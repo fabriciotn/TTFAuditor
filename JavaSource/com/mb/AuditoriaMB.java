@@ -11,7 +11,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import com.facade.AuditoriaFacade;
-import com.facade.PerguntaFacade;
 import com.facade.RespostaFacade;
 import com.model.Auditoria;
 import com.model.Pergunta;
@@ -91,6 +90,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			Resposta resposta = new Resposta();
 			resposta.setPergunta(pergunta.getPergunta());
 			resposta.setHint(pergunta.getHint());
+			resposta.setQuestionario(pergunta.getQuestionario());
 			resposta.setAuditoria(auditoria);
 			new RespostaFacade().createResposta(resposta);
 		}
@@ -117,7 +117,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 				// retorna para a listagem de Auditorias
 				ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-				context.redirect("gerenciarAuditorias.xhtml");
+				context.redirect("cadastrarAuditorias.xhtml");
 			}
 		} catch (Exception e) {
 			keepDialogOpen();

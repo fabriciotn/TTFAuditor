@@ -1,59 +1,25 @@
 package com.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-//@Entity
+@Entity
 public class Questionario implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	/*
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@OneToOne
 	private User user;
 	private String titulo;
-	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar dataDaAvaliacao;
-	@OneToOne
-	private Auditor auditor;
-	@OneToMany
-	@JoinColumn(name="questionario_id")
-	private List<Pergunta> perguntas;
-	@OneToOne(mappedBy = "questionario")
-	private ObservacaoPorQuestionario observacao;
-	private boolean auditado;
 	
-	public boolean isAuditado() {
-		return auditado;
-	}
-	public void setAuditado(boolean auditado) {
-		this.auditado = auditado;
-	}
-	public ObservacaoPorQuestionario getObservacao() {
-		return observacao;
-	}
-	public void setObservacao(ObservacaoPorQuestionario observacao) {
-		this.observacao = observacao;
-	}
-	public List<Pergunta> getPerguntas() {
-		return perguntas;
-	}
-	public void setPerguntas(List<Pergunta> pergunta) {
-		this.perguntas = pergunta;
-	}
 	public int getId() {
 		return id;
 	}
@@ -71,18 +37,6 @@ public class Questionario implements Serializable{
 	}
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
-	}
-	public Calendar getDataDaAvaliacao() {
-		return dataDaAvaliacao;
-	}
-	public void setDataDaAvaliacao(Calendar dataDaAvaliacao) {
-		this.dataDaAvaliacao = dataDaAvaliacao;
-	}
-	public Auditor getAuditor() {
-		return auditor;
-	}
-	public void setAuditor(Auditor auditor) {
-		this.auditor = auditor;
 	}
 	
 	@Override
@@ -105,5 +59,5 @@ public class Questionario implements Serializable{
 			return false;
 		return true;
 	}
-	*/
+	
 }

@@ -22,7 +22,7 @@
 <h:body style="font-family: arial; margin: 0;">
 	<center>
 		<h:form acceptcharset="ISO-8859-1" id="form1">
-			<p:panel id="basic" header="Respostas" style="margin-bottom:20px">
+			<p:panel id="basic" header="Respospondendo pergunta #{resposta.id}" style="margin-bottom:20px">
 				<h:panelGrid columns="2" columnClasses="label, value"
 					style="text-align:left">
 
@@ -30,9 +30,6 @@
 
 					<p:columnGroup>
 					</p:columnGroup>
-
-					<h:outputText value="ID: " />
-					<h:outputText value="#{resposta.id}" />
 
 					<h:outputText value="Resposta:* " />
 					<p:selectOneMenu id="resposta"

@@ -16,7 +16,7 @@ import com.model.User;
 @RequestScoped
 @ManagedBean
 public class QuestionarioMB extends AbstractMB implements Serializable {
-/*
+	
 	private static final long serialVersionUID = 1L;
 
 	private Questionario questionario;
@@ -141,5 +141,4 @@ public class QuestionarioMB extends AbstractMB implements Serializable {
 
 		return questionario;
 	}
-	*/
 }

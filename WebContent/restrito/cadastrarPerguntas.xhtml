@@ -33,7 +33,7 @@
 							converter="toUpperCaseConverter">
 							<f:ajax event="blur" render="@this" />
 						</p:inputTextarea>
-						
+
 						<h:outputText value="Explicação da pergunta: " />
 						<p:inputTextarea rows="3" cols="70"
 							value="#{perguntaMB.pergunta.hint}" required="false"
@@ -41,6 +41,18 @@
 							converter="toUpperCaseConverter">
 							<f:ajax event="blur" render="@this" />
 						</p:inputTextarea>
+
+						<h:outputText value="Questionário:* " />
+						<p:selectOneMenu id="questionario"
+							value="#{perguntaMB.pergunta.questionario}"
+							required="true" requiredMessage="O campo Questionário é obrigatório!"
+							converter="questionarioConverter" style="width:20em;">
+							<f:selectItem itemLabel="--- Selecione o questionário---" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{questionarioMB.allQuestionarios}" var="questionario"
+								itemLabel="#{questionario.id} | #{questionario.titulo}"
+								itemValue="#{questionario}" />
+						</p:selectOneMenu>
 
 						<p:columnGroup>
 						</p:columnGroup>
@@ -61,7 +73,8 @@
 					<p:dataTable id="tbl" var="pergunta"
 						value="#{perguntaMB.allPerguntas}"
 						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
-						paginator="true" rows="10" style="margin-bottom:20px;font-size:0.9em;">
+						paginator="true" rows="10"
+						style="margin-bottom:20px;font-size:0.9em;">
 
 						<f:facet name="{Exporters}">
 							<h:commandLink>
@@ -87,7 +100,7 @@
 							<h:outputText value="#{pergunta.pergunta}" escape="false"
 								style="white-space: pre-wrap;word-wrap: break-word;" />
 						</p:column>
-						
+
 						<p:column headerText="EXPLICAÇÃO" filterBy="#{pergunta.hint}"
 							sortBy="#{pergunta.hint}" style="width:20em;">
 							<h:outputText value="#{pergunta.hint}" escape="false"

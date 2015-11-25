@@ -1,9 +1,17 @@
 package com.facade;
 
 import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.Query;
+
+import org.hibernate.SessionFactory;
+
+import com.dao.QuestionarioDAO;
+import com.model.Questionario;
 
 public class QuestionarioFacade implements Serializable {
-/*
+
 	private static final long serialVersionUID = 1L;
 
 	private QuestionarioDAO questionarioDAO = new QuestionarioDAO();
@@ -18,9 +26,7 @@ public class QuestionarioFacade implements Serializable {
 	public void updateQuestionario(Questionario questionario) {
 		questionarioDAO.beginTransaction();
 		Questionario persistedQuestionario = questionarioDAO.find(questionario.getId());
-		persistedQuestionario.setTitulo(questionario.getTitulo());		
-		persistedQuestionario.setAuditor(questionario.getAuditor());	
-		persistedQuestionario.setDataDaAvaliacao(questionario.getDataDaAvaliacao());			
+		persistedQuestionario.setTitulo(questionario.getTitulo());			
 		persistedQuestionario.setUser(questionario.getUser());
 
 		questionarioDAO.update(persistedQuestionario);
@@ -32,20 +38,7 @@ public class QuestionarioFacade implements Serializable {
 		Questionario questionario = questionarioDAO.find(questionarioId);
 		questionarioDAO.closeTransaction();
 		return questionario;
-	}
-	
-	
-	public List<Questionario> findQuestionarios(int auditoriaId) {
-		questionarioDAO.beginTransaction();
-		AuditoriaDAO auditoriaDAO = new AuditoriaDAO();
-		auditoriaDAO.beginTransaction();
-		Auditoria auditoria = auditoriaDAO.find(auditoriaId);
-		auditoriaDAO.closeTransaction();
-		List<Questionario> questionarios = auditoria.getQuestionarios();
-		questionarioDAO.closeTransaction();
-		return questionarios;
-	}
-	
+	}	
 
 	public List<Questionario> listAll() {
 		questionarioDAO.beginTransaction();
@@ -69,5 +62,4 @@ public class QuestionarioFacade implements Serializable {
 		questionarioDAO.closeTransaction();
 		return list;
 	}
-*/
 }

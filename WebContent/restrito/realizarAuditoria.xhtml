@@ -46,9 +46,9 @@
 
 					<p:column headerText="Responder"
 						style="width:5em; text-align:center">
-						<p:lightBox iframe="true" id="lighbox3" height="300px"
+						<p:lightBox iframe="true" id="lighbox3" height="320px"
 							rendered="#{r.resposta == null}" widgetVar="var#{r.id}">
-							<h:outputLink value="respondePergunta.xhtml" title="Responder">
+							<h:outputLink value="respondePergunta.xhtml">
 								<img src="../images/edit.png" width="25" />
 								<f:param name="auditoria_id" value="#{auditoriaMB.auditoria.id}" />
 								<f:param name="resposta_id" value="#{r.id}" />

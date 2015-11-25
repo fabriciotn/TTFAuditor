@@ -23,6 +23,8 @@ public class Resposta implements Serializable{
 	private int id;
 	@OneToOne
 	private User user;
+	@OneToOne
+	private Questionario questionario;
 	@Lob
 	private String hint;
 	@Lob
@@ -34,7 +36,6 @@ public class Resposta implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="auditoria_id")
 	private Auditoria auditoria;
-
 	
 	public int getId() {
 		return id;
@@ -42,6 +43,14 @@ public class Resposta implements Serializable{
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public Questionario getQuestionario() {
+		return questionario;
+	}
+
+	public void setQuestionario(Questionario questionario) {
+		this.questionario = questionario;
 	}
 
 	public String getPergunta() {

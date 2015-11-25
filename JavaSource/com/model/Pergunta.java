@@ -19,6 +19,8 @@ public class Pergunta implements Serializable{
 	private int id;
 	@OneToOne
 	private User user;
+	@OneToOne
+	private Questionario questionario;
 	@Lob
 	private String pergunta;
 	@Lob
@@ -35,6 +37,12 @@ public class Pergunta implements Serializable{
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	public Questionario getQuestionario() {
+		return questionario;
+	}
+	public void setQuestionario(Questionario questionario) {
+		this.questionario = questionario;
 	}
 	public String getPergunta() {
 		return pergunta;

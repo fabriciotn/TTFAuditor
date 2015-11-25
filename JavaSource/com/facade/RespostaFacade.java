@@ -32,6 +32,8 @@ public class RespostaFacade implements Serializable {
 			persistedResposta.setRecomendacao(resposta.getRecomendacao());
 		if (resposta.getUser() != null)
 			persistedResposta.setUser(resposta.getUser());
+		if (resposta.getQuestionario() != null)
+			persistedResposta.setQuestionario(resposta.getQuestionario());
 
 		respostaDAO.update(persistedResposta);
 		respostaDAO.commitAndCloseTransaction();

@@ -1,7 +1,7 @@
 package com.dao;
 
 import com.model.Questionario;
-/*
+
 public class QuestionarioDAO extends GenericDAO<Questionario> {
 
 	private static final long serialVersionUID = 1L;
@@ -14,4 +14,4 @@ public class QuestionarioDAO extends GenericDAO<Questionario> {
 		super.delete(questionario.getId(), Questionario.class);
 	}
 	
-}*/
+}
