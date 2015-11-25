@@ -21,9 +21,9 @@
 				<h:inputHidden value="#{auditoriaMB.auditoria.id}" />
 
 				<p:dataTable var="r" value="#{auditoriaMB.auditoria.respostas}"
-					style="border:0" editable="true">
+					style="border:0; font-size:0.9em;" editable="true">
 
-					<p:column headerText="Pergunta" style="width:35em;">
+					<p:column headerText="Pergunta" style="width:35%;">
 						<p:graphicImage value="/images/hint1.png" id="hint" width="20em" />
 						<p:tooltip id="toolTipTrack" for="hint" value="#{r.hint}"
 							trackMouse="true" escape="false"
@@ -44,9 +44,13 @@
 						<h:outputText value="#{r.recomendacao}" />
 					</p:column>
 
+					<p:column headerText="Questionário">
+						<h:outputText value="#{r.questionario.titulo}" />
+					</p:column>
+					
 					<p:column headerText="Responder"
-						style="width:5em; text-align:center">
-						<p:lightBox iframe="true" id="lighbox3" height="320px"
+						style="width:8%; text-align:center">
+						<p:lightBox iframe="true" id="lighbox3" height="325px"
 							rendered="#{r.resposta == null}" widgetVar="var#{r.id}">
 							<h:outputLink value="respondePergunta.xhtml">
 								<img src="../images/edit.png" width="25" />
