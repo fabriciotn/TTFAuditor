@@ -8,66 +8,67 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 	<ui:define name="menu">
-		<ui:include src="/WEB-INF/partials/menu.xhtml"/>
+		<ui:include src="/WEB-INF/partials/menu.xhtml" />
 	</ui:define>
 
 	<ui:define name="conteudo">
 		<f:loadBundle basename="messages" var="msg" />
-		<p:panel id="basic" header="Você está respondendo o questionário"
+		<p:accordionPanel id="basic"
+			header="Você está respondendo a auditoria #{auditoriaMB.auditoria.codigo}"
 			style="margin-bottom:20px">
 
+			<p:tab title="CADASTRO">
+				<h:form acceptcharset="ISO-8859-1" id="form">
+					<h:inputHidden value="#{auditoriaMB.auditoria.id}" />
 
-			<h:form acceptcharset="ISO-8859-1" id="form">
-				<h:inputHidden value="#{auditoriaMB.auditoria.id}" />
+					<p:dataTable var="r" value="#{auditoriaMB.auditoria.respostas}"
+						style="border:0; white-space: pre-wrap;word-wrap: break-word;font-size:1em;">
 
-				<p:dataTable var="r" value="#{auditoriaMB.auditoria.respostas}"
-					style="border:0; font-size:0.9em;" editable="true">
+						<p:column headerText="Pergunta" style="width:35%;">
+							<p:graphicImage value="/images/hint1.png" id="hint" width="20em" />
+							<p:tooltip id="toolTipTrack" for="hint" value="#{r.hint}"
+								trackMouse="true" escape="false" />
+							<br />
+							<h:outputText id="asdfsd" value="#{r.id}" escape="false" />
+							<h:outputText id="pergunta" value="#{r.pergunta}" escape="false" />
+						</p:column>
 
-					<p:column headerText="Pergunta" style="width:35%;">
-						<p:graphicImage value="/images/hint1.png" id="hint" width="20em" />
-						<p:tooltip id="toolTipTrack" for="hint" value="#{r.hint}"
-							trackMouse="true" escape="false"
-							style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
-						<br />
-						<h:outputText id="asdfsd" value="#{r.id}" escape="false"
-							style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
-						<h:outputText id="pergunta" value="#{r.pergunta}" escape="false"
-							style="white-space: pre-wrap;word-wrap: break-word;font-size:0.9em;" />
-					</p:column>
+						<p:column headerText="Resposta"
+							style="width:4em; text-align:center;">
+							<h:outputText value="#{r.resposta}" />
+						</p:column>
 
-					<p:column headerText="Resposta"
-						style="width:4em; text-align:center;">
-						<h:outputText value="#{r.resposta}" />
-					</p:column>
+						<p:column headerText="Recomendação">
+							<h:outputText value="#{r.recomendacao}" />
+						</p:column>
 
-					<p:column headerText="Recomendação">
-						<h:outputText value="#{r.recomendacao}" />
-					</p:column>
+						<p:column headerText="Questionário">
+							<h:outputText value="#{r.questionario.titulo}" />
+						</p:column>
 
-					<p:column headerText="Questionário">
-						<h:outputText value="#{r.questionario.titulo}" />
-					</p:column>
-					
-					<p:column headerText="Responder"
-						style="width:8%; text-align:center">
-						<p:lightBox iframe="true" id="lighbox3" height="325px"
-							rendered="#{r.resposta == null}" widgetVar="var#{r.id}">
-							<h:outputLink value="respondePergunta.xhtml">
-								<img src="../images/edit.png" width="25" />
-								<f:param name="auditoria_id" value="#{auditoriaMB.auditoria.id}" />
-								<f:param name="resposta_id" value="#{r.id}" />
-							</h:outputLink>
-						</p:lightBox>
+						<p:column headerText="Responder"
+							style="width:8%; text-align:center">
+							<p:lightBox iframe="true" id="lighbox3" height="325px"
+								rendered="#{r.resposta == null}" widgetVar="var#{r.id}">
+								<h:outputLink value="respondePergunta.xhtml">
+									<p:graphicImage value="/images/edit.png" width="25em"
+										title="Responder pergunta!" />
+									<f:param name="auditoria_id"
+										value="#{auditoriaMB.auditoria.id}" />
+									<f:param name="resposta_id" value="#{r.id}" />
+								</h:outputLink>
+							</p:lightBox>
 
-						<p:graphicImage value="/images/ok.png" width="25em"
-							rendered="#{r.resposta != null}" title="Pergunta já respondida!"/>
-					</p:column>
+							<p:graphicImage value="/images/ok.png" width="25em"
+								rendered="#{r.resposta != null}" title="Pergunta já respondida!" />
+						</p:column>
 
-				</p:dataTable>
+					</p:dataTable>
 
-			</h:form>
+				</h:form>
+			</p:tab>
 
-		</p:panel>
+		</p:accordionPanel>
 
 
 	</ui:define>

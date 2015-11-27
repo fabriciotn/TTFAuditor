@@ -59,20 +59,6 @@
 								</h:outputText>
 							</p:column>
 
-							<p:column>
-								<p:selectOneMenu id="questionario"
-									value="#{perguntaMB.pergunta.questionario}" required="true"
-									requiredMessage="O campo Questionário é obrigatório!"
-									converter="questionarioConverter" style="width:20em;">
-									<f:selectItem itemLabel="--- Selecione o questionário---"
-										itemValue="#{null}" noSelectionOption="true" />
-									<f:selectItems value="#{questionarioMB.allQuestionarios}"
-										var="questionario"
-										itemLabel="#{questionario.id} | #{questionario.titulo}"
-										itemValue="#{questionario}" />
-								</p:selectOneMenu>
-							</p:column>
-
 							<p:column style="text-align: center; width:5em;">
 								<f:facet name="header">
 									<h:outputText value="AUDITAR" />
