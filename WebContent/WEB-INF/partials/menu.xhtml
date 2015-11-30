@@ -18,15 +18,22 @@
 			<p:submenu label="#{msg.cadastros}" icon="ui-icon-disk">
 				<p:menuitem value="#{msg.unidades}" outcome="listarUnidades.xhtml"
 					icon="ui-icon-stop" />
-				<p:menuitem value="#{msg.estabelecimentos}" outcome="listarEstabelecimentos.xhtml"
-					icon="ui-icon-stop" />
+				<p:menuitem value="#{msg.estabelecimentos}"
+					outcome="listarEstabelecimentos.xhtml" icon="ui-icon-stop" />
 				<p:menuitem value="#{msg.auditores}" outcome="listarAuditores.xhtml"
 					icon="ui-icon-stop" />
 			</p:submenu>
 
 			<p:submenu label="#{msg.auditorias}" icon="ui-icon-contact">
-				<p:menuitem value="#{msg.gerenciar}" outcome="gerenciarAuditorias.xhtml"
-					icon="ui-icon-wrench" />
+				<p:submenu label="#{msg.auditorias}">
+					<p:menuitem value="#{msg.questionarios}" outcome="cadastrarQuestionarios.xhtml"
+						icon="ui-icon-stop" />
+					<p:menuitem value="#{msg.perguntas}"
+						outcome="cadastrarPerguntas.xhtml" icon="ui-icon-stop" />
+					<p:menuitem value="#{msg.auditorias}" outcome="cadastrarAuditorias.xhtml"
+						icon="ui-icon-stop" />
+				</p:submenu>
+				<p:separator/>
 				<p:menuitem value="#{msg.auditar}" outcome="listarAuditorias.xhtml"
 					icon="ui-icon-check" />
 			</p:submenu>

@@ -28,13 +28,15 @@
 					<p:dataTable var="r"
 						value="#{auditoriaMB.pegaRespostas(questionario.id)}">
 
-						<p:column headerText="Pergunta" style="width:40em;">
-							<p:graphicImage value="/images/hint1.png" id="hint" width="20em" />
+						<p:column headerText="Pergunta" style="width:40em; padding:1em">
+							<p:graphicImage value="/images/hint1.png" id="hint" width="20em"
+								style="float:right; margin-top:0px; margin-right:0px" />
+							<h:outputText id="id_pergunta" value=" Cód.: #{r.id}"
+								escape="false" style="font-weight:bold"/>
 							<p:tooltip id="toolTipTrack" for="hint" value="#{r.hint}"
 								trackMouse="true" escape="false"
 								style="border:3; white-space:pre-wrap; word-wrap:break-word; font-size:0.9em;" />
 							<br />
-							<h:outputText id="asdfsd" value="#{r.id}" escape="false" />
 							<h:outputText id="pergunta" value="#{r.pergunta}" escape="false" />
 						</p:column>
 
