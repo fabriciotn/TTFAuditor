@@ -13,21 +13,26 @@
 
 	<ui:define name="conteudo">
 		<f:loadBundle basename="messages" var="msg" />
-		<p:accordionPanel id="basic"
+		<p:tabView scrollable="true" id="basic"
 			header="Você está respondendo a auditoria #{auditoriaMB.auditoria.codigo}"
-			style="margin-bottom:20px">
+			style="margin-bottom:20px; font-size:0.9em;"
+			value="#{questionarioMB.allQuestionarios}" var="questionario"
+			activeIndex="#{auditoriaMB.currentTab}">
 
-			<p:tab title="CADASTRO">
+			<p:ajax event="tabChange" listener="#{auditoriaMB.onTabChange}" />
+
+			<p:tab title="#{questionario.titulo}">
 				<h:form acceptcharset="ISO-8859-1" id="form">
 					<h:inputHidden value="#{auditoriaMB.auditoria.id}" />
 
-					<p:dataTable var="r" value="#{auditoriaMB.auditoria.respostas}"
-						style="border:0; white-space: pre-wrap;word-wrap: break-word;font-size:1em;">
+					<p:dataTable var="r"
+						value="#{auditoriaMB.pegaRespostas(questionario.id)}">
 
-						<p:column headerText="Pergunta" style="width:35%;">
+						<p:column headerText="Pergunta" style="width:40em;">
 							<p:graphicImage value="/images/hint1.png" id="hint" width="20em" />
 							<p:tooltip id="toolTipTrack" for="hint" value="#{r.hint}"
-								trackMouse="true" escape="false" />
+								trackMouse="true" escape="false"
+								style="border:3; white-space:pre-wrap; word-wrap:break-word; font-size:0.9em;" />
 							<br />
 							<h:outputText id="asdfsd" value="#{r.id}" escape="false" />
 							<h:outputText id="pergunta" value="#{r.pergunta}" escape="false" />
@@ -38,12 +43,8 @@
 							<h:outputText value="#{r.resposta}" />
 						</p:column>
 
-						<p:column headerText="Recomendação">
+						<p:column headerText="Recomendação" style="width:25em;">
 							<h:outputText value="#{r.recomendacao}" />
-						</p:column>
-
-						<p:column headerText="Questionário">
-							<h:outputText value="#{r.questionario.titulo}" />
 						</p:column>
 
 						<p:column headerText="Responder"
@@ -68,8 +69,7 @@
 				</h:form>
 			</p:tab>
 
-		</p:accordionPanel>
-
+		</p:tabView>
 
 	</ui:define>
 

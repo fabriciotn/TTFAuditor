@@ -1,6 +1,7 @@
 package com.mb;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -8,12 +9,14 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.facade.AuditoriaFacade;
 import com.facade.RespostaFacade;
 import com.model.Auditoria;
 import com.model.Pergunta;
+import com.model.Questionario;
 import com.model.Resposta;
 import com.model.User;
 
@@ -21,13 +24,42 @@ import com.model.User;
 @ManagedBean
 public class AuditoriaMB extends AbstractMB implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long	serialVersionUID	= 1L;
 
-	private Auditoria auditoria;
-	private List<Auditoria> auditorias;
-	private AuditoriaFacade auditoriaFacade;
-	private User usuarioLogado;
-	private String recomendacao;
+	private Auditoria			auditoria;
+	private List<Auditoria>		auditorias;
+	private AuditoriaFacade		auditoriaFacade;
+	private User				usuarioLogado;
+	private String				recomendacao;
+	private List<Resposta>		respostas;
+	private int					currentTab			= 0;
+
+	public int getCurrentTab() {
+		if(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("currentTab") != null)
+			currentTab = (Integer)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("currentTab");
+		return currentTab;
+	}
+
+	public void setCurrentTab(int currentTab) {
+		this.currentTab = currentTab;
+	}
+
+	public void onTabChange(org.primefaces.event.TabChangeEvent event) {
+		String titulo = event.getTab().getTitle();
+
+		List<Questionario> questionarios = new QuestionarioMB().getAllQuestionarios();
+		int i = 0;
+		for (Questionario questionario : questionarios) {
+			if (titulo.equals(questionario.getTitulo())) {
+				this.setCurrentTab(i);
+			}
+			i++;
+		}
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+		request.getSession().setAttribute("currentTab", currentTab);
+	}
 
 	public AuditoriaMB() {
 		usuarioLogado = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
@@ -35,7 +67,25 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		if (usuarioLogado == null)
 			throw new RuntimeException("Problemas com usuário");
 	}
-	
+
+	public List<Resposta> pegaRespostas(java.lang.Integer questionario_id) {
+		respostas = new ArrayList<Resposta>();
+
+		for (Resposta resposta : auditoria.getRespostas()) {
+			if (resposta.getQuestionario().getId() == questionario_id)
+				respostas.add(resposta);
+		}
+		return respostas;
+	}
+
+	public List<Resposta> getRespostas() {
+		return respostas;
+	}
+
+	public void setRespostas(List<Resposta> respostas) {
+		this.respostas = respostas;
+	}
+
 	public String getRecomendacao() {
 		return recomendacao;
 	}
@@ -82,10 +132,10 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		}
 		return "/restrito/cadastrarAuditoria.xhtml";
 	}
-	
+
 	private void adicionaPerguntas(Auditoria auditoria) {
 		List<Pergunta> perguntas = new PerguntaMB().getAllPerguntas();
-		
+
 		for (Pergunta pergunta : perguntas) {
 			Resposta resposta = new Resposta();
 			resposta.setPergunta(pergunta.getPergunta());
@@ -94,7 +144,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			resposta.setAuditoria(auditoria);
 			new RespostaFacade().createResposta(resposta);
 		}
-		
+
 		List<Resposta> respostas = new RespostaMB().getAllRespostas();
 		auditoria.setRespostas(respostas);
 		updateAuditoria();
