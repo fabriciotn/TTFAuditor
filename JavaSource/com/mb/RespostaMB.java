@@ -29,6 +29,16 @@ public class RespostaMB extends AbstractMB implements Serializable {
 		if (usuarioLogado == null)
 			throw new RuntimeException("Problemas com usuário");
 	}
+	
+	public void teste(int id){
+		if(resposta.getResposta().equals("NC")){
+			resposta.setExibeRecomendacao(true);
+			System.out.println("true");
+		}else{
+			resposta.setExibeRecomendacao(false);
+			System.out.println("false");
+		}
+	}
 
 	public RespostaFacade getRespostaFacade() {
 		if (respostaFacade == null) {

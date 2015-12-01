@@ -26,6 +26,29 @@
 						<p:inputText value="#{perguntaMB.pergunta.id}" size="5"
 							disabled="true" />
 
+						<h:outputText value="Questionário:* " />
+						<p:selectOneMenu id="questionario"
+							value="#{perguntaMB.pergunta.questionario}" required="true"
+							requiredMessage="O campo Questionário é obrigatório!"
+							converter="questionarioConverter" style="width:20em;">
+							<f:selectItem itemLabel="--- Selecione o questionário---"
+								itemValue="#{null}" noSelectionOption="true" />
+							<f:selectItems value="#{questionarioMB.allQuestionarios}"
+								var="questionario"
+								itemLabel="#{questionario.id} | #{questionario.titulo}"
+								itemValue="#{questionario}" />
+						</p:selectOneMenu>
+
+						<h:outputText value="Esta pergunta aplica-se à*: " />
+						<p:selectOneRadio id="console"
+							value="#{perguntaMB.pergunta.tipoServico}"
+							requiredMessage="O campo tipo do serviço é obrigatório!"
+							layout="grid" columns="3" required="true">
+							<f:selectItem itemLabel="AT" itemValue="AT" />
+							<f:selectItem itemLabel="AH" itemValue="AH" />
+							<f:selectItem itemLabel="Outro" itemValue="Outro" />
+						</p:selectOneRadio>
+
 						<h:outputText value="Pergunta:* " />
 						<p:inputTextarea rows="7" cols="70"
 							value="#{perguntaMB.pergunta.pergunta}" required="true"
@@ -42,27 +65,21 @@
 							<f:ajax event="blur" render="@this" />
 						</p:inputTextarea>
 
-						<h:outputText value="Questionário:* " />
-						<p:selectOneMenu id="questionario"
-							value="#{perguntaMB.pergunta.questionario}" required="true"
-							requiredMessage="O campo Questionário é obrigatório!"
-							converter="questionarioConverter" style="width:20em;">
-							<f:selectItem itemLabel="--- Selecione o questionário---"
-								itemValue="#{null}" noSelectionOption="true" />
-							<f:selectItems value="#{questionarioMB.allQuestionarios}"
-								var="questionario"
-								itemLabel="#{questionario.id} | #{questionario.titulo}"
-								itemValue="#{questionario}" />
-						</p:selectOneMenu>
-
-						<p:columnGroup>
-						</p:columnGroup>
+						<h:outputText value="Recomendação padrão para NC: " />
+						<p:inputTextarea id="txtRecomendacaoPadrao" rows="3" cols="70"
+							value="#{perguntaMB.pergunta.recomendacaoPadrao}" required="false"
+							requiredMessage="O campo Recomendação Padrão é obrigatório!"
+							converter="toUpperCaseConverter">
+							<f:ajax event="blur" render="@this" />
+						</p:inputTextarea>
+						<p:tooltip id="toolTipTrack" for="txtRecomendacaoPadrao"
+							value="Esta recomendação será incluída automaticamente ao inserir uma resposta como NC."
+							trackMouse="true" escape="false"
+							style="border:3; white-space:pre-wrap; word-wrap:break-word; font-size:0.9em;" />
 
 						<p:columnGroup>
 							<p:commandButton value="Enviar" ajax="false" icon="ui-icon-check"
 								action="#{perguntaMB.updatePergunta}" />
-							<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
-								outcome="gerenciarAuditorias.xhtml" />
 						</p:columnGroup>
 					</h:panelGrid>
 				</p:panel>
@@ -108,7 +125,8 @@
 								style="white-space: pre-wrap;word-wrap: break-word;" />
 						</p:column>
 
-						<p:column headerText="QUESTIONÁRIO" filterBy="#{pergunta.questionario.titulo}"
+						<p:column headerText="QUESTIONÁRIO"
+							filterBy="#{pergunta.questionario.titulo}"
 							sortBy="#{pergunta.questionario.titulo}">
 							<h:outputText value="#{pergunta.questionario.titulo}" />
 						</p:column>

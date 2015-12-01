@@ -22,8 +22,10 @@
 <h:body style="font-family: arial; margin: 0;">
 	<center>
 		<h:form acceptcharset="ISO-8859-1" id="form1">
-			<p:panel id="basic" header="Você está respospondendo pergunta #{resposta.id} da auditoria #{resposta.auditoria.codigo}" style="margin-bottom:20px">
-				<h:panelGrid columns="2" columnClasses="label, value"
+			<p:panel id="basic"
+				header="Você está respospondendo pergunta #{resposta.id} da auditoria #{resposta.auditoria.codigo}"
+				style="margin-bottom:20px">
+				<h:panelGrid columns="1" columnClasses="label, value"
 					style="text-align:left">
 
 					<h:inputHidden value="#{respostaMB.resposta.id}" />
@@ -31,7 +33,6 @@
 					<p:columnGroup>
 					</p:columnGroup>
 
-					<h:outputText value="Resposta:* " />
 					<p:selectOneMenu id="resposta"
 						value="#{respostaMB.resposta.resposta}" required="true"
 						requiredMessage="O campo Resposta é obrigatório!"
@@ -41,12 +42,18 @@
 						<f:selectItem itemLabel="C" itemValue="C" />
 						<f:selectItem itemLabel="NC" itemValue="NC" />
 						<f:selectItem itemLabel="NA" itemValue="NA" />
+						<p:ajax update="recomendacaoPadrao" listener="#{respostaMB.teste}" process="@this"/>
 					</p:selectOneMenu>
+
+					<br />
+					<h:outputText id="recomendacaoPadrao"
+						value="#{resposta.recomendacaoPadrao}"/>
+					<br />
 
 					<h:outputText value="Recomendação: " />
 					<p:inputTextarea rows="7" cols="50"
 						value="#{respostaMB.resposta.recomendacao}" required="false"
-						requiredMessage="O campo Pregunta é obrigatório!"
+						requiredMessage="O campo Recomendção é obrigatório!"
 						converter="toUpperCaseConverter">
 						<f:ajax event="blur" render="@this" />
 					</p:inputTextarea>
@@ -56,7 +63,8 @@
 
 					<p:columnGroup>
 						<p:commandButton value="Enviar"
-							actionListener="#{respostaMB.updateResposta}" oncomplete="javascript:window.parent.location.reload();">
+							actionListener="#{respostaMB.updateResposta}"
+							oncomplete="javascript:window.parent.location.reload();">
 							<f:param name="auditoria_id" value="#{auditoria.id}" />
 							<f:param name="resposta_id" value="#{resposta.id}" />
 						</p:commandButton>

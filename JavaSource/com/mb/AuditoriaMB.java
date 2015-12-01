@@ -141,6 +141,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			resposta.setPergunta(pergunta.getPergunta());
 			resposta.setHint(pergunta.getHint());
 			resposta.setQuestionario(pergunta.getQuestionario());
+			resposta.setRecomendacaoPadrao(pergunta.getRecomendacaoPadrao());
+			resposta.setTipoServico(pergunta.getTipoServico());
 			resposta.setAuditoria(auditoria);
 			new RespostaFacade().createResposta(resposta);
 		}

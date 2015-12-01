@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity
 @SessionScoped
@@ -33,10 +34,24 @@ public class Resposta implements Serializable{
 	private String resposta;
 	@Lob
 	private String recomendacao;
+	@Lob
+	private String recomendacaoPadrao;
+	private String tipoServico;
 	@ManyToOne
 	@JoinColumn(name="auditoria_id")
 	private Auditoria auditoria;
+	@Transient
+	private boolean exibeRecomendacao;
 	
+	
+	public boolean isExibeRecomendacao() {
+		return exibeRecomendacao;
+	}
+
+	public void setExibeRecomendacao(boolean exibeRecomendacao) {
+		this.exibeRecomendacao = exibeRecomendacao;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -91,6 +106,22 @@ public class Resposta implements Serializable{
 
 	public void setRecomendacao(String recomendacao) {
 		this.recomendacao = recomendacao;
+	}
+
+	public String getRecomendacaoPadrao() {
+		return recomendacaoPadrao;
+	}
+
+	public void setRecomendacaoPadrao(String recomendacaoPadrao) {
+		this.recomendacaoPadrao = recomendacaoPadrao;
+	}
+
+	public String getTipoServico() {
+		return tipoServico;
+	}
+
+	public void setTipoServico(String tipoServico) {
+		this.tipoServico = tipoServico;
 	}
 
 	public Auditoria getAuditoria() {

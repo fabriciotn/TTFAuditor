@@ -25,6 +25,9 @@ public class Pergunta implements Serializable{
 	private String pergunta;
 	@Lob
 	private String hint;
+	@Lob
+	private String recomendacaoPadrao;
+	private String tipoServico;
 	
 	public int getId() {
 		return id;
@@ -56,6 +59,18 @@ public class Pergunta implements Serializable{
 	public void setHint(String hint) {
 		this.hint = hint;
 	}	
+	public String getRecomendacaoPadrao() {
+		return recomendacaoPadrao;
+	}
+	public void setRecomendacaoPadrao(String recomendacaoPadrao) {
+		this.recomendacaoPadrao = recomendacaoPadrao;
+	}
+	public String getTipoServico() {
+		return tipoServico;
+	}
+	public void setTipoServico(String tipoServico) {
+		this.tipoServico = tipoServico;
+	}
 	
 	@Override
 	public int hashCode() {
