@@ -23,8 +23,7 @@
 	<center>
 		<h:form acceptcharset="ISO-8859-1" id="form1">
 			<p:panel id="basic"
-				header="Você está respospondendo pergunta #{resposta.id} da auditoria #{resposta.auditoria.codigo}"
-				style="margin-bottom:20px">
+				header="Você está respondendo a pergunta #{resposta.id} da auditoria #{resposta.auditoria.codigo}">
 				<h:panelGrid columns="1" columnClasses="label, value"
 					style="text-align:left">
 
@@ -42,16 +41,16 @@
 						<f:selectItem itemLabel="C" itemValue="C" />
 						<f:selectItem itemLabel="NC" itemValue="NC" />
 						<f:selectItem itemLabel="NA" itemValue="NA" />
-						<p:ajax update="recomendacaoPadrao" listener="#{respostaMB.teste}" process="@this"/>
 					</p:selectOneMenu>
 
-					<br />
-					<h:outputText id="recomendacaoPadrao"
-						value="#{resposta.recomendacaoPadrao}"/>
-					<br />
+					<h:outputText
+						value="Se a resposta para o ítem for NC, a seguinte recomendação será adicionada automaticamente: #{resposta.recomendacaoPadrao}."
+						style="color:red; font-style:italic; font-size:0.7em;"/>
+					
+					<br/>
 
-					<h:outputText value="Recomendação: " />
-					<p:inputTextarea rows="7" cols="50"
+					<h:outputText value="Recomendação manual: " />
+					<p:inputTextarea rows="5" cols="50"
 						value="#{respostaMB.resposta.recomendacao}" required="false"
 						requiredMessage="O campo Recomendção é obrigatório!"
 						converter="toUpperCaseConverter">

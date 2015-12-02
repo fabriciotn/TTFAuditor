@@ -28,12 +28,20 @@ public class RespostaFacade implements Serializable {
 		Resposta persistedResposta = respostaDAO.find(resposta.getId());
 		if (resposta.getResposta() != null)
 			persistedResposta.setResposta(resposta.getResposta());
-		if (resposta.getRecomendacao() != null)
-			persistedResposta.setRecomendacao(resposta.getRecomendacao());
 		if (resposta.getUser() != null)
 			persistedResposta.setUser(resposta.getUser());
 		if (resposta.getQuestionario() != null)
 			persistedResposta.setQuestionario(resposta.getQuestionario());
+		
+		if (resposta.getRecomendacao() != null){
+			if(resposta.getResposta().equals("NC")){
+				String novaRecomendacao = "Recomendação padrão: " + persistedResposta.getRecomendacaoPadrao() + "\n\n" +
+										  "Recomendação manual: " + resposta.getRecomendacao();
+				
+				resposta.setRecomendacao(novaRecomendacao);
+			}
+			persistedResposta.setRecomendacao(resposta.getRecomendacao());
+		}
 
 		respostaDAO.update(persistedResposta);
 		respostaDAO.commitAndCloseTransaction();

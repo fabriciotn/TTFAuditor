@@ -25,19 +25,8 @@ public class RespostaMB extends AbstractMB implements Serializable {
 
 	public RespostaMB() {
 		usuarioLogado = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-
 		if (usuarioLogado == null)
 			throw new RuntimeException("Problemas com usuário");
-	}
-	
-	public void teste(int id){
-		if(resposta.getResposta().equals("NC")){
-			resposta.setExibeRecomendacao(true);
-			System.out.println("true");
-		}else{
-			resposta.setExibeRecomendacao(false);
-			System.out.println("false");
-		}
 	}
 
 	public RespostaFacade getRespostaFacade() {

@@ -45,13 +45,13 @@
 							<h:outputText value="#{r.resposta}" />
 						</p:column>
 
-						<p:column headerText="Recomendação" style="width:25em;">
+						<p:column headerText="Recomendação" style="width:25em; white-space:pre-wrap; word-wrap:break-word; ">
 							<h:outputText value="#{r.recomendacao}" />
 						</p:column>
 
 						<p:column headerText="Responder"
 							style="width:8%; text-align:center">
-							<p:lightBox iframe="true" id="lighbox3" height="325px"
+							<p:lightBox iframe="true" id="lighbox3" height="400px"
 								rendered="#{r.resposta == null}" widgetVar="var#{r.id}">
 								<h:outputLink value="respondePergunta.xhtml">
 									<p:graphicImage value="/images/edit.png" width="25em"

@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.Transient;
 
 @Entity
 @SessionScoped
@@ -40,17 +39,6 @@ public class Resposta implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="auditoria_id")
 	private Auditoria auditoria;
-	@Transient
-	private boolean exibeRecomendacao;
-	
-	
-	public boolean isExibeRecomendacao() {
-		return exibeRecomendacao;
-	}
-
-	public void setExibeRecomendacao(boolean exibeRecomendacao) {
-		this.exibeRecomendacao = exibeRecomendacao;
-	}
 
 	public int getId() {
 		return id;
