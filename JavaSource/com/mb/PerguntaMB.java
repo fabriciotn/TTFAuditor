@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -71,9 +70,6 @@ public class PerguntaMB extends AbstractMB implements Serializable {
 
 	public void updatePergunta() {
 		try {
-//			pergunta.setTelefone(RetiraMascaras.retirar(pergunta.getTelefone()));
-//			pergunta.setCelular(RetiraMascaras.retirar(pergunta.getCelular()));
-			
 			if (pergunta.getId() == 0) {
 				createPergunta();
 			} else {
@@ -83,10 +79,6 @@ public class PerguntaMB extends AbstractMB implements Serializable {
 				displayInfoMessageToUser("Atualizado com sucesso!");
 				loadPerguntas();
 				resetPergunta();
-
-				// retorna para a listagem de Perguntas
-				ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-				context.redirect("cadastrarPerguntas.xhtml");
 			}
 		} catch (Exception e) {
 			keepDialogOpen();

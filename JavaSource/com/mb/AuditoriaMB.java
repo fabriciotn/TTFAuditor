@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -154,9 +153,6 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 	public void updateAuditoria() {
 		try {
-			// auditoria.setTelefone(RetiraMascaras.retirar(auditoria.getTelefone()));
-			// auditoria.setCelular(RetiraMascaras.retirar(auditoria.getCelular()));
-
 			if (auditoria.getId() == 0) {
 				createAuditoria();
 			} else {
@@ -166,10 +162,6 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 				displayInfoMessageToUser("Atualizado com sucesso!");
 				loadAuditorias();
 				resetAuditoria();
-
-				// retorna para a listagem de Auditorias
-				ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
-				context.redirect("cadastrarAuditorias.xhtml");
 			}
 		} catch (Exception e) {
 			keepDialogOpen();

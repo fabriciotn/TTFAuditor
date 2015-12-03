@@ -26,12 +26,12 @@ public class AuditoriaFacade implements Serializable {
 	public void updateAuditoria(Auditoria auditoria) {
 		auditoriaDAO.beginTransaction();
 		Auditoria persistedAuditoria = auditoriaDAO.find(auditoria.getId());
-//		persistedAuditoria.setNome(auditoria.getNome());		
-//		persistedAuditoria.setMasp(auditoria.getMasp());	
-//		persistedAuditoria.setTelefone(auditoria.getTelefone());
-//		persistedAuditoria.setCelular(auditoria.getCelular());
-//		persistedAuditoria.setEmail(auditoria.getEmail());
-//		persistedAuditoria.setCargo(auditoria.getCargo());
+		persistedAuditoria.setAuditores(auditoria.getAuditores());
+		persistedAuditoria.setCodigo(auditoria.getCodigo());
+		persistedAuditoria.setDataDaVerificacao(auditoria.getDataDaVerificacao());
+		persistedAuditoria.setEstabelecimento(auditoria.getEstabelecimento());
+		persistedAuditoria.setRespostas(auditoria.getRespostas());
+		persistedAuditoria.setTipo(auditoria.getTipo());
 		persistedAuditoria.setUser(auditoria.getUser());
 
 		auditoriaDAO.update(persistedAuditoria);

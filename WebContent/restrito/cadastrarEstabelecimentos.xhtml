@@ -28,20 +28,20 @@
 								<p:columnGroup>
 								</p:columnGroup>
 
-								<h:outputText value="CNPJ:* " />
+								<h:outputText value="CNPJ: " />
 								<p:inputMask value="#{estabelecimentoMB.estabelecimento.cnpj}"
-									required="true" requiredMessage="O campo CNPJ é obrigatório!"
+									required="false" requiredMessage="O campo CNPJ é obrigatório!"
 									label="Cnpj" mask="99.999.999/9999-99" />
 
-								<h:outputText value="CNES:* " />
+								<h:outputText value="CNES: " />
 								<p:inputText value="#{estabelecimentoMB.estabelecimento.cnes}"
-									required="true" requiredMessage="O campo CNES é obrigatório!"
+									required="false" requiredMessage="O campo CNES é obrigatório!"
 									size="15" maxlength="20" />
 
-								<h:outputText value="Razão Social:* " />
+								<h:outputText value="Razão Social: " />
 								<p:inputText
 									value="#{estabelecimentoMB.estabelecimento.razaoSocial}"
-									required="true"
+									required="false"
 									requiredMessage="O campo Razão Social é obrigatório!" size="50"
 									maxlength="255" converter="toUpperCaseConverter">
 									<f:ajax event="blur" render="@this" />
@@ -56,9 +56,9 @@
 									<f:ajax event="blur" render="@this" />
 								</p:inputText>
 
-								<h:outputText value="Unidade:* " />
+								<h:outputText value="Unidade: " />
 								<p:selectOneMenu id="unidade"
-									value="#{estabelecimentoMB.estabelecimento.unidade}" required="true"
+									value="#{estabelecimentoMB.estabelecimento.unidade}" required="false"
 									requiredMessage="O campo Unidade é obrigatório!"
 									converter="unidadeConverter" style="width:13em">
 									<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
@@ -68,10 +68,10 @@
 										itemValue="#{unidade}" />
 								</p:selectOneMenu>
 
-								<h:outputText value="Endereço:* " />
+								<h:outputText value="Endereço: " />
 								<p:inputText
 									value="#{estabelecimentoMB.estabelecimento.endereco}"
-									required="true"
+									required="false"
 									requiredMessage="O campo Endereço é obrigatório!" size="50"
 									maxlength="255" converter="toUpperCaseConverter">
 									<f:ajax event="blur" render="@this" />
@@ -85,11 +85,11 @@
 									<f:ajax event="blur" render="@this" />
 								</p:inputText>
 
-								<h:outputText value="Cidade:* " />
+								<h:outputText value="Cidade: " />
 								<p:column>
 									<p:inputText
 										value="#{estabelecimentoMB.estabelecimento.cidade}"
-										required="true"
+										required="false"
 										requiredMessage="O campo Cidade é obrigatório!" size="40"
 										maxlength="255" converter="toUpperCaseConverter">
 										<f:ajax event="blur" render="@this" />
@@ -99,7 +99,7 @@
 
 									<p:selectOneMenu id="uf"
 										value="#{estabelecimentoMB.estabelecimento.uf}"
-										required="true" requiredMessage="O campo UF é obrigatório!">
+										required="false" requiredMessage="O campo UF é obrigatório!">
 										<f:selectItem itemLabel="UF" itemValue="#{null}"
 											noSelectionOption="true" />
 										<f:selectItems value="#{uFMB.UFList}" var="uf"
@@ -107,16 +107,16 @@
 									</p:selectOneMenu>
 								</p:column>
 
-								<h:outputText value="CEP:* " />
+								<h:outputText value="CEP: " />
 								<p:inputMask value="#{estabelecimentoMB.estabelecimento.cep}"
-									required="true" requiredMessage="O campo CEP é obrigatório!"
+									required="false" requiredMessage="O campo CEP é obrigatório!"
 									label="Cep" mask="99.999-999" size="18" />
 
-								<h:outputText value="Fone:* " />
+								<h:outputText value="Fone: " />
 								<p:column>
 									<p:inputMask
 										value="#{estabelecimentoMB.estabelecimento.telefone1}"
-										required="true"
+										required="false"
 										requiredMessage="O campo Telefone é obrigatório!"
 										label="Telefone" mask="(99)9999-9999" style="width:7.5em" />
 
@@ -171,36 +171,36 @@
 						 -->
 						<p:tab title="Responsáveis">
 							<h:panelGrid columns="2" columnClasses="label, value">
-								<h:outputText value="RT pela AT (Médico):* " />
+								<h:outputText value="RT pela AT (Médico): " />
 								<p:inputText
 									value="#{estabelecimentoMB.estabelecimento.nomeRtAgenciaTransfusional}"
-									required="true"
+									required="false"
 									requiredMessage="O nome do médico RT é obrigatório!" size="40"
 									maxlength="255" converter="toUpperCaseConverter">
 									<f:ajax event="blur" render="@this" />
 								</p:inputText>
 
-								<h:outputText value="CRM:* " />
+								<h:outputText value="CRM: " />
 								<p:inputText
 									value="#{estabelecimentoMB.estabelecimento.crmRtAgenciaTransfusional}"
-									required="true" requiredMessage="O campo CRM é obrigatório!"
+									required="false" requiredMessage="O campo CRM é obrigatório!"
 									size="10" maxlength="255">
 									<f:ajax event="blur" render="@this" />
 								</p:inputText>
 
-								<h:outputText value="Responsável AT:* " />
+								<h:outputText value="Responsável AT: " />
 								<p:inputText
 									value="#{estabelecimentoMB.estabelecimento.nomeResponsavelAT}"
-									required="true"
+									required="false"
 									requiredMessage="O nome do Responsável pelo gerenciamento é obrigatório!"
 									size="40" maxlength="255" converter="toUpperCaseConverter">
 									<f:ajax event="blur" render="@this" />
 								</p:inputText>
 
-								<h:outputText value="Cargo:* " />
+								<h:outputText value="Cargo: " />
 								<p:inputText
 									value="#{estabelecimentoMB.estabelecimento.cargoResponsavelAT}"
-									required="true" requiredMessage="O campo Cargo é obrigatório!"
+									required="false" requiredMessage="O campo Cargo é obrigatório!"
 									size="40" maxlength="255" converter="toUpperCaseConverter">
 									<f:ajax event="blur" render="@this" />
 								</p:inputText>
@@ -214,10 +214,10 @@
 						<p:tab title="Dados do serviço">
 
 							<h:panelGrid columns="2" columnClasses="label, value">
-								<h:outputText value="Tipo do serviço: " />
+								<h:outputText value="Tipo do serviço:* " />
 								<p:selectOneRadio id="console"
 									value="#{estabelecimentoMB.estabelecimento.tipoServico}"
-									layout="grid" columns="1">
+									layout="grid" columns="1" required="true" requiredMessage="O tipo do serviço é obrigatório!">
 									<f:selectItem itemLabel="Agência Transfusional" itemValue="AT" />
 									<f:selectItem itemLabel="Assistência Hemoterápica"
 										itemValue="AH" />
