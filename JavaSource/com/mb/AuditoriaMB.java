@@ -34,8 +34,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	private int					currentTab			= 0;
 
 	public int getCurrentTab() {
-		if(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("currentTab") != null)
-			currentTab = (Integer)FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("currentTab");
+		if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("currentTab") != null)
+			currentTab = (Integer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("currentTab");
 		return currentTab;
 	}
 
@@ -54,7 +54,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			}
 			i++;
 		}
-		
+
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
 		request.getSession().setAttribute("currentTab", currentTab);
@@ -136,14 +136,20 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		List<Pergunta> perguntas = new PerguntaMB().getAllPerguntas();
 
 		for (Pergunta pergunta : perguntas) {
-			Resposta resposta = new Resposta();
-			resposta.setPergunta(pergunta.getPergunta());
-			resposta.setHint(pergunta.getHint());
-			resposta.setQuestionario(pergunta.getQuestionario());
-			resposta.setRecomendacaoPadrao(pergunta.getRecomendacaoPadrao());
-			resposta.setTipoServico(pergunta.getTipoServico());
-			resposta.setAuditoria(auditoria);
-			new RespostaFacade().createResposta(resposta);
+			//Só adiciona as perguntas que forem
+			//referentes aos tipos de estabelecimento
+			if ((pergunta.getTipoServico() != null) 
+					&& (pergunta.getTipoServico().equals(auditoria.getEstabelecimento().getTipoServico()) 
+					|| pergunta.getTipoServico().equals("Ambos"))) {
+				Resposta resposta = new Resposta();
+				resposta.setPergunta(pergunta.getPergunta());
+				resposta.setHint(pergunta.getHint());
+				resposta.setQuestionario(pergunta.getQuestionario());
+				resposta.setRecomendacaoPadrao(pergunta.getRecomendacaoPadrao());
+				resposta.setTipoServico(pergunta.getTipoServico());
+				resposta.setAuditoria(auditoria);
+				new RespostaFacade().createResposta(resposta);
+			}
 		}
 
 		List<Resposta> respostas = new RespostaMB().getAllRespostas();

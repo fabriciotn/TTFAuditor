@@ -39,14 +39,14 @@
 								itemValue="#{questionario}" />
 						</p:selectOneMenu>
 
-						<h:outputText value="Esta pergunta aplica-se à*: " />
+						<h:outputText value="Esta pergunta aplica-se à:* " />
 						<p:selectOneRadio id="console"
 							value="#{perguntaMB.pergunta.tipoServico}"
 							requiredMessage="O campo tipo do serviço é obrigatório!"
 							layout="grid" columns="3" required="true">
 							<f:selectItem itemLabel="AT" itemValue="AT" />
 							<f:selectItem itemLabel="AH" itemValue="AH" />
-							<f:selectItem itemLabel="Outro" itemValue="Outro" />
+							<f:selectItem itemLabel="Ambos" itemValue="Ambos" />
 						</p:selectOneRadio>
 
 						<h:outputText value="Pergunta:* " />
