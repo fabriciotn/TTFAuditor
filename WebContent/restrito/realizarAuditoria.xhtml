@@ -66,23 +66,8 @@
 							<p:graphicImage value="/images/ok.png" width="25em"
 								rendered="#{r.resposta != null}" title="Pergunta já respondida!" />
 						</p:column>
-
 					</p:dataTable>
-
 				</h:form>
-
-				<h:form>
-					<p:lightBox iframe="true" id="lbRecomendacaoQuestionario"
-						height="400px" widgetVar="var#{r.id}">
-						<h:outputLink value="recomendacaoPorQuestionario.xhtml">
-							<p:graphicImage value="/images/edit.png" width="25em"
-								title="Recomendações do setor: #{questionario.titulo}" />
-							<f:param name="auditoria_id" value="#{auditoriaMB.auditoria.id}" />
-							<f:param name="questionario_id" value="#{questionario_id}" />
-						</h:outputLink>
-					</p:lightBox>
-				</h:form>
-
 			</p:tab>
 
 		</p:tabView>

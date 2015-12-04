@@ -13,8 +13,8 @@
 	name="auditoria_id" />
 	
 <ui:param
-	value="#{request.getParameter('questionario')}"
-	name="questionario" />
+	value="#{request.getParameter('questionario_id')}"
+	name="as" />
 
 <h:head>
 </h:head>
@@ -23,7 +23,7 @@
 	<center>
 		<h:form acceptcharset="ISO-8859-1" id="form1">
 			<p:panel id="basic"
-				header="Observações do questionário: #{questionario.id}">
+				header="Observações do questionário: #{as}">
 				<h:panelGrid columns="1" columnClasses="label, value"
 					style="text-align:left">
 
