@@ -114,7 +114,7 @@
 						</p:column>
 
 						<p:column headerText="PERGUNTA" filterBy="#{pergunta.pergunta}"
-							sortBy="#{pergunta.pergunta}" style="width:40em;">
+							sortBy="#{pergunta.pergunta}" style="width:30em;">
 							<h:outputText value="#{pergunta.pergunta}" escape="false"
 								style="white-space: pre-wrap;word-wrap: break-word;" />
 						</p:column>
@@ -127,8 +127,14 @@
 
 						<p:column headerText="QUESTIONÁRIO"
 							filterBy="#{pergunta.questionario.titulo}"
-							sortBy="#{pergunta.questionario.titulo}">
+							sortBy="#{pergunta.questionario.titulo}" style="width:10em;">
 							<h:outputText value="#{pergunta.questionario.titulo}" />
+						</p:column>
+
+						<p:column headerText="TIPO"
+							filterBy="#{pergunta.tipoServico}"
+							sortBy="#{pergunta.tipoServico}">
+							<h:outputText value="#{pergunta.tipoServico}" />
 						</p:column>
 
 						<p:column exportable="false"
