@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -38,15 +37,156 @@ public class User implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	private String email;
+	private String telefone;
+	private String celular;
+	private String cargo;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar ultimoAcesso;
 	private boolean ativo;
+	
+	/*
+	 * Campos para gerenciar as permissões
+	 */
+	private boolean menuCadastros;
+	private boolean menuCadUnidades;
+	private boolean menuCadEstabelecimentos;
+	
+	private boolean menuAuditoria;
+	private boolean menuPreparacao;
+	private boolean menuCadQuestionarios;
+	private boolean menuCadPerguntas;
+	private boolean menuCadAuditorias;
+	private boolean menuAuditar;
+	
+	private boolean menuRelatorios;
+	
+	private boolean menuConfiguracoes;
+	private boolean menuConfigGerais;
+	private boolean menuUsuarios;
+	private boolean menuGerenciarUsuarios;
+	private boolean menuMudarMinhaSenha;
+	private boolean menuAuditoriaOff;
+	private boolean menuAuditoriaOffExportar;
+	private boolean menuAuditoriaOffImportar;
+	
+	//Getters e Settes Permissões
+	public boolean isMenuCadastros() {
+		return menuCadastros;
+	}
+	public void setMenuCadastros(boolean menuCadastros) {
+		this.menuCadastros = menuCadastros;
+	}
+	public boolean isMenuCadUnidades() {
+		return menuCadUnidades;
+	}
+	public void setMenuCadUnidades(boolean menuCadUnidades) {
+		this.menuCadUnidades = menuCadUnidades;
+	}
+	public boolean isMenuCadEstabelecimentos() {
+		return menuCadEstabelecimentos;
+	}
+	public void setMenuCadEstabelecimentos(boolean menuCadEstabelecimentos) {
+		this.menuCadEstabelecimentos = menuCadEstabelecimentos;
+	}
+	public boolean isMenuAuditoria() {
+		return menuAuditoria;
+	}
+	public void setMenuAuditoria(boolean menuAuditoria) {
+		this.menuAuditoria = menuAuditoria;
+	}
+	public boolean isMenuPreparacao() {
+		return menuPreparacao;
+	}
+	public void setMenuPreparacao(boolean menuPreparacao) {
+		this.menuPreparacao = menuPreparacao;
+	}
+	public boolean isMenuCadQuestionarios() {
+		return menuCadQuestionarios;
+	}
+	public void setMenuCadQuestionarios(boolean menuCadQuestionarios) {
+		this.menuCadQuestionarios = menuCadQuestionarios;
+	}
+	public boolean isMenuCadPerguntas() {
+		return menuCadPerguntas;
+	}
+	public void setMenuCadPerguntas(boolean menuCadPerguntas) {
+		this.menuCadPerguntas = menuCadPerguntas;
+	}
+	public boolean isMenuCadAuditorias() {
+		return menuCadAuditorias;
+	}
+	public void setMenuCadAuditorias(boolean menuCadAuditorias) {
+		this.menuCadAuditorias = menuCadAuditorias;
+	}
+	public boolean isMenuAuditar() {
+		return menuAuditar;
+	}
+	public void setMenuAuditar(boolean menuAuditar) {
+		this.menuAuditar = menuAuditar;
+	}
+	public boolean isMenuRelatorios() {
+		return menuRelatorios;
+	}
+	public void setMenuRelatorios(boolean menuRelatorios) {
+		this.menuRelatorios = menuRelatorios;
+	}
+	public boolean isMenuConfiguracoes() {
+		return menuConfiguracoes;
+	}
+	public void setMenuConfiguracoes(boolean menuConfiguracoes) {
+		this.menuConfiguracoes = menuConfiguracoes;
+	}
+	public boolean isMenuConfigGerais() {
+		return menuConfigGerais;
+	}
+	public void setMenuConfigGerais(boolean menuConfigGerais) {
+		this.menuConfigGerais = menuConfigGerais;
+	}
+	public boolean isMenuUsuarios() {
+		return menuUsuarios;
+	}
+	public void setMenuUsuarios(boolean menuUsuarios) {
+		this.menuUsuarios = menuUsuarios;
+	}
+	public boolean isMenuGerenciarUsuarios() {
+		return menuGerenciarUsuarios;
+	}
+	public void setMenuGerenciarUsuarios(boolean menuGerenciarUsuarios) {
+		this.menuGerenciarUsuarios = menuGerenciarUsuarios;
+	}
+	public boolean isMenuMudarMinhaSenha() {
+		return menuMudarMinhaSenha;
+	}
+	public void setMenuMudarMinhaSenha(boolean menuMudarMinhaSenha) {
+		this.menuMudarMinhaSenha = menuMudarMinhaSenha;
+	}
+	public boolean isMenuAuditoriaOff() {
+		return menuAuditoriaOff;
+	}
+	public void setMenuAuditoriaOff(boolean menuAuditoriaOff) {
+		this.menuAuditoriaOff = menuAuditoriaOff;
+	}
+	public boolean isMenuAuditoriaOffExportar() {
+		return menuAuditoriaOffExportar;
+	}
+	public void setMenuAuditoriaOffExportar(boolean menuAuditoriaOffExportar) {
+		this.menuAuditoriaOffExportar = menuAuditoriaOffExportar;
+	}
+	public boolean isMenuAuditoriaOffImportar() {
+		return menuAuditoriaOffImportar;
+	}
+	public void setMenuAuditoriaOffImportar(boolean menuAuditoriaOffImportar) {
+		this.menuAuditoriaOffImportar = menuAuditoriaOffImportar;
+	}
+	/*
+	 * Fim dos getters e setters das permissões.
+	 */
 	
 	
 	public boolean getAtivo() {
 		return ativo;
 	}
-
+	
 	public void setAtivo(boolean status) {
 		this.ativo = status;
 	}
@@ -110,6 +250,30 @@ public class User implements Serializable {
 
 	public boolean isUser() {
 		return Role.USER.equals(role);
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+
+	public String getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
 	}
 
 	@Override

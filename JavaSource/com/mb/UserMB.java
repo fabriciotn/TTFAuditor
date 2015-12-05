@@ -19,21 +19,25 @@ import com.util.Criptografia;
 @ManagedBean(name = "userMB")
 public class UserMB extends AbstractMB implements Serializable {
 
-	public static final String INJECTION_NAME = "#{userMB}";
-	private static final long serialVersionUID = 1L;
+	public static final String	INJECTION_NAME		= "#{userMB}";
+	private static final long	serialVersionUID	= 1L;
 
-	private User user;
-	private List<User> usuarios;
-	private UserFacade userFacade;
-	private String novasenha;
-	private String senhaDigitada;
-	private User usuarioLogado;
+	private User				user;
+	private List<User>			usuarios;
+	private UserFacade			userFacade;
+	private String				novasenha;
+	private String				senhaDigitada;
+	private User				usuarioLogado;
 
 	public UserMB() {
 		usuarioLogado = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
 
 		if (usuarioLogado == null)
 			throw new RuntimeException("Problemas com usuário");
+	}
+
+	public User getUsuarioLogado() {
+		return usuarioLogado;
 	}
 
 	public String getSenhaDigitada() {
@@ -120,9 +124,8 @@ public class UserMB extends AbstractMB implements Serializable {
 			resetUser();
 		} catch (PersistenceException e) {
 			keepDialogOpen();
-			displayErrorMessageToUser(
-					"Ocorreu algum problema ao salvar o registro! Verifique se já existe algum usuário com o login "
-							+ user.getLogin() + ", ou tente novamente.");
+			displayErrorMessageToUser("Ocorreu algum problema ao salvar o registro! Verifique se já existe algum usuário com o login "
+					+ user.getLogin() + ", ou tente novamente.");
 			displayErrorMessageToUser("Caso o problema persista, entre em contato com o administrador do sistema.");
 			e.printStackTrace();
 			return "";
@@ -161,7 +164,7 @@ public class UserMB extends AbstractMB implements Serializable {
 	}
 
 	public void mudarMinhaSenha() {
-		if(usuarioLogado.getPassword().equals(Criptografia.criptografa(senhaDigitada))){
+		if (usuarioLogado.getPassword().equals(Criptografia.criptografa(senhaDigitada))) {
 			usuarioLogado.setPasswordSemCriptografia(getNovasenha());
 			user = usuarioLogado;
 			UserFacade uf = getUserFacade();
@@ -170,7 +173,7 @@ public class UserMB extends AbstractMB implements Serializable {
 			displayInfoMessageToUser("Atualizado com sucesso!");
 			loadUsers();
 			resetUser();
-		}else{
+		} else {
 			closeDialog();
 			displayErrorMessageToUser("Você não digitou sua senha corretamente!");
 		}

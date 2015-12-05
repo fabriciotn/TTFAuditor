@@ -17,45 +17,45 @@
 
 			<p:submenu label="#{msg.cadastros}" icon="ui-icon-disk">
 				<p:menuitem value="#{msg.unidades}" outcome="listarUnidades.xhtml"
-					icon="ui-icon-stop" />
+					icon="ui-icon-stop"
+					rendered="#{userMB.usuarioLogado.menuCadUnidades}" />
 				<p:menuitem value="#{msg.estabelecimentos}"
-					outcome="listarEstabelecimentos.xhtml" icon="ui-icon-stop" />
-				<p:menuitem value="#{msg.auditores}" outcome="listarAuditores.xhtml"
-					icon="ui-icon-stop" />
+					outcome="listarEstabelecimentos.xhtml" icon="ui-icon-stop"
+					rendered="#{userMB.usuarioLogado.menuCadEstabelecimentos}" />
 			</p:submenu>
 
 			<p:submenu label="#{msg.auditorias}" icon="ui-icon-contact">
-				<p:submenu label="#{msg.auditorias}">
-					<p:menuitem value="#{msg.questionarios}" outcome="cadastrarQuestionarios.xhtml"
-						icon="ui-icon-stop" />
+				<p:submenu label="#{msg.preparacao}">
+					<p:menuitem value="#{msg.questionarios}"
+						outcome="cadastrarQuestionarios.xhtml" icon="ui-icon-stop"
+						rendered="#{userMB.usuarioLogado.menuCadQuestionarios}" />
 					<p:menuitem value="#{msg.perguntas}"
-						outcome="cadastrarPerguntas.xhtml" icon="ui-icon-stop" />
-					<p:menuitem value="#{msg.auditorias}" outcome="cadastrarAuditorias.xhtml"
-						icon="ui-icon-stop" />
+						outcome="cadastrarPerguntas.xhtml" icon="ui-icon-stop" 
+						rendered="#{userMB.usuarioLogado.menuCadPerguntas}"/>
+					<p:menuitem value="#{msg.auditorias}"
+						outcome="cadastrarAuditorias.xhtml" icon="ui-icon-stop" 
+						rendered="#{userMB.usuarioLogado.menuCadAuditorias}"/>
 				</p:submenu>
-				<p:separator/>
+				<p:separator />
 				<p:menuitem value="#{msg.auditar}" outcome="listarAuditorias.xhtml"
-					icon="ui-icon-check" />
+					icon="ui-icon-check" rendered="#{userMB.usuarioLogado.menuAuditar}"/>
 			</p:submenu>
 
-			<p:menuitem value="#{msg.agenda}" outcome="agenda.xhtml"
-				icon="ui-icon-calendar" />
-
-			<p:menuitem value="#{msg.relatorios}" outcome="agenda.xhtml"
-				icon="ui-icon-note" />
+			<p:menuitem value="#{msg.relatorios}" outcome="home.xhtml"
+				icon="ui-icon-note" rendered="#{userMB.usuarioLogado.menuRelatorios}"/>
 
 			<p:submenu label="#{msg.configuracoes}" icon="ui-icon-gear">
-				<p:menuitem value="#{msg.confGerais}" outcome="agenda.xhtml"
-					icon="ui-icon-newwin" />
+				<p:menuitem value="#{msg.confGerais}" outcome="home.xhtml"
+					icon="ui-icon-newwin" rendered="#{userMB.usuarioLogado.menuConfigGerais}"/>
 				<p:submenu label="#{msg.usuarios}" icon="ui-icon-person">
 					<p:menuitem value="#{msg.gerenciar}" outcome="listarUsuarios.xhtml"
-						icon="ui-icon-gear" />
+						icon="ui-icon-gear" rendered="#{userMB.usuarioLogado.menuGerenciarUsuarios}"/>
 					<p:separator />
 					<p:menuitem value="#{msg.mudarMinhaSenha}"
 						outcome="mudarSenha.xhtml" icon="ui-icon-person" />
 				</p:submenu>
 				<p:separator />
-				<p:submenu label="#{msg.auditOff}" icon="ui-icon-signal-diag">
+				<p:submenu label="#{msg.auditOff}" icon="ui-icon-signal-diag" rendered="#{userMB.usuarioLogado.menuAuditoriaOff}">
 					<p:menuitem value="#{msg.exportAuditoria}" outcome="home.xhtml"
 						icon="ui-icon-arrowreturnthick-1-n" />
 					<p:menuitem value="#{msg.importAuditoria}" outcome="home.xhtml"

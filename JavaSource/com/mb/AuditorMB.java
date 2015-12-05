@@ -1,5 +1,5 @@
 package com.mb;
-
+/*
 import java.io.Serializable;
 import java.util.List;
 
@@ -143,3 +143,4 @@ public class AuditorMB extends AbstractMB implements Serializable {
 		return auditor;
 	}
 }
+*/

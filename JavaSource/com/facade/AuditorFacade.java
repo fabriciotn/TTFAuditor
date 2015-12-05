@@ -1,5 +1,5 @@
 package com.facade;
-
+/*
 import java.io.Serializable;
 import java.util.List;
 
@@ -69,3 +69,4 @@ public class AuditorFacade implements Serializable {
 	}
 
 }
+*/

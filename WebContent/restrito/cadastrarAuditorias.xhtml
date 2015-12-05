@@ -49,10 +49,10 @@
 						<p:selectCheckboxMenu id="menu"
 							value="#{auditoriaMB.auditoria.auditores}" label="Auditores"
 							filter="true" filterMatchMode="startsWith"
-							panelStyle="width:250px" converter="auditorConverter"
+							panelStyle="width:250px" converter="userConverter"
 							style="width:13em">
-							<f:selectItems value="#{auditorMB.allAuditores}" var="auditor"
-								itemLabel="#{auditor.nome}" itemValue="#{auditor}" />
+							<f:selectItems value="#{userMB.allUsuarios}" var="auditor"
+								itemLabel="#{auditor.name}" itemValue="#{auditor}" />
 						</p:selectCheckboxMenu>
 
 						<h:outputText value="Data da auditoria: " />

@@ -8,11 +8,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.facade.AuditorFacade;
 import com.facade.EstabelecimentoFacade;
 import com.facade.UnidadeFacade;
 import com.facade.UserFacade;
-import com.model.Auditor;
 import com.model.Auditoria;
 import com.model.Estabelecimento;
 import com.model.Pergunta;
@@ -132,39 +130,39 @@ public class CadastraUsuarios {
 	}
 
 	private static void criaAuditores() {
-		factory = Persistence.createEntityManagerFactory("auditoria_db");
-		manager = factory.createEntityManager();
-		manager.getTransaction().begin();
-
-		user = new UserFacade().findUsuario(1);
-		
-		Auditor auditor = new Auditor();
-		auditor.setNome("AUDITOR1");
-		auditor.setCelular("3199999999");
-		auditor.setTelefone("3188888888");
-		auditor.setCargo("CARGO");
-		auditor.setEmail("auditor1@hemominas.mg.gov.br");
-		auditor.setMasp("123456");
-		auditor.setUser(user);
-
-		Auditor auditor1 = new Auditor();
-		auditor1.setNome("AUDITOR2");
-		auditor1.setCelular("3100000000");
-		auditor1.setTelefone("3111111111");
-		auditor1.setCargo("CARGO2");
-		auditor1.setEmail("auditor2@hemominas.mg.gov.br");
-		auditor1.setMasp("654321");
-		auditor1.setUser(user);
-		
-		manager.persist(auditor);
-		manager.persist(auditor1);
-
-		manager.getTransaction().commit();
-
-		manager.close();
-		factory.close();
-		
-		System.out.println("auditores criados");
+//		factory = Persistence.createEntityManagerFactory("auditoria_db");
+//		manager = factory.createEntityManager();
+//		manager.getTransaction().begin();
+//
+//		user = new UserFacade().findUsuario(1);
+//		
+//		Auditor auditor = new Auditor();
+//		auditor.setNome("AUDITOR1");
+//		auditor.setCelular("3199999999");
+//		auditor.setTelefone("3188888888");
+//		auditor.setCargo("CARGO");
+//		auditor.setEmail("auditor1@hemominas.mg.gov.br");
+//		auditor.setMasp("123456");
+//		auditor.setUser(user);
+//
+//		Auditor auditor1 = new Auditor();
+//		auditor1.setNome("AUDITOR2");
+//		auditor1.setCelular("3100000000");
+//		auditor1.setTelefone("3111111111");
+//		auditor1.setCargo("CARGO2");
+//		auditor1.setEmail("auditor2@hemominas.mg.gov.br");
+//		auditor1.setMasp("654321");
+//		auditor1.setUser(user);
+//		
+//		manager.persist(auditor);
+//		manager.persist(auditor1);
+//
+//		manager.getTransaction().commit();
+//
+//		manager.close();
+//		factory.close();
+//		
+//		System.out.println("auditores criados");
 
 	}
 
@@ -195,9 +193,9 @@ public class CadastraUsuarios {
 		manager = factory.createEntityManager();
 		manager.getTransaction().begin();
 
-		List<Auditor> auditores = new ArrayList<Auditor>();
-		auditores.add(new AuditorFacade().findAuditor(1));
-		auditores.add(new AuditorFacade().findAuditor(2));
+		List<User> auditores = new ArrayList<User>();
+		auditores.add(new UserFacade().findUsuario(1));
+		auditores.add(new UserFacade().findUsuario(2));
 
 		Estabelecimento estabelecimento = new EstabelecimentoFacade().findEstabelecimento(1);
 		user = new UserFacade().findUsuario(1);

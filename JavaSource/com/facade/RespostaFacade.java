@@ -35,8 +35,8 @@ public class RespostaFacade implements Serializable {
 		
 		if (resposta.getRecomendacao() != null){
 			if(resposta.getResposta().equals("NC")){
-				String novaRecomendacao = "Recomendação padrão: " + persistedResposta.getRecomendacaoPadrao() + "\n\n" +
-										  "Recomendação manual: " + resposta.getRecomendacao();
+				String novaRecomendacao = "Recomendação padrão: " + persistedResposta.getRecomendacaoPadrao() + "\n" +
+										  "Recomendação do avaliador: " + resposta.getRecomendacao();
 				
 				resposta.setRecomendacao(novaRecomendacao);
 			}

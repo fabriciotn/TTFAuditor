@@ -44,8 +44,8 @@ public class Auditoria implements Serializable {
 	@ManyToMany
 	@JoinTable(name = "auditoria_auditor", 
 	joinColumns = @JoinColumn(name = "auditoria_id"), 
-	inverseJoinColumns = @JoinColumn(name = "auditor_id"))
-	private List<Auditor> auditores;
+	inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List<User> auditores;
 	/*
 	 * Visita ou Revisita
 	 */
@@ -92,11 +92,11 @@ public class Auditoria implements Serializable {
 		this.respostas = respostas;
 	}
 
-	public List<Auditor> getAuditores() {
+	public List<User> getAuditores() {
 		return auditores;
 	}
 
-	public void setAuditores(List<Auditor> auditores) {
+	public void setAuditores(List<User> auditores) {
 		this.auditores = auditores;
 	}
 

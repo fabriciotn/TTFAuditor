@@ -1,5 +1,5 @@
 package com.converter;
-/*
+
 import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -7,24 +7,24 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
-import com.facade.AuditorFacade;
-import com.model.Auditor;
+import com.facade.UserFacade;
+import com.model.User;
 
-@FacesConverter(forClass = com.model.Auditor.class, value="auditorConverter")
-public class AuditorConverter implements Converter{
+@FacesConverter(forClass = com.model.User.class, value="userConverter")
+public class UserConverter implements Converter{
 
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
-		AuditorFacade setorFacade = new AuditorFacade();
-		int setorId;
+		UserFacade userFacade = new UserFacade();
+		int userId;
 
 		try {
-			setorId = Integer.parseInt(arg2);
+			userId = Integer.parseInt(arg2);
 		} catch (NumberFormatException exception) {
 			throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro na conversão", "Erro na conversão!"));
 		}
 
-		return setorFacade.findAuditor(setorId);
+		return  userFacade.findUsuario(userId);
 	}
 
 	@Override
@@ -33,8 +33,7 @@ public class AuditorConverter implements Converter{
 		if (arg2 == null) {
 			return "";
 		}
-		Auditor setor = (Auditor) arg2;
-		return String.valueOf(setor.getId());
+		User user = (User) arg2;
+		return String.valueOf(user.getId());
 	}
 }
-*/

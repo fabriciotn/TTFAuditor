@@ -11,8 +11,8 @@ import com.util.Criptografia;
 
 public class UserFacade implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	private UserDAO userDAO = new UserDAO();
+	private static final long	serialVersionUID	= 1L;
+	private UserDAO				userDAO				= new UserDAO();
 
 	public User isValidLogin(String login, String password) {
 		password = Criptografia.criptografa(password);
@@ -90,12 +90,39 @@ public class UserFacade implements Serializable {
 		if (user.getRole() != null)
 			userFind.setRole(user.getRole());
 
-
 		if (user.getUltimoAcesso() != null)
 			userFind.setUltimoAcesso(user.getUltimoAcesso());
+
+		if (user.getCargo() != null)
+			userFind.setCargo(user.getCargo());
+
+		if (user.getCelular() != null)
+			userFind.setCelular(user.getCelular());
+
+		if (user.getTelefone() != null)
+			userFind.setTelefone(user.getTelefone());
+		
+		userFind.setMenuCadastros(user.isMenuCadastros());
+		userFind.setMenuCadUnidades(user.isMenuCadUnidades());
+		userFind.setMenuCadEstabelecimentos(user.isMenuCadEstabelecimentos());
+		userFind.setMenuAuditoria(user.isMenuAuditoria());
+		userFind.setMenuPreparacao(user.isMenuPreparacao());
+		userFind.setMenuCadQuestionarios(user.isMenuCadQuestionarios());
+		userFind.setMenuCadPerguntas(user.isMenuCadPerguntas());
+		userFind.setMenuCadAuditorias(user.isMenuCadAuditorias());
+		userFind.setMenuAuditar(user.isMenuAuditar());
+		userFind.setMenuRelatorios(user.isMenuRelatorios());
+		userFind.setMenuConfiguracoes(user.isMenuConfiguracoes());
+		userFind.setMenuConfigGerais(user.isMenuConfigGerais());
+		userFind.setMenuUsuarios(user.isMenuUsuarios());
+		userFind.setMenuGerenciarUsuarios(user.isMenuGerenciarUsuarios());
+		userFind.setMenuMudarMinhaSenha(user.isMenuMudarMinhaSenha());
+		userFind.setMenuAuditoriaOff(user.isMenuAuditoriaOff());
+		userFind.setMenuAuditoriaOffExportar(user.isMenuAuditoriaOffExportar());
+		userFind.setMenuAuditoriaOffImportar(user.isMenuAuditoriaOffImportar());
 		
 		userFind.setAtivo(user.getAtivo());
-		
+
 		userDAO.update(userFind);
 		userDAO.commitAndCloseTransaction();
 	}
