@@ -28,12 +28,70 @@ public class UserMB extends AbstractMB implements Serializable {
 	private String				novasenha;
 	private String				senhaDigitada;
 	private User				usuarioLogado;
+	private boolean				menuCadastro;
+	private boolean				menuAuditorias;
+	private boolean menuPreparacao;
 
 	public UserMB() {
 		usuarioLogado = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
 
+		habilitaMenuCadastros();
+		habilitaMenuAuditorias();
+		habilitaMenuPreparacao();
+
 		if (usuarioLogado == null)
 			throw new RuntimeException("Problemas com usuário");
+	}
+
+	private void habilitaMenuPreparacao() {
+		if (!usuarioLogado.isMenuCadAuditorias() && !usuarioLogado.isMenuCadPerguntas()
+				&& !usuarioLogado.isMenuCadQuestionarios()) {
+			menuPreparacao = false;
+		}else{
+			menuPreparacao = true;
+		}
+	}
+
+	private void habilitaMenuAuditorias() {
+		if (!usuarioLogado.isMenuAuditar() && !usuarioLogado.isMenuCadAuditorias() && !usuarioLogado.isMenuCadPerguntas()
+				&& !usuarioLogado.isMenuCadQuestionarios()) {
+			menuAuditorias = false;
+		}else{
+			menuAuditorias = true;
+		}
+	}
+
+	private void habilitaMenuCadastros() {
+		if (!usuarioLogado.isMenuCadUnidades() && !usuarioLogado.isMenuCadEstabelecimentos()) {
+			menuCadastro = false;
+		} else {
+			menuCadastro = true;
+		}
+	}
+
+	
+	public boolean isMenuPreparacao() {
+		return menuPreparacao;
+	}
+
+	public void setMenuPreparacao(boolean menuPreparacao) {
+		this.menuPreparacao = menuPreparacao;
+	}
+
+	public boolean isMenuAuditorias() {
+		return menuAuditorias;
+	}
+
+	public void setMenuAuditorias(boolean menuAuditorias) {
+		this.menuAuditorias = menuAuditorias;
+	}
+
+	public boolean isMenuCadastro() {
+		return menuCadastro;
+	}
+
+	public void setMenuCadastro(boolean menuCadastro) {
+		this.menuCadastro = menuCadastro;
 	}
 
 	public User getUsuarioLogado() {

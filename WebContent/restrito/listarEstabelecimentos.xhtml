@@ -12,14 +12,14 @@
 
 	<ui:define name="conteudo">
 		<f:loadBundle basename="messages" var="msg" />
-		<h:form acceptcharset="ISO-8859-1" id="form1">
+		<h:form acceptcharset="ISO-8859-1" id="form1" rendered="#{userMB.usuarioLogado.menuCadEstabelecimentos}">
 			<p:button value="NOVO ESTABELECIMENTO" icon="ui-icon-plusthick"
 				outcome="cadastrarEstabelecimentos.xhtml">
 			</p:button>
 		</h:form>
 		<br />
 		<center>
-			<h:form acceptcharset="ISO-8859-1" id="form2">
+			<h:form acceptcharset="ISO-8859-1" id="form2" rendered="#{userMB.usuarioLogado.menuCadEstabelecimentos}">
 				<h:panelGrid columns="1" style="text-align:left">
 					<p:dataTable id="tbl" var="estabelecimento"
 						value="#{estabelecimentoMB.allEstabelecimentos}"

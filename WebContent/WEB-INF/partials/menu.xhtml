@@ -15,7 +15,7 @@
 			<p:menuitem value="#{msg.inicio}" outcome="home.xhtml"
 				icon="ui-icon-home" />
 
-			<p:submenu label="#{msg.cadastros}" icon="ui-icon-disk">
+			<p:submenu label="#{msg.cadastros}" icon="ui-icon-disk" rendered="#{userMB.menuCadastro}">
 				<p:menuitem value="#{msg.unidades}" outcome="listarUnidades.xhtml"
 					icon="ui-icon-stop"
 					rendered="#{userMB.usuarioLogado.menuCadUnidades}" />
@@ -24,8 +24,8 @@
 					rendered="#{userMB.usuarioLogado.menuCadEstabelecimentos}" />
 			</p:submenu>
 
-			<p:submenu label="#{msg.auditorias}" icon="ui-icon-contact">
-				<p:submenu label="#{msg.preparacao}">
+			<p:submenu label="#{msg.auditorias}" icon="ui-icon-contact" rendered="#{userMB.menuAuditorias}">
+				<p:submenu label="#{msg.preparacao}" rendered="#{userMB.menuPreparacao}">
 					<p:menuitem value="#{msg.questionarios}"
 						outcome="cadastrarQuestionarios.xhtml" icon="ui-icon-stop"
 						rendered="#{userMB.usuarioLogado.menuCadQuestionarios}" />

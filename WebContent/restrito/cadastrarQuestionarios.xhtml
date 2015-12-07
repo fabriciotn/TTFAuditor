@@ -13,7 +13,7 @@
 	<ui:define name="conteudo">
 		<f:loadBundle basename="messages" var="msg" />
 		<center>
-			<h:form acceptcharset="ISO-8859-1" id="form1">
+			<h:form acceptcharset="ISO-8859-1" id="form1" rendered="#{userMB.usuarioLogado.menuCadQuestionarios}">
 				<p:panel id="basic" header="Cadastro de questionarios"
 					style="margin-bottom:20px">
 					<h:panelGrid columns="2" columnClasses="label, value"
@@ -42,7 +42,7 @@
 				</p:panel>
 			</h:form>
 
-			<h:form acceptcharset="ISO-8859-1" id="form2">
+			<h:form acceptcharset="ISO-8859-1" id="form2" rendered="#{userMB.usuarioLogado.menuCadQuestionarios}">
 
 				<h:panelGrid columns="1" style="text-align:left">
 					<p:dataTable id="tbl" var="questionario"

@@ -14,7 +14,7 @@
 	<ui:param
 		value="#{auditoriaMB.auditoriaFacade.findAuditoria(request.getParameter('id'))}"
 		name="auditoria" />
-	<p:tabView id="tabview">
+	<p:tabView id="tabview" rendered="#{userMB.usuarioLogado.menuAuditar}">
 		<p:tab title="Detalhes">
 			<h:panelGrid columns="1" cellpadding="3">
 

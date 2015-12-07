@@ -17,7 +17,7 @@
 			header="Você está respondendo a auditoria #{auditoriaMB.auditoria.codigo}"
 			style="margin-bottom:20px; font-size:0.9em;"
 			value="#{questionarioMB.allQuestionarios}" var="questionario"
-			activeIndex="#{auditoriaMB.currentTab}">
+			activeIndex="#{auditoriaMB.currentTab}" rendered="#{userMB.usuarioLogado.menuAuditar}">
 
 			<p:ajax event="tabChange" listener="#{auditoriaMB.onTabChange}" />
 

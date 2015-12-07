@@ -21,7 +21,7 @@
 
 <h:body style="font-family: arial; margin: 0;">
 	<center>
-		<h:form acceptcharset="ISO-8859-1" id="form1">
+		<h:form acceptcharset="ISO-8859-1" id="form1" rendered="#{userMB.usuarioLogado.menuAuditar}">
 			<p:panel id="basic"
 				header="Você está respondendo a pergunta #{resposta.id} da auditoria #{resposta.auditoria.codigo}">
 				<h:panelGrid columns="1" columnClasses="label, value"

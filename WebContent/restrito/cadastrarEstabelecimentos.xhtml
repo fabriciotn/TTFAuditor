@@ -13,7 +13,7 @@
 	<ui:define name="conteudo">
 		<f:loadBundle basename="messages" var="msg" />
 		<center>
-			<h:form acceptcharset="ISO-8859-1" id="form1">
+			<h:form acceptcharset="ISO-8859-1" id="form1" rendered="#{userMB.usuarioLogado.menuCadEstabelecimentos}">
 				<p:panel id="basic" header="Cadastro de Estabelecimentos"
 					style="margin-bottom:20px">
 					<p:tabView style="border:1">

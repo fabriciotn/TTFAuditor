@@ -12,14 +12,14 @@
 
 	<ui:define name="conteudo">
 		<f:loadBundle basename="messages" var="msg" />
-		<h:form acceptcharset="ISO-8859-1" id="form1">
+		<h:form acceptcharset="ISO-8859-1" id="form1" rendered="#{userMB.usuarioLogado.menuCadUnidades}">
 			<p:button value="NOVA UNIDADE" icon="ui-icon-plusthick"
 				outcome="cadastrarUnidades.xhtml">
 			</p:button>
 		</h:form>
 		<br />
 		<center>
-			<h:form acceptcharset="ISO-8859-1" id="form2">
+			<h:form acceptcharset="ISO-8859-1" id="form2" rendered="#{userMB.usuarioLogado.menuCadUnidades}">
 
 				<h:panelGrid columns="1" style="text-align:left">
 					<p:dataTable id="tbl" var="unidade"
