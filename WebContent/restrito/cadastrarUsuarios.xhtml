@@ -13,7 +13,8 @@
 	<ui:define name="conteudo">
 		<f:loadBundle basename="messages" var="msg" />
 		<center>
-			<h:form acceptcharset="ISO-8859-1" id="form1" rendered="#{userMB.usuarioLogado.menuGerenciarUsuarios}">
+			<h:form acceptcharset="ISO-8859-1" id="form1"
+				rendered="#{userMB.usuarioLogado.menuGerenciarUsuarios}">
 				<p:panel id="basic" header="Cadastro de usuários"
 					style="margin-bottom:20px">
 
@@ -73,6 +74,18 @@
 										itemLabel="#{role.label}" itemValue="#{role}" />
 								</p:selectOneMenu>
 
+								<h:outputText value="Grupo de questionários: " />
+								<p:selectOneMenu id="grupo"
+									value="#{userMB.user.grupoDeQuestionario}"
+									required="false" requiredMessage="O campo Grupo é obrigatório!"
+									style="width:13em">
+									<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
+										noSelectionOption="true" />
+									<f:selectItems
+										value="#{grupoDeQuestionarioBean.grupoDeQuestionarioList}"
+										var="grupo" itemLabel="#{grupo.label}" itemValue="#{grupo}" />
+								</p:selectOneMenu>
+
 								<h:outputText value="Status: " />
 								<p:inputSwitch value="#{userMB.user.ativo}" />
 							</h:panelGrid>
@@ -81,26 +94,30 @@
 						<p:tab title="Permissões">
 							<h:panelGrid columns="2" columnClasses="label, value"
 								style="text-align:left">
-									<h:outputText value="Cadastrar unidades: " />
-        							<p:selectBooleanCheckbox value="#{userMB.user.menuCadUnidades}" />
-									<h:outputText value="Cadastrar estabelecimentos: " />
-        							<p:selectBooleanCheckbox value="#{userMB.user.menuCadEstabelecimentos}" />
-									<h:outputText value="Cadastrar questionários: " />
-        							<p:selectBooleanCheckbox value="#{userMB.user.menuCadQuestionarios}" />
-									<h:outputText value="Cadastrar perguntas: " />
-        							<p:selectBooleanCheckbox value="#{userMB.user.menuCadPerguntas}" />
-									<h:outputText value="Cadastrar auditorias: " />
-        							<p:selectBooleanCheckbox value="#{userMB.user.menuCadAuditorias}" />
-									<h:outputText value="Realizar auditorias: " />
-        							<p:selectBooleanCheckbox value="#{userMB.user.menuAuditar}" />
-									<h:outputText value="Gerar relatórios: " />
-        							<p:selectBooleanCheckbox value="#{userMB.user.menuRelatorios}" />
-									<h:outputText value="Configurações gerais: " />
-        							<p:selectBooleanCheckbox value="#{userMB.user.menuConfigGerais}" />
-									<h:outputText value="Gerenciar usuários: " />
-        							<p:selectBooleanCheckbox value="#{userMB.user.menuGerenciarUsuarios}" />
-									<h:outputText value="Gerenciar auditorias Off-line: " />
-        							<p:selectBooleanCheckbox value="#{userMB.user.menuAuditoriaOff}" />
+								<h:outputText value="Cadastrar unidades: " />
+								<p:selectBooleanCheckbox value="#{userMB.user.menuCadUnidades}" />
+								<h:outputText value="Cadastrar estabelecimentos: " />
+								<p:selectBooleanCheckbox
+									value="#{userMB.user.menuCadEstabelecimentos}" />
+								<h:outputText value="Cadastrar questionários: " />
+								<p:selectBooleanCheckbox
+									value="#{userMB.user.menuCadQuestionarios}" />
+								<h:outputText value="Cadastrar perguntas: " />
+								<p:selectBooleanCheckbox value="#{userMB.user.menuCadPerguntas}" />
+								<h:outputText value="Cadastrar auditorias: " />
+								<p:selectBooleanCheckbox
+									value="#{userMB.user.menuCadAuditorias}" />
+								<h:outputText value="Realizar auditorias: " />
+								<p:selectBooleanCheckbox value="#{userMB.user.menuAuditar}" />
+								<h:outputText value="Gerar relatórios: " />
+								<p:selectBooleanCheckbox value="#{userMB.user.menuRelatorios}" />
+								<h:outputText value="Configurações gerais: " />
+								<p:selectBooleanCheckbox value="#{userMB.user.menuConfigGerais}" />
+								<h:outputText value="Gerenciar usuários: " />
+								<p:selectBooleanCheckbox
+									value="#{userMB.user.menuGerenciarUsuarios}" />
+								<h:outputText value="Gerenciar auditorias Off-line: " />
+								<p:selectBooleanCheckbox value="#{userMB.user.menuAuditoriaOff}" />
 							</h:panelGrid>
 						</p:tab>
 					</p:tabView>

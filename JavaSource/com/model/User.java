@@ -48,6 +48,8 @@ public class User implements Serializable {
 	private boolean ativo;
 	@ManyToMany(mappedBy="auditores", fetch=FetchType.EAGER)
     private List<Auditoria> auditorias;
+	@Enumerated(EnumType.STRING)
+	private GrupoDeQuestionario grupoDeQuestionario;
 	
 	/*
 	 * Campos para gerenciar as permissões
@@ -187,11 +189,15 @@ public class User implements Serializable {
 	 * Fim dos getters e setters das permissões.
 	 */
 	
-	
+	public GrupoDeQuestionario getGrupoDeQuestionario() {
+		return grupoDeQuestionario;
+	}
+	public void setGrupoDeQuestionario(GrupoDeQuestionario grupoDeQuestionario) {
+		this.grupoDeQuestionario = grupoDeQuestionario;
+	}
 	public boolean getAtivo() {
 		return ativo;
 	}
-	
 	public void setAtivo(boolean status) {
 		this.ativo = status;
 	}

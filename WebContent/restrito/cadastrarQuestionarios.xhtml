@@ -13,7 +13,8 @@
 	<ui:define name="conteudo">
 		<f:loadBundle basename="messages" var="msg" />
 		<center>
-			<h:form acceptcharset="ISO-8859-1" id="form1" rendered="#{userMB.usuarioLogado.menuCadQuestionarios}">
+			<h:form acceptcharset="ISO-8859-1" id="form1"
+				rendered="#{userMB.usuarioLogado.menuCadQuestionarios}">
 				<p:panel id="basic" header="Cadastro de questionarios"
 					style="margin-bottom:20px">
 					<h:panelGrid columns="2" columnClasses="label, value"
@@ -30,6 +31,16 @@
 							<f:ajax event="blur" render="@this" />
 						</p:inputText>
 
+						<h:outputText value="Grupo: " />
+						<p:selectOneMenu id="grupo"
+							value="#{questionarioMB.questionario.grupoDeQuestionario}"
+							required="false" requiredMessage="O campo Grupo é obrigatório!" style="width:13em">
+							<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItems value="#{grupoDeQuestionarioBean.grupoDeQuestionarioList}" var="grupo"
+								itemLabel="#{grupo.label}"
+								itemValue="#{grupo}" />
+						</p:selectOneMenu>
 
 						<p:columnGroup>
 						</p:columnGroup>
@@ -42,7 +53,8 @@
 				</p:panel>
 			</h:form>
 
-			<h:form acceptcharset="ISO-8859-1" id="form2" rendered="#{userMB.usuarioLogado.menuCadQuestionarios}">
+			<h:form acceptcharset="ISO-8859-1" id="form2"
+				rendered="#{userMB.usuarioLogado.menuCadQuestionarios}">
 
 				<h:panelGrid columns="1" style="text-align:left">
 					<p:dataTable id="tbl" var="questionario"
@@ -65,13 +77,18 @@
 						</f:facet>
 
 						<p:column headerText="ID" filterBy="#{questionario.id}"
-							sortBy="#{questionario.id}" style="text-align: center;">
+							sortBy="#{questionario.id}" style="text-align: center; width:8em;">
 							<h:outputText value="#{questionario.id}" />
 						</p:column>
 
 						<p:column headerText="TITULO" filterBy="#{questionario.titulo}"
-							sortBy="#{questionario.titulo}" style="text-align: center;">
+							sortBy="#{questionario.titulo}" style="text-align: center; width:40em;">
 							<h:outputText value="#{questionario.titulo}" />
+						</p:column>
+
+						<p:column headerText="GRUPO" filterBy="#{questionario.grupoDeQuestionario}"
+							sortBy="#{questionario.grupoDeQuestionario}" style="text-align: center; width:10em;">
+							<h:outputText value="#{questionario.grupoDeQuestionario}" />
 						</p:column>
 
 						<p:column exportable="false"

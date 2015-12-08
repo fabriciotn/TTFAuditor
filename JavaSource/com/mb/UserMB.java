@@ -2,6 +2,7 @@ package com.mb;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -12,6 +13,7 @@ import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpServletRequest;
 
 import com.facade.UserFacade;
+import com.model.Questionario;
 import com.model.User;
 import com.util.Criptografia;
 
@@ -30,7 +32,8 @@ public class UserMB extends AbstractMB implements Serializable {
 	private User				usuarioLogado;
 	private boolean				menuCadastro;
 	private boolean				menuAuditorias;
-	private boolean menuPreparacao;
+	private boolean				menuPreparacao;
+	private List<Questionario>	questionarios;
 
 	public UserMB() {
 		usuarioLogado = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
@@ -38,16 +41,29 @@ public class UserMB extends AbstractMB implements Serializable {
 		habilitaMenuCadastros();
 		habilitaMenuAuditorias();
 		habilitaMenuPreparacao();
+		loadQuestionarios();
 
 		if (usuarioLogado == null)
 			throw new RuntimeException("Problemas com usuário");
 	}
 
+	private void loadQuestionarios() {
+		if (questionarios == null) {
+			questionarios = new ArrayList<Questionario>();
+
+			List<Questionario> allQuestionarios = new QuestionarioMB().getAllQuestionarios();
+			for (Questionario questionario : allQuestionarios) {
+				if (questionario.getGrupoDeQuestionario().equals(usuarioLogado.getGrupoDeQuestionario())) {
+					questionarios.add(questionario);
+				}
+			}
+		}
+	}
+
 	private void habilitaMenuPreparacao() {
-		if (!usuarioLogado.isMenuCadAuditorias() && !usuarioLogado.isMenuCadPerguntas()
-				&& !usuarioLogado.isMenuCadQuestionarios()) {
+		if (!usuarioLogado.isMenuCadAuditorias() && !usuarioLogado.isMenuCadPerguntas() && !usuarioLogado.isMenuCadQuestionarios()) {
 			menuPreparacao = false;
-		}else{
+		} else {
 			menuPreparacao = true;
 		}
 	}
@@ -56,7 +72,7 @@ public class UserMB extends AbstractMB implements Serializable {
 		if (!usuarioLogado.isMenuAuditar() && !usuarioLogado.isMenuCadAuditorias() && !usuarioLogado.isMenuCadPerguntas()
 				&& !usuarioLogado.isMenuCadQuestionarios()) {
 			menuAuditorias = false;
-		}else{
+		} else {
 			menuAuditorias = true;
 		}
 	}
@@ -69,7 +85,6 @@ public class UserMB extends AbstractMB implements Serializable {
 		}
 	}
 
-	
 	public boolean isMenuPreparacao() {
 		return menuPreparacao;
 	}
@@ -112,6 +127,14 @@ public class UserMB extends AbstractMB implements Serializable {
 
 	public void setNovasenha(String novasenha) {
 		this.novasenha = novasenha;
+	}
+
+	public List<Questionario> getQuestionarios() {
+		return questionarios;
+	}
+
+	public void setQuestionarios(List<Questionario> questionarios) {
+		this.questionarios = questionarios;
 	}
 
 	public List<User> getAllUsuarios() {

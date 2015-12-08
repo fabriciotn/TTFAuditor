@@ -16,7 +16,7 @@
 		<p:tabView scrollable="true" id="basic"
 			header="Você está respondendo a auditoria #{auditoriaMB.auditoria.codigo}"
 			style="margin-bottom:20px; font-size:0.9em;"
-			value="#{questionarioMB.allQuestionarios}" var="questionario"
+			value="#{userMB.questionarios}" var="questionario"
 			activeIndex="#{auditoriaMB.currentTab}" rendered="#{userMB.usuarioLogado.menuAuditar}">
 
 			<p:ajax event="tabChange" listener="#{auditoriaMB.onTabChange}" />

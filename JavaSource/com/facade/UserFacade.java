@@ -102,6 +102,9 @@ public class UserFacade implements Serializable {
 		if (user.getTelefone() != null)
 			userFind.setTelefone(user.getTelefone());
 		
+		if (user.getGrupoDeQuestionario() != null)
+			userFind.setGrupoDeQuestionario(user.getGrupoDeQuestionario());
+		
 		userFind.setMenuCadastros(user.isMenuCadastros());
 		userFind.setMenuCadUnidades(user.isMenuCadUnidades());
 		userFind.setMenuCadEstabelecimentos(user.isMenuCadEstabelecimentos());
