@@ -20,6 +20,9 @@ import javax.persistence.OrderBy;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 public class Auditoria implements Serializable {
 
@@ -37,12 +40,13 @@ public class Auditoria implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataDaVerificacao;
 	
-	@OneToMany(mappedBy = "auditoria", targetEntity = Resposta.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "auditoria", targetEntity = Resposta.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@OrderBy(value = "id ASC")
+	@Fetch(FetchMode.SELECT)
 	private List<Resposta> respostas;
 	
-	@ManyToMany
-	@JoinTable(name = "auditoria_auditor", 
+	@ManyToMany(fetch=FetchType.EAGER)
+	@JoinTable(name = "auditoria_auditor",
 	joinColumns = @JoinColumn(name = "auditoria_id"), 
 	inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> auditores;

@@ -2,14 +2,17 @@ package com.model;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -43,6 +46,8 @@ public class User implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar ultimoAcesso;
 	private boolean ativo;
+	@ManyToMany(mappedBy="auditores", fetch=FetchType.EAGER)
+    private List<Auditoria> auditorias;
 	
 	/*
 	 * Campos para gerenciar as permissões
@@ -275,7 +280,15 @@ public class User implements Serializable {
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
-
+	
+	public List<Auditoria> getAuditorias() {
+		return auditorias;
+	}
+	
+	public void setAuditorias(List<Auditoria> auditorias) {
+		this.auditorias = auditorias;
+	}
+	
 	@Override
 	public int hashCode() {
 		return getId();

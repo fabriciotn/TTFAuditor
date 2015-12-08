@@ -77,6 +77,17 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return respostas;
 	}
 
+	public User getUsuarioLogado() {
+		if (auditoriaFacade == null) {
+			auditoriaFacade = new AuditoriaFacade();
+		}
+		return usuarioLogado;
+	}
+
+	public void setUsuarioLogado(User usuarioLogado) {
+		this.usuarioLogado = usuarioLogado;
+	}
+
 	public List<Resposta> getRespostas() {
 		return respostas;
 	}
@@ -136,10 +147,9 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		List<Pergunta> perguntas = new PerguntaMB().getAllPerguntas();
 
 		for (Pergunta pergunta : perguntas) {
-			//Só adiciona as perguntas que forem
-			//referentes aos tipos de estabelecimento
-			if ((pergunta.getTipoServico() != null) 
-					&& (pergunta.getTipoServico().equals(auditoria.getEstabelecimento().getTipoServico()) 
+			// Só adiciona as perguntas que forem
+			// referentes aos tipos de estabelecimento
+			if ((pergunta.getTipoServico() != null) && (pergunta.getTipoServico().equals(auditoria.getEstabelecimento().getTipoServico())
 					|| pergunta.getTipoServico().equals("Ambos"))) {
 				Resposta resposta = new Resposta();
 				resposta.setPergunta(pergunta.getPergunta());
@@ -198,16 +208,19 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 	public List<Auditoria> getAllAuditorias() {
 		if (auditorias == null) {
-			loadAuditorias();
+				loadAuditorias();
 		}
 
 		return auditorias;
 	}
 
 	private void loadAuditorias() {
-		auditorias = getAuditoriaFacade().listAll();
+		if(usuarioLogado.isAdmin())
+			auditorias = getAuditoriaFacade().listAll();
+		else
+			auditorias = getAuditoriaFacade().listAll(usuarioLogado.getId());
 	}
-
+	
 	public void resetAuditoria() {
 		auditoria = new Auditoria();
 	}

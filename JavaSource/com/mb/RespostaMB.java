@@ -29,6 +29,14 @@ public class RespostaMB extends AbstractMB implements Serializable {
 			throw new RuntimeException("Problemas com usuário");
 	}
 
+	public List<Resposta> getRespostas() {
+		return respostas;
+	}
+
+	public void setRespostas(List<Resposta> respostas) {
+		this.respostas = respostas;
+	}
+
 	public RespostaFacade getRespostaFacade() {
 		if (respostaFacade == null) {
 			respostaFacade = new RespostaFacade();

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.faces.bean.SessionScoped;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +37,7 @@ public class Resposta implements Serializable{
 	@Lob
 	private String recomendacaoPadrao;
 	private String tipoServico;
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="auditoria_id")
 	private Auditoria auditoria;
 
