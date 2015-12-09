@@ -2,8 +2,7 @@ package com.model;
 
 public enum Role {
 	ADMIN("Administrador"), 
-	AUDITOR("Auditor"),
-	USER("Usuário");
+	AUDITOR("Auditor");
 
 	private String label;
 	

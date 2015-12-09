@@ -259,8 +259,8 @@ public class User implements Serializable {
 		return Role.ADMIN.equals(role);
 	}
 
-	public boolean isUser() {
-		return Role.USER.equals(role);
+	public boolean isAuditor() {
+		return Role.AUDITOR.equals(role);
 	}
 
 	public String getTelefone() {

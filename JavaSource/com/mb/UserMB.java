@@ -53,8 +53,9 @@ public class UserMB extends AbstractMB implements Serializable {
 
 			List<Questionario> allQuestionarios = new QuestionarioMB().getAllQuestionarios();
 			for (Questionario questionario : allQuestionarios) {
-				if (usuarioLogado.isAdmin() || questionario.getGrupoDeQuestionario().equals(usuarioLogado.getGrupoDeQuestionario())) {
-					questionarios.add(questionario);
+				if (usuarioLogado.isAdmin() || questionario.getGrupoDeQuestionario() != null) {
+					if(questionario.getGrupoDeQuestionario().equals(usuarioLogado.getGrupoDeQuestionario()))
+						questionarios.add(questionario);
 				}
 			}
 		}
@@ -168,9 +169,9 @@ public class UserMB extends AbstractMB implements Serializable {
 	public boolean isAdmin() {
 		return user.isAdmin();
 	}
-
-	public boolean isDefaultUser() {
-		return user.isUser();
+	
+	public boolean isAuditor() {
+		return user.isAuditor();
 	}
 
 	public void logOut() throws IOException {
