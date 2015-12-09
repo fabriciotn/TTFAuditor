@@ -8,12 +8,52 @@
 
 	<f:loadBundle basename="messages" var="msg"/>
 	<h:head>
-			<title>#{msg.titulo}</title>
+			<title>#{msg.tituloPagina}</title>
 			<link rel="icon" href="images/ttf.ico" type="image/x-icon" />
 			<link rel="shortcut icon" href="images/ttf.ico" type="image/x-icon" />
 	</h:head>
 	
 	<h:body style="font-family: arial; margin: 0;">
-		<h1>pagina para acesso mobile</h1>
+		
+		<div style="padding: 0.5em; background-color: #62470d; color: white">
+		</div>
+	
+		<br/>
+		<br/>
+		<br/>
+	
+		<center>
+			<br/>
+			<br/>
+			<img name="logo" src="images/logo.png" width="350px" />
+			<br/>
+			<br/>
+		
+			<h:form>
+				<p:panelGrid columns="2">
+					<f:facet name="header">
+						#{msg.loginHello}
+					</f:facet>
+	
+					<h:outputLabel for="login" value="#{msg.loginUserName}"/>
+					<p:inputText id="login" value="#{loginMB.login}" required="true"
+						label="login">
+						<f:validateLength minimum="2" />
+						<p:clientValidator />
+					</p:inputText>
+	
+					<h:outputLabel for="password" value="#{msg.loginPassword}" />
+					<p:password id="password" value="#{loginMB.password}"
+						required="true" label="password">
+						<f:validateLength minimum="2" />
+					</p:password>
+				</p:panelGrid>
+				<br />
+				<p:commandButton value="#{msg.logIn}" ajax="false" icon="ui-icon-check"
+					action="#{loginMB.loginMobile}" />
+			</h:form>
+		</center>
+		<div id="footer" style="text-align: center; background-color: #62470d; font-size: 0.5em; height: 3em; color: white; position: fixed; bottom: 0; width: 100%; margin: 0;">
+		</div>
 	</h:body>
 </html>

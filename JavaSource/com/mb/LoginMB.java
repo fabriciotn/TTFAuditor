@@ -14,14 +14,12 @@ import com.model.User;
 
 @SessionScoped
 @ManagedBean
-public class LoginMB extends AbstractMB implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
-	//@ManagedProperty(value = UserMB.INJECTION_NAME)
-	//private UserMB userMB;
+public class LoginMB extends AbstractMB implements Serializable {
 
-	private String login;
-	private String password;
+	private static final long	serialVersionUID	= 1L;
+
+	private String				login;
+	private String				password;
 
 	public String getLogin() {
 		return login;
@@ -40,32 +38,38 @@ public class LoginMB extends AbstractMB implements Serializable{
 	}
 
 	public String login() {
+		String home = "/restrito/home.xhtml";
+		String error = "/erro.xhtml";
+		return realizarLogin(home, error);
+	}
+
+	public String loginMobile() {
+		String home = "/restrito/listarAuditorias.xhtml";
+		String error = "/erro.xhtml";
+		return realizarLogin(home, error);
+	}
+
+	private String realizarLogin(String home, String error) {
 		ResourceBundle bundle = ResourceBundle.getBundle("messages");
-		
+
 		UserFacade userFacade = new UserFacade();
 
 		User usuario = new User();
 		usuario = userFacade.isValidLogin(login, password);
-		
-		if(usuario != null){
-			//userMB.setUser(usuario);
+
+		if (usuario != null) {
 			FacesContext context = FacesContext.getCurrentInstance();
 			HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
 			request.getSession().setAttribute("user", usuario);
-			//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("user",user);
 			MessagesView ms = new MessagesView();
 			String mensagem = MessageFormat.format(bundle.getString("loginWelcomeMessage"), usuario.getName());
-	        ms.info(null, mensagem);
-			return "/restrito/home.xhtml";
-		
+			ms.info(null, mensagem);
+			return home;
+
 		}
 
 		displayErrorMessageToUser(bundle.getString("verificarUsuarioESenha"));
-		
-		return "/erro.xhtml";
-	}
 
-	//public void setUserMB(UserMB userMB) {
-	//	this.userMB = userMB;
-	//}	
+		return error;
+	}
 }

@@ -53,7 +53,7 @@ public class UserMB extends AbstractMB implements Serializable {
 
 			List<Questionario> allQuestionarios = new QuestionarioMB().getAllQuestionarios();
 			for (Questionario questionario : allQuestionarios) {
-				if (questionario.getGrupoDeQuestionario().equals(usuarioLogado.getGrupoDeQuestionario())) {
+				if (usuarioLogado.isAdmin() || questionario.getGrupoDeQuestionario().equals(usuarioLogado.getGrupoDeQuestionario())) {
 					questionarios.add(questionario);
 				}
 			}
