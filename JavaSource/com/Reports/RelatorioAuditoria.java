@@ -1,78 +1,79 @@
 package com.Reports;
-import java.io.IOException;
-import java.io.StringReader;
+
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 
-import net.sf.jasperreports.engine.JasperManager;
-import net.sf.jasperreports.engine.JasperPrint;
+import javax.faces.context.FacesContext;
+
 import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.view.JasperViewer;
+import net.sf.jasperreports.engine.JasperRunManager;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 /* Primeira parte */
 public class RelatorioAuditoria {
 
+	private Connection connection;
+	Calendar data = Calendar.getInstance();
 
-   private Connection con = null;
-   private String driver = "oracle.jdbc.driver.OracleDriver";
-   private String endereco = "jdbc:oracle:thin:@host:1521:sid";
-   private String user = "user";
-   private String pass = "passw";
-   private ResultSet rs = null;
-   private String valores[] = new String[10];
-   private int chamada = 1;
-   private String dir = System.getProperty("user.dir") + "/web/";
-   private StringReader stream;
-   /*Segunda parte */
+	public byte[] imprimeRelatorio(String usuarioLogado, int id_auditoria) {
+		byte[] relatorio = null;
+		try {
+			URL arquivo = getClass().getResource("relatorioAuditoriaGeral.jasper");
+			JasperReport arquivoJasper = (JasperReport) JRLoader
+					.loadObject(arquivo);
+			this.connection = getConection();
+			
+			String path = FacesContext.getCurrentInstance().getExternalContext().getRealPath("");
+			
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("SUBREPORT_DIR", path + "/WEB-INF/classes/com/Reports/");
+			map.put("usuario_logado", usuarioLogado);
+			map.put("id_auditoria", id_auditoria);
+			map.put("caminho_imagem", path + "images/logoHemominas.png");
+			relatorio = JasperRunManager.runReportToPdf(arquivoJasper, map,
+					this.connection);
+			//JasperPrint jp = JasperFillManager.fillReport(arquivoJasper, map, this.connection);
 
-   public RelatorioAuditoria() {
-      /* Efetua a conexao a base de dados e coleta os valores da base de dados armazenando-os
-       em um array para ser futuramente utilizado */
-      try {
-         if (con == null) {
-            Class.forName(driver);
-            con = DriverManager.getConnection(endereco, user, pass);
-            Statement statement = con.createStatement();
-            rs = statement.executeQuery("select * from chamado");
-            HashMap teste = new HashMap();
-            while(rs.next()) {
-               //for até o numero de campos da tabela
-               for (int i = 1; i < 10; i++) {
-                  valores[i] = rs.getString(i);
-               }
-            }
-         }
-      }
-      catch (Exception e) {
-         System.err.println("Problemas apresentados na operacao de conexao");
-         e.printStackTrace();
-      }
-      /* Inicio do bloco que ira gerar nossos relatorios e 3ª parte */
-      try {
-         //String array[] = valores;
-         JasperDesign design = JasperManager.loadXmlDesign(dir + "relatorios/relatorio.jrxml");
-         JasperReport jr = JasperManager.compileReport(design);
-         HashMap parameters = new HashMap();
-         parameters.put("PAR_PEDID",1);
-         //parameters.put("PARAMETRO_2", array[2]);
-         //parameters.put("PARAMETRO_3", array[5]);
-         //parameters.put("PARAMETRO_4", array[4]);
-         //parameters.put("PARAMETRO_5",array[9]);
-         JasperPrint impressao = JasperManager.fillReport(jr,parameters,con);
-         JasperViewer jrviewer = new JasperViewer(impressao,false);
-         jrviewer.show();
-      }
-      catch (Exception e) {
-         e.printStackTrace();
-      }
-   }
-   /* Aqui chamamos o construtor de nossa classe para exibirmos o relatorio e 4ª parte*/
-   public static void main (String args[]) {
-      new RelatorioAuditoria();
-      System.out.println("ok");
-   }
+            //JasperViewer.viewReport(jp, false);
+            //JasperPrintManager.printReport(jp,true);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return relatorio;
+	}
+
+	public Connection getConection() {
+		ResourceBundle bundle = ResourceBundle.getBundle("messages");
+		String senhaBanco = bundle.getString("senhaBanco");
+		
+		String url = "jdbc:mysql://localhost/auditoria_db";
+		String usuario = "root";
+		String senha = senhaBanco;
+		Connection conn = null;
+
+		try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			conn = DriverManager.getConnection(url, usuario, senha);
+			System.out.println("Conexão obtida com sucesso.");
+
+			// a conexão foi obtida com sucesso?
+			if (conn != null) {
+				System.out.println("conexao ok");
+			}
+		} catch (SQLException ex) {
+			System.out.println("SQLException: " + ex.getMessage());
+		} catch (Exception e) {
+			System.out
+					.println("Problemas ao tentar conectar com o banco de dados: "
+							+ e);
+		}
+		
+		return conn;
+	}
 }

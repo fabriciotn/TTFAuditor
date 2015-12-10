@@ -1,7 +1,6 @@
 package com.testes;
 
-import com.facade.UserFacade;
-import com.model.User;
+import com.Reports.RelatorioAuditoria;
 
 public class ArquivosTeste {
 
@@ -11,16 +10,8 @@ public class ArquivosTeste {
 		//user = facade.isValidLogin("fabricio1", "fabricio");
 
 		
-		User user = new User();
-		user.setName("Fabricio");
-		user.setLogin("fabricio1");
-		user.setPassword("fabricio");
-		user.setEmail("fabriciotn@yahoo.com.br");
-		
-		System.out.println(user.getName());
-		System.out.println(user.getPassword());
-		System.out.println(user.getEmail());
-		System.out.println(user.getId());
+		//RelatorioAuditoria relat = new RelatorioAuditoria();
+		//relat.imprimeRelatorio();
 		
 		
 		

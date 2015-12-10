@@ -1,5 +1,6 @@
 package com.mb;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,8 +10,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.Reports.RelatorioAuditoria;
 import com.facade.AuditoriaFacade;
 import com.facade.RespostaFacade;
 import com.model.Auditoria;
@@ -122,6 +125,27 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 	public void setAuditoria(Auditoria auditoria) {
 		this.auditoria = auditoria;
+	}
+	
+	public void visualizarRelatorio(){
+		RelatorioAuditoria relat = new RelatorioAuditoria();
+		byte[] b = relat.imprimeRelatorio(usuarioLogado.getName(), auditoria.getId());
+		
+		HttpServletResponse res = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();  
+        res.setContentType("application/pdf");  
+        //Código abaixo gerar o relatório e disponibiliza diretamente na página   
+        res.setHeader("Content-disposition", "inline;filename=arquivo.pdf");  
+		//Código abaixo gerar o relatório e disponibiliza para o cliente baixar ou salvar   
+        //res.setHeader("Content-disposition", "attachment;filename=arquivo.pdf");  
+        try {
+			res.getOutputStream().write(b);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+        res.getCharacterEncoding();  
+        FacesContext.getCurrentInstance().responseComplete();  
+        System.out.println("saiu do visualizar relatorio");  
 	}
 
 	public String createAuditoria() {

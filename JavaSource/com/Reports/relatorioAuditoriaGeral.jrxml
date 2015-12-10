@@ -8,6 +8,7 @@
 	</parameter>
 	<parameter name="usuario_logado" class="java.lang.String"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<parameter name="caminho_imagem" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT A.CODIGO,
  A.TIPO,
@@ -32,61 +33,64 @@ AND A.ESTABELECIMENTO_ID = E.ID]]>
 	<pageHeader>
 		<band height="119" splitType="Stretch">
 			<staticText>
-				<reportElement x="5" y="68" width="111" height="15" uuid="a4a72e2d-12e1-40a9-9670-b8162ae7cfc8"/>
+				<reportElement uuid="a4a72e2d-12e1-40a9-9670-b8162ae7cfc8" x="5" y="68" width="111" height="15"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Código da auditoria:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="5" y="84" width="111" height="15" uuid="7851d9af-0d67-4455-9782-62544b1cf941"/>
+				<reportElement uuid="7851d9af-0d67-4455-9782-62544b1cf941" x="5" y="84" width="111" height="15"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Estabelecimento:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="116" y="68" width="100" height="15" uuid="5de19fde-f8e6-4187-95b8-b46afd521f24"/>
+				<reportElement uuid="5de19fde-f8e6-4187-95b8-b46afd521f24" x="116" y="68" width="100" height="15"/>
+				<textElement/>
 				<textFieldExpression><![CDATA[$F{CODIGO}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="116" y="84" width="346" height="15" uuid="88b1af9d-bf93-4ebf-80d8-67350b814639"/>
+				<reportElement uuid="88b1af9d-bf93-4ebf-80d8-67350b814639" x="116" y="84" width="346" height="15"/>
+				<textElement/>
 				<textFieldExpression><![CDATA[$F{NOMEFANTASIA}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="5" y="100" width="111" height="15" uuid="ebd820d4-725e-43c1-91b4-daab180162b2"/>
+				<reportElement uuid="ebd820d4-725e-43c1-91b4-daab180162b2" x="5" y="100" width="111" height="15"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tipo de auditoria:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="116" y="100" width="100" height="15" uuid="9e26ea05-df13-4c52-87df-4888d2d9d496"/>
+				<reportElement uuid="9e26ea05-df13-4c52-87df-4888d2d9d496" x="116" y="100" width="100" height="15"/>
+				<textElement/>
 				<textFieldExpression><![CDATA[$F{TIPO}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="1" y="62" width="801" height="1" uuid="64c58a59-0c34-4bd0-a6c0-db89f192e35f"/>
+				<reportElement uuid="64c58a59-0c34-4bd0-a6c0-db89f192e35f" x="1" y="62" width="801" height="1"/>
 			</line>
 			<line>
-				<reportElement x="1" y="118" width="801" height="1" uuid="47ffa669-c620-4dfa-8ec9-bcee1d1e1e90"/>
+				<reportElement uuid="47ffa669-c620-4dfa-8ec9-bcee1d1e1e90" x="1" y="118" width="801" height="1"/>
 			</line>
-			<image>
-				<reportElement x="1" y="1" width="192" height="60" uuid="19f04346-de0e-43fe-8436-b5221a3c56aa"/>
-				<imageExpression><![CDATA["/Users/fabriciotn/Documents/workspace/TTFAuditor/WebContent/images/logoHemominas.png"]]></imageExpression>
-			</image>
 			<staticText>
-				<reportElement x="245" y="7" width="339" height="40" uuid="97005d63-4e12-4135-a9cd-d06f1062ab3b"/>
+				<reportElement uuid="97005d63-4e12-4135-a9cd-d06f1062ab3b" x="245" y="7" width="339" height="40"/>
 				<textElement textAlignment="Center">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[VERIFICAÇÃO DE AGÊNCIA TRANSFUSIONAL E ASSISTÊNCIA HEMOTERÁPICA]]></text>
 			</staticText>
+			<image>
+				<reportElement uuid="0240b6c0-f5ba-4ff7-810a-5a199269c689" x="1" y="0" width="181" height="63"/>
+				<imageExpression><![CDATA[$P{caminho_imagem}]]></imageExpression>
+			</image>
 		</band>
 	</pageHeader>
 	<detail>
 		<band height="29" splitType="Stretch">
 			<subreport>
-				<reportElement x="0" y="3" width="802" height="25" uuid="fd898aea-79ea-4d7e-96ea-1e32c98f9800"/>
+				<reportElement uuid="fd898aea-79ea-4d7e-96ea-1e32c98f9800" x="0" y="3" width="802" height="25"/>
 				<subreportParameter name="id_auditoria">
 					<subreportParameterExpression><![CDATA[$P{id_auditoria}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -98,23 +102,24 @@ AND A.ESTABELECIMENTO_ID = E.ID]]>
 	<pageFooter>
 		<band height="29" splitType="Stretch">
 			<textField>
-				<reportElement x="626" y="14" width="131" height="15" uuid="499fcbfb-1b24-4c7c-ad35-4b6d65e4c431"/>
+				<reportElement uuid="499fcbfb-1b24-4c7c-ad35-4b6d65e4c431" x="626" y="14" width="131" height="15"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="757" y="14" width="40" height="15" uuid="9e51312a-0c13-433c-9291-90a3ff4d06b0"/>
+				<reportElement uuid="9e51312a-0c13-433c-9291-90a3ff4d06b0" x="757" y="14" width="40" height="15"/>
+				<textElement/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement stretchType="RelativeToTallestObject" x="5" y="0" width="177" height="15" uuid="c312224d-80dc-4104-a1b3-3395b9a0614a"/>
+				<reportElement uuid="c312224d-80dc-4104-a1b3-3395b9a0614a" stretchType="RelativeToTallestObject" x="5" y="0" width="177" height="15"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Relatório gerado por: " + $P{usuario_logado}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH.mm.ss">
-				<reportElement stretchType="RelativeToTallestObject" x="5" y="14" width="100" height="15" uuid="b6af9946-6b5a-4a25-872d-1b6321b52818"/>
+				<reportElement uuid="b6af9946-6b5a-4a25-872d-1b6321b52818" stretchType="RelativeToTallestObject" x="5" y="14" width="100" height="15"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
