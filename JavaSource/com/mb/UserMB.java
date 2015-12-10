@@ -50,14 +50,8 @@ public class UserMB extends AbstractMB implements Serializable {
 	private void loadQuestionarios() {
 		if (questionarios == null) {
 			questionarios = new ArrayList<Questionario>();
-
-			List<Questionario> allQuestionarios = new QuestionarioMB().getAllQuestionarios();
-			for (Questionario questionario : allQuestionarios) {
-				if (questionario.getGrupoDeQuestionario() != null) {
-					if(usuarioLogado.isAdmin() || questionario.getGrupoDeQuestionario().equals(usuarioLogado.getGrupoDeQuestionario()))
-						questionarios.add(questionario);
-				}
-			}
+			
+			questionarios = usuarioLogado.getQuestionarios();
 		}
 	}
 

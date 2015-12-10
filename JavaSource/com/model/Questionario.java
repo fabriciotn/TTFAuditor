@@ -21,8 +21,6 @@ public class Questionario implements Serializable{
 	@OneToOne
 	private User user;
 	private String titulo;
-	@Enumerated(EnumType.STRING)
-	private GrupoDeQuestionario grupoDeQuestionario;
 	
 	public int getId() {
 		return id;
@@ -42,12 +40,7 @@ public class Questionario implements Serializable{
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-	public GrupoDeQuestionario getGrupoDeQuestionario() {
-		return grupoDeQuestionario;
-	}
-	public void setGrupoDeQuestionario(GrupoDeQuestionario grupoDeQuestionario) {
-		this.grupoDeQuestionario = grupoDeQuestionario;
-	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
