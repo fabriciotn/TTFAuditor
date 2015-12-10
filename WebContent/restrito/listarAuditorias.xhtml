@@ -69,6 +69,17 @@
 										target="#{auditoriaMB.auditoria}" />
 								</p:commandLink>
 							</p:column>
+							
+							<p:column style="text-align: center; width:5em;" rendered="#{userMB.usuarioLogado.admin}">
+								<f:facet name="header">
+									<h:outputText value="RELATÓRIO" />
+								</f:facet>
+								<p:commandLink action="realizarAuditoria.xhtml" ajax="false">
+									<img src="../images/iconeRelatorio.png" width="25" />
+									<f:setPropertyActionListener value="#{auditoria}"
+										target="#{auditoriaMB.auditoria}" />
+								</p:commandLink>
+							</p:column>
 
 						</p:dataTable>
 					</h:panelGrid>
