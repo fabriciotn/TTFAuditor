@@ -12,6 +12,7 @@
 	<queryString>
 		<![CDATA[SELECT A.CODIGO,
  A.TIPO,
+ A.DATADAVERIFICACAO,
  E.NOMEFANTASIA
 FROM AUDITORIA A,
  ESTABELECIMENTO E
@@ -22,6 +23,9 @@ AND A.ESTABELECIMENTO_ID = E.ID]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="TIPO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="DATADAVERIFICACAO" class="java.sql.Timestamp">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="NOMEFANTASIA" class="java.lang.String">
@@ -85,6 +89,18 @@ AND A.ESTABELECIMENTO_ID = E.ID]]>
 				<reportElement uuid="0240b6c0-f5ba-4ff7-810a-5a199269c689" x="1" y="0" width="181" height="63"/>
 				<imageExpression><![CDATA[$P{caminho_imagem}]]></imageExpression>
 			</image>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement uuid="7d1850ec-ac40-4e5d-b589-3c06422ac23d" x="321" y="100" width="220" height="15"/>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{DATADAVERIFICACAO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="ed01abb2-19e1-4942-be35-9ea035f8496a" x="234" y="100" width="88" height="15"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data da auditoria:]]></text>
+			</staticText>
 		</band>
 	</pageHeader>
 	<detail>
