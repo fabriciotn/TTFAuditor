@@ -27,7 +27,6 @@ public class QuestionarioFacade implements Serializable {
 		questionarioDAO.beginTransaction();
 		Questionario persistedQuestionario = questionarioDAO.find(questionario.getId());
 		persistedQuestionario.setTitulo(questionario.getTitulo());
-		persistedQuestionario.setUser(questionario.getUser());
 
 		questionarioDAO.update(persistedQuestionario);
 		questionarioDAO.commitAndCloseTransaction();

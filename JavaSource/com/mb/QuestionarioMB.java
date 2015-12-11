@@ -53,8 +53,6 @@ public class QuestionarioMB extends AbstractMB implements Serializable {
 
 	public String createQuestionario() {
 		try {
-			questionario.setUser(usuarioLogado);
-
 			getQuestionarioFacade().createQuestionario(questionario);
 			closeDialog();
 			displayInfoMessageToUser("Questionario " + questionario.getTitulo() +" gravado com sucesso!");
@@ -77,7 +75,6 @@ public class QuestionarioMB extends AbstractMB implements Serializable {
 			if (questionario.getId() == 0) {
 				createQuestionario();
 			} else {
-				questionario.setUser(usuarioLogado);
 				getQuestionarioFacade().updateQuestionario(questionario);
 				closeDialog();
 				displayInfoMessageToUser("Atualizado com sucesso!");

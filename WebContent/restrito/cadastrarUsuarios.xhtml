@@ -74,18 +74,6 @@
 										itemLabel="#{role.label}" itemValue="#{role}" />
 								</p:selectOneMenu>
 
-								<h:outputText value="Grupo de questionários: " />
-								<p:selectOneMenu id="grupo"
-									value="#{userMB.user.grupoDeQuestionario}"
-									required="false" requiredMessage="O campo Grupo é obrigatório!"
-									style="width:13em">
-									<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
-										noSelectionOption="true" />
-									<f:selectItems
-										value="#{grupoDeQuestionarioBean.grupoDeQuestionarioList}"
-										var="grupo" itemLabel="#{grupo.label}" itemValue="#{grupo}" />
-								</p:selectOneMenu>
-
 								<h:outputText value="Status: " />
 								<p:inputSwitch value="#{userMB.user.ativo}" />
 							</h:panelGrid>
@@ -119,6 +107,18 @@
 								<h:outputText value="Gerenciar auditorias Off-line: " />
 								<p:selectBooleanCheckbox value="#{userMB.user.menuAuditoriaOff}" />
 							</h:panelGrid>
+						</p:tab>
+						<p:tab title="Questionários">
+							<h:outputLabel for="menu" value="Questionário acessíveis:" />
+							<p:selectCheckboxMenu id="menu"
+								value="#{userMB.user.questionarios}" label="Questionários"
+								filter="true" filterMatchMode="startsWith"
+								panelStyle="width:250px" converter="questionarioConverter"
+								style="width:13em">
+								<f:selectItems value="#{questionarioMB.allQuestionarios}" var="questionario"
+									itemLabel="#{questionario.titulo}" itemValue="#{questionario}" />
+							</p:selectCheckboxMenu>
+
 						</p:tab>
 					</p:tabView>
 

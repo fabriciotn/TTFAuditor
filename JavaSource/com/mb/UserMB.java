@@ -12,6 +12,7 @@ import javax.faces.context.FacesContext;
 import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpServletRequest;
 
+import com.facade.QuestionarioFacade;
 import com.facade.UserFacade;
 import com.model.Questionario;
 import com.model.User;
@@ -41,7 +42,6 @@ public class UserMB extends AbstractMB implements Serializable {
 		habilitaMenuCadastros();
 		habilitaMenuAuditorias();
 		habilitaMenuPreparacao();
-		loadQuestionarios();
 
 		if (usuarioLogado == null)
 			throw new RuntimeException("Problemas com usuário");
@@ -51,7 +51,10 @@ public class UserMB extends AbstractMB implements Serializable {
 		if (questionarios == null) {
 			questionarios = new ArrayList<Questionario>();
 			
-			questionarios = usuarioLogado.getQuestionarios();
+			if(usuarioLogado.isAdmin())
+				questionarios = new QuestionarioFacade().listAll();
+			else
+				questionarios = usuarioLogado.getQuestionarios();
 		}
 	}
 
@@ -125,6 +128,7 @@ public class UserMB extends AbstractMB implements Serializable {
 	}
 
 	public List<Questionario> getQuestionarios() {
+		loadQuestionarios();
 		return questionarios;
 	}
 

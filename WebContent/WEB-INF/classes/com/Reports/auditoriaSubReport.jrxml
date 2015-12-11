@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="auditoriaSubReport" language="groovy" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="b02eacf4-f747-4b2e-8c32-6701b51f9158">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="id_auditoria" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     Resposta.`id` AS Resposta_id,
+     Resposta.`pergunta` AS Resposta_pergunta,
+     Resposta.`recomendacao` AS Resposta_recomendacao,
+     Resposta.`resposta` AS Resposta_resposta,
+     Questionario.`titulo` AS Questionario_titulo,
+     USERS.`name` AS USERS_name
+FROM
+     `USERS` USERS INNER JOIN `Resposta` Resposta ON USERS.`id` = Resposta.`user_id`
+     INNER JOIN `Questionario` Questionario ON Resposta.`questionario_id` = Questionario.`id`
+WHERE
+     Resposta.`auditoria_id` = $P{id_auditoria}]]>
+	</queryString>
+	<field name="Resposta_id" class="java.lang.Integer"/>
+	<field name="Resposta_pergunta" class="java.lang.String"/>
+	<field name="Resposta_recomendacao" class="java.lang.String"/>
+	<field name="Resposta_resposta" class="java.lang.String"/>
+	<field name="Questionario_titulo" class="java.lang.String"/>
+	<field name="USERS_name" class="java.lang.String"/>
+	<variable name="Resposta_resposta_1" class="java.lang.Integer" resetType="Group" resetGroup="questionarios" calculation="Count">
+		<variableExpression><![CDATA[$F{Resposta_resposta}]]></variableExpression>
+	</variable>
+	<variable name="Questionario_titulo_1" class="java.lang.Integer" resetType="Group" resetGroup="questionarios" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{Questionario_titulo}]]></variableExpression>
+	</variable>
+	<variable name="Resposta_resposta_2" class="java.lang.Integer" resetType="Group" resetGroup="questionarios" calculation="Count">
+		<variableExpression><![CDATA[$F{Resposta_resposta}]]></variableExpression>
+	</variable>
+	<variable name="Resposta_resposta_3" class="java.lang.Integer" resetType="Group" resetGroup="questionarios" calculation="DistinctCount">
+		<variableExpression><![CDATA[$F{Resposta_resposta}]]></variableExpression>
+	</variable>
+	<group name="questionarios" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{Questionario_titulo}]]></groupExpression>
+		<groupHeader>
+			<band height="41">
+				<rectangle>
+					<reportElement uuid="0794666f-708a-4adf-a372-3228138327a7" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="20" width="801" height="20" backcolor="#99CCFF"/>
+					<graphicElement>
+						<pen lineWidth="0.0"/>
+					</graphicElement>
+				</rectangle>
+				<textField>
+					<reportElement uuid="57a2e6e7-0565-40ea-bf6e-5b2e78f58053" x="1" y="2" width="433" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Questionário: "+ $F{Questionario_titulo}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement uuid="328f798e-23c8-4ea7-a9ef-35e8a6e3ca99" x="36" y="21" width="353" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Pergunta]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="a63659f5-8a53-452d-ba5b-5f36351892e4" x="467" y="21" width="209" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Recomendação]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="4cd52474-8717-4e92-a13a-25bdfb4d71c7" x="2" y="21" width="30" height="20"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[ID]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="8f707a2f-4ee1-4fee-abfa-17222b512807" x="396" y="21" width="61" height="20"/>
+					<textElement textAlignment="Center">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Resposta]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="d8fad178-6ddf-4528-b540-dc420e99273f" x="683" y="21" width="118" height="20"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Auditor]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<rectangle>
+				<reportElement uuid="5b1e06fc-3ec3-49ca-8fe2-83000857f610" stretchType="RelativeToBandHeight" mode="Opaque" x="6" y="1" width="787" height="17" backcolor="#DDEFFF">
+					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="34048f2a-7bc0-4a91-9ed7-448c02b958ab" stretchType="RelativeToBandHeight" x="37" y="2" width="353" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Resposta_pergunta}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="a667ff8a-a0d2-4ff5-a74a-2d9d9ce39873" stretchType="RelativeToBandHeight" x="397" y="2" width="61" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Resposta_resposta}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="9df86169-e243-4cf0-86f1-d2eeb7744424" stretchType="RelativeToBandHeight" x="468" y="2" width="209" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Resposta_recomendacao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a3ddbc08-5c67-4479-8c9b-d7dc3549a011" stretchType="RelativeToBandHeight" x="6" y="2" width="27" height="15"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Resposta_id}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement uuid="88513d64-5698-4b46-8aec-86e046d8afab" stretchType="RelativeToBandHeight" x="684" y="2" width="109" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{USERS_name}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<noData>
+		<band height="32">
+			<staticText>
+				<reportElement uuid="e64e9663-cd6d-48f7-93cb-3b67e37f541d" x="152" y="0" width="525" height="32"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nenhuma pergunta respondida para esta auditoria.]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>

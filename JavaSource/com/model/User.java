@@ -1,8 +1,11 @@
 package com.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -55,7 +59,8 @@ public class User implements Serializable {
 	@JoinTable(name = "auditor_questionario",
 	joinColumns = @JoinColumn(name = "user_id"), 
 	inverseJoinColumns = @JoinColumn(name = "questionario_id"))
-	private List<Questionario> questionarios;
+	@OrderBy(value = "id ASC")
+	private Set<Questionario> questionarios;
 	
 	/*
 	 * Campos para gerenciar as permissões
@@ -199,10 +204,14 @@ public class User implements Serializable {
 		return ativo;
 	}
 	public List<Questionario> getQuestionarios() {
-		return questionarios;
+		if(questionarios != null)
+			return new ArrayList<Questionario>(questionarios);
+		
+		return null;
 	}
 	public void setQuestionarios(List<Questionario> questionarios) {
-		this.questionarios = questionarios;
+		if(questionarios != null)
+			this.questionarios = new HashSet<Questionario>(questionarios);
 	}
 	public void setAtivo(boolean status) {
 		this.ativo = status;

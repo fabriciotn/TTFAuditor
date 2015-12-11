@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 
 import com.dao.AuditoriaDAO;
 import com.model.Auditoria;
+import com.model.User;
 
 public class AuditoriaFacade implements Serializable {
 
@@ -48,13 +49,6 @@ public class AuditoriaFacade implements Serializable {
 	public List<Auditoria> listAll() {
 		auditoriaDAO.beginTransaction();
 		List<Auditoria> result = auditoriaDAO.findAllAsc();
-		auditoriaDAO.closeTransaction();
-		return result;
-	}
-	
-	public List<Auditoria> listAll(int id) {
-		auditoriaDAO.beginTransaction();
-		List<Auditoria> result = new UserFacade().findUsuario(id).getAuditorias();
 		auditoriaDAO.closeTransaction();
 		return result;
 	}

@@ -31,17 +31,6 @@
 							<f:ajax event="blur" render="@this" />
 						</p:inputText>
 
-						<h:outputText value="Grupo: " />
-						<p:selectOneMenu id="grupo"
-							value="#{questionarioMB.questionario.grupoDeQuestionario}"
-							required="false" requiredMessage="O campo Grupo é obrigatório!" style="width:13em">
-							<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
-								noSelectionOption="true" />
-							<f:selectItems value="#{grupoDeQuestionarioBean.grupoDeQuestionarioList}" var="grupo"
-								itemLabel="#{grupo.label}"
-								itemValue="#{grupo}" />
-						</p:selectOneMenu>
-
 						<p:columnGroup>
 						</p:columnGroup>
 
@@ -58,7 +47,7 @@
 
 				<h:panelGrid columns="1" style="text-align:left">
 					<p:dataTable id="tbl" var="questionario"
-						value="#{userMB.questionarios}"
+						value="#{questionarioMB.allQuestionarios}"
 						paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
 						paginator="true" rows="10" style="margin-bottom:20px">
 
@@ -84,11 +73,6 @@
 						<p:column headerText="TITULO" filterBy="#{questionario.titulo}"
 							sortBy="#{questionario.titulo}" style="text-align: center; width:40em;">
 							<h:outputText value="#{questionario.titulo}" />
-						</p:column>
-
-						<p:column headerText="GRUPO" filterBy="#{questionario.grupoDeQuestionario}"
-							sortBy="#{questionario.grupoDeQuestionario}" style="text-align: center; width:10em;">
-							<h:outputText value="#{questionario.grupoDeQuestionario}" />
 						</p:column>
 
 						<p:column exportable="false"

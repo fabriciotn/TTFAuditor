@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -12,6 +13,8 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.hibernate.mapping.Array;
 
 import com.Reports.RelatorioAuditoria;
 import com.facade.AuditoriaFacade;
@@ -241,8 +244,17 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	private void loadAuditorias() {
 		if(usuarioLogado.isAdmin())
 			auditorias = getAuditoriaFacade().listAll();
-		else
-			auditorias = getAuditoriaFacade().listAll(usuarioLogado.getId());
+		else{
+			auditorias = new ArrayList<Auditoria>();
+			List<Auditoria> todasAuditorias = getAuditoriaFacade().listAll();
+			
+			for (Auditoria auditoria : todasAuditorias) {
+				for (User user : auditoria.getAuditores()) {
+					if(user.getId() == usuarioLogado.getId())
+						auditorias.add(auditoria);					
+				}
+			}
+		}
 	}
 	
 	public void resetAuditoria() {

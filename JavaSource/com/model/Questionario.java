@@ -3,12 +3,9 @@ package com.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Questionario implements Serializable{
@@ -18,9 +15,8 @@ public class Questionario implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	@OneToOne
-	private User user;
 	private String titulo;
+	
 	
 	public int getId() {
 		return id;
@@ -28,12 +24,7 @@ public class Questionario implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
+
 	public String getTitulo() {
 		return titulo;
 	}
