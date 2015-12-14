@@ -32,7 +32,7 @@
 							<p:graphicImage value="/images/hint1.png" id="hint" width="20em"
 								style="float:right; margin-top:0px; margin-right:0px" />
 							<h:outputText id="id_pergunta" value=" Cód.: #{r.id}"
-								escape="false" style="font-weight:bold" />
+								escape="false" style="font-weight:bold" rendered="false"/>
 							<p:tooltip id="toolTipTrack" for="hint" value="#{r.hint}"
 								trackMouse="true" escape="false"
 								style="border:3; white-space:pre-wrap; word-wrap:break-word; font-size:0.9em;" />
