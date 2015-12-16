@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:loadBundle basename="messages" var="msg" />
+
+<ui:param
+	value="#{respostaMB.respostaFacade.findResposta(request.getParameter('resposta_id'))}"
+	name="resposta" />
+
+<ui:param
+	value="#{auditoriaMB.auditoriaFacade.findAuditoria(request.getParameter('auditoria_id'))}"
+	name="auditoria" />
+
+<h:head>
+</h:head>
+
+<h:body style="font-family: arial; margin: 0;">
+	<center>
+		<h:form acceptcharset="ISO-8859-1" id="form1"
+			rendered="#{userMB.usuarioLogado.menuAuditar}">
+			<p:panel id="basic"
+				header="Você está respondendo a auditoria #{resposta.auditoria.codigo}">
+				<h:panelGrid columns="1" columnClasses="label, value"
+					style="text-align:left">
+
+					<h:inputHidden value="#{respostaMB.resposta.id}" />
+
+					<p:columnGroup>
+						<h:outputText value="Resposta anterior: #{resposta.resposta}"
+							rendered="#{resposta.resposta != null}" />
+						<p:selectOneMenu id="resposta"
+							value="#{respostaMB.resposta.resposta}" required="true"
+							requiredMessage="O campo Resposta é obrigatório!"
+							style="width:8em;">
+							<f:selectItem itemLabel="Resposta" itemValue="#{null}"
+								noSelectionOption="true" />
+							<f:selectItem itemLabel="C" itemValue="C" />
+							<f:selectItem itemLabel="NC" itemValue="NC" />
+							<f:selectItem itemLabel="NA" itemValue="NA" />
+						</p:selectOneMenu>
+					</p:columnGroup>
+
+					<h:outputText
+						value="Se a resposta para o ítem for NC, a seguinte recomendação será adicionada automaticamente: #{resposta.recomendacaoPadrao}."
+						style="color:red; font-style:italic; font-size:0.7em;" />
+
+					<br />
+
+					<h:outputText value="Observações: " />
+					<p:inputTextarea rows="5" cols="50"
+						value="#{respostaMB.resposta.recomendacao}" required="false"
+						requiredMessage="O campo Recomendção é obrigatório!"
+						converter="toUpperCaseConverter">
+						<f:ajax event="blur" render="@this" />
+					</p:inputTextarea>
+
+					<p:columnGroup>
+					</p:columnGroup>
+
+					<p:columnGroup>
+						<p:commandButton value="Enviar"
+							actionListener="#{respostaMB.updateResposta}"
+							oncomplete="javascript:window.parent.location.reload();">
+							<f:param name="auditoria_id" value="#{auditoria.id}" />
+							<f:param name="resposta_id" value="#{resposta.id}" />
+						</p:commandButton>
+
+					</p:columnGroup>
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+	</center>
+</h:body>
+</html>

@@ -56,7 +56,9 @@
 								rendered="#{r.resposta == null}" widgetVar="var#{r.id}">
 								<h:outputLink value="respondePergunta.xhtml">
 									<p:graphicImage value="/images/edit.png" width="25em"
-										title="Responder pergunta!" />
+										title="Responder pergunta!" rendered="#{!auditoriaMB.vefificaData}"/>
+									<p:graphicImage value="/images/ok1.png" width="25em"
+										title="Responder pergunta!" rendered="#{auditoriaMB.vefificaData}"/>
 									<f:param name="auditoria_id"
 										value="#{auditoriaMB.auditoria.id}" />
 									<f:param name="resposta_id" value="#{r.id}" />

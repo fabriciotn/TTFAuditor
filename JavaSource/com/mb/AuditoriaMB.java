@@ -3,8 +3,9 @@ package com.mb;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -13,8 +14,6 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.hibernate.mapping.Array;
 
 import com.Reports.RelatorioAuditoria;
 import com.facade.AuditoriaFacade;
@@ -38,6 +37,29 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	private String				recomendacao;
 	private List<Resposta>		respostas;
 	private int					currentTab			= 0;
+	private boolean podeEditar;
+
+	
+	public boolean isPodeEditar() {
+		Calendar hoje = Calendar.getInstance();
+		hoje.setTime( new java.util.Date() );
+		hoje.add( Calendar.DAY_OF_MONTH , 1 );
+		
+		Date dataDaAuditoria = auditoria.getDataDaVerificacao();
+		
+		//se a data de 
+		if(hoje.getTime().after(dataDaAuditoria)){
+			podeEditar = false;
+		}else{
+			podeEditar = true;
+		}
+		
+		return podeEditar;
+	}
+
+	public void setPodeEditar(boolean podeEditar) {
+		this.podeEditar = podeEditar;
+	}
 
 	public int getCurrentTab() {
 		if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("currentTab") != null)
