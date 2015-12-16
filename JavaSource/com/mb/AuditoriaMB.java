@@ -38,21 +38,36 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	private int					currentTab			= 0;
 	private boolean podeEditar;
 
-	
-	public boolean isPodeEditar() {
+	public boolean podeEditar(Date dataDaResposta){
+		if(dataDaResposta == null){
+			podeEditar = false;
+			return podeEditar;
+		}
+		
 		Calendar hoje = Calendar.getInstance();
 		hoje.setTime( new java.util.Date() );
-		hoje.add( Calendar.DAY_OF_MONTH , 1 );
 		
-		Date dataDaAuditoria = auditoria.getDataDaVerificacao();
+		Calendar dataDaRespostaMais1Dia = Calendar.getInstance();
+		dataDaRespostaMais1Dia.setTime(dataDaResposta);
+		dataDaRespostaMais1Dia.add(Calendar.DAY_OF_MONTH,1);
 		
-		//se a data de 
-		if(hoje.getTime().after(dataDaAuditoria)){
+		System.out.println("hoje: " + hoje.getTime());
+		System.out.println("hoje+24h: " + dataDaRespostaMais1Dia.getTime());
+		System.out.println("Resposta: " + dataDaResposta);
+		
+		
+		//se a data de hoje + 1 dia for maior que a data da resposta não é permitido alterar
+		if(hoje.after(dataDaRespostaMais1Dia)){
 			podeEditar = false;
 		}else{
 			podeEditar = true;
 		}
 		
+		System.out.println("pode editar? " + podeEditar);
+		return podeEditar;
+	}
+	
+	public boolean isPodeEditar() {
 		return podeEditar;
 	}
 

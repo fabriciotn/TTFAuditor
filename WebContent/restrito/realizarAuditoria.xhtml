@@ -44,6 +44,9 @@
 							style="width:4em; text-align:center;">
 							<h:outputText value="#{r.resposta}" />
 						</p:column>
+						
+						<p:remoteCommand name="nomeRemoteCommand" id="idRemoteCommand" action="#{auditoriaMB.podeEditar(r.dataDaResposta)}"/>
+						
 
 						<p:column headerText="Recomendação"
 							style="width:25em; white-space:pre-wrap; word-wrap:break-word; ">
@@ -53,12 +56,12 @@
 						<p:column headerText="Responder"
 							style="width:8em; text-align:center">
 							<p:lightBox iframe="true" id="lighbox3" height="400px"
-								rendered="#{r.resposta == null}" widgetVar="var#{r.id}">
+								 widgetVar="var#{r.id}">
 								<h:outputLink value="respondePergunta.xhtml">
 									<p:graphicImage value="/images/edit.png" width="25em"
-										title="Responder pergunta!" rendered="#{!auditoriaMB.vefificaData}"/>
+										title="Responder pergunta!" rendered="#{!auditoriaMB.podeEditar}"/>
 									<p:graphicImage value="/images/ok1.png" width="25em"
-										title="Responder pergunta!" rendered="#{auditoriaMB.vefificaData}"/>
+										title="Editar pergunta!" rendered="#{auditoriaMB.podeEditar}"/>
 									<f:param name="auditoria_id"
 										value="#{auditoriaMB.auditoria.id}" />
 									<f:param name="resposta_id" value="#{r.id}" />

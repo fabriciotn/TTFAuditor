@@ -1,6 +1,7 @@
 package com.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.faces.bean.SessionScoped;
 import javax.persistence.Entity;
@@ -12,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @SessionScoped
@@ -40,6 +43,16 @@ public class Resposta implements Serializable{
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="auditoria_id")
 	private Auditoria auditoria;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataDaResposta;
+
+	public Date getDataDaResposta() {
+		return dataDaResposta;
+	}
+
+	public void setDataDaResposta(Date dataDaResposta) {
+		this.dataDaResposta = dataDaResposta;
+	}
 
 	public int getId() {
 		return id;

@@ -1,6 +1,8 @@
 package com.facade;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -42,6 +44,8 @@ public class RespostaFacade implements Serializable {
 			}
 			persistedResposta.setRecomendacao(resposta.getRecomendacao());
 		}
+		
+		persistedResposta.setDataDaResposta(new Date());
 
 		respostaDAO.update(persistedResposta);
 		respostaDAO.commitAndCloseTransaction();
