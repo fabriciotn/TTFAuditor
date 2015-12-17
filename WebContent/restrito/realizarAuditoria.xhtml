@@ -17,7 +17,8 @@
 			header="Você está respondendo a auditoria #{auditoriaMB.auditoria.codigo}"
 			style="margin-bottom:20px; font-size:0.9em;"
 			value="#{userMB.questionarios}" var="questionario"
-			activeIndex="#{auditoriaMB.currentTab}" rendered="#{userMB.usuarioLogado.menuAuditar}">
+			activeIndex="#{auditoriaMB.currentTab}"
+			rendered="#{userMB.usuarioLogado.menuAuditar}">
 
 			<p:ajax event="tabChange" listener="#{auditoriaMB.onTabChange}" />
 
@@ -32,7 +33,7 @@
 							<p:graphicImage value="/images/hint1.png" id="hint" width="20em"
 								style="float:right; margin-top:0px; margin-right:0px" />
 							<h:outputText id="id_pergunta" value=" Cód.: #{r.id}"
-								escape="false" style="font-weight:bold" rendered="false"/>
+								escape="false" style="font-weight:bold" rendered="false" />
 							<p:tooltip id="toolTipTrack" for="hint" value="#{r.hint}"
 								trackMouse="true" escape="false"
 								style="border:3; white-space:pre-wrap; word-wrap:break-word; font-size:0.9em;" />
@@ -44,9 +45,6 @@
 							style="width:4em; text-align:center;">
 							<h:outputText value="#{r.resposta}" />
 						</p:column>
-						
-						<p:remoteCommand name="nomeRemoteCommand" id="idRemoteCommand" action="#{auditoriaMB.podeEditar(r.dataDaResposta)}"/>
-						
 
 						<p:column headerText="Recomendação"
 							style="width:25em; white-space:pre-wrap; word-wrap:break-word; ">
@@ -54,22 +52,38 @@
 						</p:column>
 
 						<p:column headerText="Responder"
-							style="width:8em; text-align:center">
-							<p:lightBox iframe="true" id="lighbox3" height="400px"
-								 widgetVar="var#{r.id}">
+							style="width:8em; text-align:center"
+							rendered="#{r.resposta == null}">
+							<p:lightBox iframe="true" id="lighbox2" height="400px"
+								widgetVar="var#{r.id}">
 								<h:outputLink value="respondePergunta.xhtml">
 									<p:graphicImage value="/images/edit.png" width="25em"
-										title="Responder pergunta!" rendered="#{!auditoriaMB.podeEditar}"/>
-									<p:graphicImage value="/images/ok1.png" width="25em"
-										title="Editar pergunta!" rendered="#{auditoriaMB.podeEditar}"/>
+										title="Responder pergunta!" />
 									<f:param name="auditoria_id"
 										value="#{auditoriaMB.auditoria.id}" />
 									<f:param name="resposta_id" value="#{r.id}" />
 								</h:outputLink>
 							</p:lightBox>
+						</p:column>
 
+						<p:column headerText="Responder"
+							style="width:8em; text-align:center"
+							rendered="#{r.resposta != null}">
+							<p:lightBox iframe="true" id="lighbox3" height="600px"
+								widgetVar="var#{r.id}">
+								<h:outputLink value="editaPergunta.xhtml">
+									<p:graphicImage value="/images/ok1.png" width="25em"
+										title="Editar pergunta!"
+										rendered="#{auditoriaMB.podeEditar(r.dataDaResposta)}" />
+									<f:param name="auditoria_id"
+										value="#{auditoriaMB.auditoria.id}" />
+									<f:param name="resposta_id" value="#{r.id}" />
+								</h:outputLink>
+							</p:lightBox>
+							
 							<p:graphicImage value="/images/ok.png" width="25em"
-								rendered="#{r.resposta != null}" title="Pergunta já respondida!" />
+								rendered="#{!auditoriaMB.podeEditar(r.dataDaResposta)}"
+								title="Pergunta já respondida!" />
 						</p:column>
 					</p:dataTable>
 				</h:form>

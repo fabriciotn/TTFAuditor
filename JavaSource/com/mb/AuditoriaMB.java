@@ -48,22 +48,15 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		hoje.setTime( new java.util.Date() );
 		
 		Calendar dataDaRespostaMais1Dia = Calendar.getInstance();
-		dataDaRespostaMais1Dia.setTime(dataDaResposta);
-		dataDaRespostaMais1Dia.add(Calendar.DAY_OF_MONTH,1);
-		
-		System.out.println("hoje: " + hoje.getTime());
-		System.out.println("hoje+24h: " + dataDaRespostaMais1Dia.getTime());
-		System.out.println("Resposta: " + dataDaResposta);
-		
-		
+		dataDaRespostaMais1Dia.setTime(dataDaResposta); //recebe a data da resposta no formato Date e converte para Calendar
+		dataDaRespostaMais1Dia.add(Calendar.DAY_OF_MONTH,1); //Acrescenta um dia
+
 		//se a data de hoje + 1 dia for maior que a data da resposta não é permitido alterar
 		if(hoje.after(dataDaRespostaMais1Dia)){
 			podeEditar = false;
 		}else{
 			podeEditar = true;
 		}
-		
-		System.out.println("pode editar? " + podeEditar);
 		return podeEditar;
 	}
 	

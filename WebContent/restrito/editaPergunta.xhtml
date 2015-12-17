@@ -30,13 +30,20 @@
 					<h:inputHidden value="#{respostaMB.resposta.id}" />
 
 					<p:columnGroup>
-						<h:outputText value="Resposta anterior: #{resposta.resposta}"
-							rendered="#{resposta.resposta != null}" />
+						<h:outputText value="Resposta atual: " />
+						<h:outputText value="#{resposta.resposta}"
+							style="font-weight:bold; text-decoration: underline;" />
+					</p:columnGroup>
+
+					<br />
+
+					<p:columnGroup>
+						<h:outputText value="Nova resposta: " />
 						<p:selectOneMenu id="resposta"
 							value="#{respostaMB.resposta.resposta}" required="true"
 							requiredMessage="O campo Resposta é obrigatório!"
 							style="width:8em;">
-							<f:selectItem itemLabel="Resposta" itemValue="#{null}"
+							<f:selectItem itemLabel="Nova resposta" itemValue="#{null}"
 								noSelectionOption="true" />
 							<f:selectItem itemLabel="C" itemValue="C" />
 							<f:selectItem itemLabel="NC" itemValue="NC" />
@@ -44,21 +51,24 @@
 						</p:selectOneMenu>
 					</p:columnGroup>
 
-					<h:outputText
-						value="Se a resposta para o ítem for NC, a seguinte recomendação será adicionada automaticamente: #{resposta.recomendacaoPadrao}."
-						style="color:red; font-style:italic; font-size:0.7em;" />
+					<br />
+
+					<h:outputText value="Observação atual: " />
+					<h:outputText value="#{resposta.recomendacao}"
+						style="font-size:0.8em;white-space: pre-wrap;word-wrap: break-word;" />
 
 					<br />
 
-					<h:outputText value="Observações: " />
-					<p:inputTextarea rows="5" cols="50"
-						value="#{respostaMB.resposta.recomendacao}" required="false"
-						requiredMessage="O campo Recomendção é obrigatório!"
-						converter="toUpperCaseConverter">
-						<f:ajax event="blur" render="@this" />
-					</p:inputTextarea>
-
 					<p:columnGroup>
+						<h:outputText value="Nova observação: " />
+						<p:inputTextarea rows="3" cols="50" id="observacao"
+							value="#{respostaMB.resposta.recomendacao}" required="false"
+							requiredMessage="O campo Observação é obrigatório!"
+							converter="toUpperCaseConverter">
+							<f:ajax event="blur" render="@this" />
+						</p:inputTextarea>
+						<p:watermark for="observacao" value="Digite sua observação!"
+							id="watermark" />
 					</p:columnGroup>
 
 					<p:columnGroup>
