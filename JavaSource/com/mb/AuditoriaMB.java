@@ -65,7 +65,14 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		quantidadeDePerguntasNaoRespondidas = 0;
 		for (Resposta resposta : auditoria.getRespostas()) {
 			if(resposta.getResposta() == null){
-				quantidadeDePerguntasNaoRespondidas++;
+				if(usuarioLogado.isAdmin())
+					quantidadeDePerguntasNaoRespondidas++;
+				else{
+					for (Questionario q : usuarioLogado.getQuestionarios()) {
+						if(resposta.getQuestionario().getId() == q.getId())
+							quantidadeDePerguntasNaoRespondidas++;
+					}
+				}
 			}
 		}
 		return quantidadeDePerguntasNaoRespondidas;
