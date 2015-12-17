@@ -80,12 +80,24 @@
 									<f:param name="resposta_id" value="#{r.id}" />
 								</h:outputLink>
 							</p:lightBox>
-							
+
 							<p:graphicImage value="/images/ok.png" width="25em"
 								rendered="#{!auditoriaMB.podeEditar(r.dataDaResposta)}"
 								title="Pergunta já respondida!" />
 						</p:column>
 					</p:dataTable>
+
+					<br />
+
+					<h:outputText
+						value="Existem #{auditoriaMB.quantidadeDePerguntasNaoRespondidas} perguntas sem resposta."
+						style="padding:15px 10px 15px 50px;margin: 10px 0px;border: 1px solid;background-color: #FFBABA; color:#D8000C; white-space:pre-wrap; word-wrap:break-word; font-size:1.5em; font-weight:bold;"
+						rendered="#{auditoriaMB.quantidadeDePerguntasNaoRespondidas != 0}" />
+
+					<h:outputText value="Todas as perguntas foram respondidas."
+						style="padding:15px 10px 15px 50px;margin: 10px 0px;border: 1px solid;background-color: #DFF2BF; color:#4F8A10; white-space:pre-wrap; word-wrap:break-word; font-size:1.5em; font-weight:bold;"
+						rendered="#{auditoriaMB.quantidadeDePerguntasNaoRespondidas == 0}" />
+
 				</h:form>
 			</p:tab>
 

@@ -37,6 +37,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	private List<Resposta>		respostas;
 	private int					currentTab			= 0;
 	private boolean podeEditar;
+	private int quantidadeDePerguntasNaoRespondidas = 0;
 
 	public boolean podeEditar(Date dataDaResposta){
 		if(dataDaResposta == null){
@@ -60,6 +61,20 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return podeEditar;
 	}
 	
+	public int getQuantidadeDePerguntasNaoRespondidas() {
+		quantidadeDePerguntasNaoRespondidas = 0;
+		for (Resposta resposta : auditoria.getRespostas()) {
+			if(resposta.getResposta() == null){
+				quantidadeDePerguntasNaoRespondidas++;
+			}
+		}
+		return quantidadeDePerguntasNaoRespondidas;
+	}
+
+	public void setQuantidadeDePerguntasNaoRespondidas(int quantidadeDePerguntasNaoRespondidas) {
+		this.quantidadeDePerguntasNaoRespondidas = quantidadeDePerguntasNaoRespondidas;
+	}
+
 	public boolean isPodeEditar() {
 		return podeEditar;
 	}
