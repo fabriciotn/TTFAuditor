@@ -13,6 +13,20 @@
 
 	<ui:define name="conteudo">
 		<f:loadBundle basename="messages" var="msg" />
+
+		<h:form>
+			<h:outputText
+				value="Existem #{auditoriaMB.quantidadeDePerguntasNaoRespondidas} perguntas sem resposta."
+				style="padding:15px 10px 15px 50px;margin: 10px 0px;border: 1px solid;background-color: #FFBABA; color:#D8000C; white-space:pre-wrap; word-wrap:break-word; font-size:1.5em; font-weight:bold;"
+				rendered="#{auditoriaMB.quantidadeDePerguntasNaoRespondidas != 0}" />
+
+			<h:outputText value="Todas as perguntas foram respondidas."
+				style="padding:15px 10px 15px 50px;margin: 10px 0px;border: 1px solid;background-color: #DFF2BF; color:#4F8A10; white-space:pre-wrap; word-wrap:break-word; font-size:1.5em; font-weight:bold;"
+				rendered="#{auditoriaMB.quantidadeDePerguntasNaoRespondidas == 0}" />
+		</h:form>
+
+		<br/>
+
 		<p:tabView scrollable="true" id="basic"
 			header="Você está respondendo a auditoria #{auditoriaMB.auditoria.codigo}"
 			style="margin-bottom:20px; font-size:0.9em;"
@@ -86,18 +100,6 @@
 								title="Pergunta já respondida!" />
 						</p:column>
 					</p:dataTable>
-
-					<br />
-
-					<h:outputText
-						value="Existem #{auditoriaMB.quantidadeDePerguntasNaoRespondidas} perguntas sem resposta."
-						style="padding:15px 10px 15px 50px;margin: 10px 0px;border: 1px solid;background-color: #FFBABA; color:#D8000C; white-space:pre-wrap; word-wrap:break-word; font-size:1.5em; font-weight:bold;"
-						rendered="#{auditoriaMB.quantidadeDePerguntasNaoRespondidas != 0}" />
-
-					<h:outputText value="Todas as perguntas foram respondidas."
-						style="padding:15px 10px 15px 50px;margin: 10px 0px;border: 1px solid;background-color: #DFF2BF; color:#4F8A10; white-space:pre-wrap; word-wrap:break-word; font-size:1.5em; font-weight:bold;"
-						rendered="#{auditoriaMB.quantidadeDePerguntasNaoRespondidas == 0}" />
-
 				</h:form>
 			</p:tab>
 
