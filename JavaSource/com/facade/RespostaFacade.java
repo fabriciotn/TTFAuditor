@@ -34,17 +34,20 @@ public class RespostaFacade implements Serializable {
 			persistedResposta.setUser(resposta.getUser());
 		if (resposta.getQuestionario() != null)
 			persistedResposta.setQuestionario(resposta.getQuestionario());
-		
-		if (resposta.getRecomendacao() != null){
-			if(resposta.getResposta().equals("NC")){
-				String novaRecomendacao = "Recomendação padrão: " + persistedResposta.getRecomendacaoPadrao() + "\n" +
-										  "Observações: " + resposta.getRecomendacao();
-				
+
+		if (resposta.getRecomendacao() != null) {
+			if (resposta.getResposta().equals("NC") && persistedResposta.getRecomendacaoPadrao() != null
+					&& !persistedResposta.getRecomendacaoPadrao().equals("")) {
+				String novaRecomendacao = "Recomendação padrão: " + persistedResposta.getRecomendacaoPadrao() + "\n" + "Observações: "
+						+ resposta.getRecomendacao();
+
 				resposta.setRecomendacao(novaRecomendacao);
+			} else {
+				resposta.setRecomendacao(resposta.getRecomendacao());
 			}
 			persistedResposta.setRecomendacao(resposta.getRecomendacao());
 		}
-		
+
 		persistedResposta.setDataDaResposta(new Date());
 
 		respostaDAO.update(persistedResposta);
