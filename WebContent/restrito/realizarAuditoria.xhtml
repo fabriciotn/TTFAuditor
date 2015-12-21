@@ -35,8 +35,11 @@
 			rendered="#{userMB.usuarioLogado.menuAuditar}">
 
 			<p:ajax event="tabChange" listener="#{auditoriaMB.onTabChange}" />
-
+			
 			<p:tab title="#{questionario.titulo}">
+				<h:outputText value="Instituição: #{auditoriaMB.auditoria.estabelecimento.nomeFantasia}" style="font-size:1em; font-weight:bold;"/><br/>
+				<h:outputText value="Código: #{auditoriaMB.auditoria.codigo}" style="font-size:1em; font-weight:bold;"/>
+				
 				<h:form acceptcharset="ISO-8859-1" id="form">
 					<h:inputHidden value="#{auditoriaMB.auditoria.id}" />
 
