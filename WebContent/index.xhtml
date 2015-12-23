@@ -6,28 +6,56 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 
-	<f:loadBundle basename="messages" var="msg" />
-	<h:head>
-		<title>#{msg.tituloPagina}</title>
-	
-		<script language="JavaScript">
-			/**
-			 * @function isMobile
-			 * detecta se o useragent e um dispositivo mobile e direciona para a página correta.
-			 */
-			function isMobile()
-			{
-				var userAgent = navigator.userAgent.toLowerCase();
-				if( userAgent.search(/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i)!= -1 )
-					location.href = "index_mobile.xhtml";
-				else
-					location.href = "index_padrao.xhtml";
+<f:loadBundle basename="messages" var="msg" />
+<h:head>
+	<title>#{msg.tituloPagina}</title>
+
+	<script language="JavaScript">
+		function identifyBrowser() {
+			var ua = navigator.userAgent.toLowerCase();
+			if (ua.indexOf("opera") != -1) {
+				browserName = "opera";
+				//return 1;
+			} else if (ua.indexOf("msie") != -1) {
+				browserName = "msie";
+				//return 2;
+			} else if (ua.indexOf("chrome") != -1) {
+				browserName = "chrome";
+				return "index_padrao.xhtml";
+				//return 3;
+			} else if (ua.indexOf("safari") != -1) {
+				browserName = "safari";
+				//return 3;
+			} else if (ua.indexOf("mozilla") != -1) {
+				if (ua.indexOf("firefox") != -1) {
+					browserName = "firefox";
+					//return 4;
+				} else {
+					browserName = "mozilla";
+					//return 5;
+				}
 			}
-		</script>
-		<link rel="icon" href="images/ttf.ico" type="image/x-icon" />
-		<link rel="shortcut icon" href="images/ttf.ico" type="image/x-icon" />
-	</h:head>
-	
-	<h:body style="font-family: arial; margin: 0;" onload="isMobile();">
-	</h:body>
+			return "erro_brownser.xhtml";
+		}
+
+		/**
+		 * @function isMobile
+		 * detecta se o useragent e um dispositivo mobile e direciona para a página correta.
+		 */
+		function isMobile() {			
+			var userAgent = navigator.userAgent.toLowerCase();
+			if (userAgent
+					.search(/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i) != -1)
+				location.href = "index_mobile.xhtml";
+			else{
+				location.href = identifyBrowser();
+			}
+		}
+	</script>
+	<link rel="icon" href="images/ttf.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="images/ttf.ico" type="image/x-icon" />
+</h:head>
+
+<h:body style="font-family: arial; margin: 0;" onload="isMobile();">
+</h:body>
 </html>
