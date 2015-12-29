@@ -16,8 +16,10 @@ import javax.servlet.http.HttpSession;
 
 import com.Reports.RelatorioAuditoria;
 import com.facade.AuditoriaFacade;
+import com.facade.ParametrosFacade;
 import com.facade.RespostaFacade;
 import com.model.Auditoria;
+import com.model.Parametros;
 import com.model.Pergunta;
 import com.model.Questionario;
 import com.model.Resposta;
@@ -45,14 +47,16 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			return podeEditar;
 		}
 		
+		Parametros parametros = new ParametrosFacade().findParametros(1);
+		
 		Calendar hoje = Calendar.getInstance();
 		hoje.setTime( new java.util.Date() );
 		
 		Calendar prazoParaEditarResposta = Calendar.getInstance();
 		prazoParaEditarResposta.setTime(dataDaResposta); //recebe a data da resposta no formato Date e converte para Calendar
-		prazoParaEditarResposta.add(Calendar.DAY_OF_MONTH,5); //Acrescenta quantidade de dias
+		prazoParaEditarResposta.add(Calendar.DAY_OF_MONTH,parametros.getQuantidadeDeDiasParaAlterarAResposta());
 
-		//se a data de hoje + 5 dia for maior que a data da resposta não é permitido alterar
+		//se a data de hoje + XXX dia for maior que a data da resposta não é permitido alterar
 		if(hoje.after(prazoParaEditarResposta)){
 			podeEditar = false;
 		}else{

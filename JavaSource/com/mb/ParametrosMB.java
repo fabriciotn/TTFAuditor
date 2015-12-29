@@ -1,16 +1,13 @@
 package com.mb;
 
 import java.io.Serializable;
-import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 
 import com.facade.ParametrosFacade;
 import com.model.Parametros;
-import com.model.User;
 
 @RequestScoped
 @ManagedBean
@@ -20,6 +17,22 @@ public class ParametrosMB extends AbstractMB implements Serializable {
 
 	private Parametros parametros;
 	private ParametrosFacade parametrosFacade;
+	
+	@PostConstruct
+    public void init(){
+        this.parametros = getParametrosFacade().findParametros(1);
+    }
+
+	public ParametrosFacade getParametrosFacade() {
+		if (parametrosFacade == null) {
+			parametrosFacade = new ParametrosFacade();
+		}
+		return parametrosFacade;
+	}
+
+	public void setParametrosFacade(ParametrosFacade parametrosFacade) {
+		this.parametrosFacade = parametrosFacade;
+	}
 
 	public Parametros getParametros() {
 		if (parametros == null) {
@@ -39,12 +52,12 @@ public class ParametrosMB extends AbstractMB implements Serializable {
 			closeDialog();
 			displayInfoMessageToUser("Atualizado com sucesso!");
 			resetParametros();
-
 		} catch (Exception e) {
 			keepDialogOpen();
 			displayErrorMessageToUser("Ocorreu algum problema. Tente novamente!");
 			e.printStackTrace();
 		}
+		init();
 	}
 
 	public void resetParametros() {
