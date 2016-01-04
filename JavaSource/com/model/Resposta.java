@@ -25,6 +25,7 @@ public class Resposta implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	private Flag ehResponsavelOubservacao;
 	@OneToOne
 	private User user;
 	@OneToOne
@@ -45,6 +46,15 @@ public class Resposta implements Serializable{
 	private Auditoria auditoria;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataDaResposta;
+
+	
+	public Flag getEhResponsavelOubservacao() {
+		return ehResponsavelOubservacao;
+	}
+
+	public void setEhResponsavelOubservacao(Flag ehResponsavelOubservacao) {
+		this.ehResponsavelOubservacao = ehResponsavelOubservacao;
+	}
 
 	public Date getDataDaResposta() {
 		return dataDaResposta;
