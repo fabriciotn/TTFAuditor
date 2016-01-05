@@ -45,8 +45,9 @@ public class PerguntaFacade implements Serializable {
 	}
 
 	public List<Pergunta> listAll() {
+		String campo = "questionario_id";
 		perguntaDAO.beginTransaction();
-		List<Pergunta> result = perguntaDAO.findAllAsc();
+		List<Pergunta> result = perguntaDAO.findAllAsc("questionario");
 		perguntaDAO.closeTransaction();
 		return result;
 	}

@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.faces.bean.SessionScoped;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,7 +27,8 @@ public class Resposta implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private Flag ehResponsavelOubservacao;
+	@Enumerated(EnumType.STRING)
+	private Flag tipoDeResposta;
 	@OneToOne
 	private User user;
 	@OneToOne
@@ -47,13 +50,12 @@ public class Resposta implements Serializable{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataDaResposta;
 
-	
-	public Flag getEhResponsavelOubservacao() {
-		return ehResponsavelOubservacao;
+	public Flag getTipoDeResposta() {
+		return tipoDeResposta;
 	}
 
-	public void setEhResponsavelOubservacao(Flag ehResponsavelOubservacao) {
-		this.ehResponsavelOubservacao = ehResponsavelOubservacao;
+	public void setTipoDeResposta(Flag tipoDeResposta) {
+		this.tipoDeResposta = tipoDeResposta;
 	}
 
 	public Date getDataDaResposta() {

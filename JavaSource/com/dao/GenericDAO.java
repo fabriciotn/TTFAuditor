@@ -85,6 +85,15 @@ abstract class GenericDAO<T> implements Serializable {
 		return em.getReference(entityClass, entityID);
 	}
 
+	public List<T> findAllAsc(String campo) {
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityClass);
+		Root<T> from = criteriaQuery.from(entityClass);
+		CriteriaQuery<T> select = criteriaQuery.select(from);
+		criteriaQuery.orderBy(criteriaBuilder.asc(from.get(campo)));
+		return em.createQuery(select).getResultList();
+	}
+	
 	public List<T> findAllAsc() {
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityClass);

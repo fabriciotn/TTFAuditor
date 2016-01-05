@@ -19,6 +19,7 @@ import com.facade.AuditoriaFacade;
 import com.facade.ParametrosFacade;
 import com.facade.RespostaFacade;
 import com.model.Auditoria;
+import com.model.Flag;
 import com.model.Parametros;
 import com.model.Pergunta;
 import com.model.Questionario;
@@ -227,18 +228,28 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 	private void adicionaPerguntas(Auditoria auditoria) {
 		List<Pergunta> perguntas = new PerguntaMB().getAllPerguntas();
+		int idQuestionarioAnterior = 0;
 
 		for (Pergunta pergunta : perguntas) {
 			// Só adiciona as perguntas que forem
 			// referentes aos tipos de estabelecimento
 			if ((pergunta.getTipoServico() != null) && (pergunta.getTipoServico().equals(auditoria.getEstabelecimento().getTipoServico())
 					|| pergunta.getTipoServico().equals("Ambos"))) {
+				
+				
+				if(idQuestionarioAnterior != pergunta.getQuestionario().getId()){
+					new RespostaFacade().createResposta(incluiPerguntaNomeDoResponsavel(pergunta.getQuestionario()));
+					new RespostaFacade().createResposta(incluiPerguntaObservacao(pergunta.getQuestionario()));
+					idQuestionarioAnterior = pergunta.getQuestionario().getId();
+				}
+				
 				Resposta resposta = new Resposta();
 				resposta.setPergunta(pergunta.getPergunta());
 				resposta.setHint(pergunta.getHint());
 				resposta.setQuestionario(pergunta.getQuestionario());
 				resposta.setRecomendacaoPadrao(pergunta.getRecomendacaoPadrao());
 				resposta.setTipoServico(pergunta.getTipoServico());
+				resposta.setTipoDeResposta(Flag.PERGUNTA);
 				resposta.setAuditoria(auditoria);
 				new RespostaFacade().createResposta(resposta);
 			}
@@ -247,6 +258,28 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		List<Resposta> respostas = new RespostaMB().getAllRespostas();
 		auditoria.setRespostas(respostas);
 		updateAuditoria();
+	}
+	
+	private Resposta incluiPerguntaNomeDoResponsavel(Questionario q){
+		Resposta resposta = new Resposta();
+		resposta.setPergunta("RESPONSÁVEL");
+		resposta.setHint("PESSOA RESPONSÁVEL POR FORNECER AS RESPOSTAS PARA ESTE QUESTIONÁRIO");
+		resposta.setQuestionario(q);
+		resposta.setRecomendacaoPadrao(null);
+		resposta.setTipoDeResposta(Flag.RESPONSAVEL);
+		resposta.setAuditoria(auditoria);
+		return resposta;
+	}
+	
+	private Resposta incluiPerguntaObservacao(Questionario q){
+		Resposta resposta = new Resposta();
+		resposta.setPergunta("OBSERVAÇÃO");
+		resposta.setHint("OBSERVAÇÕES PARA ESTE QUESTIONÁRIO");
+		resposta.setQuestionario(q);
+		resposta.setRecomendacaoPadrao(null);
+		resposta.setTipoDeResposta(Flag.OBSERVACAO);
+		resposta.setAuditoria(auditoria);
+		return resposta;
 	}
 
 	public void updateAuditoria() {
