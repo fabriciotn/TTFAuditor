@@ -45,30 +45,62 @@
 
 							<h:inputHidden value="#{respostaMB.resposta.id}" />
 
-							<p:selectOneMenu id="resposta"
-								value="#{respostaMB.resposta.resposta}" required="true"
-								requiredMessage="O campo Resposta é obrigatório!"
-								style="width:8em;">
-								<f:selectItem itemLabel="Resposta" itemValue="#{null}"
-									noSelectionOption="true" />
-								<f:selectItem itemLabel="C" itemValue="C" />
-								<f:selectItem itemLabel="NC" itemValue="NC" />
-								<f:selectItem itemLabel="NA" itemValue="NA" />
-							</p:selectOneMenu>
+							<!--
+								PERGUNTA COMUM 
+						 	-->
+							<p:columnGroup
+								rendered="#{resposta.tipoDeResposta == 'B_PERGUNTA'}">
+								<p:selectOneMenu id="resposta"
+									value="#{respostaMB.resposta.resposta}" required="true"
+									requiredMessage="O campo Resposta é obrigatório!"
+									style="width:8em;">
+									<f:selectItem itemLabel="Resposta" itemValue="#{null}"
+										noSelectionOption="true" />
+									<f:selectItem itemLabel="C" itemValue="C" />
+									<f:selectItem itemLabel="NC" itemValue="NC" />
+									<f:selectItem itemLabel="NA" itemValue="NA" />
+								</p:selectOneMenu>
 
-							<h:outputText
-								value="Se a resposta para o ítem for NC, a seguinte observação será adicionada automaticamente: #{resposta.recomendacaoPadrao}."
-								style="color:red; font-style:italic; font-size:0.7em;" />
+								<h:outputText
+									value="Se a resposta para o ítem for NC, a seguinte observação será adicionada automaticamente: #{resposta.recomendacaoPadrao}."
+									style="color:red; font-style:italic; font-size:0.7em;" />
 
-							<h:outputText value="Observações: " />
-							<p:inputTextarea rows="5" cols="50"
-								value="#{respostaMB.resposta.recomendacao}" required="false"
-								requiredMessage="O campo Recomendção é obrigatório!"
-								converter="toUpperCaseConverter">
-								<f:ajax event="blur" render="@this" />
-							</p:inputTextarea>
+								<h:outputText value="Observações: " />
+								<p:inputTextarea rows="5" cols="50"
+									value="#{respostaMB.resposta.recomendacao}" required="false"
+									requiredMessage="O campo Recomendção é obrigatório!"
+									converter="toUpperCaseConverter">
+									<f:ajax event="blur" render="@this" />
+								</p:inputTextarea>
+							</p:columnGroup>
 
-							<p:columnGroup>
+							<!--
+								PERGUNTA: RESPONSAVEL POR RESPONDER AS PERGUNTAS DESTE QUESTIONARIO 
+							 -->
+							<p:columnGroup
+								rendered="#{resposta.tipoDeResposta == 'A_RESPONSAVEL'}">
+								<h:outputText value="Nome do responsável pelas respostas:" />
+								<p:inputText value="#{respostaMB.resposta.resposta}"
+									required="true" requiredMessage="O campo Responsável é obrigatório!"
+									label="Responsável" size="40" maxlength="255"
+									converter="toUpperCaseConverter">
+									<f:ajax event="blur" render="@this" />
+								</p:inputText>
+							</p:columnGroup>
+
+
+							<!--
+								PERGUNTA: OBSERVAÇÕES POR QUESTIONARIO 
+							 -->
+							<p:columnGroup
+								rendered="#{resposta.tipoDeResposta == 'C_OBSERVACAO'}">
+								<h:outputText value="Observações para este questionário: " />
+								<p:inputTextarea rows="5" cols="50"
+									value="#{respostaMB.resposta.resposta}" required="false"
+									requiredMessage="O campo Recomendção é obrigatório!"
+									converter="toUpperCaseConverter">
+									<f:ajax event="blur" render="@this" />
+								</p:inputTextarea>
 							</p:columnGroup>
 
 							<p:columnGroup>
