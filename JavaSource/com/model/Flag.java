@@ -1,7 +1,7 @@
 package com.model;
 
 public enum Flag {
-	PERGUNTA,
-	RESPONSAVEL, 
-	OBSERVACAO;
+	A_RESPONSAVEL, 
+	B_PERGUNTA,
+	C_OBSERVACAO;
 }

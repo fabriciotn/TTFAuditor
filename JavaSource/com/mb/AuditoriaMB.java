@@ -259,7 +259,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 				resposta.setQuestionario(pergunta.getQuestionario());
 				resposta.setRecomendacaoPadrao(pergunta.getRecomendacaoPadrao());
 				resposta.setTipoServico(pergunta.getTipoServico());
-				resposta.setTipoDeResposta(Flag.PERGUNTA);
+				resposta.setTipoDeResposta(Flag.B_PERGUNTA);
 				resposta.setAuditoria(auditoria);
 				new RespostaFacade().createResposta(resposta);
 			}
@@ -276,7 +276,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		resposta.setHint("PESSOA RESPONSÁVEL POR FORNECER AS RESPOSTAS PARA ESTE QUESTIONÁRIO");
 		resposta.setQuestionario(q);
 		resposta.setRecomendacaoPadrao(null);
-		resposta.setTipoDeResposta(Flag.RESPONSAVEL);
+		resposta.setTipoDeResposta(Flag.A_RESPONSAVEL);
 		resposta.setAuditoria(auditoria);
 		return resposta;
 	}
@@ -287,7 +287,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		resposta.setHint("OBSERVAÇÕES PARA ESTE QUESTIONÁRIO");
 		resposta.setQuestionario(q);
 		resposta.setRecomendacaoPadrao(null);
-		resposta.setTipoDeResposta(Flag.OBSERVACAO);
+		resposta.setTipoDeResposta(Flag.C_OBSERVACAO);
 		resposta.setAuditoria(auditoria);
 		return resposta;
 	}

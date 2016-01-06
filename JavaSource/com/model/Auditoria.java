@@ -41,7 +41,7 @@ public class Auditoria implements Serializable {
 	private Date dataDaVerificacao;
 	
 	@OneToMany(mappedBy = "auditoria", targetEntity = Resposta.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@OrderBy(value = "id ASC")
+	@OrderBy(value = "tipoDeResposta ASC, id ASC")
 	@Fetch(FetchMode.SELECT)
 	private List<Resposta> respostas;
 	
