@@ -42,6 +42,10 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	private boolean podeEditar;
 	private int quantidadeDePerguntasNaoRespondidas = 0;
 
+	private FacesContext context;
+
+	private HttpServletRequest request;
+
 	public boolean podeEditar(Date dataDaResposta){
 		if(dataDaResposta == null){
 			podeEditar = false;
@@ -108,7 +112,13 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	public void onTabChange(org.primefaces.event.TabChangeEvent event) {
 		String titulo = event.getTab().getTitle();
 
-		List<Questionario> questionarios = new QuestionarioMB().getAllQuestionarios();
+		List<Questionario> questionarios;
+		
+		if (usuarioLogado.isAdmin())
+			questionarios = new QuestionarioMB().getAllQuestionarios();
+		else
+			questionarios = usuarioLogado.getQuestionarios();
+		
 		int i = 0;
 		for (Questionario questionario : questionarios) {
 			if (titulo.equals(questionario.getTitulo())) {
@@ -117,8 +127,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			i++;
 		}
 
-		FacesContext context = FacesContext.getCurrentInstance();
-		HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+		context = FacesContext.getCurrentInstance();
+		request = (HttpServletRequest) context.getExternalContext().getRequest();
 		request.getSession().setAttribute("currentTab", currentTab);
 	}
 
