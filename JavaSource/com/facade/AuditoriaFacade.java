@@ -9,7 +9,6 @@ import org.hibernate.SessionFactory;
 
 import com.dao.AuditoriaDAO;
 import com.model.Auditoria;
-import com.model.User;
 
 public class AuditoriaFacade implements Serializable {
 
