@@ -18,13 +18,24 @@ import com.util.RetiraMascaras;
 @ManagedBean
 public class EstabelecimentoMB extends AbstractMB implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long		serialVersionUID	= 1L;
 
-	private Estabelecimento estabelecimento;
-	private List<Estabelecimento> estabelecimentos;
-	private EstabelecimentoFacade estabelecimentoFacade;
-	private User usuarioLogado;
-	private boolean mostrar;
+	private Estabelecimento			estabelecimento;
+	private List<Estabelecimento>	estabelecimentos;
+	private EstabelecimentoFacade	estabelecimentoFacade;
+	private User					usuarioLogado;
+	private boolean					mostrar;
+
+	public void teste() {
+		int estabelecimento_id = 0;
+		String idEmString = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("estabelecimento_id");
+		
+		if(idEmString != null)
+			estabelecimento_id = Integer.parseInt(idEmString);
+		
+		if (estabelecimento_id > 0)
+			estabelecimento = getEstabelecimentoFacade().findEstabelecimento(estabelecimento_id);
+	}
 
 	public boolean isMostrar() {
 		return mostrar;

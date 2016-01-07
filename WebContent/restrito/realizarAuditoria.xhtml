@@ -25,7 +25,7 @@
 				rendered="#{auditoriaMB.quantidadeDePerguntasNaoRespondidas == 0}" />
 		</h:form>
 
-		<br/>
+		<br />
 
 		<p:tabView scrollable="true" id="basic"
 			header="Você está respondendo a auditoria #{auditoriaMB.auditoria.codigo}"
@@ -35,11 +35,28 @@
 			rendered="#{userMB.usuarioLogado.menuAuditar}">
 
 			<p:ajax event="tabChange" listener="#{auditoriaMB.onTabChange}" />
-			
+
 			<p:tab title="#{questionario.titulo}">
-				<h:outputText value="Instituição: #{auditoriaMB.auditoria.estabelecimento.nomeFantasia}" style="font-size:1em; font-weight:bold;"/><br/>
-				<h:outputText value="Código: #{auditoriaMB.auditoria.codigo}" style="font-size:1em; font-weight:bold;"/>
-				
+
+				<p:columnGroup>
+					<h:form>
+						<h:outputText value="Instituição: "
+							style="font-size:1em; font-weight:bold;" />
+						<p:commandLink action="cadastrarEstabelecimentos.xhtml"
+							ajax="false" target="blank">
+							<h:outputText
+								value="#{auditoriaMB.auditoria.estabelecimento.nomeFantasia}"
+								style="font-size:1em; font-weight:bold;" />
+							<f:param name="estabelecimento_id" value="#{auditoriaMB.auditoria.estabelecimento.id}" />
+						</p:commandLink>
+					</h:form>
+				</p:columnGroup>
+
+
+				<br />
+				<h:outputText value="Código: #{auditoriaMB.auditoria.codigo}"
+					style="font-size:1em; font-weight:bold;" />
+
 				<h:form acceptcharset="ISO-8859-1" id="form">
 					<h:inputHidden value="#{auditoriaMB.auditoria.id}" />
 
