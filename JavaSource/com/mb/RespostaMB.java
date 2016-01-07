@@ -139,6 +139,11 @@ public class RespostaMB extends AbstractMB implements Serializable {
 	public void resetResposta() {
 		resposta = new Resposta();
 	}
+	
+	public void colocaRespostaMbNaSessao(){
+		int resposta_id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("resposta_id"));
+		resposta = getRespostaFacade().findResposta(resposta_id);
+	}
 
 	public Resposta pesquisaResposta() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();

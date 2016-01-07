@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import org.hibernate.SessionFactory;
 
 import com.dao.RespostaDAO;
+import com.model.Flag;
 import com.model.Resposta;
 
 public class RespostaFacade implements Serializable {
@@ -35,13 +36,16 @@ public class RespostaFacade implements Serializable {
 			persistedResposta.setQuestionario(resposta.getQuestionario());
 
 		if (resposta.getRecomendacao() != null) {
-			if (resposta.getResposta().equals("NC") && persistedResposta.getRecomendacaoPadrao() != null
+			if (resposta.getResposta() != null && resposta.getResposta().equals("NC") && persistedResposta.getRecomendacaoPadrao() != null
 					&& !persistedResposta.getRecomendacaoPadrao().equals("")) {
 				String novaRecomendacao = persistedResposta.getRecomendacaoPadrao() + "\n" + resposta.getRecomendacao();
 
 				resposta.setRecomendacao(novaRecomendacao);
 			} else {
-				resposta.setRecomendacao(resposta.getRecomendacao());
+				if (persistedResposta.getTipoDeResposta() == Flag.B_PERGUNTA)
+					resposta.setRecomendacao(resposta.getRecomendacao());
+				else
+					persistedResposta.setResposta("-");
 			}
 			persistedResposta.setRecomendacao(resposta.getRecomendacao());
 		}
