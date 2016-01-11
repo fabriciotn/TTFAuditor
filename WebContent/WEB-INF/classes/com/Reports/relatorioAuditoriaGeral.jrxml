@@ -2,13 +2,18 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioAuditoriaGeral" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7adbdca9-ad59-4558-b92d-4f18ba3d8086">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="64"/>
 	<parameter name="id_auditoria" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="usuario_logado" class="java.lang.String"/>
-	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
-	<parameter name="caminho_imagem" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA["/Users/fabriciotn/Documents/workspace/TTFAuditor/JavaSource/com/Reports/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="caminho_imagem" class="java.lang.String">
+		<defaultValueExpression><![CDATA["/Users/fabriciotn/Documents/workspace/TTFAuditor/WebContent/images/logoHemominas.png"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_estabelecimento" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT A.CODIGO,
  A.TIPO,
@@ -34,6 +39,24 @@ AND A.ESTABELECIMENTO_ID = E.ID]]>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
+	<title>
+		<band height="407" splitType="Stretch">
+			<break>
+				<reportElement x="0" y="88" width="100" height="1" uuid="20bbb8aa-994c-4f23-a17e-1827ad567b41"/>
+			</break>
+			<subreport>
+				<reportElement x="0" y="89" width="802" height="47" uuid="d6003834-347e-4c49-abd0-4f5e22ae76b4"/>
+				<subreportParameter name="id_estabelecimento">
+					<subreportParameterExpression><![CDATA[$P{id_estabelecimento}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="caminho_imagem">
+					<subreportParameterExpression><![CDATA[$P{caminho_imagem}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "caracterizacaoSubReport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
 	<pageHeader>
 		<band height="119" splitType="Stretch">
 			<staticText>
@@ -116,23 +139,28 @@ AND A.ESTABELECIMENTO_ID = E.ID]]>
 		<band height="29" splitType="Stretch">
 			<textField>
 				<reportElement x="626" y="14" width="131" height="15" uuid="499fcbfb-1b24-4c7c-ad35-4b6d65e4c431"/>
-				<textElement textAlignment="Right"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement x="757" y="14" width="40" height="15" uuid="9e51312a-0c13-433c-9291-90a3ff4d06b0"/>
+				<textElement verticalAlignment="Bottom">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement stretchType="RelativeToTallestObject" x="5" y="0" width="177" height="15" uuid="c312224d-80dc-4104-a1b3-3395b9a0614a"/>
-				<textElement>
+				<textElement verticalAlignment="Bottom">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Relatório gerado por: " + $P{usuario_logado}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH.mm.ss">
 				<reportElement stretchType="RelativeToTallestObject" x="5" y="14" width="100" height="15" uuid="b6af9946-6b5a-4a25-872d-1b6321b52818"/>
-				<textElement>
+				<textElement verticalAlignment="Bottom">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>

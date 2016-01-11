@@ -70,11 +70,11 @@ order by Resposta.`id`]]>
 					</graphicElement>
 				</rectangle>
 				<textField>
-					<reportElement x="1" y="2" width="433" height="15" uuid="57a2e6e7-0565-40ea-bf6e-5b2e78f58053"/>
+					<reportElement x="1" y="2" width="526" height="15" uuid="57a2e6e7-0565-40ea-bf6e-5b2e78f58053"/>
 					<textElement verticalAlignment="Middle">
 						<font size="10" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA["Questionário: "+ $F{Questionario_titulo}]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Questionário: "+ $F{Questionario_titulo} + " - Respondido por: " +$F{Resposta_recomendacao}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="36" y="21" width="353" height="20" uuid="328f798e-23c8-4ea7-a9ef-35e8a6e3ca99"/>
@@ -111,15 +111,6 @@ order by Resposta.`id`]]>
 					</textElement>
 					<text><![CDATA[Auditor]]></text>
 				</staticText>
-				<textField>
-					<reportElement x="468" y="2" width="325" height="15" uuid="32d656d2-a981-49d2-9ad9-d47107d1139e">
-						<printWhenExpression><![CDATA[$F{Tipo_de_resposta}.equals("A_RESPONSAVEL")]]></printWhenExpression>
-					</reportElement>
-					<textElement verticalAlignment="Middle">
-						<font isBold="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA["Respondido por: " +$F{Resposta_recomendacao}]]></textFieldExpression>
-				</textField>
 			</band>
 		</groupHeader>
 	</group>
@@ -128,7 +119,7 @@ order by Resposta.`id`]]>
 	</background>
 	<detail>
 		<band height="18" splitType="Stretch">
-			<printWhenExpression><![CDATA[!$F{Tipo_de_resposta}.equals("A_RESPONSAVEL") ]]></printWhenExpression>
+			<printWhenExpression><![CDATA[!$F{Tipo_de_resposta}.equals("A_RESPONSAVEL")]]></printWhenExpression>
 			<rectangle>
 				<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="6" y="1" width="787" height="17" backcolor="#DDEFFF" uuid="5b1e06fc-3ec3-49ca-8fe2-83000857f610">
 					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) == 0)]]></printWhenExpression>
