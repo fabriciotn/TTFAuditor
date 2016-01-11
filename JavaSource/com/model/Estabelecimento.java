@@ -58,6 +58,7 @@ public class Estabelecimento implements Serializable{
 	private boolean oncologia;
 	private boolean transplantes;
 	private boolean pediatria;
+	private boolean bercario;
 	@OneToOne
 	private Unidade unidade;
 	
@@ -307,7 +308,12 @@ public class Estabelecimento implements Serializable{
 	public void setUnidade(Unidade unidade) {
 		this.unidade = unidade;
 	}
-	
+	public boolean isBercario() {
+		return bercario;
+	}
+	public void setBercario(boolean bercario) {
+		this.bercario = bercario;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

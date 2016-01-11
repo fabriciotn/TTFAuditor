@@ -66,6 +66,7 @@ public class EstabelecimentoFacade implements Serializable {
 		persistedEstabelecimento.setOncologia(estabelecimento.isOncologia());
 		persistedEstabelecimento.setTransplantes(estabelecimento.isTransplantes());
 		persistedEstabelecimento.setPediatria(estabelecimento.isPediatria());
+		persistedEstabelecimento.setBercario(estabelecimento.isBercario());
 
 		estabelecimentoDAO.update(persistedEstabelecimento);
 		estabelecimentoDAO.commitAndCloseTransaction();
