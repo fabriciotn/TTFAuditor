@@ -198,7 +198,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	
 	public void visualizarRelatorio(){
 		RelatorioAuditoria relat = new RelatorioAuditoria();
-		byte[] b = relat.imprimeRelatorio(usuarioLogado.getName(), auditoria.getId());
+		byte[] b = relat.imprimeRelatorio(usuarioLogado.getName(), auditoria.getId(), auditoria.getEstabelecimento().getId());
 		
 		HttpServletResponse res = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();  
         res.setContentType("application/pdf");  

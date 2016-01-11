@@ -20,7 +20,7 @@ public class RelatorioAuditoria {
 	private Connection connection;
 	Calendar data = Calendar.getInstance();
 
-	public byte[] imprimeRelatorio(String usuarioLogado, int id_auditoria) {
+	public byte[] imprimeRelatorio(String usuarioLogado, int id_auditoria, int id_estabelecimento) {
 		byte[] relatorio = null;
 		try {
 			URL arquivo = getClass().getResource("relatorioAuditoriaGeral.jasper");
@@ -34,6 +34,7 @@ public class RelatorioAuditoria {
 			map.put("SUBREPORT_DIR", path + "/WEB-INF/classes/com/Reports/");
 			map.put("usuario_logado", usuarioLogado);
 			map.put("id_auditoria", id_auditoria);
+			map.put("id_estabelecimento", id_estabelecimento);
 			map.put("caminho_imagem", path + "images/logoHemominas.png");
 			relatorio = JasperRunManager.runReportToPdf(arquivoJasper, map,
 					this.connection);
