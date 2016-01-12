@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="caracterizacaoSubReport" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4a22c07f-7fbc-41d0-a38b-67126b5b8e97">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="282"/>
 	<style name="table">
 		<box>
 			<pen lineWidth="1.0" lineColor="#000000"/>
@@ -150,488 +150,487 @@ WHERE
 	<title>
 		<band height="555" splitType="Stretch">
 			<rectangle>
-				<reportElement uuid="e4ae3a0c-6ebe-486a-b689-19859ae90023" x="0" y="246" width="802" height="20" backcolor="#CCCCCC"/>
+				<reportElement x="0" y="246" width="802" height="20" backcolor="#CCCCCC" uuid="e4ae3a0c-6ebe-486a-b689-19859ae90023"/>
 			</rectangle>
 			<staticText>
-				<reportElement uuid="cdd8b86a-bd9f-40d1-97e9-99fe9f13b9f1" x="206" y="5" width="387" height="40"/>
+				<reportElement x="206" y="5" width="387" height="40" uuid="cdd8b86a-bd9f-40d1-97e9-99fe9f13b9f1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[VERIFICAÇÃO DE AGÊNCIA TRANSFUSIONAL E ASSISTÊNCIA HEMOTERÁPICA]]></text>
 			</staticText>
 			<image>
-				<reportElement uuid="1cb917f7-e5be-4a30-b879-4a7dc6968f60" x="5" y="7" width="181" height="63"/>
+				<reportElement x="5" y="7" width="181" height="63" uuid="1cb917f7-e5be-4a30-b879-4a7dc6968f60"/>
 				<imageExpression><![CDATA[$P{caminho_imagem}]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement uuid="c04d0202-e7ea-476e-bbe0-e4c308972ab2" x="206" y="46" width="387" height="24"/>
+				<reportElement x="206" y="46" width="387" height="24" uuid="c04d0202-e7ea-476e-bbe0-e4c308972ab2"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[INFORMAÇÕES GERAIS]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement uuid="0c6e9f8c-3acd-4f7b-88f5-4545a8ea416c" x="0" y="76" width="802" height="20" backcolor="#CCCCCC"/>
+				<reportElement x="0" y="76" width="802" height="20" backcolor="#CCCCCC" uuid="0c6e9f8c-3acd-4f7b-88f5-4545a8ea416c"/>
 			</rectangle>
 			<staticText>
-				<reportElement uuid="d088a687-c4f8-4c06-ac0f-b60b205782c5" x="0" y="76" width="802" height="20"/>
+				<reportElement x="0" y="76" width="802" height="20" uuid="d088a687-c4f8-4c06-ac0f-b60b205782c5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[IDENTIFICAÇÃO DO ESTABELECIMENTO DE SAÚDE]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="201ad07d-3a17-487d-a155-5b0d252d5a55" x="95" y="98" width="444" height="15"/>
+				<reportElement x="95" y="98" width="444" height="15" uuid="201ad07d-3a17-487d-a155-5b0d252d5a55"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_razaoSocial}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="5ccef41b-36ba-4352-b86b-e67f71edcab0" x="5" y="98" width="90" height="15"/>
+				<reportElement x="5" y="98" width="90" height="15" uuid="5ccef41b-36ba-4352-b86b-e67f71edcab0"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Razão Social:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="b37171f3-faf2-4dbd-8e74-e8d1705b82c6" x="5" y="113" width="90" height="15"/>
+				<reportElement x="5" y="113" width="90" height="15" uuid="b37171f3-faf2-4dbd-8e74-e8d1705b82c6"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nome Fantasia:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="ae6979f5-d72f-4d30-a4ca-0f623ac65a6c" x="95" y="113" width="444" height="15"/>
+				<reportElement x="95" y="113" width="444" height="15" uuid="ae6979f5-d72f-4d30-a4ca-0f623ac65a6c"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_nomeFantasia}]]></textFieldExpression>
 			</textField>
 			<textField pattern="" isBlankWhenNull="true">
-				<reportElement uuid="fbdc5384-267f-4dd8-ae60-5ddc4eedbe75" x="593" y="98" width="203" height="15"/>
+				<reportElement x="593" y="98" width="203" height="15" uuid="fbdc5384-267f-4dd8-ae60-5ddc4eedbe75"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_cnpj} == null || $F{Estabelecimento_cnpj}.isEmpty() ? $F{Estabelecimento_cnpj} : $F{Estabelecimento_cnpj}.substring(0,2) + "." + $F{Estabelecimento_cnpj}.substring(2,5) + "." + $F{Estabelecimento_cnpj}.substring(5,8) + "/" + $F{Estabelecimento_cnpj}.substring(8,12) + "-" + $F{Estabelecimento_cnpj}.substring(12,14)]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="84bb1a47-5c39-4eab-ac90-300d3f089b0c" x="593" y="113" width="203" height="15"/>
+				<reportElement x="593" y="113" width="203" height="15" uuid="84bb1a47-5c39-4eab-ac90-300d3f089b0c"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_cnes}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="9752de71-395f-4751-bb15-60d8effdc048" x="556" y="98" width="37" height="15"/>
+				<reportElement x="556" y="98" width="37" height="15" uuid="9752de71-395f-4751-bb15-60d8effdc048"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[CNPJ:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="d86619db-82e9-4989-9a30-76e836f89e58" x="556" y="113" width="37" height="15"/>
+				<reportElement x="556" y="113" width="37" height="15" uuid="d86619db-82e9-4989-9a30-76e836f89e58"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[CNES:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="df477b80-5ed5-45ee-822e-3852a7dd31c3" x="95" y="128" width="444" height="15"/>
+				<reportElement x="95" y="128" width="444" height="15" uuid="df477b80-5ed5-45ee-822e-3852a7dd31c3"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_endereco} + $F{Estabelecimento_complementoEndereco}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="31da873b-92e4-4ed8-adfd-191f7585e55e" x="5" y="128" width="90" height="15"/>
+				<reportElement x="5" y="128" width="90" height="15" uuid="31da873b-92e4-4ed8-adfd-191f7585e55e"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Endereço:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="463f4abe-68c8-42cf-b24f-27fb0954e154" x="556" y="128" width="37" height="15"/>
+				<reportElement x="556" y="128" width="37" height="15" uuid="463f4abe-68c8-42cf-b24f-27fb0954e154"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[CEP:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="f08a405a-16a2-4d97-b8d7-73bf1d252557" x="593" y="128" width="203" height="15"/>
+				<reportElement x="593" y="128" width="203" height="15" uuid="f08a405a-16a2-4d97-b8d7-73bf1d252557"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_cep} == null || $F{Estabelecimento_cep}.isEmpty() ? $F{Estabelecimento_cep} : $F{Estabelecimento_cep}.substring(0,2) + "." + $F{Estabelecimento_cep}.substring(2,5) + "-" + $F{Estabelecimento_cep}.substring(5,8)]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="1de507de-eb46-419c-9507-3c46667b5bbe" x="95" y="143" width="232" height="15"/>
+				<reportElement x="95" y="143" width="232" height="15" uuid="1de507de-eb46-419c-9507-3c46667b5bbe"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_cidade} + " / " + $F{Estabelecimento_uf}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="97962e7f-3611-4f43-b852-6408cb113ab7" x="5" y="143" width="90" height="15"/>
+				<reportElement x="5" y="143" width="90" height="15" uuid="97962e7f-3611-4f43-b852-6408cb113ab7"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cidade:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="2bd76e7b-b848-4744-a1a2-dd4e0a257bf2" x="337" y="143" width="62" height="15"/>
+				<reportElement x="337" y="143" width="55" height="15" uuid="2bd76e7b-b848-4744-a1a2-dd4e0a257bf2"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Telefones:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="b25af5bf-a458-4154-98d9-4dbec7640e58" x="399" y="143" width="95" height="15"/>
+				<reportElement x="392" y="143" width="95" height="15" uuid="b25af5bf-a458-4154-98d9-4dbec7640e58"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_telefone1} == null || $F{Estabelecimento_telefone1}.isEmpty() ? $F{Estabelecimento_telefone1} : "(" + $F{Estabelecimento_telefone1}.substring(0,2) + ")" + $F{Estabelecimento_telefone1}.substring(2,6) + "-" + $F{Estabelecimento_telefone1}.substring(6,10)]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="ce06634e-7e0e-4f07-b263-b0036b68b470" x="498" y="143" width="95" height="15"/>
+				<reportElement x="489" y="143" width="95" height="15" uuid="ce06634e-7e0e-4f07-b263-b0036b68b470"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_telefone2} ==null || $F{Estabelecimento_telefone2}.isEmpty() ? $F{Estabelecimento_telefone2} : "(" + $F{Estabelecimento_telefone2}.substring(0,2) + ")" + $F{Estabelecimento_telefone2}.substring(2,6) + "-" + $F{Estabelecimento_telefone2}.substring(6,10)]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="ebdca501-6a30-42e4-839e-3b1c3f64a77a" x="597" y="143" width="95" height="15"/>
+				<reportElement x="585" y="143" width="95" height="15" uuid="ebdca501-6a30-42e4-839e-3b1c3f64a77a"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_telefone3} ==null || $F{Estabelecimento_telefone3}.isEmpty() ? $F{Estabelecimento_telefone3} : "(" + $F{Estabelecimento_telefone3}.substring(0,2) + ")" + $F{Estabelecimento_telefone3}.substring(2,6) + "-" + $F{Estabelecimento_telefone3}.substring(6,10)]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="7c388c82-6d3b-4579-8ce4-3b237e17d494" x="698" y="143" width="95" height="15"/>
+				<reportElement x="682" y="143" width="95" height="15" uuid="7c388c82-6d3b-4579-8ce4-3b237e17d494"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_telefone4} ==null || $F{Estabelecimento_telefone4}.isEmpty() ? $F{Estabelecimento_telefone4} : "(" + $F{Estabelecimento_telefone4}.substring(0,2) + ")" + $F{Estabelecimento_telefone4}.substring(2,6) + "-" + $F{Estabelecimento_telefone4}.substring(6,10)]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="74f59740-7f5c-4e9e-b45e-d8766dd0c336" x="5" y="158" width="90" height="15"/>
+				<reportElement x="5" y="158" width="90" height="15" uuid="74f59740-7f5c-4e9e-b45e-d8766dd0c336"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Site:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="3ccee44c-ae94-415d-b40f-ac4bdc865619" x="337" y="158" width="62" height="15"/>
+				<reportElement x="337" y="158" width="62" height="15" uuid="3ccee44c-ae94-415d-b40f-ac4bdc865619"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[E-mail:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="1d5ecd46-28dc-4a8b-97c5-e19ba31caef8" x="399" y="158" width="194" height="15"/>
+				<reportElement x="399" y="158" width="194" height="15" uuid="1d5ecd46-28dc-4a8b-97c5-e19ba31caef8"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_email}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="45812a8a-55ae-4163-8dd6-ca4e8df4a2c8" x="95" y="158" width="232" height="15"/>
-				<textElement/>
+				<reportElement x="95" y="158" width="232" height="15" uuid="45812a8a-55ae-4163-8dd6-ca4e8df4a2c8"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_site}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="2776b233-3b15-4096-8a93-471b1aaa0b63" x="597" y="158" width="133" height="15"/>
+				<reportElement x="597" y="158" width="127" height="15" uuid="2776b233-3b15-4096-8a93-471b1aaa0b63"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nº de leitos do Hospital:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="975ecabf-217e-4ec6-bccc-1f9f8bf5f764" x="730" y="158" width="63" height="15"/>
+				<reportElement x="725" y="158" width="63" height="15" uuid="975ecabf-217e-4ec6-bccc-1f9f8bf5f764"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_numeroDeLeitos}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement uuid="789365b5-7781-4705-b525-0fb89523afa8" x="0" y="183" width="802" height="20" backcolor="#CCCCCC"/>
+				<reportElement x="0" y="183" width="802" height="20" backcolor="#CCCCCC" uuid="789365b5-7781-4705-b525-0fb89523afa8"/>
 			</rectangle>
 			<staticText>
-				<reportElement uuid="d98b776c-fe69-4c25-98c0-ce5252ebf44b" x="0" y="183" width="802" height="20"/>
+				<reportElement x="0" y="183" width="802" height="20" uuid="d98b776c-fe69-4c25-98c0-ce5252ebf44b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[PROFISSIONAIS RESPONSÁVEIS PELO ESTABELECIMENTO DE SAÚDE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="1554283d-9842-4333-9e8e-f0e1a5337a41" x="5" y="205" width="312" height="15"/>
+				<reportElement x="5" y="205" width="309" height="15" uuid="1554283d-9842-4333-9e8e-f0e1a5337a41"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[RT pela Agencia Transfusional Hemoterapia (médico): Dr(a) ]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="9f222e30-fc91-4d8c-b6c3-a153a023fb6e" x="317" y="205" width="276" height="15"/>
+				<reportElement x="314" y="205" width="276" height="15" uuid="9f222e30-fc91-4d8c-b6c3-a153a023fb6e"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_nomeRtAgenciaTransfusional}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="327a5360-4fa0-4983-985b-39d612a50197" x="597" y="205" width="34" height="15"/>
+				<reportElement x="597" y="205" width="34" height="15" uuid="327a5360-4fa0-4983-985b-39d612a50197"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[CRM:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="29bb02db-c304-4c90-a4a8-becd9b072c6b" x="639" y="205" width="154" height="15"/>
+				<reportElement x="639" y="205" width="154" height="15" uuid="29bb02db-c304-4c90-a4a8-becd9b072c6b"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_CrmRtAgenciaTransfusional}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="5850e7af-a09b-482e-836e-3d7f667b8e73" x="5" y="220" width="213" height="15"/>
+				<reportElement x="5" y="220" width="209" height="15" uuid="5850e7af-a09b-482e-836e-3d7f667b8e73"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Responsável pelo gerenciamento da AT: ]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="193d64a0-fb1d-4551-a530-557bfd113b99" x="220" y="220" width="276" height="15"/>
+				<reportElement x="214" y="220" width="376" height="15" uuid="193d64a0-fb1d-4551-a530-557bfd113b99"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_nomeResponsavelAT}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="898f9e72-f496-4d39-8b38-026cbba00bd8" x="597" y="220" width="42" height="15"/>
+				<reportElement x="597" y="220" width="42" height="15" uuid="898f9e72-f496-4d39-8b38-026cbba00bd8"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Cargo:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="4837c7ae-78c1-432d-86ef-db64a6ba40df" x="639" y="220" width="154" height="15"/>
+				<reportElement x="639" y="220" width="154" height="15" uuid="4837c7ae-78c1-432d-86ef-db64a6ba40df"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_cargoResponsavelAT}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="856dd0f5-1b53-43fe-a585-8b44cea7ebf4" x="0" y="246" width="802" height="20"/>
+				<reportElement x="0" y="246" width="802" height="20" uuid="856dd0f5-1b53-43fe-a585-8b44cea7ebf4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[DADOS DO SERVIÇO DE HEMOTERAPIA AVALIADO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="eb9172f3-1aaa-4813-966f-cadd0207e09c" x="5" y="268" width="171" height="15"/>
+				<reportElement x="5" y="268" width="168" height="15" uuid="eb9172f3-1aaa-4813-966f-cadd0207e09c"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Tipo do Serviço de Hemoterapia:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="a2aaa507-a808-4630-b71a-dfbff00d2429" x="176" y="268" width="127" height="15"/>
+				<reportElement x="174" y="268" width="127" height="15" uuid="a2aaa507-a808-4630-b71a-dfbff00d2429"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_tipoServico}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="dea44ef2-7686-4715-8142-b19648f674e8" x="317" y="268" width="144" height="15"/>
+				<reportElement x="317" y="268" width="138" height="15" uuid="dea44ef2-7686-4715-8142-b19648f674e8"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Horário de funcionamento:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="6dc538cb-3413-4d24-aba6-162099832d5a" x="461" y="268" width="132" height="15"/>
-				<textElement/>
+				<reportElement x="455" y="268" width="132" height="15" uuid="6dc538cb-3413-4d24-aba6-162099832d5a"/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_horarioDeFuncionamento}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="60946dc3-aeba-411b-8ce4-ad5604e35435" x="597" y="268" width="133" height="15"/>
+				<reportElement x="597" y="268" width="128" height="15" uuid="60946dc3-aeba-411b-8ce4-ad5604e35435"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Número de funcionários:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="1e7f5f17-677f-4cdf-b536-7c2f75f90c78" x="730" y="268" width="63" height="15"/>
+				<reportElement x="726" y="268" width="63" height="15" uuid="1e7f5f17-677f-4cdf-b536-7c2f75f90c78"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_numeroDeFuncionarios}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="1496f365-b633-4a08-af5d-fa5367fab74b" x="5" y="283" width="152" height="15"/>
+				<reportElement x="5" y="283" width="147" height="15" uuid="1496f365-b633-4a08-af5d-fa5367fab74b"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Média  de transfusões/mês:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="17cbe1bd-61b6-4593-8e67-d4b6d6dd76f5" x="317" y="283" width="260" height="15"/>
+				<reportElement x="317" y="283" width="255" height="15" uuid="17cbe1bd-61b6-4593-8e67-d4b6d6dd76f5"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Média de reações transfusionais imediatas/mês:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="a93d44c9-2bab-4de1-befb-89e4b7052074" mode="Transparent" x="577" y="283" width="100" height="15"/>
+				<reportElement mode="Transparent" x="572" y="283" width="100" height="15" uuid="a93d44c9-2bab-4de1-befb-89e4b7052074"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_mediaDeReacoesImediatas}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="a3978e0e-86f3-4252-be30-3ac10c058499" mode="Transparent" x="157" y="283" width="146" height="15"/>
+				<reportElement mode="Transparent" x="152" y="283" width="146" height="15" uuid="a3978e0e-86f3-4252-be30-3ac10c058499"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_mediaDeTransfusoes}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement uuid="99dca9f3-3393-42b2-8f8c-7e2d71bb8a96" x="0" y="309" width="802" height="20" backcolor="#CCCCCC"/>
+				<reportElement x="0" y="309" width="802" height="20" backcolor="#CCCCCC" uuid="99dca9f3-3393-42b2-8f8c-7e2d71bb8a96"/>
 			</rectangle>
 			<staticText>
-				<reportElement uuid="12d54a4e-21c5-4093-8ab4-2c026d48969b" x="0" y="309" width="802" height="20"/>
+				<reportElement x="0" y="309" width="802" height="20" uuid="12d54a4e-21c5-4093-8ab4-2c026d48969b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[SETORES DO ESTABELECIMENTO DE SAÚDE ONDE HÁ HEMOTRANSFUSÃO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="d4acc4d1-607a-4b5a-b1a1-fe91cbf24e95" x="160" y="333" width="215" height="15"/>
+				<reportElement x="160" y="333" width="215" height="15" uuid="d4acc4d1-607a-4b5a-b1a1-fe91cbf24e95"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[1. PA – Pronto Atendimento de Urgência:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="2b8bafab-2e93-4d8e-a615-ded527a2c559" x="160" y="348" width="215" height="15"/>
+				<reportElement x="160" y="348" width="215" height="15" uuid="2b8bafab-2e93-4d8e-a615-ded527a2c559"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[2. Bloco Cirúrgico:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="cc1f88a5-0c4b-49c4-9cd2-3d54ac3adfe8" x="160" y="363" width="215" height="15"/>
+				<reportElement x="160" y="363" width="215" height="15" uuid="cc1f88a5-0c4b-49c4-9cd2-3d54ac3adfe8"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[3. Cirurgia de grande porte:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="0add1996-fc2d-42fd-822a-c2c3b8c10352" x="160" y="408" width="215" height="15"/>
+				<reportElement x="160" y="408" width="215" height="15" uuid="0add1996-fc2d-42fd-822a-c2c3b8c10352"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[6. Hemodiálise:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="386aafb3-b09a-4eca-990b-f29398f58313" x="160" y="378" width="215" height="15"/>
+				<reportElement x="160" y="378" width="215" height="15" uuid="386aafb3-b09a-4eca-990b-f29398f58313"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[4. Andares pacientes internados:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="66816fe8-8a49-4295-be1e-c391e4849156" x="160" y="393" width="215" height="15"/>
+				<reportElement x="160" y="393" width="215" height="15" uuid="66816fe8-8a49-4295-be1e-c391e4849156"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[5. Maternidade:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="e0155d46-3eed-4f47-bd59-e55425a3171a" x="265" y="453" width="110" height="15"/>
+				<reportElement x="265" y="453" width="110" height="15" uuid="e0155d46-3eed-4f47-bd59-e55425a3171a"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[9. Oncologia:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="b7a2690f-e3d1-4994-abe8-fba5f346e8c7" x="265" y="438" width="110" height="15"/>
+				<reportElement x="265" y="438" width="110" height="15" uuid="b7a2690f-e3d1-4994-abe8-fba5f346e8c7"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[8. Berçário:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="c0d9274d-8fe7-44e6-8e4f-8cfc4b2c3ea8" x="160" y="423" width="215" height="15"/>
+				<reportElement x="160" y="423" width="215" height="15" uuid="c0d9274d-8fe7-44e6-8e4f-8cfc4b2c3ea8"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[7. CTI:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="ba3b51f6-c80e-416e-bf26-5a340e9e64e4" x="265" y="468" width="110" height="15"/>
+				<reportElement x="265" y="468" width="110" height="15" uuid="ba3b51f6-c80e-416e-bf26-5a340e9e64e4"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[10. Transplantes:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="a429fcac-6659-4903-8839-75df8d37b4a1" x="265" y="497" width="110" height="15"/>
+				<reportElement x="265" y="497" width="110" height="15" uuid="a429fcac-6659-4903-8839-75df8d37b4a1"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[12. CTI Neo natal:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="13085de3-ba74-4b54-ac0b-ed5c2c436a51" x="265" y="482" width="110" height="15"/>
+				<reportElement x="265" y="482" width="110" height="15" uuid="13085de3-ba74-4b54-ac0b-ed5c2c436a51"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[11.  Pediatria:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="e7998b63-0bb1-4426-aa20-5b7cf291ef68" x="379" y="334" width="31" height="15"/>
+				<reportElement x="379" y="334" width="31" height="15" uuid="e7998b63-0bb1-4426-aa20-5b7cf291ef68"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_prontoAtendimento} == true ? "SIM" : "NÃO"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="39bc5bce-e9be-433d-98bd-1555146833a8" x="379" y="348" width="31" height="15"/>
+				<reportElement x="379" y="348" width="31" height="15" uuid="39bc5bce-e9be-433d-98bd-1555146833a8"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_blocoCirurgico} == true ? "SIM" : "NÃO"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="9a26625a-b454-465a-9b5f-b1a30a146c34" x="379" y="363" width="31" height="15"/>
+				<reportElement x="379" y="363" width="31" height="15" uuid="9a26625a-b454-465a-9b5f-b1a30a146c34"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_cirurgiaGrandePorte} == true ? "SIM" : "NÃO"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="90399a45-a283-42ad-b353-e1cc539590f9" x="379" y="379" width="31" height="15"/>
+				<reportElement x="379" y="379" width="31" height="15" uuid="90399a45-a283-42ad-b353-e1cc539590f9"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_pacientesInternados} == true ? "SIM" : "NÃO"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="1ba78fe6-5280-4338-ac5d-2e7771524409" x="379" y="394" width="31" height="15"/>
+				<reportElement x="379" y="394" width="31" height="15" uuid="1ba78fe6-5280-4338-ac5d-2e7771524409"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_maternidade} == true ? "SIM" : "NÃO"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="cbe9f69a-cd45-4d14-aa62-44cd7729c6cd" x="379" y="409" width="31" height="15"/>
+				<reportElement x="379" y="409" width="31" height="15" uuid="cbe9f69a-cd45-4d14-aa62-44cd7729c6cd"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_hemodialise} == true ? "SIM" : "NÃO"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="9ff35d9f-f876-4977-a430-261faa1dee90" x="379" y="468" width="31" height="15"/>
+				<reportElement x="379" y="468" width="31" height="15" uuid="9ff35d9f-f876-4977-a430-261faa1dee90"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_transplantes} == true ? "SIM" : "NÃO"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="34618b3c-98f3-4cda-8639-57ce11101e8f" x="379" y="452" width="31" height="15"/>
+				<reportElement x="379" y="452" width="31" height="15" uuid="34618b3c-98f3-4cda-8639-57ce11101e8f"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_oncologia} == true ? "SIM" : "NÃO"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="e9acf46e-0654-4795-b4a6-1b5f5b1c8c0f" x="379" y="423" width="31" height="15"/>
+				<reportElement x="379" y="423" width="31" height="15" uuid="e9acf46e-0654-4795-b4a6-1b5f5b1c8c0f"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_cti} == true ? "SIM" : "NÃO"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="470d4a78-b81d-4f21-9dda-b01a48e60043" x="379" y="483" width="31" height="15"/>
+				<reportElement x="379" y="483" width="31" height="15" uuid="470d4a78-b81d-4f21-9dda-b01a48e60043"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_pediatria} == true ? "SIM" : "NÃO"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="23b72a62-f19d-45f2-8644-1f21d152db69" x="379" y="498" width="31" height="15"/>
+				<reportElement x="379" y="498" width="31" height="15" uuid="23b72a62-f19d-45f2-8644-1f21d152db69"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_ctiNeoNatal} == true ? "SIM" : "NÃO"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="bb6bd9d3-ea79-4bbd-bf01-e79e0f133fc9" x="379" y="437" width="31" height="15"/>
+				<reportElement x="379" y="437" width="31" height="15" uuid="bb6bd9d3-ea79-4bbd-bf01-e79e0f133fc9"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_bercario} == true ? "SIM" : "NÃO"]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="ded55335-a45c-419e-9538-a27eb3292559" x="480" y="363" width="80" height="15"/>
+				<reportElement x="475" y="363" width="80" height="15" uuid="ded55335-a45c-419e-9538-a27eb3292559"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_mediaCirurgiaGrandePorte}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement uuid="d16339f9-9765-4344-a3d0-ba881c1ca876" x="411" y="363" width="70" height="15"/>
+				<reportElement x="411" y="363" width="63" height="15" uuid="d16339f9-9765-4344-a3d0-ba881c1ca876"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[média/mês:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="66303b63-6d88-43f1-ab31-b368b3aef96e" x="411" y="424" width="70" height="15"/>
+				<reportElement x="411" y="424" width="63" height="15" uuid="66303b63-6d88-43f1-ab31-b368b3aef96e"/>
 				<textElement verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nº de leitos:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="347f3da1-c4c8-4363-9c15-ad578db1d555" x="480" y="424" width="81" height="15"/>
+				<reportElement x="475" y="424" width="81" height="15" uuid="347f3da1-c4c8-4363-9c15-ad578db1d555"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_numeroLeitosCti}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy HH.mm.ss">
-				<reportElement uuid="ec20c891-87bb-4d77-8c8f-6bd20bd9f10a" stretchType="RelativeToTallestObject" x="0" y="540" width="141" height="15"/>
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="540" width="141" height="15" uuid="ec20c891-87bb-4d77-8c8f-6bd20bd9f10a"/>
 				<textElement verticalAlignment="Middle">
 					<font size="8"/>
 				</textElement>
