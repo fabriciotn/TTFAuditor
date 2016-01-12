@@ -36,7 +36,8 @@
 
 			<p:ajax event="tabChange" listener="#{auditoriaMB.onTabChange}" />
 
-			<p:tab title="#{questionario.titulo}">
+			<p:tab title="#{questionario.titulo}"
+				rendered="#{auditoriaMB.exibeTab(questionario.id)}">
 
 				<p:columnGroup>
 					<h:form>
@@ -47,7 +48,8 @@
 							<h:outputText
 								value="#{auditoriaMB.auditoria.estabelecimento.nomeFantasia}"
 								style="font-size:1em; font-weight:bold;" />
-							<f:param name="estabelecimento_id" value="#{auditoriaMB.auditoria.estabelecimento.id}" />
+							<f:param name="estabelecimento_id"
+								value="#{auditoriaMB.auditoria.estabelecimento.id}" />
 						</p:commandLink>
 					</h:form>
 				</p:columnGroup>

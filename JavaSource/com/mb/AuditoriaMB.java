@@ -99,6 +99,15 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		this.podeEditar = podeEditar;
 	}
 
+	public boolean exibeTab(int quesstionario_id) {
+		List<Resposta> r = pegaRespostas(quesstionario_id);
+		
+		if(r != null && r.size() > 0)
+			return true;
+		
+		return false;
+	}
+
 	public int getCurrentTab() {
 		if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("currentTab") != null)
 			currentTab = (Integer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("currentTab");
