@@ -103,9 +103,9 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		List<Resposta> r = pegaRespostas(quesstionario_id);
 		
 		if(r != null && r.size() > 0)
-			return true;
+			return false;
 		
-		return false;
+		return true;
 	}
 
 	public int getCurrentTab() {
