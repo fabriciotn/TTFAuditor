@@ -292,8 +292,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	
 	private Resposta incluiPerguntaObservacao(Questionario q){
 		Resposta resposta = new Resposta();
-		resposta.setPergunta("OBSERVAÇÃO");
-		resposta.setHint("OBSERVAÇÕES PARA ESTE QUESTIONÁRIO");
+		resposta.setPergunta("CONSIDERAÇÕES FINAIS");
+		resposta.setHint("CONSIDERAÇÕES FINAIS PARA ESTE QUESTIONÁRIO");
 		resposta.setQuestionario(q);
 		resposta.setRecomendacaoPadrao(null);
 		resposta.setTipoDeResposta(Flag.C_OBSERVACAO);
