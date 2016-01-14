@@ -30,7 +30,7 @@ import com.model.User;
 @ManagedBean
 public class AuditoriaMB extends AbstractMB implements Serializable {
 
-	private static final long	serialVersionUID	= 1L;
+	private static final long	serialVersionUID					= 1L;
 
 	private Auditoria			auditoria;
 	private List<Auditoria>		auditorias;
@@ -38,47 +38,47 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	private User				usuarioLogado;
 	private String				recomendacao;
 	private List<Resposta>		respostas;
-	private int					currentTab			= 0;
-	private boolean podeEditar;
-	private int quantidadeDePerguntasNaoRespondidas = 0;
+	private int					currentTab							= 0;
+	private boolean				podeEditar;
+	private int					quantidadeDePerguntasNaoRespondidas	= 0;
+	private FacesContext		context;
+	private HttpServletRequest	request;
 
-	private FacesContext context;
-
-	private HttpServletRequest request;
-
-	public boolean podeEditar(Date dataDaResposta){
-		if(dataDaResposta == null){
+	
+	public boolean podeEditar(Date dataDaResposta) {
+		if (dataDaResposta == null) {
 			podeEditar = false;
 			return podeEditar;
 		}
-		
-		Parametros parametros = new ParametrosFacade().findParametros(1);
-		
-		Calendar hoje = Calendar.getInstance();
-		hoje.setTime( new java.util.Date() );
-		
-		Calendar prazoParaEditarResposta = Calendar.getInstance();
-		prazoParaEditarResposta.setTime(dataDaResposta); //recebe a data da resposta no formato Date e converte para Calendar
-		prazoParaEditarResposta.add(Calendar.DAY_OF_MONTH,parametros.getQuantidadeDeDiasParaAlterarAResposta());
 
-		//se a data de hoje + XXX dia for maior que a data da resposta não é permitido alterar
-		if(hoje.after(prazoParaEditarResposta)){
+		Parametros parametros = new ParametrosFacade().findParametros(1);
+
+		Calendar hoje = Calendar.getInstance();
+		hoje.setTime(new java.util.Date());
+
+		Calendar prazoParaEditarResposta = Calendar.getInstance();
+		prazoParaEditarResposta.setTime(dataDaResposta); // recebe a data da resposta no formato Date e converte para
+															// Calendar
+		prazoParaEditarResposta.add(Calendar.DAY_OF_MONTH, parametros.getQuantidadeDeDiasParaAlterarAResposta());
+
+		// se a data de hoje + XXX dia for maior que a data da resposta não é permitido alterar
+		if (hoje.after(prazoParaEditarResposta)) {
 			podeEditar = false;
-		}else{
+		} else {
 			podeEditar = true;
 		}
 		return podeEditar;
 	}
-	
+
 	public int getQuantidadeDePerguntasNaoRespondidas() {
 		quantidadeDePerguntasNaoRespondidas = 0;
 		for (Resposta resposta : auditoria.getRespostas()) {
-			if(resposta.getResposta() == null){
-				if(usuarioLogado.isAdmin())
+			if (resposta.getResposta() == null) {
+				if (usuarioLogado.isAdmin())
 					quantidadeDePerguntasNaoRespondidas++;
-				else{
+				else {
 					for (Questionario q : usuarioLogado.getQuestionarios()) {
-						if(resposta.getQuestionario().getId() == q.getId())
+						if (resposta.getQuestionario().getId() == q.getId())
 							quantidadeDePerguntasNaoRespondidas++;
 					}
 				}
@@ -101,10 +101,10 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 	public boolean exibeTab(int quesstionario_id) {
 		List<Resposta> r = pegaRespostas(quesstionario_id);
-		
-		if(r != null && r.size() > 0)
+
+		if (r != null && r.size() > 0)
 			return false;
-		
+
 		return true;
 	}
 
@@ -122,12 +122,12 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		String titulo = event.getTab().getTitle();
 
 		List<Questionario> questionarios;
-		
+
 		if (usuarioLogado.isAdmin())
 			questionarios = new QuestionarioMB().getAllQuestionarios();
 		else
 			questionarios = usuarioLogado.getQuestionarios();
-		
+
 		int i = 0;
 		for (Questionario questionario : questionarios) {
 			if (titulo.equals(questionario.getTitulo())) {
@@ -204,26 +204,26 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	public void setAuditoria(Auditoria auditoria) {
 		this.auditoria = auditoria;
 	}
-	
-	public void visualizarRelatorio(){
+
+	public void visualizarRelatorio() {
 		RelatorioAuditoria relat = new RelatorioAuditoria();
 		byte[] b = relat.imprimeRelatorio(usuarioLogado.getName(), auditoria.getId(), auditoria.getEstabelecimento().getId());
-		
-		HttpServletResponse res = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();  
-        res.setContentType("application/pdf");  
-        //Código abaixo gerar o relatório e disponibiliza diretamente na página   
-        res.setHeader("Content-disposition", "inline;filename=arquivo.pdf");  
-		//Código abaixo gerar o relatório e disponibiliza para o cliente baixar ou salvar   
-        //res.setHeader("Content-disposition", "attachment;filename=arquivo.pdf");  
-        try {
+
+		HttpServletResponse res = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+		res.setContentType("application/pdf");
+		// Código abaixo gerar o relatório e disponibiliza diretamente na página
+		res.setHeader("Content-disposition", "inline;filename=arquivo.pdf");
+		// Código abaixo gerar o relatório e disponibiliza para o cliente baixar ou salvar
+		// res.setHeader("Content-disposition", "attachment;filename=arquivo.pdf");
+		try {
 			res.getOutputStream().write(b);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}  
-        res.getCharacterEncoding();  
-        FacesContext.getCurrentInstance().responseComplete();  
-        System.out.println("saiu do visualizar relatorio");  
+		}
+		res.getCharacterEncoding();
+		FacesContext.getCurrentInstance().responseComplete();
+		System.out.println("saiu do visualizar relatorio");
 	}
 
 	public String createAuditoria() {
@@ -252,16 +252,16 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		for (Pergunta pergunta : perguntas) {
 			// Só adiciona as perguntas que forem
 			// referentes aos tipos de estabelecimento
-			if ((pergunta.getTipoServico() != null) && (pergunta.getTipoServico().equals(auditoria.getEstabelecimento().getTipoServico())
+			if ((pergunta.getTipoServico() != null) && 
+					(pergunta.getTipoServico().equals(auditoria.getEstabelecimento().getTipoServico().substring(0, 2))
 					|| pergunta.getTipoServico().equals("Ambos"))) {
-				
-				
-				if(idQuestionarioAnterior != pergunta.getQuestionario().getId()){
+
+				if (idQuestionarioAnterior != pergunta.getQuestionario().getId()) {
 					new RespostaFacade().createResposta(incluiPerguntaNomeDoResponsavel(pergunta.getQuestionario()));
 					new RespostaFacade().createResposta(incluiPerguntaObservacao(pergunta.getQuestionario()));
 					idQuestionarioAnterior = pergunta.getQuestionario().getId();
 				}
-				
+
 				Resposta resposta = new Resposta();
 				resposta.setPergunta(pergunta.getPergunta());
 				resposta.setHint(pergunta.getHint());
@@ -278,8 +278,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		auditoria.setRespostas(respostas);
 		updateAuditoria();
 	}
-	
-	private Resposta incluiPerguntaNomeDoResponsavel(Questionario q){
+
+	private Resposta incluiPerguntaNomeDoResponsavel(Questionario q) {
 		Resposta resposta = new Resposta();
 		resposta.setPergunta("RESPONSÁVEL");
 		resposta.setHint("PESSOA RESPONSÁVEL POR FORNECER AS RESPOSTAS PARA ESTE QUESTIONÁRIO");
@@ -289,8 +289,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		resposta.setAuditoria(auditoria);
 		return resposta;
 	}
-	
-	private Resposta incluiPerguntaObservacao(Questionario q){
+
+	private Resposta incluiPerguntaObservacao(Questionario q) {
 		Resposta resposta = new Resposta();
 		resposta.setPergunta("CONSIDERAÇÕES FINAIS");
 		resposta.setHint("CONSIDERAÇÕES FINAIS PARA ESTE QUESTIONÁRIO");
@@ -342,28 +342,28 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 	public List<Auditoria> getAllAuditorias() {
 		if (auditorias == null) {
-				loadAuditorias();
+			loadAuditorias();
 		}
 
 		return auditorias;
 	}
 
 	private void loadAuditorias() {
-		if(usuarioLogado.isAdmin())
+		if (usuarioLogado.isAdmin())
 			auditorias = getAuditoriaFacade().listAll();
-		else{
+		else {
 			auditorias = new ArrayList<Auditoria>();
 			List<Auditoria> todasAuditorias = getAuditoriaFacade().listAll();
-			
+
 			for (Auditoria auditoria : todasAuditorias) {
 				for (User user : auditoria.getAuditores()) {
-					if(user.getId() == usuarioLogado.getId())
-						auditorias.add(auditoria);					
+					if (user.getId() == usuarioLogado.getId())
+						auditorias.add(auditoria);
 				}
 			}
 		}
 	}
-	
+
 	public void resetAuditoria() {
 		auditoria = new Auditoria();
 	}
