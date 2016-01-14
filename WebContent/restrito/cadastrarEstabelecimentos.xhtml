@@ -216,7 +216,6 @@
 							Início ta TAB Dados do serviço 
 						 -->
 							<p:tab title="Dados do serviço">
-
 								<h:panelGrid columns="2" columnClasses="label, value">
 									<h:outputText value="Tipo do serviço:* " />
 									<p:selectOneRadio id="console"
@@ -228,8 +227,15 @@
 											itemValue="AH" />
 										<f:selectItem itemLabel="Assistência Hemoterápica - interveniência"
 											itemValue="AHI" />
-										<f:selectItem itemLabel="Outro" itemValue="Outro" />
+										<f:selectItem itemLabel="Outro" itemValue="Outro"/>
 									</p:selectOneRadio>
+									
+									<h:outputText value="Observação: " />
+									<p:inputText
+										value="#{estabelecimentoMB.estabelecimento.observacao}"
+										required="false"
+										requiredMessage="O campo Observação é obrigatório!"
+										size="20" maxlength="255" />
 
 									<h:outputText value="Horário de funcionamento: " />
 									<p:inputText

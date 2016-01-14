@@ -41,6 +41,7 @@ public class Estabelecimento implements Serializable{
 	private String nomeResponsavelAT;
 	private String cargoResponsavelAT;
 	private String tipoServico;
+	private String observacao;
 	private String horarioDeFuncionamento;
 	private int numeroDeFuncionarios;
 	private int mediaDeTransfusoes;
@@ -313,6 +314,12 @@ public class Estabelecimento implements Serializable{
 	}
 	public void setBercario(boolean bercario) {
 		this.bercario = bercario;
+	}
+	public String getObservacao() {
+		return observacao;
+	}
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 	@Override
 	public int hashCode() {
