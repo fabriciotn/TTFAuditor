@@ -13,7 +13,8 @@
 	<ui:define name="conteudo">
 		<f:loadBundle basename="messages" var="msg" />
 		<center>
-			<h:form acceptcharset="ISO-8859-1" id="form1" rendered="#{userMB.usuarioLogado.menuCadAuditorias}">
+			<h:form acceptcharset="ISO-8859-1" id="form1"
+				rendered="#{userMB.usuarioLogado.menuCadAuditorias}">
 				<p:panel id="basic" header="Cadastro de auditorias"
 					style="margin-bottom:20px">
 
@@ -24,25 +25,36 @@
 
 						<p:columnGroup>
 						</p:columnGroup>
-						
+
 						<h:outputText value="Código:* " />
-						<p:inputText value="#{auditoriaMB.auditoria.codigo}" required="true"
-							requiredMessage="O campo Código é obrigatório!" label="Código"
-							size="15" maxlength="20" converter="toUpperCaseConverter">
+						<p:inputText value="#{auditoriaMB.auditoria.codigo}"
+							required="true" requiredMessage="O campo Código é obrigatório!"
+							label="Código" size="15" maxlength="20"
+							converter="toUpperCaseConverter">
 							<f:ajax event="blur" render="@this" />
 						</p:inputText>
 
 						<h:outputText value="Estabelecimento:* " />
 						<p:selectOneMenu id="estabelecimento"
-							value="#{auditoriaMB.auditoria.estabelecimento}" required="true"
+							value="#{auditoriaMB.auditoria.estabelecimento}" var="aud" required="true"
 							requiredMessage="O campo Estabelecimento é obrigatório!"
-							converter="estabelecimentoConverter" style="width:13em" filter="true" filterMatchMode="startsWith">
+							converter="estabelecimentoConverter" style="width:13em"
+							filter="true" filterMatchMode="startsWith">
 							<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
 								noSelectionOption="true" />
 							<f:selectItems value="#{estabelecimentoMB.allEstabelecimentos}"
 								var="estabelecimento"
 								itemLabel="#{estabelecimento.nomeFantasia}"
 								itemValue="#{estabelecimento}" />
+							<p:column style="width:10%">
+								<h:outputText value="#{aud.id}"/>
+							</p:column>
+							<p:column>
+								<h:outputText value="#{aud.nomeFantasia}" />
+							</p:column>
+							<p:column>
+								<h:outputText value="#{aud.unidade.sigla}" />
+							</p:column>
 						</p:selectOneMenu>
 
 						<h:outputLabel for="menu" value="Auditores:" />
@@ -59,16 +71,15 @@
 						<p:calendar id="dataAuditoria" pattern="dd/MM/yyyy" locale="pt"
 							value="#{auditoriaMB.auditoria.dataDaVerificacao}"
 							mindate="#{auditoriaMB.hoje}" />
-						
+
 						<h:outputText value="Tipo:* " />
-						<p:selectOneMenu id="tipo"
-							value="#{auditoriaMB.auditoria.tipo}" required="true"
-							requiredMessage="O campo Tipo é obrigatório!"
+						<p:selectOneMenu id="tipo" value="#{auditoriaMB.auditoria.tipo}"
+							required="true" requiredMessage="O campo Tipo é obrigatório!"
 							style="width:13em">
 							<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
 								noSelectionOption="true" />
-							<f:selectItem itemLabel="Visita" itemValue="VISITA"/>
-							<f:selectItem itemLabel="Revisita" itemValue="REVISITA"/>
+							<f:selectItem itemLabel="Visita" itemValue="VISITA" />
+							<f:selectItem itemLabel="Revisita" itemValue="REVISITA" />
 						</p:selectOneMenu>
 
 						<p:columnGroup>
@@ -120,7 +131,7 @@
 							sortBy="#{auditoria.tipo}" style="text-align: center;">
 							<h:outputText value="#{auditoria.tipo}" />
 						</p:column>
-						
+
 						<p:column headerText="DATA"
 							filterBy="#{auditoria.dataDaVerificacao}"
 							sortBy="#{auditoria.dataDaVerificacao}"
