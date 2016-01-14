@@ -36,12 +36,12 @@
 						<p:selectOneMenu id="estabelecimento"
 							value="#{auditoriaMB.auditoria.estabelecimento}" required="true"
 							requiredMessage="O campo Estabelecimento é obrigatório!"
-							converter="estabelecimentoConverter" style="width:13em">
+							converter="estabelecimentoConverter" style="width:13em" filter="true" filterMatchMode="startsWith">
 							<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
 								noSelectionOption="true" />
 							<f:selectItems value="#{estabelecimentoMB.allEstabelecimentos}"
 								var="estabelecimento"
-								itemLabel="#{estabelecimento.id} | #{estabelecimento.nomeFantasia}"
+								itemLabel="#{estabelecimento.nomeFantasia}"
 								itemValue="#{estabelecimento}" />
 						</p:selectOneMenu>
 

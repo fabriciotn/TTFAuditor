@@ -63,11 +63,11 @@
 										value="#{estabelecimentoMB.estabelecimento.unidade}"
 										required="false"
 										requiredMessage="O campo Unidade é obrigatório!"
-										converter="unidadeConverter" style="width:13em">
+										converter="unidadeConverter" style="width:13em" filter="true" filterMatchMode="startsWith">
 										<f:selectItem itemLabel="--- Selecione ---"
 											itemValue="#{null}" noSelectionOption="true" />
 										<f:selectItems value="#{unidadeMB.allUnidades}" var="unidade"
-											itemLabel="#{unidade.id} | #{unidade.sigla}"
+											itemLabel="#{unidade.sigla}"
 											itemValue="#{unidade}" />
 									</p:selectOneMenu>
 
@@ -102,7 +102,7 @@
 
 										<p:selectOneMenu id="uf"
 											value="#{estabelecimentoMB.estabelecimento.uf}"
-											required="false" requiredMessage="O campo UF é obrigatório!">
+											required="false" requiredMessage="O campo UF é obrigatório!" filter="true" filterMatchMode="startsWith">
 											<f:selectItem itemLabel="UF" itemValue="#{null}"
 												noSelectionOption="true" />
 											<f:selectItems value="#{uFMB.UFList}" var="uf"

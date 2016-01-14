@@ -30,12 +30,12 @@
 						<p:selectOneMenu id="questionario"
 							value="#{perguntaMB.pergunta.questionario}" required="true"
 							requiredMessage="O campo Questionário é obrigatório!"
-							converter="questionarioConverter" style="width:20em;">
+							converter="questionarioConverter" style="width:20em;" filter="true" filterMatchMode="startsWith">
 							<f:selectItem itemLabel="--- Selecione o questionário---"
 								itemValue="#{null}" noSelectionOption="true" />
 							<f:selectItems value="#{questionarioMB.allQuestionarios}"
 								var="questionario"
-								itemLabel="#{questionario.id} | #{questionario.titulo}"
+								itemLabel="#{questionario.titulo}"
 								itemValue="#{questionario}" />
 						</p:selectOneMenu>
 
