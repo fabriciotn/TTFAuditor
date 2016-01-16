@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioAuditoriaGeral" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7adbdca9-ad59-4558-b92d-4f18ba3d8086">
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="id_auditoria" class="java.lang.Integer">
@@ -121,13 +121,13 @@ AND A.ESTABELECIMENTO_ID = E.ID]]>
 				<imageExpression><![CDATA[$P{caminho_imagem}]]></imageExpression>
 			</image>
 			<textField pattern="dd MMMMM yyyy">
-				<reportElement x="321" y="100" width="189" height="15" uuid="7d1850ec-ac40-4e5d-b589-3c06422ac23d"/>
+				<reportElement x="322" y="100" width="189" height="15" uuid="7d1850ec-ac40-4e5d-b589-3c06422ac23d"/>
 				<textElement verticalAlignment="Top"/>
 				<textFieldExpression><![CDATA[$F{DATADAVERIFICACAO}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="234" y="100" width="88" height="15" uuid="ed01abb2-19e1-4942-be35-9ea035f8496a"/>
-				<textElement>
+				<reportElement x="227" y="100" width="95" height="15" uuid="ed01abb2-19e1-4942-be35-9ea035f8496a"/>
+				<textElement textAlignment="Right">
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[Data da auditoria:]]></text>
@@ -178,4 +178,15 @@ AND A.ESTABELECIMENTO_ID = E.ID]]>
 			</textField>
 		</band>
 	</pageFooter>
+	<noData>
+		<band height="32">
+			<staticText>
+				<reportElement x="116" y="0" width="525" height="32" uuid="7cdb8e36-8159-4234-9092-8dbed44abf35"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nenhuma pergunta respondida para esta auditoria.]]></text>
+			</staticText>
+		</band>
+	</noData>
 </jasperReport>
