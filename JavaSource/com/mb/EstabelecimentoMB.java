@@ -75,6 +75,9 @@ public class EstabelecimentoMB extends AbstractMB implements Serializable {
 	public String createEstabelecimento() {
 		try {
 			estabelecimento.setUser(usuarioLogado);
+			if(estabelecimento.getCnpj() != null && estabelecimento.getCnpj().isEmpty()){
+				estabelecimento.setCnpj(null);
+			}
 
 			getEstabelecimentoFacade().createEstabelecimento(estabelecimento);
 			closeDialog();
@@ -98,6 +101,9 @@ public class EstabelecimentoMB extends AbstractMB implements Serializable {
 			estabelecimento.setTelefone2(RetiraMascaras.retirar(estabelecimento.getTelefone2()));
 			estabelecimento.setTelefone3(RetiraMascaras.retirar(estabelecimento.getTelefone3()));
 			estabelecimento.setTelefone4(RetiraMascaras.retirar(estabelecimento.getTelefone4()));
+			if(estabelecimento.getCnpj() != null && estabelecimento.getCnpj().isEmpty()){
+				estabelecimento.setCnpj(null);
+			}
 
 			if (estabelecimento.getId() == 0) {
 				createEstabelecimento();
