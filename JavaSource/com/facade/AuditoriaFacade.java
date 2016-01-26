@@ -12,10 +12,12 @@ import com.model.Auditoria;
 
 public class AuditoriaFacade implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+	private static final long		serialVersionUID	= 1L;
 
-	private AuditoriaDAO auditoriaDAO = new AuditoriaDAO();
-	private static SessionFactory factory; 
+	private AuditoriaDAO			auditoriaDAO		= new AuditoriaDAO();
+	private static SessionFactory	factory;
+
+	private Auditoria				auditoria;
 
 	public void createAuditoria(Auditoria auditoria) {
 		auditoriaDAO.beginTransaction();
@@ -39,9 +41,12 @@ public class AuditoriaFacade implements Serializable {
 	}
 
 	public Auditoria findAuditoria(int auditoriaId) {
-		auditoriaDAO.beginTransaction();
-		Auditoria auditoria = auditoriaDAO.find(auditoriaId);
-		auditoriaDAO.closeTransaction();
+		if (auditoria == null) {
+			System.out.println("pesquisou auditoria");
+			auditoriaDAO.beginTransaction();
+			auditoria = auditoriaDAO.find(auditoriaId);
+			auditoriaDAO.closeTransaction();
+		}
 		return auditoria;
 	}
 
@@ -54,8 +59,7 @@ public class AuditoriaFacade implements Serializable {
 
 	public void deleteAuditoria(Auditoria auditoria) {
 		auditoriaDAO.beginTransaction();
-		Auditoria persistedAuditoria = auditoriaDAO.findReferenceOnly(auditoria
-				.getId());
+		Auditoria persistedAuditoria = auditoriaDAO.findReferenceOnly(auditoria.getId());
 		auditoriaDAO.delete(persistedAuditoria);
 		auditoriaDAO.commitAndCloseTransaction();
 	}
@@ -63,7 +67,7 @@ public class AuditoriaFacade implements Serializable {
 	public List<Object[]> buscaComQuery(String sql) {
 		auditoriaDAO.beginTransaction();
 		Query query = auditoriaDAO.selectComQuery(sql);
-		List<Object[]> list = (List<Object[]>)query.getResultList();
+		List<Object[]> list = (List<Object[]>) query.getResultList();
 		auditoriaDAO.closeTransaction();
 		return list;
 	}

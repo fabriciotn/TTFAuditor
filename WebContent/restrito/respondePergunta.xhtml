@@ -11,10 +11,6 @@
 	value="#{respostaMB.respostaFacade.findResposta(request.getParameter('resposta_id'))}"
 	name="resposta" />
 
-<ui:param
-	value="#{auditoriaMB.auditoriaFacade.findAuditoria(request.getParameter('auditoria_id'))}"
-	name="auditoria" />
-
 <h:head>
 </h:head>
 
@@ -76,7 +72,7 @@
 								<p:commandButton value="Enviar"
 									actionListener="#{respostaMB.updateResposta}"
 									oncomplete="javascript:window.parent.location.reload();">
-									<f:param name="auditoria_id" value="#{auditoria.id}" />
+									<f:param name="auditoria_id" value="#{resposta.auditoria.id}" />
 									<f:param name="resposta_id" value="#{resposta.id}" />
 								</p:commandButton>
 							</p:columnGroup>
@@ -106,7 +102,7 @@
 								<p:commandButton value="Enviar"
 									actionListener="#{respostaMB.updateResposta}"
 									oncomplete="javascript:window.parent.location.reload();">
-									<f:param name="auditoria_id" value="#{auditoria.id}" />
+									<f:param name="auditoria_id" value="#{resposta.auditoria.id}" />
 									<f:param name="resposta_id" value="#{resposta.id}" />
 								</p:commandButton>
 							</p:columnGroup>
@@ -135,7 +131,7 @@
 								<p:commandButton value="Enviar"
 									actionListener="#{respostaMB.updateResposta}"
 									oncomplete="javascript:window.parent.location.reload();">
-									<f:param name="auditoria_id" value="#{auditoria.id}" />
+									<f:param name="auditoria_id" value="#{resposta.auditoria.id}" />
 									<f:param name="resposta_id" value="#{resposta.id}" />
 								</p:commandButton>
 							</p:columnGroup>

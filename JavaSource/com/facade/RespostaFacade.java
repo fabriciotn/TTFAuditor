@@ -19,6 +19,8 @@ public class RespostaFacade implements Serializable {
 	private RespostaDAO				respostaDAO			= new RespostaDAO();
 	private static SessionFactory	factory;
 
+	private Resposta				resposta			= null;
+
 	public void createResposta(Resposta resposta) {
 		respostaDAO.beginTransaction();
 		respostaDAO.save(resposta);
@@ -57,9 +59,13 @@ public class RespostaFacade implements Serializable {
 	}
 
 	public Resposta findResposta(int respostaId) {
-		respostaDAO.beginTransaction();
-		Resposta resposta = respostaDAO.find(respostaId);
-		respostaDAO.closeTransaction();
+		if (resposta == null) {
+			System.out.println("pesquisou resposta");
+			respostaDAO.beginTransaction();
+			resposta = respostaDAO.find(respostaId);
+			respostaDAO.closeTransaction();
+		}
+
 		return resposta;
 	}
 
