@@ -21,6 +21,8 @@ public class RespostaFacade implements Serializable {
 
 	private Resposta				resposta			= null;
 
+	private Resposta persistedResposta;
+
 	public void createResposta(Resposta resposta) {
 		respostaDAO.beginTransaction();
 		respostaDAO.save(resposta);
@@ -29,7 +31,10 @@ public class RespostaFacade implements Serializable {
 
 	public void updateResposta(Resposta resposta) {
 		respostaDAO.beginTransaction();
-		Resposta persistedResposta = respostaDAO.find(resposta.getId());
+		
+		if(persistedResposta == null)
+			persistedResposta = respostaDAO.find(resposta.getId());
+		
 		if (resposta.getResposta() != null)
 			persistedResposta.setResposta(resposta.getResposta());
 		if (resposta.getUser() != null)

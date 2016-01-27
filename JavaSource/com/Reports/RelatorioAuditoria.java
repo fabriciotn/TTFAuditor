@@ -52,8 +52,9 @@ public class RelatorioAuditoria {
 	public Connection getConection() {
 		ResourceBundle bundle = ResourceBundle.getBundle("messages");
 		String senhaBanco = bundle.getString("senhaBanco");
+		String urlBanco = bundle.getString("url");
 		
-		String url = "jdbc:mysql://localhost/auditoria_db";
+		String url = urlBanco;
 		String usuario = "root";
 		String senha = senhaBanco;
 		Connection conn = null;

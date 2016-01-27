@@ -140,9 +140,13 @@ public class RespostaMB extends AbstractMB implements Serializable {
 		resposta = new Resposta();
 	}
 	
-	public void colocaRespostaMbNaSessao(){
-		int resposta_id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("resposta_id"));
-		resposta = getRespostaFacade().findResposta(resposta_id);
+	public Resposta colocaRespostaMbNaSessao(int resposta_id){
+		//int resposta_id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("resposta_id"));
+		if(resposta == null && resposta_id != 0){
+			resposta = getRespostaFacade().findResposta(resposta_id);
+			System.out.println("coloca na sessão");
+		}
+		return resposta;
 	}
 
 	public Resposta pesquisaResposta() {
@@ -151,7 +155,9 @@ public class RespostaMB extends AbstractMB implements Serializable {
 
 		int id = (Integer) session.getAttribute("id");
 		int respostaId = id;
-		resposta = respostaFacade.findResposta(respostaId);
+		
+		if(respostaId != 0)
+			resposta = respostaFacade.findResposta(respostaId);
 
 		return resposta;
 	}

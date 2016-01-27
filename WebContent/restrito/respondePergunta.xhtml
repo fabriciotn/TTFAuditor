@@ -8,13 +8,13 @@
 <f:loadBundle basename="messages" var="msg" />
 
 <ui:param
-	value="#{respostaMB.respostaFacade.findResposta(request.getParameter('resposta_id'))}"
+	value="#{respostaMB.colocaRespostaMbNaSessao(request.getParameter('resposta_id'))}"
 	name="resposta" />
 
 <h:head>
 </h:head>
 
-<h:body style="font-family: arial; margin: 0;" onload="#{respostaMB.colocaRespostaMbNaSessao()}">
+<h:body style="font-family: arial; margin: 0;">
 	<center>
 		<h:form acceptcharset="ISO-8859-1" id="form1"
 			rendered="#{userMB.usuarioLogado.menuAuditar}">
