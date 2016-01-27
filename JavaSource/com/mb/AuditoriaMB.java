@@ -223,7 +223,6 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		}
 		res.getCharacterEncoding();
 		FacesContext.getCurrentInstance().responseComplete();
-		System.out.println("saiu do visualizar relatorio");
 	}
 
 	public String createAuditoria() {

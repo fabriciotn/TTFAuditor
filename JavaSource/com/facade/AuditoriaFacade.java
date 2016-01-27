@@ -42,7 +42,6 @@ public class AuditoriaFacade implements Serializable {
 
 	public Auditoria findAuditoria(int auditoriaId) {
 		if (auditoria == null) {
-			System.out.println("pesquisou auditoria");
 			auditoriaDAO.beginTransaction();
 			auditoria = auditoriaDAO.find(auditoriaId);
 			auditoriaDAO.closeTransaction();

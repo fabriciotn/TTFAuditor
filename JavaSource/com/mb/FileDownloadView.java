@@ -72,7 +72,6 @@ public class FileDownloadView implements Serializable {
 		}
 
 		for (int i = 0; i < fList.length; i++) {
-			System.out.println(fList[i].getName());
 			listaDeArquivos.add(fList[i].getName());
 		}
 

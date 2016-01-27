@@ -65,7 +65,6 @@ public class RespostaFacade implements Serializable {
 
 	public Resposta findResposta(int respostaId) {
 		if (resposta == null) {
-			System.out.println("pesquisou resposta");
 			respostaDAO.beginTransaction();
 			resposta = respostaDAO.find(respostaId);
 			respostaDAO.closeTransaction();

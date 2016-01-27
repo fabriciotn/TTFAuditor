@@ -79,9 +79,6 @@ public class RespostaMB extends AbstractMB implements Serializable {
 		int auditoria_id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("auditoria_id"));
 		int resposta_id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("resposta_id"));
 
-		System.out.println("auditoria: " + auditoria_id);
-		System.out.println("resposta: " + resposta_id);
-
 		resposta.setId(resposta_id);
 		resposta.setAuditoria(new AuditoriaMB().getAuditoriaFacade().findAuditoria(auditoria_id));
 
@@ -144,7 +141,6 @@ public class RespostaMB extends AbstractMB implements Serializable {
 		//int resposta_id = Integer.parseInt(FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("resposta_id"));
 		if(resposta == null && resposta_id != 0){
 			resposta = getRespostaFacade().findResposta(resposta_id);
-			System.out.println("coloca na sessão");
 		}
 		return resposta;
 	}

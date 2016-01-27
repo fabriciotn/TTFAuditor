@@ -62,18 +62,15 @@ public class RelatorioAuditoria {
 		try {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 			conn = DriverManager.getConnection(url, usuario, senha);
-			System.out.println("Conexão obtida com sucesso.");
 
 			// a conexão foi obtida com sucesso?
 			if (conn != null) {
-				System.out.println("conexao ok");
+				//System.out.println("conexao ok");
 			}
 		} catch (SQLException ex) {
-			System.out.println("SQLException: " + ex.getMessage());
+			ex.printStackTrace();
 		} catch (Exception e) {
-			System.out
-					.println("Problemas ao tentar conectar com o banco de dados: "
-							+ e);
+			e.printStackTrace();
 		}
 		
 		return conn;

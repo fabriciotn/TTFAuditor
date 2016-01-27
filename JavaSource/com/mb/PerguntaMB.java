@@ -69,9 +69,7 @@ public class PerguntaMB extends AbstractMB implements Serializable {
 	}
 
 	public void updatePergunta() {
-		try {
-			System.out.println(pergunta.getPergunta());
-			
+		try {			
 			if (pergunta.getId() == 0) {
 				createPergunta();
 			} else {

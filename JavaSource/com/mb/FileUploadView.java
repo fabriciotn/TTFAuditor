@@ -44,9 +44,7 @@ public class FileUploadView {
             }
         	
             File file1 = new File(caminho, file.getFileName());
-            
-            System.out.println(file1.getPath());
-            
+                        
             try {
                 FileOutputStream fos = new FileOutputStream(file1);
                 fos.write(event.getFile().getContents());
