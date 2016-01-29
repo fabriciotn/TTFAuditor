@@ -61,6 +61,7 @@ public class LoginMB extends AbstractMB implements Serializable {
 			FacesContext context = FacesContext.getCurrentInstance();
 			HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
 			request.getSession().setAttribute("user", usuario);
+			request.getSession().setAttribute("user_name", usuario.getName());
 			MessagesView ms = new MessagesView();
 			String mensagem = MessageFormat.format(bundle.getString("loginWelcomeMessage"), usuario.getName());
 			ms.info(null, mensagem);
