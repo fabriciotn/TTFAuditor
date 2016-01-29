@@ -40,12 +40,12 @@ public class Auditoria implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataDaVerificacao;
 	
-	@OneToMany(mappedBy = "auditoria", targetEntity = Resposta.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "auditoria", targetEntity = Resposta.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@OrderBy(value = "tipoDeResposta ASC, id ASC")
 	@Fetch(FetchMode.SELECT)
 	private List<Resposta> respostas;
 	
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name = "auditoria_auditor",
 	joinColumns = @JoinColumn(name = "auditoria_id"), 
 	inverseJoinColumns = @JoinColumn(name = "user_id"))
