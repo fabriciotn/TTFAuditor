@@ -7,7 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.BatchSize;
+
 @Entity
+@BatchSize(size = 500)
 public class Questionario implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

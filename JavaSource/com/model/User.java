@@ -24,11 +24,14 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.BatchSize;
+
 import com.util.Criptografia;
 
 @Entity
 @Table(name = "USERS")
 @NamedQuery(name = "User.findUserByLogin", query = "select u from User u where u.login = :login")
+@BatchSize(size = 500)
 //@SequenceGenerator(name="SEQ_USER", sequenceName="SEQ_USER")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -55,7 +58,7 @@ public class User implements Serializable {
 	@ManyToMany(mappedBy="auditores", fetch=FetchType.EAGER)
     private List<Auditoria> auditorias;
 	
-	@ManyToMany(fetch=FetchType.EAGER)
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name = "auditor_questionario",
 	joinColumns = @JoinColumn(name = "user_id"), 
 	inverseJoinColumns = @JoinColumn(name = "questionario_id"))

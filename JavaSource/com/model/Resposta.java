@@ -18,8 +18,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.BatchSize;
+
 @Entity
 @SessionScoped
+@BatchSize(size = 500)
 public class Resposta implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -44,7 +47,7 @@ public class Resposta implements Serializable{
 	@Lob
 	private String recomendacaoPadrao;
 	private String tipoServico;
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="auditoria_id")
 	private Auditoria auditoria;
 	@Temporal(TemporalType.TIMESTAMP)

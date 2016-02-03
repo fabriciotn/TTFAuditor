@@ -9,6 +9,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 
+import com.facade.ParametrosFacade;
 import com.facade.UserFacade;
 import com.model.User;
 
@@ -62,6 +63,7 @@ public class LoginMB extends AbstractMB implements Serializable {
 			HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
 			request.getSession().setAttribute("user", usuario);
 			request.getSession().setAttribute("user_name", usuario.getName());
+			request.getSession().setAttribute("parametros", new ParametrosFacade().findParametros(1));			
 			MessagesView ms = new MessagesView();
 			String mensagem = MessageFormat.format(bundle.getString("loginWelcomeMessage"), usuario.getName());
 			ms.info(null, mensagem);

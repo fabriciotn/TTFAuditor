@@ -9,7 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.BatchSize;
+
 @Entity
+@BatchSize(size = 500)
 public class Pergunta implements Serializable{
 
 	private static final long serialVersionUID = 1L;

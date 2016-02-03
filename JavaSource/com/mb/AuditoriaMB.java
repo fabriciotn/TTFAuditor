@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 
 import com.Reports.RelatorioAuditoria;
 import com.facade.AuditoriaFacade;
-import com.facade.ParametrosFacade;
 import com.facade.RespostaFacade;
 import com.model.Auditoria;
 import com.model.Flag;
@@ -44,6 +43,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	private FacesContext		context;
 	private HttpServletRequest	request;
 
+	private Parametros parametros;
+
 	
 	public boolean podeEditar(Date dataDaResposta) {
 		if (dataDaResposta == null) {
@@ -51,7 +52,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			return podeEditar;
 		}
 
-		Parametros parametros = new ParametrosFacade().findParametros(1);
+		parametros = (Parametros) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("parametros");
 
 		Calendar hoje = Calendar.getInstance();
 		hoje.setTime(new java.util.Date());

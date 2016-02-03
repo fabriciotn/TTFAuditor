@@ -20,10 +20,12 @@ import javax.persistence.OrderBy;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 @Entity
+@BatchSize(size = 500)
 public class Auditoria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
