@@ -48,6 +48,10 @@ public class EstabelecimentoFacade implements Serializable {
 		persistedEstabelecimento.setCrmRtAgenciaTransfusional(estabelecimento.getCrmRtAgenciaTransfusional());
 		persistedEstabelecimento.setNomeResponsavelAT(estabelecimento.getNomeResponsavelAT());
 		persistedEstabelecimento.setCargoResponsavelAT(estabelecimento.getCargoResponsavelAT());
+		persistedEstabelecimento.setDiretorClinico(estabelecimento.getDiretorClinico());
+		persistedEstabelecimento.setDiretorTecnico(estabelecimento.getDiretorTecnico());
+		persistedEstabelecimento.setDiretorOuGerenteAdm(estabelecimento.getDiretorOuGerenteAdm());
+		persistedEstabelecimento.setProvedorDoEstab(estabelecimento.getProvedorDoEstab());
 		persistedEstabelecimento.setTipoServico(estabelecimento.getTipoServico());
 		persistedEstabelecimento.setHorarioDeFuncionamento(estabelecimento.getHorarioDeFuncionamento());
 		persistedEstabelecimento.setNumeroDeFuncionarios(estabelecimento.getNumeroDeFuncionarios());

@@ -174,7 +174,7 @@
 						 -->
 							<p:tab title="Responsáveis">
 								<h:panelGrid columns="2" columnClasses="label, value">
-									<h:outputText value="RT pela AT (Médico): " />
+									<h:outputText value="RT pela AT/AH (Médico): " />
 									<p:inputText
 										value="#{estabelecimentoMB.estabelecimento.nomeRtAgenciaTransfusional}"
 										required="false"
@@ -191,7 +191,7 @@
 										<f:ajax event="blur" render="@this" />
 									</p:inputText>
 
-									<h:outputText value="Responsável AT: " />
+									<h:outputText value="Responsável AT/AH (outro profissional se houver): " />
 									<p:inputText
 										value="#{estabelecimentoMB.estabelecimento.nomeResponsavelAT}"
 										required="false"
@@ -206,6 +206,42 @@
 										required="false"
 										requiredMessage="O campo Cargo é obrigatório!" size="40"
 										maxlength="255" converter="toUpperCaseConverter">
+										<f:ajax event="blur" render="@this" />
+									</p:inputText>
+									
+									<h:outputText value="Diretor Técnico do Estabelecimento de Saúde: " />
+									<p:inputText
+										value="#{estabelecimentoMB.estabelecimento.diretorTecnico}"
+										required="false"
+										requiredMessage="O nome do Diretor Técnico é obrigatório!"
+										size="40" maxlength="255" converter="toUpperCaseConverter">
+										<f:ajax event="blur" render="@this" />
+									</p:inputText>
+									
+									<h:outputText value="Diretor Clínico de Estabelecimento de Saúde: " />
+									<p:inputText
+										value="#{estabelecimentoMB.estabelecimento.diretorClinico}"
+										required="false"
+										requiredMessage="O nome do Diretor Clínico é obrigatório!"
+										size="40" maxlength="255" converter="toUpperCaseConverter">
+										<f:ajax event="blur" render="@this" />
+									</p:inputText>
+									
+									<h:outputText value="Diretor ou Gerente Administrativo do Estabelecimento de Saúde: " />
+									<p:inputText
+										value="#{estabelecimentoMB.estabelecimento.diretorOuGerenteAdm}"
+										required="false"
+										requiredMessage="O nome do Diretor ou Gerente é obrigatório!"
+										size="40" maxlength="255" converter="toUpperCaseConverter">
+										<f:ajax event="blur" render="@this" />
+									</p:inputText>
+									
+									<h:outputText value="Provedor do Estabelecimento de Saúde (se houver): " />
+									<p:inputText
+										value="#{estabelecimentoMB.estabelecimento.provedorDoEstab}"
+										required="false"
+										requiredMessage="O nome do Provedor é obrigatório!"
+										size="40" maxlength="255" converter="toUpperCaseConverter">
 										<f:ajax event="blur" render="@this" />
 									</p:inputText>
 								</h:panelGrid>
@@ -237,14 +273,14 @@
 										requiredMessage="O campo Observação é obrigatório!"
 										size="20" maxlength="255" />
 
-									<h:outputText value="Horário de funcionamento: " />
+									<h:outputText value="Horário de funcionamento (AT/AH): " />
 									<p:inputText
 										value="#{estabelecimentoMB.estabelecimento.horarioDeFuncionamento}"
 										required="false"
 										requiredMessage="O campo Horário de funcionamento é obrigatório!"
 										size="20" maxlength="255" />
 
-									<h:outputText value="Nº de funcionários: " />
+									<h:outputText value="Nº de funcionários (AT): " />
 									<p:spinner id="numFuncionarios"
 										value="#{estabelecimentoMB.estabelecimento.numeroDeFuncionarios}"
 										min="0" max="999999" size="13" />
@@ -265,7 +301,7 @@
 							<!--
 							Início ta TAB Setores do estabelecimento 
 						 -->
-							<p:tab title="Setores do establecimento">
+							<p:tab title="Setores do establecimento (Locais que fazem Hemotransfusão)">
 								<h:panelGrid columns="2" columnClasses="label, value">
 
 									<h:outputText value="Pronto atendimento: " />
@@ -283,7 +319,7 @@
 											<p:ajax update="mediaCirurgiasGPorte" />
 										</p:selectBooleanCheckbox>
 
-										<h:outputText value=" Média/mês: " />
+										<h:outputText value=" Média de transfusões/mês (considerar 3 meses): " />
 										<p:spinner id="mediaCirurgiasGPorte"
 											value="#{estabelecimentoMB.estabelecimento.mediaCirurgiaGrandePorte}"
 											min="0" max="99999" size="5" />

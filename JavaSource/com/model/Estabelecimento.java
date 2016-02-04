@@ -42,6 +42,10 @@ public class Estabelecimento implements Serializable{
 	private String nomeRtAgenciaTransfusional;
 	private String CrmRtAgenciaTransfusional;
 	private String nomeResponsavelAT;
+	private String diretorTecnico;
+	private String diretorClinico;
+	private String diretorOuGerenteAdm;
+	private String provedorDoEstab;
 	private String cargoResponsavelAT;
 	private String tipoServico;
 	private String observacao;
@@ -323,6 +327,30 @@ public class Estabelecimento implements Serializable{
 	}
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+	public String getDiretorTecnico() {
+		return diretorTecnico;
+	}
+	public void setDiretorTecnico(String diretorTecnico) {
+		this.diretorTecnico = diretorTecnico;
+	}
+	public String getDiretorClinico() {
+		return diretorClinico;
+	}
+	public void setDiretorClinico(String diretorClinico) {
+		this.diretorClinico = diretorClinico;
+	}
+	public String getDiretorOuGerenteAdm() {
+		return diretorOuGerenteAdm;
+	}
+	public void setDiretorOuGerenteAdm(String diretorOuGerenteAdm) {
+		this.diretorOuGerenteAdm = diretorOuGerenteAdm;
+	}
+	public String getProvedorDoEstab() {
+		return provedorDoEstab;
+	}
+	public void setProvedorDoEstab(String provedorDoEstab) {
+		this.provedorDoEstab = provedorDoEstab;
 	}
 	@Override
 	public int hashCode() {
