@@ -55,10 +55,10 @@ public class User implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar ultimoAcesso;
 	private boolean ativo;
-	@ManyToMany(mappedBy="auditores", fetch=FetchType.EAGER)
+	@ManyToMany(mappedBy="auditores", fetch=FetchType.LAZY)
     private List<Auditoria> auditorias;
 	
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name = "auditor_questionario",
 	joinColumns = @JoinColumn(name = "user_id"), 
 	inverseJoinColumns = @JoinColumn(name = "questionario_id"))
