@@ -63,7 +63,7 @@
 								<f:facet name="header">
 									<h:outputText value="AUDITAR" />
 								</f:facet>
-								<p:commandLink action="realizarAuditoria.xhtml" ajax="false">
+								<p:commandLink action="realizarAuditoria.xhtml" ajax="false" target="_parent">
 									<img src="../images/edit.png" width="25" />
 									<f:setPropertyActionListener value="#{auditoria}"
 										target="#{auditoriaMB.auditoria}" />
@@ -74,7 +74,7 @@
 								<f:facet name="header">
 									<h:outputText value="RELATÓRIO" />
 								</f:facet>
-								<p:commandLink action="#{auditoriaMB.visualizarRelatorio()}" ajax="false" target="blank">
+								<p:commandLink action="#{auditoriaMB.visualizarRelatorio()}" ajax="false" target="_blank">
 									<img src="../images/iconeRelatorio.png" width="25" />
 									<f:setPropertyActionListener value="#{auditoria}"
 										target="#{auditoriaMB.auditoria}" />
