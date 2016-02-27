@@ -8,6 +8,7 @@
 		<![CDATA[SELECT
      auditoria.`dataDaVerificacao` AS auditoria_dataDaVerificacao,
      estabelecimento.`nomeFantasia` AS estabelecimento_nomeFantasia,
+     estabelecimento.`cidade` AS cidade,
      unidade.`sigla` AS unidade_sigla
 FROM
      `estabelecimento` estabelecimento INNER JOIN `auditoria` auditoria ON estabelecimento.`id` = auditoria.`estabelecimento_id`
@@ -17,6 +18,9 @@ WHERE
 	</queryString>
 	<field name="auditoria_dataDaVerificacao" class="java.sql.Timestamp"/>
 	<field name="estabelecimento_nomeFantasia" class="java.lang.String"/>
+	<field name="cidade" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<field name="unidade_sigla" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -57,6 +61,13 @@ WHERE
 				</textElement>
 				<text><![CDATA[ANO]]></text>
 			</staticText>
+			<textField>
+				<reportElement x="0" y="344" width="802" height="34" uuid="fc2e9a48-dd18-42f9-9a37-e0840e4a1710"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cidade}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 </jasperReport>
