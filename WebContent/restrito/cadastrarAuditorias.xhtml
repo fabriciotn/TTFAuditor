@@ -23,8 +23,7 @@
 
 						<h:inputHidden value="#{auditoriaMB.auditoria.id}" />
 
-						<p:columnGroup>
-						</p:columnGroup>
+						<p:columnGroup />
 
 						<h:outputText value="Código:* " />
 						<p:inputText value="#{auditoriaMB.auditoria.codigo}"
@@ -36,7 +35,8 @@
 
 						<h:outputText value="Estabelecimento:* " />
 						<p:selectOneMenu id="estabelecimento"
-							value="#{auditoriaMB.auditoria.estabelecimento}" var="aud" required="true"
+							value="#{auditoriaMB.auditoria.estabelecimento}" var="aud"
+							required="true"
 							requiredMessage="O campo Estabelecimento é obrigatório!"
 							converter="estabelecimentoConverter" style="width:13em"
 							filter="true" filterMatchMode="startsWith">
@@ -47,7 +47,7 @@
 								itemLabel="#{estabelecimento.nomeFantasia}"
 								itemValue="#{estabelecimento}" />
 							<p:column style="width:10%">
-								<h:outputText value="#{aud.id}"/>
+								<h:outputText value="#{aud.id}" />
 							</p:column>
 							<p:column>
 								<h:outputText value="#{aud.nomeFantasia}" />
@@ -153,6 +153,24 @@
 								<f:setPropertyActionListener value="#{auditoria}"
 									target="#{auditoriaMB.auditoria}" />
 							</p:commandLink>
+						</p:column>
+						
+						<p:column exportable="false"
+							style="text-align: center; width:3em;" rendered="#{userMB.usuarioLogado.admin}">
+							<f:facet name="header">
+								<h:outputText value="Excluir" />
+							</f:facet>
+
+							<p:commandButton value="Excluir" ajax="false" icon="ui-icon-trash"
+								action="#{auditoriaMB.deleteAuditoria(auditoria.id)}" >
+								<p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+							</p:commandButton>
+							
+							<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						    </p:confirmDialog>
+							
 						</p:column>
 					</p:dataTable>
 				</h:panelGrid>

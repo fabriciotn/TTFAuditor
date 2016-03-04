@@ -335,6 +335,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	}
 
 	public void deleteAuditoria(String id) {
+		System.out.println("teste");
+		System.out.println(id);
 		int idAuditoria = Integer.parseInt(id);
 		auditoria = auditoriaFacade.findAuditoria(idAuditoria);
 		deleteAuditoria();
