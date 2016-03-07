@@ -154,23 +154,34 @@
 									target="#{auditoriaMB.auditoria}" />
 							</p:commandLink>
 						</p:column>
-						
+
 						<p:column exportable="false"
-							style="text-align: center; width:3em;" rendered="#{userMB.usuarioLogado.admin}">
+							style="text-align: center; width:3em;"
+							rendered="#{userMB.usuarioLogado.admin}">
 							<f:facet name="header">
 								<h:outputText value="Excluir" />
 							</f:facet>
+							
+							<p:growl id="message" showDetail="true" />
 
-							<p:commandButton value="Excluir" ajax="false" icon="ui-icon-trash"
-								action="#{auditoriaMB.deleteAuditoria(auditoria.id)}" >
-								<p:confirm header="Confirmation" message="Are you sure?" icon="ui-icon-alert" />
+							<p:commandButton value="" icon="ui-icon-trash"
+								actionListener="#{auditoriaMB.deleteAuditoria(auditoria.id)}"
+								update="@form">
+								<p:confirm header="A T E N Ç Ã O"
+									message="Deseja excluir a auditoria?" icon="ui-icon-alert" />
 							</p:commandButton>
-							
-							<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-						        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-						        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-						    </p:confirmDialog>
-							
+
+							<p:confirmDialog global="true" showEffect="fade"
+								hideEffect="fade">
+								<p:commandButton value="Não" type="button"
+									styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								<p:commandButton value="Sim, excluir a auditoria!" type="button"
+									styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+								<br />
+								<h:outputText value="Atenção: esta ação é irreversível!"
+									style="font-size:small; color:red;" />
+							</p:confirmDialog>
+
 						</p:column>
 					</p:dataTable>
 				</h:panelGrid>

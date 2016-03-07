@@ -324,7 +324,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		try {
 			getAuditoriaFacade().deleteAuditoria(auditoria);
 			closeDialog();
-			displayInfoMessageToUser("Deletado com sucesso!");
+			displayInfoMessageToUser("Auditoria " + auditoria.getCodigo() + " deletada com sucesso!");
 			loadAuditorias();
 			resetAuditoria();
 		} catch (Exception e) {
@@ -335,8 +335,6 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	}
 
 	public void deleteAuditoria(String id) {
-		System.out.println("teste");
-		System.out.println(id);
 		int idAuditoria = Integer.parseInt(id);
 		auditoria = auditoriaFacade.findAuditoria(idAuditoria);
 		deleteAuditoria();
