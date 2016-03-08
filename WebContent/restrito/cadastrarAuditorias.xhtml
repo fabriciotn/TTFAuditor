@@ -161,12 +161,14 @@
 							<f:facet name="header">
 								<h:outputText value="Excluir" />
 							</f:facet>
-							
-							<p:growl id="message" showDetail="true" />
 
-							<p:commandButton value="" icon="ui-icon-trash"
+							<p:growl/>
+
+							<p:commandButton value="'"
 								actionListener="#{auditoriaMB.deleteAuditoria(auditoria.id)}"
-								update="@form">
+								update="@form" 
+								style="background-image: url(../images/delete.png); background-size: 20px 20px; background-repeat:no-repeat; color:white;">
+
 								<p:confirm header="A T E N Ç Ã O"
 									message="Deseja excluir a auditoria?" icon="ui-icon-alert" />
 							</p:commandButton>
