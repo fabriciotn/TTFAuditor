@@ -34,6 +34,7 @@ public class AuditoriaFacade implements Serializable {
 		persistedAuditoria.setEstabelecimento(auditoria.getEstabelecimento());
 		persistedAuditoria.setRespostas(auditoria.getRespostas());
 		persistedAuditoria.setTipo(auditoria.getTipo());
+		persistedAuditoria.setOffLine(auditoria.isOffLine());
 		persistedAuditoria.setUser(auditoria.getUser());
 
 		auditoriaDAO.update(persistedAuditoria);

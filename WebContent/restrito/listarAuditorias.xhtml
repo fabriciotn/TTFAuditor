@@ -14,7 +14,8 @@
 		<f:loadBundle basename="messages" var="msg" />
 		<br />
 		<center>
-			<h:form acceptcharset="ISO-8859-1" id="form2" rendered="#{userMB.usuarioLogado.menuAuditar}">
+			<h:form acceptcharset="ISO-8859-1" id="form2"
+				rendered="#{userMB.usuarioLogado.menuAuditar}">
 				<p:panel id="basic" header="Selecione a auditoria"
 					style="margin-bottom:20px">
 					<h:panelGrid columns="1" style="text-align:left">
@@ -22,6 +23,23 @@
 							value="#{auditoriaMB.allAuditorias}"
 							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
 							paginator="true" rows="10" style="margin-bottom:20px">
+
+							<p:column exportable="false"
+								style="text-align: center; width:3em;" headerText="ON/OFF">
+								<p:graphicImage id="online" url="../images/online.png"
+									width="25px" rendered="#{!auditoria.offLine}" />
+								<p:tooltip id="toolTipTrack" for="online"
+									value="Auditoria OnLine" trackMouse="true" escape="false"
+									style="border:3; white-space:pre-wrap; word-wrap:break-word; font-size:0.9em;" />
+								<br />
+
+								<p:graphicImage id="offline" url="../images/offline.png"
+									width="25px" rendered="#{auditoria.offLine}" />
+								<p:tooltip id="toolTipTrack1" for="offline"
+									value="Auditoria OffLine" trackMouse="true" escape="false"
+									style="border:3; white-space:pre-wrap; word-wrap:break-word; font-size:0.9em;" />
+								<br />
+							</p:column>
 
 							<p:column headerText="CÓDIGO" filterBy="#{auditoria.codigo}"
 								sortBy="#{auditoria.codigo}"
@@ -63,18 +81,21 @@
 								<f:facet name="header">
 									<h:outputText value="AUDITAR" />
 								</f:facet>
-								<p:commandLink action="realizarAuditoria.xhtml" ajax="false" target="_parent">
+								<p:commandLink action="realizarAuditoria.xhtml" ajax="false"
+									target="_parent">
 									<img src="../images/edit.png" width="25" />
 									<f:setPropertyActionListener value="#{auditoria}"
 										target="#{auditoriaMB.auditoria}" />
 								</p:commandLink>
 							</p:column>
-							
-							<p:column style="text-align: center; width:5em;" rendered="#{userMB.usuarioLogado.admin}">
+
+							<p:column style="text-align: center; width:5em;"
+								rendered="#{userMB.usuarioLogado.admin}">
 								<f:facet name="header">
 									<h:outputText value="RELATÓRIO" />
 								</f:facet>
-								<p:commandLink action="#{auditoriaMB.visualizarRelatorio()}" ajax="false" target="_blank">
+								<p:commandLink action="#{auditoriaMB.visualizarRelatorio()}"
+									ajax="false" target="_blank">
 									<img src="../images/iconeRelatorio.png" width="25" />
 									<f:setPropertyActionListener value="#{auditoria}"
 										target="#{auditoriaMB.auditoria}" />

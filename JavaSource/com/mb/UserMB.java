@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -35,14 +36,26 @@ public class UserMB extends AbstractMB implements Serializable {
 	private boolean				menuAuditorias;
 	private boolean				menuPreparacao;
 	private List<Questionario>	questionarios;
+	private boolean offLine;
+
+	public boolean isOffLine() {
+		return offLine;
+	}
+
+	public void setOffLine(boolean offLine) {
+		this.offLine = offLine;
+	}
 
 	public UserMB() {
 		usuarioLogado = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+		
+		ResourceBundle bundle = ResourceBundle.getBundle("messages");
+		setOffLine(bundle.getString("modulo").equals("off"));
 
 		habilitaMenuCadastros();
 		habilitaMenuAuditorias();
 		habilitaMenuPreparacao();
-
+		
 		if (usuarioLogado == null)
 			throw new RuntimeException("Problemas com usuário");
 	}

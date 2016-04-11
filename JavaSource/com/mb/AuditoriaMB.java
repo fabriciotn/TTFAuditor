@@ -40,12 +40,12 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	private int					currentTab							= 0;
 	private boolean				podeEditar;
 	private int					quantidadeDePerguntasNaoRespondidas	= 0;
+	private int					quantidadeDePerguntasRespondidas	= 0;
 	private FacesContext		context;
 	private HttpServletRequest	request;
 
-	private Parametros parametros;
+	private Parametros			parametros;
 
-	
 	public boolean podeEditar(Date dataDaResposta) {
 		if (dataDaResposta == null) {
 			podeEditar = false;
@@ -71,25 +71,44 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return podeEditar;
 	}
 
-	public int getQuantidadeDePerguntasNaoRespondidas() {
+	private void contaPerguntas() {
 		quantidadeDePerguntasNaoRespondidas = 0;
-		for (Resposta resposta : auditoria.getRespostas()) {
-			if (resposta.getResposta() == null) {
-				if (usuarioLogado.isAdmin())
-					quantidadeDePerguntasNaoRespondidas++;
-				else {
-					for (Questionario q : usuarioLogado.getQuestionarios()) {
-						if (resposta.getQuestionario().getId() == q.getId())
-							quantidadeDePerguntasNaoRespondidas++;
+		quantidadeDePerguntasRespondidas = 0;
+
+		if (auditoria != null && auditoria.getRespostas() != null) {
+			for (Resposta resposta : auditoria.getRespostas()) {
+				if (resposta.getResposta() == null) {
+					if (usuarioLogado.isAdmin())
+						quantidadeDePerguntasNaoRespondidas++;
+					else {
+						for (Questionario q : usuarioLogado.getQuestionarios()) {
+							if (resposta.getQuestionario().getId() == q.getId())
+								quantidadeDePerguntasNaoRespondidas++;
+						}
 					}
+				} else {
+					quantidadeDePerguntasRespondidas++;
 				}
 			}
 		}
+	}
+
+	public int getQuantidadeDePerguntasNaoRespondidas() {
+		contaPerguntas();
 		return quantidadeDePerguntasNaoRespondidas;
 	}
 
 	public void setQuantidadeDePerguntasNaoRespondidas(int quantidadeDePerguntasNaoRespondidas) {
 		this.quantidadeDePerguntasNaoRespondidas = quantidadeDePerguntasNaoRespondidas;
+	}
+
+	public int getQuantidadeDePerguntasRespondidas() {
+		contaPerguntas();
+		return quantidadeDePerguntasRespondidas;
+	}
+
+	public void setQuantidadeDePerguntasRespondidas(int quantidadeDePerguntasRespondidas) {
+		this.quantidadeDePerguntasRespondidas = quantidadeDePerguntasRespondidas;
 	}
 
 	public boolean isPodeEditar() {
@@ -252,9 +271,9 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		for (Pergunta pergunta : perguntas) {
 			// Só adiciona as perguntas que forem
 			// referentes aos tipos de estabelecimento
-			if ((pergunta.getTipoServico() != null) && 
-					(pergunta.getTipoServico().equals(auditoria.getEstabelecimento().getTipoServico().substring(0, 2))
-					|| pergunta.getTipoServico().equals("Ambos"))) {
+			if ((pergunta.getTipoServico() != null)
+					&& (pergunta.getTipoServico().equals(auditoria.getEstabelecimento().getTipoServico().substring(0, 2))
+							|| pergunta.getTipoServico().equals("Ambos"))) {
 
 				if (idQuestionarioAnterior != pergunta.getQuestionario().getId()) {
 					new RespostaFacade().createResposta(incluiPerguntaNomeDoResponsavel(pergunta.getQuestionario()));

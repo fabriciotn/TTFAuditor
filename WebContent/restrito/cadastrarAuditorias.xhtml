@@ -82,6 +82,10 @@
 							<f:selectItem itemLabel="Revisita" itemValue="REVISITA" />
 						</p:selectOneMenu>
 
+						<h:outputText value="Auditoria Off-Line: " />
+						<p:selectBooleanCheckbox value="#{auditoriaMB.auditoria.offLine}"
+							disabled="#{auditoriaMB.quantidadeDePerguntasRespondidas != 0}" />
+
 						<p:columnGroup>
 						</p:columnGroup>
 
@@ -114,6 +118,23 @@
 								<p:dataExporter type="pdf" target="tbl" fileName="Auditorias" />
 							</h:commandLink>
 						</f:facet>
+
+						<p:column exportable="false"
+							style="text-align: center; width:3em;" headerText="ON/OFF">
+							<p:graphicImage id="online" url="../images/online.png"
+								width="25px" rendered="#{!auditoria.offLine}" />
+							<p:tooltip id="toolTipTrack" for="online"
+								value="Auditoria OnLine" trackMouse="true" escape="false"
+								style="border:3; white-space:pre-wrap; word-wrap:break-word; font-size:0.9em;" />
+							<br />
+
+							<p:graphicImage id="offline" url="../images/offline.png"
+								width="25px" rendered="#{auditoria.offLine}" />
+							<p:tooltip id="toolTipTrack1" for="offline"
+								value="Auditoria OffLine" trackMouse="true" escape="false"
+								style="border:3; white-space:pre-wrap; word-wrap:break-word; font-size:0.9em;" />
+							<br />
+						</p:column>
 
 						<p:column headerText="CÓDIGO" filterBy="#{auditoria.codigo}"
 							sortBy="#{auditoria.codigo}" style="text-align: center;">
@@ -162,11 +183,11 @@
 								<h:outputText value="Excluir" />
 							</f:facet>
 
-							<p:growl/>
+							<p:growl />
 
 							<p:commandButton value="'"
 								actionListener="#{auditoriaMB.deleteAuditoria(auditoria.id)}"
-								update="@form" 
+								update="@form"
 								style="background-image: url(../images/delete.png); background-size: 20px 20px; background-repeat:no-repeat; color:white;">
 
 								<p:confirm header="A T E N Ç Ã O"

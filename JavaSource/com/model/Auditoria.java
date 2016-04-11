@@ -56,6 +56,7 @@ public class Auditoria implements Serializable {
 	 * Visita ou Revisita
 	 */
 	private String tipo;
+	private boolean offLine;
 	
 
 	public int getId() {
@@ -120,6 +121,14 @@ public class Auditoria implements Serializable {
 
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	public boolean isOffLine() {
+		return offLine;
+	}
+
+	public void setOffLine(boolean offLine) {
+		this.offLine = offLine;
 	}
 
 	@Override
