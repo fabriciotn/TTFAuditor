@@ -14,8 +14,9 @@ public class UserFacade implements Serializable {
 	private static final long	serialVersionUID	= 1L;
 	private UserDAO				userDAO				= new UserDAO();
 
-	public User isValidLogin(String login, String password) {
-		password = Criptografia.criptografa(password);
+	public User isValidLogin(String login, String password, boolean service) {
+		if(!service)
+			password = Criptografia.criptografa(password);
 
 		userDAO.beginTransaction();
 		User user = userDAO.findUserByLogin(login);

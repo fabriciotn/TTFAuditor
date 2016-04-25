@@ -19,6 +19,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
@@ -26,7 +29,9 @@ import org.hibernate.annotations.FetchMode;
 
 @Entity
 @BatchSize(size = 500)
-public class Auditoria implements Serializable {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Auditoria implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 
@@ -152,5 +157,11 @@ public class Auditoria implements Serializable {
 			return false;
 		return true;
 	}
-
+	
+	public Auditoria() {
+	}
+	
+	public Auditoria(int id) {
+		this.id = id;
+	}
 }

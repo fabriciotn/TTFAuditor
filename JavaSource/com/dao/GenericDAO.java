@@ -20,6 +20,7 @@ abstract class GenericDAO<T> implements Serializable {
 
 	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("auditoria_db");
 	private EntityManager em;
+
 	private ResourceBundle bundle = ResourceBundle.getBundle("messages");
 
 	private Class<T> entityClass;
@@ -31,6 +32,10 @@ abstract class GenericDAO<T> implements Serializable {
 		} catch (Exception e) {
 			throw new RuntimeException(bundle.getString("falhaAoConectarAoBancoDeDados"));
 		}
+	}
+	
+	protected EntityManager getEm() {
+		return em;
 	}
 
 	public void commit() {

@@ -23,6 +23,10 @@ import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.annotations.BatchSize;
 
@@ -32,6 +36,8 @@ import com.util.Criptografia;
 @Table(name = "USERS")
 @NamedQuery(name = "User.findUserByLogin", query = "select u from User u where u.login = :login")
 @BatchSize(size = 500)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 //@SequenceGenerator(name="SEQ_USER", sequenceName="SEQ_USER")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -56,6 +62,7 @@ public class User implements Serializable {
 	private Calendar ultimoAcesso;
 	private boolean ativo;
 	@ManyToMany(mappedBy="auditores", fetch=FetchType.LAZY)
+	@XmlTransient
     private List<Auditoria> auditorias;
 	
 	@ManyToMany(fetch=FetchType.EAGER)
@@ -63,6 +70,7 @@ public class User implements Serializable {
 	joinColumns = @JoinColumn(name = "user_id"), 
 	inverseJoinColumns = @JoinColumn(name = "questionario_id"))
 	@OrderBy(value = "id ASC")
+	@XmlTransient
 	private Set<Questionario> questionarios;
 	
 	/*

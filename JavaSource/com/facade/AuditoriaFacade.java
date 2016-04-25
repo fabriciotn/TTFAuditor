@@ -71,5 +71,12 @@ public class AuditoriaFacade implements Serializable {
 		auditoriaDAO.closeTransaction();
 		return list;
 	}
+	
+	public List<Auditoria> findAuditoriasOff(){
+		auditoriaDAO.beginTransaction();
+		List<Auditoria> result = auditoriaDAO.listaAuditoriasOff();
+		auditoriaDAO.closeTransaction();
+		return result;
+	}
 
 }

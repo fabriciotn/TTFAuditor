@@ -17,12 +17,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.annotations.BatchSize;
 
 @Entity
 @SessionScoped
 @BatchSize(size = 500)
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Resposta implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -49,6 +55,7 @@ public class Resposta implements Serializable{
 	private String tipoServico;
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="auditoria_id")
+	@XmlTransient
 	private Auditoria auditoria;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataDaResposta;

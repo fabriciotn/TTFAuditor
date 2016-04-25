@@ -56,7 +56,7 @@ public class LoginMB extends AbstractMB implements Serializable {
 		UserFacade userFacade = new UserFacade();
 
 		User usuario = new User();
-		usuario = userFacade.isValidLogin(login, password);
+		usuario = userFacade.isValidLogin(login, password, false);
 
 		if (usuario != null) {
 			FacesContext context = FacesContext.getCurrentInstance();
