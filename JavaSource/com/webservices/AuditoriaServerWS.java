@@ -1,6 +1,7 @@
 package com.webservices;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.jws.WebMethod;
@@ -9,10 +10,12 @@ import javax.jws.WebResult;
 import javax.jws.WebService;
 
 import com.facade.AuditoriaFacade;
+import com.facade.GerenciadorDeAuditoriasOffFacade;
 import com.facade.ParametrosFacade;
 import com.facade.UserFacade;
 import com.model.Auditoria;
 import com.model.AuditoriaHeader;
+import com.model.GerenciadorDeAuditoriasOff;
 import com.model.Parametros;
 import com.model.User;
 
@@ -22,12 +25,12 @@ public class AuditoriaServerWS {
 	UserFacade		userFacade		= new UserFacade();
 	AuditoriaFacade	auditoriaFacade	= new AuditoriaFacade();
 
-	private boolean autentica(String login, String pass) {
+	private User autentica(String login, String pass) {
 		User usuario = userFacade.isValidLogin(login, pass, true);
 		if (usuario == null) {
 			throw new RuntimeException("Usuário ou senha inválidos!");
 		}
-		return true;
+		return usuario;
 	}
 
 	@WebMethod
@@ -36,7 +39,7 @@ public class AuditoriaServerWS {
 			@WebParam(name = "Login", header=true) String login, 
 			@WebParam(name = "Senha", header=true) String pass, 
 			@WebParam(name = "HostName", header=true) String hostname) {
-		autentica(login, pass);
+		User usuario = autentica(login, pass);
 		return userFacade.listAll();
 	}
 
@@ -46,7 +49,7 @@ public class AuditoriaServerWS {
 			@WebParam(name = "Login", header=true) String login, 
 			@WebParam(name = "Senha", header=true) String pass, 
 			@WebParam(name = "HostName", header=true) String hostname) {
-		autentica(login, pass);
+		User usuario = autentica(login, pass);
 		return new ParametrosFacade().findParametros(1);
 	}
 
@@ -56,7 +59,7 @@ public class AuditoriaServerWS {
 			@WebParam(name = "Login", header=true) String login, 
 			@WebParam(name = "Senha", header=true) String pass, 
 			@WebParam(name = "HostName", header=true) String hostname) {
-		autentica(login, pass);
+		User usuario = autentica(login, pass);
 		List<AuditoriaHeader> auditoriasHeader = new ArrayList<AuditoriaHeader>();
 		List<Auditoria> auditorias = auditoriaFacade.findAuditoriasOff();
 
@@ -82,8 +85,17 @@ public class AuditoriaServerWS {
 			@WebParam(name = "Senha", header=true) String pass, 
 			@WebParam(name = "HostName", header=true) String hostname, 
 			@WebParam(name = "IdAuditoria") int id) {
-		autentica(login, pass);
+		
+		User usuario = autentica(login, pass);
 		Auditoria auditoria = auditoriaFacade.findAuditoria(id);
+		GerenciadorDeAuditoriasOffFacade gerenciadorFacade = new GerenciadorDeAuditoriasOffFacade();
+		GerenciadorDeAuditoriasOff gerenciador = new GerenciadorDeAuditoriasOff();
+		gerenciador.setAuditoria(auditoria);
+		gerenciador.setDataDownload(new Date());
+		gerenciador.setUsuarioDownload(usuario);
+		gerenciador.setHostnameDownload(hostname);		
+		gerenciadorFacade.createGerenciador(gerenciador);
+		
 		return auditoria;
 	}
 }

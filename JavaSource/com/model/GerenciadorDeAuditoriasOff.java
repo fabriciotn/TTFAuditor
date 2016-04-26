@@ -38,5 +38,54 @@ public class GerenciadorDeAuditoriasOff implements Serializable {
 	@OneToOne
 	private User usuarioUpload;
 	private String hostnameUpload;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public Auditoria getAuditoria() {
+		return auditoria;
+	}
+	public void setAuditoria(Auditoria auditoria) {
+		this.auditoria = auditoria;
+	}
+	public Date getDataDownload() {
+		return dataDownload;
+	}
+	public void setDataDownload(Date dataDownload) {
+		this.dataDownload = dataDownload;
+	}
+	public User getUsuarioDownload() {
+		return usuarioDownload;
+	}
+	public void setUsuarioDownload(User usuarioDownload) {
+		this.usuarioDownload = usuarioDownload;
+	}
+	public String getHostnameDownload() {
+		return hostnameDownload;
+	}
+	public void setHostnameDownload(String hostnameDownload) {
+		this.hostnameDownload = hostnameDownload;
+	}
+	public Date getDataUpload() {
+		return dataUpload;
+	}
+	public void setDataUpload(Date dataUpload) {
+		this.dataUpload = dataUpload;
+	}
+	public User getUsuarioUpload() {
+		return usuarioUpload;
+	}
+	public void setUsuarioUpload(User usuarioUpload) {
+		this.usuarioUpload = usuarioUpload;
+	}
+	public String getHostnameUpload() {
+		return hostnameUpload;
+	}
+	public void setHostnameUpload(String hostnameUpload) {
+		this.hostnameUpload = hostnameUpload;
+	}
+	
 	
 }
