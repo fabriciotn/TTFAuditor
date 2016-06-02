@@ -1,6 +1,7 @@
 package com.testes;
 
-import com.Reports.RelatorioAuditoria;
+import com.model.User;
+import com.resource.UsuarioResource;
 
 public class ArquivosTeste {
 
@@ -15,6 +16,8 @@ public class ArquivosTeste {
 		
 		
 		
-
-	}
+		UsuarioResource.serializaUsuario(1);
+		User user = UsuarioResource.deserializaUsuario();
+		System.out.println(user.getName());
+		System.out.println(user.getEmail());
 }

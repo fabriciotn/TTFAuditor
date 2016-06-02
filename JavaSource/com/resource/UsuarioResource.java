@@ -1,4 +1,4 @@
-package resource;
+package com.resource;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -18,28 +18,52 @@ public class UsuarioResource {
 
 	private static UserFacade userFacade = new UserFacade();
 
-	public static void serializaUsuario(){
+	/**
+	 * Cria um arquivo XML de acordo com o id do usuário passado
+	 * @param idUsuario
+	 */
+	public static void serializaUsuario(int idUsuario) {
 		XStream xstream = new XStream();
 		xstream.setMode(XStream.ID_REFERENCES);
-		
+
 		BufferedWriter output = null;
 		try {
-			output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("cliente.xml"), "UTF-8"));
+			output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("usuario.xml"), "UTF-8"));
+			xstream.toXML(userFacade.findUsuario(idUsuario), output);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Cria um arquivo XML com a lista de todos os usuários
+	 */
+	public static void serializaListaDeUsuarios() {
+		XStream xstream = new XStream();
+		xstream.setMode(XStream.ID_REFERENCES);
+
+		BufferedWriter output = null;
+		try {
+			output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("usuarios.xml"), "UTF-8"));
 			xstream.toXML(userFacade.listAll(), output);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	public static User deserializaUsuario(String arquivoXml) {
+
+	/**
+	 * Cria um objeto User de acordo com o arquivo usuario.xml que existe na raiz do diretório
+	 * @return User
+	 */
+	public static User deserializaUsuario() {
 		BufferedReader input = null;
 
 		try {
-			input = new BufferedReader(new InputStreamReader(
-					new FileInputStream(arquivoXml), "UTF-8"));
+			input = new BufferedReader(new InputStreamReader(new FileInputStream("usuario.xml"), "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
@@ -48,15 +72,19 @@ public class UsuarioResource {
 
 		XStream xstream = new XStream();
 		xstream.setMode(XStream.ID_REFERENCES);
+		
 		return (User) xstream.fromXML(input);
 	}
 
-	public static List<User> deserializaListaDeUsuarios(String arquivoXml) {
+	/**
+	 * Cria uma lista de objetos User de acordo com o arquivo usuarios.xml que existe na raiz do diretório
+	 * @return List<User>
+	 */
+	public static List<User> deserializaListaDeUsuarios() {
 		BufferedReader input = null;
 
 		try {
-			input = new BufferedReader(new InputStreamReader(
-					new FileInputStream(arquivoXml), "UTF-8"));
+			input = new BufferedReader(new InputStreamReader(new FileInputStream("usuarios.xml"), "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
