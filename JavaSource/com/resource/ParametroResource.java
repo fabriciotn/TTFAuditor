@@ -15,18 +15,24 @@ import com.thoughtworks.xstream.XStream;
 
 public class ParametroResource {
 
-	private static ParametrosFacade parametrosFacade = new ParametrosFacade();
+	private String caminho;
+
+	public ParametroResource(String caminho) {
+		this.caminho = caminho;
+	}
+	
+	private ParametrosFacade parametrosFacade = new ParametrosFacade();
 
 	/**
 	 * Cria um arquivo XML dos parametros - Registro 1 no banco.
 	 */
-	public static void serializaParametro() {
+	public void serializaParametro() {
 		XStream xstream = new XStream();
 		xstream.setMode(XStream.ID_REFERENCES);
 
 		BufferedWriter output = null;
 		try {
-			output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("parametros.xml"), "UTF-8"));
+			output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(caminho + "parametros.xml"), "UTF-8"));
 			xstream.toXML(parametrosFacade.findParametros(1), output);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -39,11 +45,11 @@ public class ParametroResource {
 	 * Cria um objeto Parametros de acordo com o arquivo parametros.xml que existe na raiz do diretório
 	 * @return
 	 */
-	public static Parametros deserializaParametro() {
+	public Parametros deserializaParametro() {
 		BufferedReader input = null;
 
 		try {
-			input = new BufferedReader(new InputStreamReader(new FileInputStream("parametros.xml"), "UTF-8"));
+			input = new BufferedReader(new InputStreamReader(new FileInputStream(caminho + "parametros.xml"), "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {

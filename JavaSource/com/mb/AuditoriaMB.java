@@ -1,5 +1,6 @@
 package com.mb;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.Reports.RelatorioAuditoria;
+import com.exportacaoxml.ExportaXml;
 import com.facade.AuditoriaFacade;
 import com.facade.RespostaFacade;
 import com.model.Auditoria;
@@ -366,6 +368,14 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 		return auditorias;
 	}
+	
+	public List<Auditoria> getAllAuditoriasOff() {
+		if (auditorias == null) {
+			auditorias = getAuditoriaFacade().listAuditoriasOff();
+		}
+
+		return auditorias;
+	}
 
 	private void loadAuditorias() {
 		if (usuarioLogado.isAdmin())
@@ -400,6 +410,14 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 	public Date getHoje() {
 		return new Date();
+	}
+	
+	public void geraArquivosXml(){
+		File diretorio = new File("/Volumes/Arquivos/fabriciotn/Documents/IntegracaoAuditorias/auditoria_id_" + auditoria.getId());
+		diretorio.mkdir();
+		String caminho = diretorio.getPath() + "/";
+		ExportaXml xml = new ExportaXml(caminho);
+		xml.exporta(auditoria);
 	}
 
 }

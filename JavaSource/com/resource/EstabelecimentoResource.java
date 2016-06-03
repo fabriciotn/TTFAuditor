@@ -16,20 +16,26 @@ import com.thoughtworks.xstream.XStream;
 
 public class EstabelecimentoResource {
 
-	private static EstabelecimentoFacade estabelecimentoFacade = new EstabelecimentoFacade();
+	private String caminho;
+
+	public EstabelecimentoResource(String caminho) {
+		this.caminho = caminho;
+	}
+	
+	private EstabelecimentoFacade estabelecimentoFacade = new EstabelecimentoFacade();
 	
 	/**
 	 * Cria um arquivo XML de acordo com o id da estabelecimento passada
 	 * @param idEstabelecimento
 	 */
-	public static void serializaEstabelecimento(int idEstabelecimento) {
+	public void serializaEstabelecimento(Estabelecimento estabelecimento) {
 		XStream xstream = new XStream();
 		xstream.setMode(XStream.ID_REFERENCES);
 
 		BufferedWriter output = null;
 		try {
-			output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("estabelecimento.xml"), "UTF-8"));
-			xstream.toXML(estabelecimentoFacade.findEstabelecimento(idEstabelecimento), output);
+			output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(caminho + "estabelecimento.xml"), "UTF-8"));
+			xstream.toXML(estabelecimento, output);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
@@ -40,13 +46,13 @@ public class EstabelecimentoResource {
 	/**
 	 * Cria um arquivo XML com a lista de estabelecimentos
 	 */
-	public static void serializaListaDeEstabelecimentos() {
+	public void serializaListaDeEstabelecimentos() {
 		XStream xstream = new XStream();
 		xstream.setMode(XStream.ID_REFERENCES);
 
 		BufferedWriter output = null;
 		try {
-			output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("estabelecimentos.xml"), "UTF-8"));
+			output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(caminho + "estabelecimentos.xml"), "UTF-8"));
 			xstream.toXML(estabelecimentoFacade.listAll(), output);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -59,11 +65,11 @@ public class EstabelecimentoResource {
 	 * Cria um objeto Estabelecimento de acordo com o arquivo estabelecimento.xml que existe na raiz do diretório
 	 * @return Estabelecimento
 	 */
-	public static Estabelecimento deserializaEstabelecimento() {
+	public Estabelecimento deserializaEstabelecimento() {
 		BufferedReader input = null;
 
 		try {
-			input = new BufferedReader(new InputStreamReader(new FileInputStream("estabelecimento.xml"), "UTF-8"));
+			input = new BufferedReader(new InputStreamReader(new FileInputStream(caminho + "estabelecimento.xml"), "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
@@ -80,11 +86,11 @@ public class EstabelecimentoResource {
 	 * Cria uma lista de objetos Estabelecimento de acordo com o arquivo estabelecimentos.xml que existe na raiz do diretório
 	 * @return List<Estabelecimento>
 	 */
-	public static List<Estabelecimento> deserializaListaDeEstabelecimentos() {
+	public List<Estabelecimento> deserializaListaDeEstabelecimentos() {
 		BufferedReader input = null;
 
 		try {
-			input = new BufferedReader(new InputStreamReader(new FileInputStream("estabelecimentos.xml"), "UTF-8"));
+			input = new BufferedReader(new InputStreamReader(new FileInputStream(caminho + "estabelecimentos.xml"), "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {

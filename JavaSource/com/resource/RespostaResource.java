@@ -10,35 +10,33 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-import com.facade.AuditoriaFacade;
-import com.model.Auditoria;
+import com.facade.RespostaFacade;
+import com.model.Resposta;
 import com.thoughtworks.xstream.XStream;
 
-public class AuditoriaResource {
-
+public class RespostaResource {
+	
 	private String caminho;
 
-	public AuditoriaResource(String caminho) {
+	public RespostaResource(String caminho) {
 		this.caminho = caminho;
 	}
-
-	private AuditoriaFacade auditoriaFacade = new AuditoriaFacade();
+	
+	private RespostaFacade respostaFacade = new RespostaFacade();
 
 	/**
-	 * Cria um arquivo XML de acordo com o id da auditoria passada
+	 * Cria um arquivo XML de acordo com o id da resposta passada
 	 * 
-	 * @param caminho
-	 * 
-	 * @param idAuditoria
+	 * @param idResposta
 	 */
-	public void serializaAuditoria(Auditoria auditoria) {
+	public void serializaResposta(Resposta resposta) {
 		XStream xstream = new XStream();
 		xstream.setMode(XStream.ID_REFERENCES);
 
 		BufferedWriter output = null;
 		try {
-			output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(caminho + "auditoria.xml"), "UTF-8"));
-			xstream.toXML(auditoria, output);
+			output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(caminho + "resposta.xml"), "UTF-8"));
+			xstream.toXML(resposta, output);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
@@ -47,16 +45,16 @@ public class AuditoriaResource {
 	}
 
 	/**
-	 * Cria um arquivo XML com a lista de auditorias Off-line
+	 * Cria um arquivo XML com a lista de respostas
 	 */
-	public void serializaListaDeAuditoriasOff() {
+	public void serializaListaDeRespostas(List<Resposta> respostas) {
 		XStream xstream = new XStream();
 		xstream.setMode(XStream.ID_REFERENCES);
 
 		BufferedWriter output = null;
 		try {
-			output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(caminho + "auditorias.xml"), "UTF-8"));
-			xstream.toXML(auditoriaFacade.findAuditoriasOff(), output);
+			output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(caminho + "respostas.xml"), "UTF-8"));
+			xstream.toXML(respostas, output);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
@@ -65,15 +63,14 @@ public class AuditoriaResource {
 	}
 
 	/**
-	 * Cria um objeto Auditoria de acordo com o arquivo auditoria.xml que existe na raiz do diretório
-	 * 
-	 * @return Auditoria
+	 * Cria um objeto Resposta de acordo com o arquivo resposta.xml que existe na raiz do diretório
+	 * @return Resposta
 	 */
-	public Auditoria deserializaAuditoria() {
+	public Resposta deserializaResposta() {
 		BufferedReader input = null;
 
 		try {
-			input = new BufferedReader(new InputStreamReader(new FileInputStream(caminho + "auditoria.xml"), "UTF-8"));
+			input = new BufferedReader(new InputStreamReader(new FileInputStream(caminho + "resposta.xml"), "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
@@ -83,19 +80,20 @@ public class AuditoriaResource {
 		XStream xstream = new XStream();
 		xstream.setMode(XStream.ID_REFERENCES);
 
-		return (Auditoria) xstream.fromXML(input);
+		return (Resposta) xstream.fromXML(input);
 	}
 
 	/**
-	 * Cria uma lista de objetos Auditoria de acordo com o arquivo auditorias.xml que existe na raiz do diretório
+	 * Cria uma lista de objetos Resposta de acordo com o arquivo respostas.xml que existe na raiz do
+	 * diretório
 	 * 
-	 * @return List<Auditoria>
+	 * @return List<Resposta>
 	 */
-	public List<Auditoria> deserializaListaDeAuditorias() {
+	public List<Resposta> deserializaListaDeRespostas() {
 		BufferedReader input = null;
 
 		try {
-			input = new BufferedReader(new InputStreamReader(new FileInputStream(caminho + "auditorias.xml"), "UTF-8"));
+			input = new BufferedReader(new InputStreamReader(new FileInputStream(caminho + "respostas.xml"), "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
@@ -104,6 +102,6 @@ public class AuditoriaResource {
 
 		XStream xstream = new XStream();
 		xstream.setMode(XStream.ID_REFERENCES);
-		return (List<Auditoria>) xstream.fromXML(input);
+		return (List<Resposta>) xstream.fromXML(input);
 	}
 }

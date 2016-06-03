@@ -16,21 +16,27 @@ import com.thoughtworks.xstream.XStream;
 
 public class QuestionarioResource {
 
-	private static QuestionarioFacade questionarioFacade = new QuestionarioFacade();
+	private String caminho;
+
+	public QuestionarioResource(String caminho) {
+		this.caminho = caminho;
+	}
+	
+	private QuestionarioFacade questionarioFacade = new QuestionarioFacade();
 
 	/**
 	 * Cria um arquivo XML de acordo com o id da questionario passada
 	 * 
 	 * @param idQuestionario
 	 */
-	public static void serializaQuestionario(int idQuestionario) {
+	public void serializaQuestionario(Questionario questionario) {
 		XStream xstream = new XStream();
 		xstream.setMode(XStream.ID_REFERENCES);
 
 		BufferedWriter output = null;
 		try {
-			output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("questionario.xml"), "UTF-8"));
-			xstream.toXML(questionarioFacade.findQuestionario(idQuestionario), output);
+			output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(caminho + "questionario.xml"), "UTF-8"));
+			xstream.toXML(questionario, output);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
@@ -41,13 +47,13 @@ public class QuestionarioResource {
 	/**
 	 * Cria um arquivo XML com a lista de questionarios
 	 */
-	public static void serializaListaDeQuestionarios() {
+	public void serializaListaDeQuestionarios() {
 		XStream xstream = new XStream();
 		xstream.setMode(XStream.ID_REFERENCES);
 
 		BufferedWriter output = null;
 		try {
-			output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("questionarios.xml"), "UTF-8"));
+			output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(caminho + "questionarios.xml"), "UTF-8"));
 			xstream.toXML(questionarioFacade.listAll(), output);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -60,11 +66,11 @@ public class QuestionarioResource {
 	 * Cria um objeto Questionario de acordo com o arquivo questionario.xml que existe na raiz do diretório
 	 * @return Questionario
 	 */
-	public static Questionario deserializaQuestionario() {
+	public Questionario deserializaQuestionario() {
 		BufferedReader input = null;
 
 		try {
-			input = new BufferedReader(new InputStreamReader(new FileInputStream("questionario.xml"), "UTF-8"));
+			input = new BufferedReader(new InputStreamReader(new FileInputStream(caminho + "questionario.xml"), "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
@@ -83,11 +89,11 @@ public class QuestionarioResource {
 	 * 
 	 * @return List<Questionario>
 	 */
-	public static List<Questionario> deserializaListaDeQuestionarios() {
+	public List<Questionario> deserializaListaDeQuestionarios() {
 		BufferedReader input = null;
 
 		try {
-			input = new BufferedReader(new InputStreamReader(new FileInputStream("questionarios.xml"), "UTF-8"));
+			input = new BufferedReader(new InputStreamReader(new FileInputStream(caminho + "questionarios.xml"), "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
