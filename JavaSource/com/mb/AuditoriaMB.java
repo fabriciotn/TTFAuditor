@@ -10,7 +10,9 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,27 +28,28 @@ import com.model.Pergunta;
 import com.model.Questionario;
 import com.model.Resposta;
 import com.model.User;
+import com.util.AbreTelaDeIteracao;
 
 @RequestScoped
 @ManagedBean
 public class AuditoriaMB extends AbstractMB implements Serializable {
 
-	private static final long	serialVersionUID					= 1L;
+	private static final long serialVersionUID = 1L;
 
-	private Auditoria			auditoria;
-	private List<Auditoria>		auditorias;
-	private AuditoriaFacade		auditoriaFacade;
-	private User				usuarioLogado;
-	private String				recomendacao;
-	private List<Resposta>		respostas;
-	private int					currentTab							= 0;
-	private boolean				podeEditar;
-	private int					quantidadeDePerguntasNaoRespondidas	= 0;
-	private int					quantidadeDePerguntasRespondidas	= 0;
-	private FacesContext		context;
-	private HttpServletRequest	request;
+	private Auditoria auditoria;
+	private List<Auditoria> auditorias;
+	private AuditoriaFacade auditoriaFacade;
+	private User usuarioLogado;
+	private String recomendacao;
+	private List<Resposta> respostas;
+	private int currentTab = 0;
+	private boolean podeEditar;
+	private int quantidadeDePerguntasNaoRespondidas = 0;
+	private int quantidadeDePerguntasRespondidas = 0;
+	private FacesContext context;
+	private HttpServletRequest request;
 
-	private Parametros			parametros;
+	private Parametros parametros;
 
 	public boolean podeEditar(Date dataDaResposta) {
 		if (dataDaResposta == null) {
@@ -54,17 +57,23 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			return podeEditar;
 		}
 
-		parametros = (Parametros) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("parametros");
+		parametros = (Parametros) FacesContext.getCurrentInstance()
+				.getExternalContext().getSessionMap().get("parametros");
 
 		Calendar hoje = Calendar.getInstance();
 		hoje.setTime(new java.util.Date());
 
 		Calendar prazoParaEditarResposta = Calendar.getInstance();
-		prazoParaEditarResposta.setTime(dataDaResposta); // recebe a data da resposta no formato Date e converte para
+		prazoParaEditarResposta.setTime(dataDaResposta); // recebe a data da
+															// resposta no
+															// formato Date e
+															// converte para
 															// Calendar
-		prazoParaEditarResposta.add(Calendar.DAY_OF_MONTH, parametros.getQuantidadeDeDiasParaAlterarAResposta());
+		prazoParaEditarResposta.add(Calendar.DAY_OF_MONTH,
+				parametros.getQuantidadeDeDiasParaAlterarAResposta());
 
-		// se a data de hoje + XXX dia for maior que a data da resposta não é permitido alterar
+		// se a data de hoje + XXX dia for maior que a data da resposta não é
+		// permitido alterar
 		if (hoje.after(prazoParaEditarResposta)) {
 			podeEditar = false;
 		} else {
@@ -100,7 +109,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return quantidadeDePerguntasNaoRespondidas;
 	}
 
-	public void setQuantidadeDePerguntasNaoRespondidas(int quantidadeDePerguntasNaoRespondidas) {
+	public void setQuantidadeDePerguntasNaoRespondidas(
+			int quantidadeDePerguntasNaoRespondidas) {
 		this.quantidadeDePerguntasNaoRespondidas = quantidadeDePerguntasNaoRespondidas;
 	}
 
@@ -109,7 +119,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return quantidadeDePerguntasRespondidas;
 	}
 
-	public void setQuantidadeDePerguntasRespondidas(int quantidadeDePerguntasRespondidas) {
+	public void setQuantidadeDePerguntasRespondidas(
+			int quantidadeDePerguntasRespondidas) {
 		this.quantidadeDePerguntasRespondidas = quantidadeDePerguntasRespondidas;
 	}
 
@@ -131,8 +142,10 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	}
 
 	public int getCurrentTab() {
-		if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("currentTab") != null)
-			currentTab = (Integer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("currentTab");
+		if (FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().get("currentTab") != null)
+			currentTab = (Integer) FacesContext.getCurrentInstance()
+					.getExternalContext().getSessionMap().get("currentTab");
 		return currentTab;
 	}
 
@@ -159,12 +172,14 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		}
 
 		context = FacesContext.getCurrentInstance();
-		request = (HttpServletRequest) context.getExternalContext().getRequest();
+		request = (HttpServletRequest) context.getExternalContext()
+				.getRequest();
 		request.getSession().setAttribute("currentTab", currentTab);
 	}
 
 	public AuditoriaMB() {
-		usuarioLogado = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+		usuarioLogado = (User) FacesContext.getCurrentInstance()
+				.getExternalContext().getSessionMap().get("user");
 
 		if (usuarioLogado == null)
 			throw new RuntimeException("Problemas com usuário");
@@ -229,14 +244,18 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 	public void visualizarRelatorio() {
 		RelatorioAuditoria relat = new RelatorioAuditoria();
-		byte[] b = relat.imprimeRelatorio(usuarioLogado.getName(), auditoria.getId(), auditoria.getEstabelecimento().getId());
+		byte[] b = relat.imprimeRelatorio(usuarioLogado.getName(),
+				auditoria.getId(), auditoria.getEstabelecimento().getId());
 
-		HttpServletResponse res = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+		HttpServletResponse res = (HttpServletResponse) FacesContext
+				.getCurrentInstance().getExternalContext().getResponse();
 		res.setContentType("application/pdf");
 		// Código abaixo gerar o relatório e disponibiliza diretamente na página
 		res.setHeader("Content-disposition", "inline;filename=arquivo.pdf");
-		// Código abaixo gerar o relatório e disponibiliza para o cliente baixar ou salvar
-		// res.setHeader("Content-disposition", "attachment;filename=arquivo.pdf");
+		// Código abaixo gerar o relatório e disponibiliza para o cliente baixar
+		// ou salvar
+		// res.setHeader("Content-disposition",
+		// "attachment;filename=arquivo.pdf");
 		try {
 			res.getOutputStream().write(b);
 		} catch (IOException e) {
@@ -274,12 +293,19 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			// Só adiciona as perguntas que forem
 			// referentes aos tipos de estabelecimento
 			if ((pergunta.getTipoServico() != null)
-					&& (pergunta.getTipoServico().equals(auditoria.getEstabelecimento().getTipoServico().substring(0, 2))
-							|| pergunta.getTipoServico().equals("Ambos"))) {
+					&& (pergunta.getTipoServico().equals(
+							auditoria.getEstabelecimento().getTipoServico()
+									.substring(0, 2)) || pergunta
+							.getTipoServico().equals("Ambos"))) {
 
-				if (idQuestionarioAnterior != pergunta.getQuestionario().getId()) {
-					new RespostaFacade().createResposta(incluiPerguntaNomeDoResponsavel(pergunta.getQuestionario()));
-					new RespostaFacade().createResposta(incluiPerguntaObservacao(pergunta.getQuestionario()));
+				if (idQuestionarioAnterior != pergunta.getQuestionario()
+						.getId()) {
+					new RespostaFacade()
+							.createResposta(incluiPerguntaNomeDoResponsavel(pergunta
+									.getQuestionario()));
+					new RespostaFacade()
+							.createResposta(incluiPerguntaObservacao(pergunta
+									.getQuestionario()));
 					idQuestionarioAnterior = pergunta.getQuestionario().getId();
 				}
 
@@ -345,7 +371,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		try {
 			getAuditoriaFacade().deleteAuditoria(auditoria);
 			closeDialog();
-			displayInfoMessageToUser("Auditoria " + auditoria.getCodigo() + " deletada com sucesso!");
+			displayInfoMessageToUser("Auditoria " + auditoria.getCodigo()
+					+ " deletada com sucesso!");
 			loadAuditorias();
 			resetAuditoria();
 		} catch (Exception e) {
@@ -368,7 +395,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 		return auditorias;
 	}
-	
+
 	public List<Auditoria> getAllAuditoriasOff() {
 		if (auditorias == null) {
 			auditorias = getAuditoriaFacade().listAuditoriasOff();
@@ -399,7 +426,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 	public Auditoria pesquisaAuditoria() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+		HttpSession session = (HttpSession) facesContext.getExternalContext()
+				.getSession(true);
 
 		int id = (Integer) session.getAttribute("id");
 		int auditoriaId = id;
@@ -411,9 +439,15 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	public Date getHoje() {
 		return new Date();
 	}
-	
-	public void geraArquivosXml(){
-		File diretorio = new File("/Volumes/Arquivos/fabriciotn/Documents/IntegracaoAuditorias/auditoria_id_" + auditoria.getId());
+
+	public void geraArquivosXml() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ServletContext scontext = (ServletContext) facesContext
+				.getExternalContext().getContext();
+		String path = scontext
+				.getRealPath("/WEB-INF/IntegracaoAuditoria/auditoriaId");
+
+		File diretorio = new File(path + auditoria.getId() + "/");
 		diretorio.mkdir();
 		String caminho = diretorio.getPath() + "/";
 		ExportaXml xml = new ExportaXml(caminho);
