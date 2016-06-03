@@ -20,4 +20,5 @@ public class ArquivosTeste {
 		User user = UsuarioResource.deserializaUsuario();
 		System.out.println(user.getName());
 		System.out.println(user.getEmail());
+	}
 }
