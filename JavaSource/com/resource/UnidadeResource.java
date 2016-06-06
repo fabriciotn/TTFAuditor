@@ -14,11 +14,11 @@ import com.facade.UnidadeFacade;
 import com.model.Unidade;
 import com.thoughtworks.xstream.XStream;
 
-public class UnidadeRsource {
+public class UnidadeResource {
 
 	private String caminho;
 
-	public UnidadeRsource(String caminho) {
+	public UnidadeResource(String caminho) {
 		this.caminho = caminho;
 	}
 	

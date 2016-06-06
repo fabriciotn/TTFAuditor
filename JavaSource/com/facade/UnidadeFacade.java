@@ -26,14 +26,18 @@ public class UnidadeFacade implements Serializable {
 	public void updateUnidade(Unidade unidade) {
 		unidadeDAO.beginTransaction();
 		Unidade persistedUnidade = unidadeDAO.find(unidade.getId());
-		persistedUnidade.setNome(unidade.getNome());
-		persistedUnidade.setSigla(unidade.getSigla());
-		persistedUnidade.setTelefone(unidade.getTelefone());
-		persistedUnidade.setContato(unidade.getContato());
-		persistedUnidade.setEmail(unidade.getEmail());
-		persistedUnidade.setEndereco(unidade.getEndereco());
-		persistedUnidade.setUser(unidade.getUser());
-
+		if(persistedUnidade != null){
+			persistedUnidade.setNome(unidade.getNome());
+			persistedUnidade.setSigla(unidade.getSigla());
+			persistedUnidade.setTelefone(unidade.getTelefone());
+			persistedUnidade.setContato(unidade.getContato());
+			persistedUnidade.setEmail(unidade.getEmail());
+			persistedUnidade.setEndereco(unidade.getEndereco());
+			persistedUnidade.setUser(unidade.getUser());
+		}else{
+			persistedUnidade = unidade;
+		}
+			
 		unidadeDAO.update(persistedUnidade);
 		unidadeDAO.commitAndCloseTransaction();
 	}

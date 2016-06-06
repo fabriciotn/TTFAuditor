@@ -1,0 +1,102 @@
+
+<ui:composition template="/WEB-INF/templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:define name="menu">
+		<ui:include src="/WEB-INF/partials/menu.xhtml" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<f:loadBundle basename="messages" var="msg" />
+		<br />
+		<center>
+			<h:form acceptcharset="ISO-8859-1" id="form2"
+				rendered="#{userMB.usuarioLogado.menuAuditoriaOff}">
+				<p:panel id="basic" header="Exportar auditoria para utilização off-line"
+					style="margin-bottom:20px">
+					<h:panelGrid columns="1" style="text-align:left">
+						<p:dataTable id="tbl" var="auditoria"
+							value="#{auditoriaMB.allAuditoriasOff}"
+							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+							paginator="true" rows="10" style="margin-bottom:20px">
+
+							<p:column exportable="false"
+								style="text-align: center; width:3em;" headerText="ON/OFF">
+								<p:graphicImage id="online" url="../images/online.png"
+									width="25px" rendered="#{!auditoria.offLine}" />
+								<p:tooltip id="toolTipTrack" for="online"
+									value="Auditoria OnLine" trackMouse="true" escape="false"
+									style="border:3; white-space:pre-wrap; word-wrap:break-word; font-size:0.9em;" />
+								<br />
+
+								<p:graphicImage id="offline" url="../images/offline.png"
+									width="25px" rendered="#{auditoria.offLine}" />
+								<p:tooltip id="toolTipTrack1" for="offline"
+									value="Auditoria OffLine" trackMouse="true" escape="false"
+									style="border:3; white-space:pre-wrap; word-wrap:break-word; font-size:0.9em;" />
+								<br />
+							</p:column>
+
+							<p:column headerText="CÓDIGO" filterBy="#{auditoria.codigo}"
+								sortBy="#{auditoria.codigo}"
+								style="text-align: center; width:6em">
+								<h:outputText value="#{auditoria.codigo}" />
+							</p:column>
+
+							<p:column headerText="ESTABELECIMENTO"
+								filterBy="#{auditoria.estabelecimento.nomeFantasia}"
+								sortBy="#{auditoria.estabelecimento.nomeFantasia}"
+								style="text-align: center; whidth:10em;">
+								<h:outputText value="#{auditoria.estabelecimento.nomeFantasia}" />
+							</p:column>
+
+							<p:column headerText="TIPO" filterBy="#{auditoria.tipo}"
+								sortBy="#{auditoria.tipo}"
+								style="text-align: center; width:10em">
+								<h:outputText value="#{auditoria.tipo}" />
+							</p:column>
+
+							<p:column headerText="UIDADE"
+								filterBy="#{auditoria.estabelecimento.unidade.sigla}"
+								sortBy="#{auditoria.estabelecimento.unidade.sigla}"
+								style="text-align:center; width:6em">
+								<h:outputText value="#{auditoria.estabelecimento.unidade.sigla}" />
+							</p:column>
+
+							<p:column headerText="DATA"
+								filterBy="#{auditoria.dataDaVerificacao}"
+								sortBy="#{auditoria.dataDaVerificacao}"
+								style="text-align: center; width:8em">
+								<h:outputText value="#{auditoria.dataDaVerificacao}">
+									<f:convertDateTime type="date" dateStyle="short"
+										pattern="dd/MM/yyyy" />
+								</h:outputText>
+							</p:column>
+
+
+							<p:column style="text-align: center; width:5em;"
+								rendered="#{userMB.usuarioLogado.admin}">
+								<f:facet name="header">
+									<h:outputText value="EXPORTAR" />
+								</f:facet>
+								<p:commandLink action="#{auditoriaMB.exportaDoServidorParaLocal()}"
+									ajax="false">
+									<img src="../images/exportar.png" width="25" />
+									<f:setPropertyActionListener value="#{auditoria}"
+										target="#{auditoriaMB.auditoria}" />
+								</p:commandLink>
+							</p:column>
+
+						</p:dataTable>
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+		</center>
+
+	</ui:define>
+
+</ui:composition>

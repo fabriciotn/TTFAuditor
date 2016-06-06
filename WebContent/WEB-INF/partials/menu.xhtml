@@ -44,10 +44,10 @@
 			<p:menuitem value="#{msg.relatorios}" outcome="home.xhtml"
 				icon="ui-icon-note" rendered="#{!userMB.offLine and userMB.usuarioLogado.menuRelatorios}"/>
 
-			<p:submenu label="#{msg.configuracoes}" icon="ui-icon-gear" rendered="#{!userMB.offLine}">
+			<p:submenu label="#{msg.configuracoes}" icon="ui-icon-gear">
 				<p:menuitem value="#{msg.confGerais}" outcome="configuracoesGerais.xhtml"
 					icon="ui-icon-newwin" rendered="#{!userMB.offLine and userMB.usuarioLogado.menuConfigGerais}"/>
-				<p:submenu label="#{msg.usuarios}" icon="ui-icon-person">
+				<p:submenu label="#{msg.usuarios}" icon="ui-icon-person" rendered="#{!userMB.offLine}">
 					<p:menuitem value="#{msg.gerenciar}" outcome="listarUsuarios.xhtml"
 						icon="ui-icon-gear" rendered="#{!userMB.offLine and userMB.usuarioLogado.menuGerenciarUsuarios}"/>
 					<p:separator />
@@ -55,11 +55,15 @@
 						outcome="mudarSenha.xhtml" icon="ui-icon-person" rendered="#{!userMB.offLine}"/>
 				</p:submenu>
 				<p:separator />
-				<p:submenu label="#{msg.auditOff}" icon="ui-icon-signal-diag" rendered="#{!userMB.offLine and userMB.usuarioLogado.menuAuditoriaOff}">
-					<p:menuitem value="#{msg.exportAuditoria}" outcome="listarAuditoriasOff.xhtml"
-						icon="ui-icon-arrowreturnthick-1-n" />
-					<p:menuitem value="#{msg.importAuditoria}" outcome="home.xhtml"
-						icon="ui-icon-arrowreturnthick-1-s" />
+				<p:submenu label="#{msg.auditOff}" icon="ui-icon-signal-diag" rendered="#{userMB.usuarioLogado.menuAuditoriaOff}">
+					<p:menuitem value="#{msg.exportAuditoria}" outcome="exportaDoServidorParaLocal.xhtml"
+						icon="ui-icon-arrowreturnthick-1-n" rendered="#{!userMB.offLine}"/>
+					<p:menuitem value="#{msg.exportAuditoria}" outcome="exportaDoLocalParaServidor.xhtml"
+						icon="ui-icon-arrowreturnthick-1-n" rendered="#{userMB.offLine}"/>
+					<p:menuitem value="#{msg.importAuditoria}" outcome="importaDoServidorParaLocal.xhtml"
+						icon="ui-icon-arrowreturnthick-1-s" rendered="#{userMB.offLine}"/>
+					<p:menuitem value="#{msg.importAuditoria}" outcome="importaDoLocalParaServidor.xhtml"
+						icon="ui-icon-arrowreturnthick-1-s" rendered="#{!userMB.offLine}"/>
 				</p:submenu>
 				<p:separator />
 				<p:menuitem value="#{msg.sobre}" outcome="sobre.xhtml"

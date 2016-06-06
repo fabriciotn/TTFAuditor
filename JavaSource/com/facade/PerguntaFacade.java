@@ -26,12 +26,16 @@ public class PerguntaFacade implements Serializable {
 	public void updatePergunta(Pergunta pergunta) {
 		perguntaDAO.beginTransaction();
 		Pergunta persistedPergunta = perguntaDAO.find(pergunta.getId());
-		persistedPergunta.setHint(pergunta.getHint());	
-		persistedPergunta.setPergunta(pergunta.getPergunta());
-		persistedPergunta.setQuestionario(pergunta.getQuestionario());
-		persistedPergunta.setRecomendacaoPadrao(pergunta.getRecomendacaoPadrao());
-		persistedPergunta.setTipoServico(pergunta.getTipoServico());
-		persistedPergunta.setUser(pergunta.getUser());
+		if(persistedPergunta != null){
+			persistedPergunta.setHint(pergunta.getHint());	
+			persistedPergunta.setPergunta(pergunta.getPergunta());
+			persistedPergunta.setQuestionario(pergunta.getQuestionario());
+			persistedPergunta.setRecomendacaoPadrao(pergunta.getRecomendacaoPadrao());
+			persistedPergunta.setTipoServico(pergunta.getTipoServico());
+			persistedPergunta.setUser(pergunta.getUser());
+		}else{
+			persistedPergunta = pergunta;
+		}
 
 		perguntaDAO.update(persistedPergunta);
 		perguntaDAO.commitAndCloseTransaction();

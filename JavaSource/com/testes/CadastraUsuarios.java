@@ -13,6 +13,7 @@ import com.facade.UnidadeFacade;
 import com.facade.UserFacade;
 import com.model.Auditoria;
 import com.model.Estabelecimento;
+import com.model.Parametros;
 import com.model.Pergunta;
 import com.model.Role;
 import com.model.Unidade;
@@ -24,6 +25,7 @@ public class CadastraUsuarios {
 	private static EntityManagerFactory factory;
 	private static EntityManager manager;
 	
+	private static String banco = "auditoria_db1";
 	
 	public CadastraUsuarios() {
 		
@@ -31,18 +33,36 @@ public class CadastraUsuarios {
 
 	public static void main(String[] args) {
 		criaUsuarios();
-		criaUnidades();
-		criaAuditores();
-		criaEstabelecimento();
-		criaPerguntas();
+		criaParametro();
+		//criaUnidades();
+		//criaAuditores();
+		//criaEstabelecimento();
+		//criaPerguntas();
 		//criaAuditoria();
 
 		// Pergunta p = new PerguntaFacade().findPergunta(22);
 		// System.out.println(p.getPergunta());
 	}
 
+	private static void criaParametro() {
+		factory = Persistence.createEntityManagerFactory(banco);
+		manager = factory.createEntityManager();
+		manager.getTransaction().begin();
+
+		Parametros parametro = new Parametros();
+		parametro.setQuantidadeDeDiasParaAlterarAResposta(0);
+		manager.persist(parametro);
+
+		manager.getTransaction().commit();
+
+		manager.close();
+		factory.close();
+		
+		System.out.println("parametro criado");
+	}
+
 	private static void criaPerguntas() {
-		factory = Persistence.createEntityManagerFactory("auditoria_db");
+		factory = Persistence.createEntityManagerFactory(banco);
 		manager = factory.createEntityManager();
 		manager.getTransaction().begin();
 
@@ -70,7 +90,7 @@ public class CadastraUsuarios {
 	}
 
 	private static void criaUnidades() {
-		factory = Persistence.createEntityManagerFactory("auditoria_db");
+		factory = Persistence.createEntityManagerFactory(banco);
 		manager = factory.createEntityManager();
 		manager.getTransaction().begin();
 		
@@ -95,7 +115,7 @@ public class CadastraUsuarios {
 	}
 
 	private static void criaEstabelecimento() {
-		factory = Persistence.createEntityManagerFactory("auditoria_db");
+		factory = Persistence.createEntityManagerFactory(banco);
 		manager = factory.createEntityManager();
 		manager.getTransaction().begin();
 		
@@ -130,7 +150,7 @@ public class CadastraUsuarios {
 	}
 
 	private static void criaAuditores() {
-//		factory = Persistence.createEntityManagerFactory("auditoria_db");
+//		factory = Persistence.createEntityManagerFactory(banco);
 //		manager = factory.createEntityManager();
 //		manager.getTransaction().begin();
 //
@@ -167,7 +187,7 @@ public class CadastraUsuarios {
 	}
 
 	private static void criaUsuarios() {
-		factory = Persistence.createEntityManagerFactory("auditoria_db");
+		factory = Persistence.createEntityManagerFactory(banco);
 		manager = factory.createEntityManager();
 		manager.getTransaction().begin();
 
@@ -176,6 +196,24 @@ public class CadastraUsuarios {
 		user.setLogin("123");
 		user.setPassword("123");
 		user.setEmail("master@master.com");
+		user.setMenuAuditar(true);
+		user.setMenuAuditoria(true);
+		user.setMenuAuditoriaOff(true);
+		user.setMenuAuditoriaOffExportar(true);
+		user.setMenuAuditoriaOffImportar(true);
+		user.setMenuCadastros(true);
+		user.setMenuCadAuditorias(true);
+		user.setMenuCadEstabelecimentos(true);
+		user.setMenuCadPerguntas(true);
+		user.setMenuCadQuestionarios(true);
+		user.setMenuCadUnidades(true);
+		user.setMenuConfigGerais(true);
+		user.setMenuConfiguracoes(true);
+		user.setMenuGerenciarUsuarios(true);
+		user.setMenuMudarMinhaSenha(true);
+		user.setMenuPreparacao(true);
+		user.setMenuRelatorios(true);
+		user.setMenuUsuarios(true);		
 		user.setRole(Role.ADMIN);
 		user.setAtivo(true);
 		manager.persist(user);
@@ -189,7 +227,7 @@ public class CadastraUsuarios {
 	}
 
 	private static void criaAuditoria() {
-		factory = Persistence.createEntityManagerFactory("auditoria_db");
+		factory = Persistence.createEntityManagerFactory(banco);
 		manager = factory.createEntityManager();
 		manager.getTransaction().begin();
 

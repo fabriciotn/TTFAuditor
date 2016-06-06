@@ -10,7 +10,6 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +21,7 @@ import com.facade.AuditoriaFacade;
 import com.facade.GerenciadorDeAuditoriasOffFacade;
 import com.facade.RespostaFacade;
 import com.integracao.ExportaXml;
+import com.integracao.ImportaXml;
 import com.model.Auditoria;
 import com.model.Flag;
 import com.model.GerenciadorDeAuditoriasOff;
@@ -30,7 +30,6 @@ import com.model.Pergunta;
 import com.model.Questionario;
 import com.model.Resposta;
 import com.model.User;
-import com.util.AbreTelaDeIteracao;
 
 @RequestScoped
 @ManagedBean
@@ -174,7 +173,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		}
 
 		context = FacesContext.getCurrentInstance();
-		request = (HttpServletRequest) context.getExternalContext().getRequest();
+		request = (HttpServletRequest) context.getExternalContext()
+				.getRequest();
 		request.getSession().setAttribute("currentTab", currentTab);
 	}
 
@@ -448,33 +448,77 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		String path = scontext
 				.getRealPath("/WEB-INF/IntegracaoAuditoria/auditoriaId");
 
-		File diretorio = new File(path + auditoria.getId() );
-		if(!diretorio.exists()){
+		File diretorio = new File(path + auditoria.getId());
+		if (!diretorio.exists()) {
 			diretorio.mkdirs();
 		}
-		
+
 		String caminho = diretorio.getPath() + "/";
 		ExportaXml xml = new ExportaXml(caminho);
 		xml.exporta(auditoria);
-		
-		atualizaGerenciadorDeAuditorias();
 	}
 	
-	
-	public void atualizaGerenciadorDeAuditorias(){
+	private void leArquivosXml() {
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ServletContext scontext = (ServletContext) facesContext
+				.getExternalContext().getContext();
+		String path = scontext
+				.getRealPath("/WEB-INF/IntegracaoAuditoria/auditoriaId");
+
+		File diretorio = new File(path + "179");
+		if (!diretorio.exists()) {
+			diretorio.mkdirs();
+		}
+
+		String caminho = diretorio.getPath() + "/";
+		ImportaXml xml = new ImportaXml(caminho);
+		xml.importaDoServidorParaLocal();
+	}
+
+	public void exportaDoServidorParaLocal() {
 		context = FacesContext.getCurrentInstance();
-		request = (HttpServletRequest) context.getExternalContext().getRequest();
-		
+		request = (HttpServletRequest) context.getExternalContext()
+				.getRequest();
+
 		GerenciadorDeAuditoriasOffFacade gerenciadorFacade = new GerenciadorDeAuditoriasOffFacade();
+
+		List<GerenciadorDeAuditoriasOff> listarPorAuditoria = gerenciadorFacade
+				.listarPorAuditoria(auditoria.getId());
+		for (GerenciadorDeAuditoriasOff g : listarPorAuditoria) {
+			if (g.getAuditoria().getId() == auditoria.getId()
+					&& g.getDataUpload() != null) {
+				closeDialog();
+				displayErrorMessageToUser("A auditoria " + auditoria.getCodigo() + " já foi exportada!");
+				return;
+			}
+		}
+
 		GerenciadorDeAuditoriasOff gerenciador = new GerenciadorDeAuditoriasOff();
 		gerenciador.setAuditoria(auditoria);
 		gerenciador.setDataUpload(new Date());
 		gerenciador.setUsuarioUpload(usuarioLogado);
-		gerenciador.setHostnameUpload(request.getRemoteAddr());		
+		gerenciador.setHostnameUpload(request.getRemoteAddr());
 		gerenciadorFacade.createGerenciador(gerenciador);
-		
+		geraArquivosXml();
 		closeDialog();
 		displayInfoMessageToUser("Auditoria exportada com sucesso!");
 	}
 
+	public void importaDoServidorParaLocal(){
+		context = FacesContext.getCurrentInstance();
+		request = (HttpServletRequest) context.getExternalContext()
+				.getRequest();
+		
+		GerenciadorDeAuditoriasOffFacade gerenciadorFacade = new GerenciadorDeAuditoriasOffFacade();
+		
+		GerenciadorDeAuditoriasOff gerenciador = new GerenciadorDeAuditoriasOff();
+		gerenciador.setAuditoria(auditoria);
+		gerenciador.setDataDownload(new Date());
+		gerenciador.setUsuarioDownload(usuarioLogado);
+		gerenciador.setHostnameDownload(request.getRemoteAddr());
+		gerenciadorFacade.createGerenciador(gerenciador);
+		leArquivosXml();
+		closeDialog();
+		displayInfoMessageToUser("Auditoria importada com sucesso!");
+	}
 }

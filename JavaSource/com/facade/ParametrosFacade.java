@@ -21,7 +21,11 @@ public class ParametrosFacade implements Serializable {
 	public void updateParametros(Parametros parametros) {
 		parametrosDAO.beginTransaction();
 		Parametros persistedParametros = parametrosDAO.find(parametros.getId());
-		persistedParametros.setQuantidadeDeDiasParaAlterarAResposta(parametros.getQuantidadeDeDiasParaAlterarAResposta());
+		if(persistedParametros != null){
+			persistedParametros.setQuantidadeDeDiasParaAlterarAResposta(parametros.getQuantidadeDeDiasParaAlterarAResposta());
+		}else{
+			persistedParametros = parametros;
+		}
 		parametrosDAO.update(persistedParametros);
 		parametrosDAO.commitAndCloseTransaction();
 	}
