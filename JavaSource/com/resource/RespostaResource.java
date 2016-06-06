@@ -10,6 +10,7 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import com.dao.RespostaDAO;
 import com.facade.RespostaFacade;
 import com.model.Resposta;
 import com.thoughtworks.xstream.XStream;
@@ -47,7 +48,9 @@ public class RespostaResource {
 	/**
 	 * Cria um arquivo XML com a lista de respostas
 	 */
-	public void serializaListaDeRespostas(List<Resposta> respostas) {
+	public void serializaListaDeRespostas(int auditoria_id) {
+		List<Resposta> respostas = respostaFacade.listaRespostasPorIdDaAuditoria(auditoria_id);
+		
 		XStream xstream = new XStream();
 		xstream.setMode(XStream.ID_REFERENCES);
 

@@ -3,10 +3,12 @@ package com.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,20 +26,23 @@ public class GerenciadorDeAuditoriasOff implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
 	@OneToOne
+	@JoinColumn(name="auditoria_id", unique=true)
 	private Auditoria auditoria;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataDownload;
 	@OneToOne
 	private User usuarioDownload;
-	private String hostnameDownload;
+	private String ipDownload;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataUpload;
 	@OneToOne
 	private User usuarioUpload;
-	private String hostnameUpload;
+	private String ipUpload;
+	
 	public int getId() {
 		return id;
 	}
@@ -63,10 +68,10 @@ public class GerenciadorDeAuditoriasOff implements Serializable {
 		this.usuarioDownload = usuarioDownload;
 	}
 	public String getHostnameDownload() {
-		return hostnameDownload;
+		return ipDownload;
 	}
 	public void setHostnameDownload(String hostnameDownload) {
-		this.hostnameDownload = hostnameDownload;
+		this.ipDownload = hostnameDownload;
 	}
 	public Date getDataUpload() {
 		return dataUpload;
@@ -81,10 +86,10 @@ public class GerenciadorDeAuditoriasOff implements Serializable {
 		this.usuarioUpload = usuarioUpload;
 	}
 	public String getHostnameUpload() {
-		return hostnameUpload;
+		return ipUpload;
 	}
 	public void setHostnameUpload(String hostnameUpload) {
-		this.hostnameUpload = hostnameUpload;
+		this.ipUpload = hostnameUpload;
 	}
 	
 	

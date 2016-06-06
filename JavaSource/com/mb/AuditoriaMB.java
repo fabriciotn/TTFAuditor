@@ -18,11 +18,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.Reports.RelatorioAuditoria;
-import com.exportacaoxml.ExportaXml;
 import com.facade.AuditoriaFacade;
+import com.facade.GerenciadorDeAuditoriasOffFacade;
 import com.facade.RespostaFacade;
+import com.integracao.ExportaXml;
 import com.model.Auditoria;
 import com.model.Flag;
+import com.model.GerenciadorDeAuditoriasOff;
 import com.model.Parametros;
 import com.model.Pergunta;
 import com.model.Questionario;
@@ -172,8 +174,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		}
 
 		context = FacesContext.getCurrentInstance();
-		request = (HttpServletRequest) context.getExternalContext()
-				.getRequest();
+		request = (HttpServletRequest) context.getExternalContext().getRequest();
 		request.getSession().setAttribute("currentTab", currentTab);
 	}
 
@@ -447,11 +448,33 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		String path = scontext
 				.getRealPath("/WEB-INF/IntegracaoAuditoria/auditoriaId");
 
-		File diretorio = new File(path + auditoria.getId() + "/");
-		diretorio.mkdir();
+		File diretorio = new File(path + auditoria.getId() );
+		if(!diretorio.exists()){
+			diretorio.mkdirs();
+		}
+		
 		String caminho = diretorio.getPath() + "/";
 		ExportaXml xml = new ExportaXml(caminho);
 		xml.exporta(auditoria);
+		
+		atualizaGerenciadorDeAuditorias();
+	}
+	
+	
+	public void atualizaGerenciadorDeAuditorias(){
+		context = FacesContext.getCurrentInstance();
+		request = (HttpServletRequest) context.getExternalContext().getRequest();
+		
+		GerenciadorDeAuditoriasOffFacade gerenciadorFacade = new GerenciadorDeAuditoriasOffFacade();
+		GerenciadorDeAuditoriasOff gerenciador = new GerenciadorDeAuditoriasOff();
+		gerenciador.setAuditoria(auditoria);
+		gerenciador.setDataUpload(new Date());
+		gerenciador.setUsuarioUpload(usuarioLogado);
+		gerenciador.setHostnameUpload(request.getRemoteAddr());		
+		gerenciadorFacade.createGerenciador(gerenciador);
+		
+		closeDialog();
+		displayInfoMessageToUser("Auditoria exportada com sucesso!");
 	}
 
 }

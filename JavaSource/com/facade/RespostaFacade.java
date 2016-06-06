@@ -79,6 +79,13 @@ public class RespostaFacade implements Serializable {
 		respostaDAO.closeTransaction();
 		return result;
 	}
+	
+	public List<Resposta> listaRespostasPorIdDaAuditoria(int auditoria_id) {
+		respostaDAO.beginTransaction();
+		List<Resposta> result = respostaDAO.listaRespostasPorIdDaAuditoria(auditoria_id);
+		respostaDAO.closeTransaction();
+		return result;
+	}
 
 	public void deleteResposta(Resposta resposta) {
 		respostaDAO.beginTransaction();

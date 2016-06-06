@@ -1,4 +1,4 @@
-package com.exportacaoxml;
+package com.integracao;
 
 import com.model.Auditoria;
 import com.resource.AuditoriaResource;
@@ -29,6 +29,6 @@ public class ExportaXml {
 		questionarioResource.serializaListaDeQuestionarios();
 		
 		RespostaResource respostaResource = new RespostaResource(caminho);
-		respostaResource.serializaListaDeRespostas(auditoria.getRespostas());
+		respostaResource.serializaListaDeRespostas(auditoria.getId());
 	}
 }

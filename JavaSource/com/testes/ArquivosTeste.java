@@ -1,8 +1,9 @@
 package com.testes;
 
-import com.facade.AuditoriaFacade;
-import com.model.Auditoria;
-import com.resource.AuditoriaResource;
+import java.util.List;
+
+import com.model.Resposta;
+import com.resource.RespostaResource;
 
 public class ArquivosTeste {
 
@@ -14,10 +15,15 @@ public class ArquivosTeste {
 		// RelatorioAuditoria relat = new RelatorioAuditoria();
 		// relat.imprimeRelatorio();
 
-		AuditoriaResource res = new AuditoriaResource("/Volumes/Arquivos/fabriciotn/Documents/IntegracaoAuditorias/auditoria_id_51/");
-		Auditoria auditoria = res.deserializaAuditoria();
+		RespostaResource res = new RespostaResource(
+				"/Volumes/Arquivos/fabriciotn/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/TTFAuditor/WEB-INF/IntegracaoAuditoria/AuditoriaId58/");
+		List<Resposta> respostas = res.deserializaListaDeRespostas();
 
-		AuditoriaFacade f = new AuditoriaFacade();
-		f.updateAuditoria(auditoria);
+		for (Resposta resposta : respostas) {
+			System.out.println("Id: " + resposta.getId());
+			System.out.println(resposta.getPergunta());
+			System.out.println("******\n");
+		}
+		
 	}
 }
