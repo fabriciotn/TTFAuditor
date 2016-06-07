@@ -1,10 +1,7 @@
 package com.testes;
 
-import java.util.List;
+import java.io.IOException;
 
-import com.facade.RespostaFacade;
-import com.model.Resposta;
-import com.resource.RespostaResource;
 
 public class ArquivosTeste {
 
@@ -23,14 +20,31 @@ public class ArquivosTeste {
 //			new RespostaFacade().updateResposta(resposta);
 //		}	
 		
-		TestaCriacaoBD a =  new TestaCriacaoBD();
-		String dumpExePath = "/usr/local/mysql/bin/mysqldump ";
-		String host = "localhost";
-		String port = "3306";
-		String user = "root";
-		String password = "root";
-		String database = "auditoria_db";
-		String backupPath = "/Volumes/Arquivos/fabriciotn/dumps/teste/";
-		a.backupDataWithDatabase(dumpExePath, host, port, user, password, database, backupPath);
+		//backupDoServidor();
+		
+		String realizaBackup = "C:/Program Files/MySQL/MySQL Server 5.6/bin/mysqldump -h 10.14.124.14 --port 3306 -u root --password=TTFAuditorADM -B auditoria_db -r C:/Fabricio/backup.sql";
+		String compacta = "C:/Program Files/7-Zip/7z.exe a -tgzip C:/Fabricio/backup.zip C:/Fabricio/backup.sql";
+		String descompacta = "C:/Program Files/7-Zip/7z.exe e -tgzip C:/Fabricio/backup.zip -oC:/Fabricio";
+		String restoreBackup =  "\"C:/Program Files/MySQL/MySQL Server 5.6/bin/mysql\" -u root --password=root auditoria_db < C:/Fabricio/backup.sql";
+		String createDatabase = "C:/Program Files/MySQL/MySQL Server 5.6/bin/mysql -uroot -proot -e \"CREATE DATABASE IF NOT EXISTS `auditoria_db` DEFAULT CHARACTER SET utf8\"";
+		executaComando(restoreBackup);
+	}
+
+	private static void executaComando(String comando) {
+		
+		System.out.println("Executando: " + comando);
+		
+		Runtime runtime = Runtime.getRuntime();
+		try {
+			Process p = runtime.exec(comando);
+			p.waitFor();
+			p.destroy();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("fim");
 	}
 }
