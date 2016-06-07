@@ -18,7 +18,7 @@ import javax.persistence.criteria.Root;
 abstract class GenericDAO<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("auditoria_db1");
+	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("auditoria_db");
 	private EntityManager em;
 
 	private ResourceBundle bundle = ResourceBundle.getBundle("messages");

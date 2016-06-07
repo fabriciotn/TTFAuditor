@@ -465,10 +465,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		String path = scontext
 				.getRealPath("/WEB-INF/IntegracaoAuditoria/auditoriaId");
 
-		File diretorio = new File(path + "179");
-		if (!diretorio.exists()) {
-			diretorio.mkdirs();
-		}
+		File diretorio = new File(path + "58");
 
 		String caminho = diretorio.getPath() + "/";
 		ImportaXml xml = new ImportaXml(caminho);

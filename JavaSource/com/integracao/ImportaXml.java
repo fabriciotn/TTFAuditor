@@ -46,39 +46,45 @@ public class ImportaXml {
 		 * por isso neste caso, usamos o update.
 		 */
 		new ParametrosFacade().updateParametros(new ParametroResource(caminho).deserializaParametro()); 
+		System.out.println("Parametro");
 	
 		List<Unidade> unidades = new UnidadeResource(caminho).deserializaListaDeUnidades();
 		for (Unidade unidade : unidades) {
 			//unidade.setId(0);
 			new UnidadeFacade().updateUnidade(unidade);
 		}
-		
+		System.out.println("Unidades");
 		
 		List<Questionario> questionarios = new QuestionarioResource(caminho).deserializaListaDeQuestionarios();
 		for (Questionario questionario : questionarios) {
 			//questionario.setId(0);
 			new QuestionarioFacade().updateQuestionario(questionario);
 		}
+		System.out.println("Questionarios");
 		
 		List<User> users = new UsuarioResource(caminho).deserializaListaDeUsuarios();
 		for (User user : users) {
 			//user.setId(0);
 			new UserFacade().updateUsuario(user);
 		}
+		System.out.println("Usuários");
 		
 		Estabelecimento estabelecimento = new EstabelecimentoResource(caminho).deserializaEstabelecimento();
 		estabelecimento.setId(0);
 		new EstabelecimentoFacade().updateEstabelecimento(estabelecimento);
+		System.out.println("Estabelecimento");
 		
 		Auditoria auditoria = new AuditoriaResource(caminho).deserializaAuditoria();
 		//auditoria.setId(0);
 		new AuditoriaFacade().updateAuditoria(auditoria);
+		System.out.println("Auditoria");
 		
 		List<Resposta> respostas = new RespostaResource(caminho).deserializaListaDeRespostas();
 		for (Resposta resposta : respostas) {
 			//resposta.setId(0);
 			new RespostaFacade().updateResposta(resposta);
 		}
+		System.out.println("Respostas");
 	}
 
 	private void limpaBanco() {

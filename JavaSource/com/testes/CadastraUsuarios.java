@@ -193,8 +193,8 @@ public class CadastraUsuarios {
 
 		User user = new User();
 		user.setName("master");
-		user.setLogin("123");
-		user.setPassword("123");
+		user.setLogin("master");
+		user.setPassword("master");
 		user.setEmail("master@master.com");
 		user.setMenuAuditar(true);
 		user.setMenuAuditoria(true);

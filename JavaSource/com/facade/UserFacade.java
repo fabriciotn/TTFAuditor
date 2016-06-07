@@ -86,8 +86,8 @@ public class UserFacade implements Serializable {
 			if (user.getLogin() != null)
 				userFind.setLogin(user.getLogin());
 	
-			if (user.getPassword() != null)
-				userFind.setPassword(user.getPassword());
+			//if (user.getPassword() != null)
+			//	userFind.setPassword(user.getPassword());
 	
 			if (user.getRole() != null)
 				userFind.setRole(user.getRole());

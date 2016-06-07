@@ -2,6 +2,7 @@ package com.testes;
 
 import java.util.List;
 
+import com.facade.RespostaFacade;
 import com.model.Resposta;
 import com.resource.RespostaResource;
 
@@ -14,16 +15,22 @@ public class ArquivosTeste {
 
 		// RelatorioAuditoria relat = new RelatorioAuditoria();
 		// relat.imprimeRelatorio();
-
-		RespostaResource res = new RespostaResource(
-				"/Volumes/Arquivos/fabriciotn/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/TTFAuditor/WEB-INF/IntegracaoAuditoria/AuditoriaId58/");
-		List<Resposta> respostas = res.deserializaListaDeRespostas();
-
-		for (Resposta resposta : respostas) {
-			System.out.println("Id: " + resposta.getId());
-			System.out.println(resposta.getPergunta());
-			System.out.println("******\n");
-		}
+//
+//		RespostaResource res = new RespostaResource(
+//				"//Volumes/Arquivos/fabriciotn/Documents/workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/TTFAuditor/WEB-INF/IntegracaoAuditoria/AuditoriaId183/");
+//		List<Resposta> respostas = res.deserializaListaDeRespostas();
+//		for (Resposta resposta : respostas) {
+//			new RespostaFacade().updateResposta(resposta);
+//		}	
 		
+		TestaCriacaoBD a =  new TestaCriacaoBD();
+		String dumpExePath = "/usr/local/mysql/bin/mysqldump ";
+		String host = "localhost";
+		String port = "3306";
+		String user = "root";
+		String password = "root";
+		String database = "auditoria_db";
+		String backupPath = "/Volumes/Arquivos/fabriciotn/dumps/teste/";
+		a.backupDataWithDatabase(dumpExePath, host, port, user, password, database, backupPath);
 	}
 }
