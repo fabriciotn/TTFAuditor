@@ -22,8 +22,18 @@ public class ArquivosTeste {
 		
 		//backupDoServidor();
 		
-		String realizaBackup = "C:/Program Files/MySQL/MySQL Server 5.6/bin/mysqldump -h 10.14.124.14 --port 3306 -u root --password=TTFAuditorADM -B auditoria_db -r C:/Fabricio/backup.sql";
-		String compacta = "C:/Program Files/7-Zip/7z.exe a -tgzip C:/Fabricio/backup.zip C:/Fabricio/backup.sql";
+		String caminhoMySql = "/usr/local/mysql/bin/";
+		//String caminhoMySql = "C:/Program Files/MySQL/MySQL Server 5.6/bin/";
+		
+		String localBackup = "/Volumes/Arquivos/fabriciotn/dumps/teste/";
+		//String localBackup = "C:/Fabricio/";
+		
+		String nomeArquivo = "backup.sql";
+		
+		String caminhoZip = "C:/Program Files/7-Zip/7z.exe";
+		
+		String realizaBackup = caminhoMySql + "mysqldump -h 10.14.124.14 --port 3306 -u root --password=TTFAuditorADM -B auditoria_db -r " + localBackup + nomeArquivo;
+		String compacta = caminhoZip + " a -tgzip C:/Fabricio/backup.zip C:/Fabricio/backup.sql";
 		String descompacta = "C:/Program Files/7-Zip/7z.exe e -tgzip C:/Fabricio/backup.zip -oC:/Fabricio";
 		String restoreBackup =  "\"C:/Program Files/MySQL/MySQL Server 5.6/bin/mysql\" -u root --password=root auditoria_db < C:/Fabricio/backup.sql";
 		String createDatabase = "C:/Program Files/MySQL/MySQL Server 5.6/bin/mysql -uroot -proot -e \"CREATE DATABASE IF NOT EXISTS `auditoria_db` DEFAULT CHARACTER SET utf8\"";

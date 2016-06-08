@@ -518,4 +518,20 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		closeDialog();
 		displayInfoMessageToUser("Auditoria importada com sucesso!");
 	}
+	
+	public void teste(){
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ServletContext scontext = (ServletContext) facesContext
+				.getExternalContext().getContext();
+		String path = scontext
+				.getRealPath("/WEB-INF/Backup");
+		
+		Runtime runtime = Runtime.getRuntime();
+		try {
+			Process p = runtime.exec(path + "/Servidor_backup.bat");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

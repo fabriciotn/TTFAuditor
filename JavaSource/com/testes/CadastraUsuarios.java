@@ -25,7 +25,7 @@ public class CadastraUsuarios {
 	private static EntityManagerFactory factory;
 	private static EntityManager manager;
 	
-	private static String banco = "auditoria_db1";
+	private static String banco = "auditoria_db";
 	
 	public CadastraUsuarios() {
 		
