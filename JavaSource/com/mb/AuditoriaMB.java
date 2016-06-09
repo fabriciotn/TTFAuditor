@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -49,8 +50,30 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	private int quantidadeDePerguntasRespondidas = 0;
 	private FacesContext context;
 	private HttpServletRequest request;
-
+	private boolean offLine;
 	private Parametros parametros;
+
+	
+	public AuditoriaMB() {
+		usuarioLogado = (User) FacesContext.getCurrentInstance()
+				.getExternalContext().getSessionMap().get("user");
+
+		if (usuarioLogado == null)
+			throw new RuntimeException("Problemas com usuário");
+		
+		
+		ResourceBundle bundle = ResourceBundle.getBundle("messages");
+		setOffLine(bundle.getString("modulo").equals("off"));
+	}
+	
+	
+	public boolean isOffLine() {
+		return offLine;
+	}
+
+	public void setOffLine(boolean offLine) {
+		this.offLine = offLine;
+	}
 
 	public boolean podeEditar(Date dataDaResposta) {
 		if (dataDaResposta == null) {
@@ -176,14 +199,6 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		request = (HttpServletRequest) context.getExternalContext()
 				.getRequest();
 		request.getSession().setAttribute("currentTab", currentTab);
-	}
-
-	public AuditoriaMB() {
-		usuarioLogado = (User) FacesContext.getCurrentInstance()
-				.getExternalContext().getSessionMap().get("user");
-
-		if (usuarioLogado == null)
-			throw new RuntimeException("Problemas com usuário");
 	}
 
 	public List<Resposta> pegaRespostas(java.lang.Integer questionario_id) {
@@ -393,7 +408,6 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		if (auditorias == null) {
 			loadAuditorias();
 		}
-
 		return auditorias;
 	}
 
@@ -407,10 +421,18 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 	private void loadAuditorias() {
 		if (usuarioLogado.isAdmin())
-			auditorias = getAuditoriaFacade().listAll();
+			if(isOffLine())
+				auditorias = getAuditoriaFacade().listAuditoriasOff();
+			else 
+				auditorias = getAuditoriaFacade().listAll();
 		else {
 			auditorias = new ArrayList<Auditoria>();
-			List<Auditoria> todasAuditorias = getAuditoriaFacade().listAll();
+			List<Auditoria> todasAuditorias;
+			
+			if(isOffLine())
+				todasAuditorias = getAuditoriaFacade().listAuditoriasOff();
+			else 
+				todasAuditorias = getAuditoriaFacade().listAll();
 
 			for (Auditoria auditoria : todasAuditorias) {
 				for (User user : auditoria.getAuditores()) {

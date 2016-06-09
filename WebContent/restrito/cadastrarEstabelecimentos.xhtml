@@ -383,7 +383,7 @@
 									icon="ui-icon-check"
 									action="#{estabelecimentoMB.updateEstabelecimento}" />
 								<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
-									outcome="listarEstabelecimentos.xhtml" />
+									outcome="listarEstabelecimentos.xhtml" rendered="#{!userMB.offLine}"/>
 							</p:columnGroup>
 						</h:panelGrid>
 					</p:panel>
