@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="capaRelatorioAuditoria" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="9cf3827a-7cab-4cc3-ad7f-1539804b91ad">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_auditoria" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+     auditoria.`dataDaVerificacao` AS auditoria_dataDaVerificacao,
+     estabelecimento.`nomeFantasia` AS estabelecimento_nomeFantasia,
+     estabelecimento.`cidade` AS cidade,
+     unidade.`sigla` AS unidade_sigla
+FROM
+     `estabelecimento` estabelecimento INNER JOIN `auditoria` auditoria ON estabelecimento.`id` = auditoria.`estabelecimento_id`
+     INNER JOIN `unidade` unidade ON estabelecimento.`unidade_id` = unidade.`id`
+WHERE
+     auditoria.`id` = $P{id_auditoria}]]>
+	</queryString>
+	<field name="auditoria_dataDaVerificacao" class="java.sql.Timestamp"/>
+	<field name="estabelecimento_nomeFantasia" class="java.lang.String"/>
+	<field name="cidade" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="unidade_sigla" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="555" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="802" height="555" uuid="d089a3b7-688c-4b23-91de-026a03f1fd84"/>
+				<graphicElement>
+					<pen lineWidth="5.0" lineStyle="Double"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="38" width="802" height="65" uuid="4565b831-b93f-492c-97f3-c34a8a549282"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="28" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO DE VISITA FUNDAÇÃO HEMOMINAS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="201" width="802" height="90" uuid="69b4913b-b974-42e2-a1e4-91a1aa25e151"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estabelecimento_nomeFantasia}.toUpperCase() + " - " + $F{unidade_sigla}]]></textFieldExpression>
+			</textField>
+			<textField pattern="yyyy">
+				<reportElement x="0" y="452" width="802" height="41" uuid="ca6e800f-5330-495b-93d5-856ddcc8a7e6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{auditoria_dataDaVerificacao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="421" width="802" height="31" uuid="72c203af-fdad-4f0c-be70-477135a8d16a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ANO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="344" width="802" height="34" uuid="fc2e9a48-dd18-42f9-9a37-e0840e4a1710"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cidade}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

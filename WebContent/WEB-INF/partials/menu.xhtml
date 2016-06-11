@@ -58,12 +58,13 @@
 				<p:submenu label="#{msg.auditOff}" icon="ui-icon-signal-diag" rendered="#{userMB.usuarioLogado.menuAuditoriaOff}">
 					<p:menuitem value="#{msg.exportAuditoria}" outcome="exportaDoServidorParaLocal.xhtml"
 						icon="ui-icon-arrowreturnthick-1-n" rendered="#{!userMB.offLine}"/>
-					<p:menuitem value="#{msg.exportAuditoria}" outcome="exportaDoLocalParaServidor.xhtml"
-						icon="ui-icon-arrowreturnthick-1-n" rendered="#{userMB.offLine}"/>
-					<p:menuitem value="#{msg.importAuditoria}" outcome="importaDoServidorParaLocal.xhtml"
-						icon="ui-icon-arrowreturnthick-1-s" rendered="#{userMB.offLine}"/>
 					<p:menuitem value="#{msg.importAuditoria}" outcome="importaDoLocalParaServidor.xhtml"
 						icon="ui-icon-arrowreturnthick-1-s" rendered="#{!userMB.offLine}"/>
+						
+					<p:menuitem value="#{msg.atualizaBase}" outcome="importaDoServidorParaLocal.xhtml"
+						icon="ui-icon-arrowreturnthick-1-s" rendered="#{userMB.offLine}"/>
+					<p:menuitem value="#{msg.enviarDadosParaOServidor}" outcome="exportaDoLocalParaServidor.xhtml"
+						icon="ui-icon-arrowreturnthick-1-n" rendered="#{userMB.offLine}"/>
 				</p:submenu>
 				<p:separator />
 				<p:menuitem value="#{msg.sobre}" outcome="sobre.xhtml"

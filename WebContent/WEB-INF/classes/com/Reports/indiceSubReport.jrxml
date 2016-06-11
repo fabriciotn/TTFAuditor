@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="indiceSubReport" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="988640e0-45c9-4094-bceb-5c69268bd788">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="caminho_imagem" class="java.lang.String">
+		<defaultValueExpression><![CDATA["/Users/fabriciotn/Documents/workspace/TTFAuditor/WebContent/images/logoHemominas.png"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_auditoria" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     auditoria.`id` AS auditoria_id,
+     auditoria.`codigo` AS auditoria_codigo,
+     auditoria.`dataDaVerificacao` AS auditoria_dataDaVerificacao,
+     auditoria.`tipo` AS auditoria_tipo,
+     auditoria.`estabelecimento_id` AS auditoria_estabelecimento_id,
+     auditoria.`user_id` AS auditoria_user_id,
+     estabelecimento.`nomeFantasia` AS estabelecimento_nomeFantasia,
+     estabelecimento.`razaoSocial` AS estabelecimento_razaoSocial,
+     estabelecimento.`unidade_id` AS estabelecimento_unidade_id,
+     unidade.`nome` AS unidade_nome
+FROM
+     `estabelecimento` estabelecimento INNER JOIN `auditoria` auditoria ON estabelecimento.`id` = auditoria.`estabelecimento_id`
+     INNER JOIN `unidade` unidade ON estabelecimento.`unidade_id` = unidade.`id`
+WHERE
+     auditoria.`id` = $P{id_auditoria}]]>
+	</queryString>
+	<field name="auditoria_id" class="java.lang.Integer"/>
+	<field name="auditoria_codigo" class="java.lang.String"/>
+	<field name="auditoria_dataDaVerificacao" class="java.sql.Timestamp"/>
+	<field name="auditoria_tipo" class="java.lang.String"/>
+	<field name="auditoria_estabelecimento_id" class="java.lang.Integer"/>
+	<field name="auditoria_user_id" class="java.lang.Integer"/>
+	<field name="estabelecimento_nomeFantasia" class="java.lang.String"/>
+	<field name="estabelecimento_razaoSocial" class="java.lang.String"/>
+	<field name="estabelecimento_unidade_id" class="java.lang.Integer"/>
+	<field name="unidade_nome" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="536" splitType="Stretch">
+			<rectangle>
+				<reportElement x="21" y="501" width="731" height="20" backcolor="#FFFFFF" uuid="fb1c3188-16ab-44b7-99da-b31390b3281e"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="21" y="264" width="731" height="20" backcolor="#FFFFFF" uuid="1db8ce4c-b0cf-483a-b9e9-247bdb2ba041"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="21" y="244" width="731" height="20" backcolor="#E8E9E9" uuid="14b9b80b-ebc1-451c-8c7e-e4bee7d7f9d8"/>
+			</rectangle>
+			<image>
+				<reportElement x="10" y="12" width="181" height="63" uuid="d42084ee-798a-425e-8a09-9e05de5a47a8"/>
+				<imageExpression><![CDATA[$P{caminho_imagem}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="202" y="10" width="418" height="65" uuid="5bd345c8-f9f6-4a5e-8e35-2b8f040cd1bc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VERIFICAÇÃO DE AGÊNCIA TRANSFUSIONAL E ASSISTÊNCIA HEMOTERÁPICA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="21" y="114" width="181" height="15" uuid="6c5c7a8e-f4cc-4e9a-ab40-10b448203ed5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data da Verificação:]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="83" width="802" height="20" backcolor="#CCCCCC" uuid="85e72871-5191-43a3-94b0-b4a7cc8a9cb2"/>
+			</rectangle>
+			<textField pattern="dd &apos;de&apos; MMMMM &apos;de&apos; yyyy" isBlankWhenNull="true">
+				<reportElement x="204" y="114" width="173" height="15" uuid="df7f5784-2e44-4f1d-a55a-4a1b76582b98"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{auditoria_dataDaVerificacao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="642" y="114" width="31" height="15" uuid="c7036e11-25f4-40f6-a715-c82c04745eda"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="675" y="114" width="100" height="15" uuid="237569d7-594b-4689-b3ee-51416d88b9ef"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{auditoria_tipo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="133" width="192" height="15" uuid="46f5f5aa-6a98-482e-b159-1d2c16099622"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome do estabelecimento de saúde:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="204" y="133" width="558" height="15" uuid="46af68e2-696d-44fa-b1d3-03b45840a49b"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{estabelecimento_razaoSocial}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="21" y="152" width="181" height="15" uuid="ba27b5be-a446-4c6b-9f93-1a7207d7b74a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data do relatório:]]></text>
+			</staticText>
+			<textField pattern="dd &apos;de&apos; MMMMM &apos;de&apos; yyyy" isBlankWhenNull="true">
+				<reportElement x="204" y="152" width="173" height="15" uuid="66a3db0a-62ff-451b-9688-8ced00fbf764"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="21" y="171" width="181" height="15" uuid="19725a3d-c115-41a8-875e-3b627a0b7fb7"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Unidade da FH:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="204" y="171" width="558" height="15" uuid="72c32685-a12e-4727-8cd2-767e0341c327"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{unidade_nome}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="210" width="802" height="20" backcolor="#CCCCCC" uuid="81e1ba86-bddf-42be-94bb-cdcb29c36a51"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="210" width="802" height="20" uuid="b2b66b2c-847a-4aea-9d2a-2aedf8d794bb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ÍNDICE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="244" width="721" height="20" uuid="c59a107b-d9f5-4739-83be-af692e62fbd3"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ÁREA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="264" width="721" height="20" uuid="ce229152-4a38-4681-9aa1-035d1f41764a"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[CARACTERIZAÇÃO DO SERVIÇO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="21" y="284" width="731" height="20" backcolor="#FFFFFF" uuid="b8ebae9e-865f-4298-848b-98b090734509"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="31" y="284" width="721" height="20" uuid="727550b0-48be-4bd3-82cd-4380a24e913d"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[INFORMAÇÕES GERAIS]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="21" y="304" width="731" height="20" backcolor="#FFFFFF" uuid="cab8bd84-5c97-4bd3-8144-2f78d715f724"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="31" y="304" width="721" height="20" uuid="c17c4e2a-ca8b-4456-b624-012cac14c06c"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[CAPTAÇÃO DE DOADORES]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="21" y="324" width="731" height="20" backcolor="#FFFFFF" uuid="f9e7bd65-6b8a-446b-bd55-f95c9bbba64e"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="31" y="324" width="721" height="20" uuid="75d70a2f-598e-428d-b553-b2c153dcc338"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[COLETA DE AMOSTRAS E CADASTRO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="21" y="344" width="731" height="20" backcolor="#FFFFFF" uuid="fb9bdd7e-7577-45ab-b95b-8d0a38d65f89"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="31" y="344" width="721" height="20" uuid="8875fc54-9575-48e3-9268-f699653ddfd1"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[IMUNOHEMATOLOGIA DO RECEPTOR]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="21" y="364" width="731" height="20" backcolor="#FFFFFF" uuid="d0777acf-ee55-4318-858c-6fd8e9c05b7b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="31" y="364" width="721" height="20" uuid="cfac8122-b3b3-40c7-b910-0cd3f5fd802a"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[TRANSFUSÃO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="21" y="384" width="731" height="20" backcolor="#FFFFFF" uuid="2ceba69a-0a00-4ba8-b9a9-ea867e0ab6c7"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="31" y="384" width="721" height="20" uuid="7051b35d-03a3-4b10-9acb-d9777cc10ef6"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[GARANTIA DA QUALIDADE]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="21" y="404" width="731" height="20" backcolor="#FFFFFF" uuid="58c6076d-662e-4374-8c60-11d9ddd885f8"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="31" y="404" width="721" height="20" uuid="8df2b2d1-2cc5-4117-a173-faee1a2cf586"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[COMITÊ TRANSFUSIONAL / HEMOVIGILÂNCIA]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="21" y="424" width="731" height="20" backcolor="#FFFFFF" uuid="e69c5e4b-2dff-415a-94f2-f84671ce3307"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="31" y="424" width="721" height="20" uuid="65bdcc54-853c-49d7-be1a-e58026517b3d"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[ESTRUTURA FÍSICA/INSTALAÇÕES]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="21" y="444" width="731" height="20" backcolor="#FFFFFF" uuid="1ca1a5ef-0e0b-4a29-bf7a-67bab1ff9953"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="31" y="444" width="721" height="20" uuid="99196753-f735-4ac4-8306-b2ed4de34cd7"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[FATURAMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="31" y="501" width="135" height="20" uuid="be4f5f36-9b86-4760-b345-c22f38213176"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[LEGENDA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="176" y="501" width="576" height="20" uuid="7891228e-3062-418b-ac39-6799dc28044d"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[C - CONFORME/ NC - NÃO CONFORME / NA - NÃO SE APLICA]]></text>
+			</staticText>
+			<line>
+				<reportElement x="166" y="501" width="1" height="20" uuid="2f49c988-5e93-4573-a2ea-bd03596b6759"/>
+			</line>
+			<line>
+				<reportElement x="569" y="264" width="1" height="200" uuid="3226310b-462f-4e4e-ac50-cf0476a61de8"/>
+			</line>
+		</band>
+	</title>
+</jasperReport>

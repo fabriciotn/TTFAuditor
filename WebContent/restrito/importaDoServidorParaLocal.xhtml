@@ -19,9 +19,18 @@
 				<p:panel id="basic"
 					header="Importação das auditorias para utilização off-line"
 					style="margin-bottom:20px">
-					<h:panelGrid columns="1" style="text-align:left">
-						<p:commandButton value="Teste" ajax="false"
-							icon="ui-icon-check" action="#{auditoriaMB.importaDoServidorParaLocal()}" />
+					<h:panelGrid columns="1" style="text-align:center">
+						<p:outputPanel deferred="true" style="text-align:center;">
+							<p:graphicImage value="/images/accessDenied.png" id="hint"
+								height="70px" style="margin:10px" />
+							<h2>Atenção!</h2>
+							<p>Esta ação <b>APAGARÁ TODOS</b> os dados de seu sistema local e atualizará com os dados do servidor!</p>
+							<p>Certifique-se que suas alterações já tenham sido enviadas.</p>
+						</p:outputPanel>
+						<br/>
+						<p:commandButton value="#{msg.atualizaBase}" ajax="false"
+							icon="ui-icon-check"
+							action="#{auditoriaMB.importaDoServidorParaLocal()}"/>
 					</h:panelGrid>
 				</p:panel>
 			</h:form>
