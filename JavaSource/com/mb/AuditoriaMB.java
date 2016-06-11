@@ -497,17 +497,17 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	public void importaDoServidorParaLocal() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
-		String path = scontext.getRealPath("/WEB-INF/Backup");
+		File path = new File(scontext.getRealPath("/WEB-INF/Backup"));
 		
 		
 		Process p;
 		Runtime runtime = Runtime.getRuntime();
 		try {
-			p = runtime.exec("cmd /c " + path + "/1_backup.bat");
+			p = runtime.exec("cmd /c \"" + path.getPath() + "\\1_backup.bat\"");
 			p.waitFor();	
-			p = runtime.exec("cmd /c " + path + "/2_createBD.bat");
+			p = runtime.exec("cmd /c \"" + path.getPath() + "\\2_createBD.bat\"");
 			p.waitFor();	
-			p = runtime.exec("cmd /c " + path + "/3_restoreBD.bat");
+			p = runtime.exec("cmd /c \"" + path.getPath() + "\\3_restoreBD.bat\"");
 			p.waitFor();	
 		} catch (IOException e) {
 			System.out.println("IOException");
