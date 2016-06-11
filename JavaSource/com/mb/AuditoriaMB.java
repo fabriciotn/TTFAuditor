@@ -494,7 +494,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		displayInfoMessageToUser("Auditoria exportada com sucesso!");
 	}
 
-	public void importaDoServidorParaLocal() {
+	public String importaDoServidorParaLocal() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
 		File path = new File(scontext.getRealPath("/WEB-INF/Backup"));
@@ -519,5 +519,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		
 		closeDialog();
 		displayInfoMessageToUser("Atualizado com sucesso!");
+		
+		return "/restrito/home.xhtml";
 	}
 }
