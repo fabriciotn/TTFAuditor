@@ -468,27 +468,10 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		xml.importaDoServidorParaLocal();
 	}
 
-	public void exportaDoServidorParaLocal() {
+	public void enviaDadosParaOServidor() {
 		context = FacesContext.getCurrentInstance();
 		request = (HttpServletRequest) context.getExternalContext().getRequest();
 
-		GerenciadorDeAuditoriasOffFacade gerenciadorFacade = new GerenciadorDeAuditoriasOffFacade();
-
-		List<GerenciadorDeAuditoriasOff> listarPorAuditoria = gerenciadorFacade.listarPorAuditoria(auditoria.getId());
-		for (GerenciadorDeAuditoriasOff g : listarPorAuditoria) {
-			if (g.getAuditoria().getId() == auditoria.getId() && g.getDataUpload() != null) {
-				closeDialog();
-				displayErrorMessageToUser("A auditoria " + auditoria.getCodigo() + " já foi exportada!");
-				return;
-			}
-		}
-
-		GerenciadorDeAuditoriasOff gerenciador = new GerenciadorDeAuditoriasOff();
-		gerenciador.setAuditoria(auditoria);
-		gerenciador.setDataUpload(new Date());
-		gerenciador.setUsuarioUpload(usuarioLogado);
-		gerenciador.setHostnameUpload(request.getRemoteAddr());
-		gerenciadorFacade.createGerenciador(gerenciador);
 		geraArquivosXml();
 		closeDialog();
 		displayInfoMessageToUser("Auditoria exportada com sucesso!");
@@ -509,16 +492,25 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			p.waitFor();	
 			p = runtime.exec("cmd /c \"" + path.getPath() + "\\3_restoreBD.bat\"");
 			p.waitFor();	
+			closeDialog();
+			displayInfoMessageToUser("Atualizado com sucesso!");
 		} catch (IOException e) {
 			System.out.println("IOException");
 			e.printStackTrace();
+			closeDialog();
+			displayErrorMessageToUser("Aconteceu algum erro!\nFavor contactar o administrador do sistema.");
 		} catch (InterruptedException e) {
 			System.out.println("InterruptedException");
+			closeDialog();
+			displayErrorMessageToUser("Aconteceu algum erro!\nFavor contactar o administrador do sistema.");
 			e.printStackTrace();
+		}catch (Exception e) {
+			System.out.println("Exception");
+			e.printStackTrace();		
+			closeDialog();
+			displayErrorMessageToUser("Aconteceu algum erro!\nFavor contactar o administrador do sistema.");
 		}
 		
-		closeDialog();
-		displayInfoMessageToUser("Atualizado com sucesso!");
 		
 		return "/restrito/home.xhtml";
 	}
