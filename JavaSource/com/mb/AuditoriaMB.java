@@ -481,9 +481,10 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 					}
 				}
 			}
+			
 		}
 	}
-
+	
 	public void importaDadosDoLocalNoServidor() {
 		leArquivosXml();
 	}
