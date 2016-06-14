@@ -19,13 +19,11 @@ import javax.servlet.http.HttpSession;
 
 import com.Reports.RelatorioAuditoria;
 import com.facade.AuditoriaFacade;
-import com.facade.GerenciadorDeAuditoriasOffFacade;
 import com.facade.RespostaFacade;
 import com.integracao.ExportaXml;
 import com.integracao.ImportaXml;
 import com.model.Auditoria;
 import com.model.Flag;
-import com.model.GerenciadorDeAuditoriasOff;
 import com.model.Parametros;
 import com.model.Pergunta;
 import com.model.Questionario;
@@ -457,15 +455,37 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	}
 
 	private void leArquivosXml() {
+		ImportaXml xml = new ImportaXml();
+		
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
-		String path = scontext.getRealPath("/WEB-INF/IntegracaoAuditoria/auditoriaId");
+		String path = scontext.getRealPath("/WEB-INF/IntegracaoAuditoria/");
 
-		File diretorio = new File(path + "58");
+		File dir = new File(path);
 
-		String caminho = diretorio.getPath() + "/";
-		ImportaXml xml = new ImportaXml(caminho);
-		xml.importaDoServidorParaLocal();
+		File diretorio = new File(dir.getPath());
+		File fList[] = diretorio.listFiles();
+
+		System.out.println("Numero de arquivos no diretorio : " + fList.length);
+
+		for (int i = 0; i < fList.length; i++) {
+			if (fList[i].isDirectory()) {
+				File list[] = new File(fList[i].getPath()).listFiles();
+				for (int j = 0; j < list.length; j++) {
+					if (list[j].isFile()) {
+						if(list[j].getName().contains("estabelecimento"))
+							xml.importaEstabelecimentoParaServidor(list[j].getAbsolutePath());
+						
+						if(list[j].getName().contains("respostas"))
+							xml.importaRespostaParaServidor(list[j].getAbsolutePath());
+					}
+				}
+			}
+		}
+	}
+
+	public void importaDadosDoLocalNoServidor() {
+		leArquivosXml();
 	}
 
 	public void enviaDadosParaOServidor() {
@@ -481,17 +501,16 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
 		File path = new File(scontext.getRealPath("/WEB-INF/Backup"));
-		
-		
+
 		Process p;
 		Runtime runtime = Runtime.getRuntime();
 		try {
 			p = runtime.exec("cmd /c \"" + path.getPath() + "\\1_backup.bat\"");
-			p.waitFor();	
+			p.waitFor();
 			p = runtime.exec("cmd /c \"" + path.getPath() + "\\2_createBD.bat\"");
-			p.waitFor();	
+			p.waitFor();
 			p = runtime.exec("cmd /c \"" + path.getPath() + "\\3_restoreBD.bat\"");
-			p.waitFor();	
+			p.waitFor();
 			closeDialog();
 			displayInfoMessageToUser("Atualizado com sucesso!");
 		} catch (IOException e) {
@@ -504,14 +523,13 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			closeDialog();
 			displayErrorMessageToUser("Aconteceu algum erro!\nFavor contactar o administrador do sistema.");
 			e.printStackTrace();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("Exception");
-			e.printStackTrace();		
+			e.printStackTrace();
 			closeDialog();
 			displayErrorMessageToUser("Aconteceu algum erro!\nFavor contactar o administrador do sistema.");
 		}
-		
-		
+
 		return "/restrito/home.xhtml";
 	}
 }

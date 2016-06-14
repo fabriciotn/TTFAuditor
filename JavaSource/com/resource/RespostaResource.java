@@ -8,21 +8,15 @@ import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
 import java.util.List;
 
-import com.dao.RespostaDAO;
 import com.facade.RespostaFacade;
 import com.model.Resposta;
 import com.thoughtworks.xstream.XStream;
 
 public class RespostaResource {
-	
-	private String caminho;
 
-	public RespostaResource(String caminho) {
-		this.caminho = caminho;
-	}
-	
 	private RespostaFacade respostaFacade = new RespostaFacade();
 
 	/**
@@ -30,13 +24,14 @@ public class RespostaResource {
 	 * 
 	 * @param idResposta
 	 */
-	public void serializaResposta(Resposta resposta) {
+	public void serializaResposta(String caminho, Resposta resposta) {
 		XStream xstream = new XStream();
 		xstream.setMode(XStream.ID_REFERENCES);
 
 		BufferedWriter output = null;
 		try {
-			output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(caminho + "resposta.xml"), "UTF-8"));
+			output = new BufferedWriter(
+					new OutputStreamWriter(new FileOutputStream(caminho + "resposta_" + Calendar.getInstance().getTimeInMillis() + ".xml"), "UTF-8"));
 			xstream.toXML(resposta, output);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -48,15 +43,16 @@ public class RespostaResource {
 	/**
 	 * Cria um arquivo XML com a lista de respostas
 	 */
-	public void serializaListaDeRespostas(int auditoria_id) {
+	public void serializaListaDeRespostas(String caminho, int auditoria_id) {
 		List<Resposta> respostas = respostaFacade.listaRespostasPorIdDaAuditoria(auditoria_id);
-		
+
 		XStream xstream = new XStream();
 		xstream.setMode(XStream.ID_REFERENCES);
 
 		BufferedWriter output = null;
 		try {
-			output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(caminho + "respostas.xml"), "UTF-8"));
+			output = new BufferedWriter(new OutputStreamWriter(
+					new FileOutputStream(caminho + "respostas_" + Calendar.getInstance().getTimeInMillis() + ".xml"), "UTF-8"));
 			xstream.toXML(respostas, output);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -67,13 +63,15 @@ public class RespostaResource {
 
 	/**
 	 * Cria um objeto Resposta de acordo com o arquivo resposta.xml que existe na raiz do diretório
+	 * 
 	 * @return Resposta
 	 */
-	public Resposta deserializaResposta() {
+	public Resposta deserializaResposta(String caminhoCompleto) {
 		BufferedReader input = null;
 
 		try {
-			input = new BufferedReader(new InputStreamReader(new FileInputStream(caminho + "resposta.xml"), "UTF-8"));
+			input = new BufferedReader(
+					new InputStreamReader(new FileInputStream(caminhoCompleto), "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
@@ -87,16 +85,16 @@ public class RespostaResource {
 	}
 
 	/**
-	 * Cria uma lista de objetos Resposta de acordo com o arquivo respostas.xml que existe na raiz do
-	 * diretório
+	 * Cria uma lista de objetos Resposta de acordo com o arquivo respostas.xml que existe na raiz do diretório
 	 * 
 	 * @return List<Resposta>
 	 */
-	public List<Resposta> deserializaListaDeRespostas() {
+	public List<Resposta> deserializaListaDeRespostas(String caminhoCompleto) {
 		BufferedReader input = null;
 
 		try {
-			input = new BufferedReader(new InputStreamReader(new FileInputStream(caminho + "respostas.xml"), "UTF-8"));
+			input = new BufferedReader(
+					new InputStreamReader(new FileInputStream(caminhoCompleto), "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {

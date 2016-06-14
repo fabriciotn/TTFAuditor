@@ -1,13 +1,8 @@
 package com.integracao;
 
 import com.model.Auditoria;
-import com.resource.AuditoriaResource;
 import com.resource.EstabelecimentoResource;
-import com.resource.ParametroResource;
-import com.resource.QuestionarioResource;
 import com.resource.RespostaResource;
-import com.resource.UnidadeResource;
-import com.resource.UsuarioResource;
 
 public class ExportaXml {
 	
@@ -18,25 +13,10 @@ public class ExportaXml {
 	}
 
 	public void exporta(Auditoria auditoria){
-		ParametroResource parametrosResource = new ParametroResource(caminho);
-		parametrosResource.serializaParametro();
+		RespostaResource respostaResource = new RespostaResource();
+		respostaResource.serializaListaDeRespostas(caminho, auditoria.getId());
 		
-		UnidadeResource unidadeResource = new UnidadeResource(caminho);
-		unidadeResource.serializaListaDeUnidades();
-		
-		UsuarioResource usuarioResource = new UsuarioResource(caminho);
-		usuarioResource.serializaListaDeUsuarios();
-		
-		QuestionarioResource questionarioResource = new QuestionarioResource(caminho);
-		questionarioResource.serializaListaDeQuestionarios();
-		
-		RespostaResource respostaResource = new RespostaResource(caminho);
-		respostaResource.serializaListaDeRespostas(auditoria.getId());
-		
-		EstabelecimentoResource estabelecimentoResource = new EstabelecimentoResource(caminho);
-		estabelecimentoResource.serializaEstabelecimento(auditoria.getEstabelecimento());
-		
-		AuditoriaResource auditoriaResource = new AuditoriaResource(caminho);
-		auditoriaResource.serializaAuditoria(auditoria);
+		EstabelecimentoResource estabelecimentoResource = new EstabelecimentoResource();
+		estabelecimentoResource.serializaEstabelecimento(caminho, auditoria.getEstabelecimento());
 	}
 }

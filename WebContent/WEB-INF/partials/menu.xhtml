@@ -56,8 +56,6 @@
 				</p:submenu>
 				<p:separator />
 				<p:submenu label="#{msg.auditOff}" icon="ui-icon-signal-diag" rendered="#{userMB.usuarioLogado.menuAuditoriaOff}">
-					<p:menuitem value="#{msg.exportAuditoria}" outcome="exportaDoServidorParaLocal.xhtml"
-						icon="ui-icon-arrowreturnthick-1-n" rendered="#{!userMB.offLine}"/>
 					<p:menuitem value="#{msg.importAuditoria}" outcome="importaDoLocalParaServidor.xhtml"
 						icon="ui-icon-arrowreturnthick-1-s" rendered="#{!userMB.offLine}"/>
 						
