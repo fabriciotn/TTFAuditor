@@ -83,14 +83,20 @@
 								<f:facet name="header">
 									<h:outputText value="EXPORTAR" />
 								</f:facet>
-								<p:commandLink action="#{auditoriaMB.importaDadosDoLocalNoServidor()}"
-									ajax="false">
-									<img src="../images/exportar.png" width="25" />
+								<p:commandLink
+									action="#{auditoriaMB.importaDadosDoLocalNoServidor()}"
+									ajax="true" id="btn">
+									<img src="../images/importar.png" width="25" />
 									<f:setPropertyActionListener value="#{auditoria}"
 										target="#{auditoriaMB.auditoria}" />
 								</p:commandLink>
-							</p:column>
 
+
+								<p:blockUI block="tbl" trigger="btn">
+								    AGUARDE!<br/>
+									<img src="../images/progress.gif" />
+								</p:blockUI>
+							</p:column>
 						</p:dataTable>
 					</h:panelGrid>
 				</p:panel>

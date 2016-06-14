@@ -19,7 +19,7 @@
 				<p:panel id="basic"
 					header="Importação das auditorias para utilização off-line"
 					style="margin-bottom:20px">
-					<h:panelGrid columns="1" style="text-align:center">
+					<h:panelGrid columns="1" style="text-align:center" id="tbl">
 						<p:outputPanel deferred="true" style="text-align:center;">
 							<p:graphicImage value="/images/accessDenied.png" id="hint"
 								height="70px" style="margin:10px" />
@@ -28,9 +28,14 @@
 							<p>Certifique-se que suas alterações já tenham sido enviadas.</p>
 						</p:outputPanel>
 						<br/>
-						<p:commandButton value="#{msg.atualizaBase}" ajax="false"
-							icon="ui-icon-check"
+						<p:commandButton value="#{msg.atualizaBase}" ajax="true"
+							icon="ui-icon-check" id="btn"
 							action="#{auditoriaMB.importaDoServidorParaLocal()}"/>
+
+						<p:blockUI block="tbl" trigger="btn">
+								    AGUARDE!<br />
+							<img src="../images/progress.gif" />
+						</p:blockUI>
 					</h:panelGrid>
 				</p:panel>
 			</h:form>
