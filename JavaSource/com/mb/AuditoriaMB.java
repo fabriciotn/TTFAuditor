@@ -34,25 +34,26 @@ import com.model.User;
 @ManagedBean
 public class AuditoriaMB extends AbstractMB implements Serializable {
 
-	private static final long	serialVersionUID					= 1L;
+	private static final long serialVersionUID = 1L;
 
-	private Auditoria			auditoria;
-	private List<Auditoria>		auditorias;
-	private AuditoriaFacade		auditoriaFacade;
-	private User				usuarioLogado;
-	private String				recomendacao;
-	private List<Resposta>		respostas;
-	private int					currentTab							= 0;
-	private boolean				podeEditar;
-	private int					quantidadeDePerguntasNaoRespondidas	= 0;
-	private int					quantidadeDePerguntasRespondidas	= 0;
-	private FacesContext		context;
-	private HttpServletRequest	request;
-	private boolean				offLine;
-	private Parametros			parametros;
+	private Auditoria auditoria;
+	private List<Auditoria> auditorias;
+	private AuditoriaFacade auditoriaFacade;
+	private User usuarioLogado;
+	private String recomendacao;
+	private List<Resposta> respostas;
+	private int currentTab = 0;
+	private boolean podeEditar;
+	private int quantidadeDePerguntasNaoRespondidas = 0;
+	private int quantidadeDePerguntasRespondidas = 0;
+	private FacesContext context;
+	private HttpServletRequest request;
+	private boolean offLine;
+	private Parametros parametros;
 
 	public AuditoriaMB() {
-		usuarioLogado = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+		usuarioLogado = (User) FacesContext.getCurrentInstance()
+				.getExternalContext().getSessionMap().get("user");
 
 		if (usuarioLogado == null)
 			throw new RuntimeException("Problemas com usuário");
@@ -75,7 +76,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			return podeEditar;
 		}
 
-		parametros = (Parametros) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("parametros");
+		parametros = (Parametros) FacesContext.getCurrentInstance()
+				.getExternalContext().getSessionMap().get("parametros");
 
 		Calendar hoje = Calendar.getInstance();
 		hoje.setTime(new java.util.Date());
@@ -86,7 +88,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 															// formato Date e
 															// converte para
 															// Calendar
-		prazoParaEditarResposta.add(Calendar.DAY_OF_MONTH, parametros.getQuantidadeDeDiasParaAlterarAResposta());
+		prazoParaEditarResposta.add(Calendar.DAY_OF_MONTH,
+				parametros.getQuantidadeDeDiasParaAlterarAResposta());
 
 		// se a data de hoje + XXX dia for maior que a data da resposta não é
 		// permitido alterar
@@ -125,7 +128,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return quantidadeDePerguntasNaoRespondidas;
 	}
 
-	public void setQuantidadeDePerguntasNaoRespondidas(int quantidadeDePerguntasNaoRespondidas) {
+	public void setQuantidadeDePerguntasNaoRespondidas(
+			int quantidadeDePerguntasNaoRespondidas) {
 		this.quantidadeDePerguntasNaoRespondidas = quantidadeDePerguntasNaoRespondidas;
 	}
 
@@ -134,7 +138,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return quantidadeDePerguntasRespondidas;
 	}
 
-	public void setQuantidadeDePerguntasRespondidas(int quantidadeDePerguntasRespondidas) {
+	public void setQuantidadeDePerguntasRespondidas(
+			int quantidadeDePerguntasRespondidas) {
 		this.quantidadeDePerguntasRespondidas = quantidadeDePerguntasRespondidas;
 	}
 
@@ -156,8 +161,10 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	}
 
 	public int getCurrentTab() {
-		if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("currentTab") != null)
-			currentTab = (Integer) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("currentTab");
+		if (FacesContext.getCurrentInstance().getExternalContext()
+				.getSessionMap().get("currentTab") != null)
+			currentTab = (Integer) FacesContext.getCurrentInstance()
+					.getExternalContext().getSessionMap().get("currentTab");
 		return currentTab;
 	}
 
@@ -184,7 +191,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		}
 
 		context = FacesContext.getCurrentInstance();
-		request = (HttpServletRequest) context.getExternalContext().getRequest();
+		request = (HttpServletRequest) context.getExternalContext()
+				.getRequest();
 		request.getSession().setAttribute("currentTab", currentTab);
 	}
 
@@ -247,9 +255,11 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 	public void visualizarRelatorio() {
 		RelatorioAuditoria relat = new RelatorioAuditoria();
-		byte[] b = relat.imprimeRelatorio(usuarioLogado.getName(), auditoria.getId(), auditoria.getEstabelecimento().getId());
+		byte[] b = relat.imprimeRelatorio(usuarioLogado.getName(),
+				auditoria.getId(), auditoria.getEstabelecimento().getId());
 
-		HttpServletResponse res = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+		HttpServletResponse res = (HttpServletResponse) FacesContext
+				.getCurrentInstance().getExternalContext().getResponse();
 		res.setContentType("application/pdf");
 		// Código abaixo gerar o relatório e disponibiliza diretamente na página
 		res.setHeader("Content-disposition", "inline;filename=arquivo.pdf");
@@ -294,12 +304,19 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			// Só adiciona as perguntas que forem
 			// referentes aos tipos de estabelecimento
 			if ((pergunta.getTipoServico() != null)
-					&& (pergunta.getTipoServico().equals(auditoria.getEstabelecimento().getTipoServico().substring(0, 2))
-							|| pergunta.getTipoServico().equals("Ambos"))) {
+					&& (pergunta.getTipoServico().equals(
+							auditoria.getEstabelecimento().getTipoServico()
+									.substring(0, 2)) || pergunta
+							.getTipoServico().equals("Ambos"))) {
 
-				if (idQuestionarioAnterior != pergunta.getQuestionario().getId()) {
-					new RespostaFacade().createResposta(incluiPerguntaNomeDoResponsavel(pergunta.getQuestionario()));
-					new RespostaFacade().createResposta(incluiPerguntaObservacao(pergunta.getQuestionario()));
+				if (idQuestionarioAnterior != pergunta.getQuestionario()
+						.getId()) {
+					new RespostaFacade()
+							.createResposta(incluiPerguntaNomeDoResponsavel(pergunta
+									.getQuestionario()));
+					new RespostaFacade()
+							.createResposta(incluiPerguntaObservacao(pergunta
+									.getQuestionario()));
 					idQuestionarioAnterior = pergunta.getQuestionario().getId();
 				}
 
@@ -365,7 +382,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		try {
 			getAuditoriaFacade().deleteAuditoria(auditoria);
 			closeDialog();
-			displayInfoMessageToUser("Auditoria " + auditoria.getCodigo() + " deletada com sucesso!");
+			displayInfoMessageToUser("Auditoria " + auditoria.getCodigo()
+					+ " deletada com sucesso!");
 			loadAuditorias();
 			resetAuditoria();
 		} catch (Exception e) {
@@ -426,7 +444,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 	public Auditoria pesquisaAuditoria() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+		HttpSession session = (HttpSession) facesContext.getExternalContext()
+				.getSession(true);
 
 		int id = (Integer) session.getAttribute("id");
 		int auditoriaId = id;
@@ -441,8 +460,10 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 	public void geraArquivosXml() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
-		String path = scontext.getRealPath("/WEB-INF/IntegracaoAuditoria/auditoriaId");
+		ServletContext scontext = (ServletContext) facesContext
+				.getExternalContext().getContext();
+		String path = scontext
+				.getRealPath("/WEB-INF/IntegracaoAuditoria/auditoriaId");
 
 		File diretorio = new File(path + auditoria.getId());
 		if (!diretorio.exists()) {
@@ -452,65 +473,92 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		String caminho = diretorio.getPath() + "/";
 		ExportaXml xml = new ExportaXml(caminho);
 		xml.exporta(auditoria);
+
+		enviaDiretorioParaOServidor(diretorio);
 	}
 
-	private void leArquivosXml() {
+	private void enviaDiretorioParaOServidor(File diretorio) {
+
+	}
+
+	private boolean leArquivosXml() {
 		ImportaXml xml = new ImportaXml();
-		
+
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
-		String path = scontext.getRealPath("/WEB-INF/IntegracaoAuditoria/");
+		ServletContext scontext = (ServletContext) facesContext
+				.getExternalContext().getContext();
+		String path = scontext
+				.getRealPath("/WEB-INF/IntegracaoAuditoria/auditoriaId"
+						+ auditoria.getId());
 
 		File dir = new File(path);
 
 		File diretorio = new File(dir.getPath());
 		File fList[] = diretorio.listFiles();
 
+		if (fList == null) {
+			return false;
+		}
+
 		System.out.println("Numero de arquivos no diretorio : " + fList.length);
 
 		for (int i = 0; i < fList.length; i++) {
-			if (fList[i].isDirectory()) {
-				File list[] = new File(fList[i].getPath()).listFiles();
-				for (int j = 0; j < list.length; j++) {
-					if (list[j].isFile()) {
-						if(list[j].getName().contains("estabelecimento"))
-							xml.importaEstabelecimentoParaServidor(list[j].getAbsolutePath());
-						
-						if(list[j].getName().contains("respostas"))
-							xml.importaRespostaParaServidor(list[j].getAbsolutePath());
-					}
-				}
+			if (fList[i].isFile()) {
+				if (fList[i].getName().contains("estabelecimento"))
+					xml.importaEstabelecimentoParaServidor(fList[i]
+							.getAbsolutePath());
+
+				if (fList[i].getName().contains("respostas"))
+					xml.importaRespostaParaServidor(fList[i].getAbsolutePath());
 			}
-			
 		}
-	}
-	
-	public void importaDadosDoLocalNoServidor() {
-		leArquivosXml();
+
+		return true;
 	}
 
-	public void enviaDadosParaOServidor() {
-		context = FacesContext.getCurrentInstance();
-		request = (HttpServletRequest) context.getExternalContext().getRequest();
+	public String importaDadosDoLocalNoServidor() {
+		if (leArquivosXml()) {
+			closeDialog();
+			displayInfoMessageToUser("Auditoria importada com sucesso!");
+		} else {
+			closeDialog();
+			displayErrorMessageToUser("Não há arquivos para ser importado!");
+		}
+		
+		return "/restrito/importaDoLocalParaOServidor.xhtml";
+	}
 
+	public String enviaDadosParaOServidor() {
 		geraArquivosXml();
+		copiaParaOServidor();
+
 		closeDialog();
 		displayInfoMessageToUser("Auditoria exportada com sucesso!");
+		
+		return "/restrito/home.xhtml";
+	}
+
+	private void copiaParaOServidor() {
+
 	}
 
 	public String importaDoServidorParaLocal() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
-		ServletContext scontext = (ServletContext) facesContext.getExternalContext().getContext();
+		ServletContext scontext = (ServletContext) facesContext
+				.getExternalContext().getContext();
 		File path = new File(scontext.getRealPath("/WEB-INF/Backup"));
 
 		Process p;
 		Runtime runtime = Runtime.getRuntime();
 		try {
-			p = runtime.exec("cmd /c \"" + path.getPath() + "\\1_backup.bat\"");
+			p = runtime.exec("cmd /c \"" + path.getPath() 
+					+ "\\1_backup.bat\"");
 			p.waitFor();
-			p = runtime.exec("cmd /c \"" + path.getPath() + "\\2_createBD.bat\"");
+			p = runtime.exec("cmd /c \"" + path.getPath()
+					+ "\\2_createBD.bat\"");
 			p.waitFor();
-			p = runtime.exec("cmd /c \"" + path.getPath() + "\\3_restoreBD.bat\"");
+			p = runtime.exec("cmd /c \"" + path.getPath()
+					+ "\\3_restoreBD.bat\"");
 			p.waitFor();
 			closeDialog();
 			displayInfoMessageToUser("Atualizado com sucesso!");
