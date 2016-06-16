@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
@@ -33,9 +34,12 @@ public class RespostaResource {
 			output = new BufferedWriter(
 					new OutputStreamWriter(new FileOutputStream(caminho + "resposta_" + Calendar.getInstance().getTimeInMillis() + ".xml"), "UTF-8"));
 			xstream.toXML(resposta, output);
+			output.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -54,9 +58,12 @@ public class RespostaResource {
 			output = new BufferedWriter(new OutputStreamWriter(
 					new FileOutputStream(caminho + "respostas_" + Calendar.getInstance().getTimeInMillis() + ".xml"), "UTF-8"));
 			xstream.toXML(respostas, output);
+			output.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -72,16 +79,23 @@ public class RespostaResource {
 		try {
 			input = new BufferedReader(
 					new InputStreamReader(new FileInputStream(caminhoCompleto), "UTF-8"));
+			
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
+		
 		XStream xstream = new XStream();
 		xstream.setMode(XStream.ID_REFERENCES);
-
-		return (Resposta) xstream.fromXML(input);
+		Resposta resposta = (Resposta) xstream.fromXML(input);
+		try {
+			input.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return resposta;
 	}
 
 	/**
@@ -100,9 +114,17 @@ public class RespostaResource {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-
+		
 		XStream xstream = new XStream();
 		xstream.setMode(XStream.ID_REFERENCES);
-		return (List<Resposta>) xstream.fromXML(input);
+		
+		List<Resposta> respostas = (List<Resposta>) xstream.fromXML(input);
+		try {
+			input.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return respostas;
 	}
 }

@@ -33,6 +33,10 @@ public class ImportaXml {
 		}
 		
 		String currentPath = file.getPath().replace("\\" + file.getName(), "");
-		file.renameTo(new File(currentPath + "\\importados", file.getName()));
+		if(file.renameTo(new File(currentPath + "\\importados", file.getName()))){
+			System.out.println("Importou: " + currentPath + "\\importados\\" + file.getName());
+		}else{
+			System.out.println("NÃO Importou: " + currentPath + "\\importados\\" + file.getName());
+		}
 	}
 }
