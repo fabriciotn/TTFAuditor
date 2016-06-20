@@ -500,8 +500,6 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			return false;
 		}
 
-		System.out.println("Numero de arquivos no diretorio : " + fList.length);
-
 		for (int i = 0; i < fList.length; i++) {
 			if (fList[i].isFile()) {
 				if (fList[i].getName().contains("estabelecimento"))
