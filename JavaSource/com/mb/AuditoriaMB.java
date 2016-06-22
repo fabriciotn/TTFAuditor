@@ -473,12 +473,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		String caminho = diretorio.getPath() + "/";
 		ExportaXml xml = new ExportaXml(caminho);
 		xml.exporta(auditoria);
-
-		enviaDiretorioParaOServidor(diretorio);
-	}
-
-	private void enviaDiretorioParaOServidor(File diretorio) {
-
+		
+		copiaArquivosParaServidor(diretorio.getPath());
 	}
 
 	private boolean leArquivosXml() {
@@ -528,7 +524,6 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 	public String enviaDadosParaOServidor() {
 		geraArquivosXml();
-		copiaParaOServidor();
 
 		closeDialog();
 		displayInfoMessageToUser("Auditoria exportada com sucesso!");
@@ -536,8 +531,27 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return "/restrito/home.xhtml";
 	}
 
-	private void copiaParaOServidor() {
-
+	public void copiaArquivosParaServidor(String caminhoOrigem){
+		File origem = new File(caminhoOrigem);
+		File destino = new File("\\\\200.198.51.90\\teste\\" + origem.getName());
+		if(!destino.exists())
+			destino.mkdirs();
+			
+		String comando = "xcopy \"" + caminhoOrigem + "\" "+ destino.getPath() + " /Y /S /E";
+		System.out.println("Executando: " + comando);
+		
+		Runtime runtime = Runtime.getRuntime();
+		try {
+			Process p = runtime.exec(comando);
+			p.waitFor();
+			p.destroy();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("fim");
 	}
 
 	public String importaDoServidorParaLocal() {
