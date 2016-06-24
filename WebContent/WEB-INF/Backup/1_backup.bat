@@ -3,7 +3,7 @@ IF NOT EXIST "C:\TTFAuditorBackup" (
 )
 cd\
 cd "C:\Program Files\MySQL\MySQL Server 5.7\bin"
-mysqldump --add-drop-database --add-drop-table -h 10.20.8.209 --port 3306 -u integra --password=root -B auditoria_db -r "C:\TTFAuditorBackup\backup.sql"
+mysqldump --add-drop-database --add-drop-table -h 10.12.175.208 --port 3306 -u integra --password=root -B auditoria_db -r "C:\TTFAuditorBackup\backup.sql"
 
 net stop MySQL57
 net start MySQL57

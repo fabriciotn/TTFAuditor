@@ -533,7 +533,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 	public void copiaArquivosParaServidor(String caminhoOrigem){
 		File origem = new File(caminhoOrigem);
-		File destino = new File("\\\\200.198.51.90\\teste\\" + origem.getName());
+		File destino = new File("\\\\10.12.175.208\\IntegracaoAuditoria\\" + origem.getName());
 		if(!destino.exists())
 			destino.mkdirs();
 			
@@ -552,6 +552,34 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		}
 		
 		System.out.println("fim");
+		moveArquivo(origem);
+	}
+	
+	
+	public void moveArquivo(File file){
+		String fullPath = file.getAbsolutePath().replace(file.getName(), "") + "\\exportados";
+		File newDir = new File(fullPath);
+		if(!(newDir.exists()) && newDir.mkdir()){
+			System.out.println("Criou pasta " + fullPath );
+		}
+		
+		String currentPath = file.getPath().replace("\\" + file.getName(), "");
+		File file2 = new File(currentPath + "\\exportados", file.getName());
+		if(file.renameTo(file2)){
+			System.out.println("Importou: " + currentPath + "\\exportados\\" + file.getName());
+		}else{
+			System.out.println("NÃO Importou: " + currentPath + "\\exportados\\" + file.getName());
+			File[] listFiles = file.listFiles();
+			for (File arquivo : listFiles) {
+				if(arquivo.renameTo(new File(file2+"\\"+arquivo.getName()))){
+					System.out.println("Importou: " + file2+"\\"+arquivo.getName());
+				}else{
+					System.out.println("NÃO Importou: " + file2+"\\"+arquivo.getName());
+				}
+			}
+			
+			file.delete();
+		}
 	}
 
 	public String importaDoServidorParaLocal() {
