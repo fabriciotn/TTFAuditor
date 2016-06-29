@@ -27,7 +27,7 @@ public class AuditoriaDAO extends GenericDAO<Auditoria> {
 			      "SELECT a "+
 			      "FROM Auditoria a "+
 			      "WHERE a.offLine=1 "+
-			      "AND a.dataDaVerificacao >= sysdate()", 
+			      "AND a.dataDaVerificacao >= DATE_FORMAT(sysdate(),'%Y-%m-%d')", 
 			      Auditoria.class);
 		List<Auditoria> results = typedQuery.getResultList();
 		return results;

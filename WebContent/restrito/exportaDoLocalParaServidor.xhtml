@@ -20,7 +20,7 @@
 					style="margin-bottom:20px">
 					<h:panelGrid columns="1" style="text-align:left">
 						<p:dataTable id="tbl" var="auditoria"
-							value="#{auditoriaMB.allAuditoriasOff}"
+							value="#{auditoriaMB.allAuditorias}"
 							paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
 							paginator="true" rows="10" style="margin-bottom:20px">
 
@@ -78,8 +78,7 @@
 							</p:column>
 
 
-							<p:column style="text-align: center; width:5em;"
-								rendered="#{userMB.usuarioLogado.admin}">
+							<p:column style="text-align: center; width:5em;">
 								<f:facet name="header">
 									<h:outputText value="EXPORTAR" />
 								</f:facet>
