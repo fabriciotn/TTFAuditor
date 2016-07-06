@@ -74,6 +74,19 @@
 										itemLabel="#{role.label}" itemValue="#{role}" />
 								</p:selectOneMenu>
 
+								<h:outputText value="Unidade: " />
+								<p:selectOneMenu id="unidade"
+									value="#{userMB.user.unidade}"
+									required="false"
+									requiredMessage="O campo Unidade é obrigatório!"
+									converter="unidadeConverter" style="width:13em" filter="true"
+									filterMatchMode="startsWith">
+									<f:selectItem itemLabel="--- Selecione ---" itemValue="#{null}"
+										noSelectionOption="true" />
+									<f:selectItems value="#{unidadeMB.allUnidades}" var="unidade"
+										itemLabel="#{unidade.sigla}" itemValue="#{unidade}" />
+								</p:selectOneMenu>
+
 								<h:outputText value="Status: " />
 								<p:inputSwitch value="#{userMB.user.ativo}" />
 							</h:panelGrid>

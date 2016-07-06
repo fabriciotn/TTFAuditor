@@ -91,6 +91,9 @@ public class UserFacade implements Serializable {
 	
 			if (user.getRole() != null)
 				userFind.setRole(user.getRole());
+			
+			if (user.getUnidade() != null)
+				userFind.setUnidade(user.getUnidade());
 	
 			if (user.getUltimoAcesso() != null)
 				userFind.setUltimoAcesso(user.getUltimoAcesso());

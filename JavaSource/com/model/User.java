@@ -19,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -72,6 +73,9 @@ public class User implements Serializable {
 	@OrderBy(value = "id ASC")
 	@XmlTransient
 	private Set<Questionario> questionarios;
+	
+	@OneToOne
+	private Unidade unidade;
 	
 	/*
 	 * Campos para gerenciar as permissões
@@ -207,6 +211,13 @@ public class User implements Serializable {
 	public void setMenuAuditoriaOffImportar(boolean menuAuditoriaOffImportar) {
 		this.menuAuditoriaOffImportar = menuAuditoriaOffImportar;
 	}
+	public Unidade getUnidade() {
+		return unidade;
+	}
+	public void setUnidade(Unidade unidade) {
+		this.unidade = unidade;
+	}
+	
 	/*
 	 * Fim dos getters e setters das permissões.
 	 */
