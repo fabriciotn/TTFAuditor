@@ -420,7 +420,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 				auditorias = getAuditoriaFacade().listAuditoriasOff();
 			else
 				auditorias = getAuditoriaFacade().listAll();
-		else {
+		else if(usuarioLogado.isAuditor()) {
 			auditorias = new ArrayList<Auditoria>();
 			List<Auditoria> todasAuditorias;
 
@@ -435,6 +435,8 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 						auditorias.add(auditoria);
 				}
 			}
+		}else if(usuarioLogado.isGestor()){
+			auditorias = getAuditoriaFacade().listAuditoriasPorUnidade(usuarioLogado.getUnidade());
 		}
 	}
 

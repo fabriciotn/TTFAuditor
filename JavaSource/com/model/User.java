@@ -299,6 +299,11 @@ public class User implements Serializable {
 	public boolean isAuditor() {
 		return Role.AUDITOR.equals(role);
 	}
+	
+	public boolean isGestor() {
+		return Role.GESTOR.equals(role);
+	}
+
 
 	public String getTelefone() {
 		return telefone;

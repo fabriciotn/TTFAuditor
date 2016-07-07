@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 
 import com.dao.AuditoriaDAO;
 import com.model.Auditoria;
+import com.model.Unidade;
 
 public class AuditoriaFacade implements Serializable {
 
@@ -85,6 +86,13 @@ public class AuditoriaFacade implements Serializable {
 	public List<Auditoria> findAuditoriasOff(){
 		auditoriaDAO.beginTransaction();
 		List<Auditoria> result = auditoriaDAO.listaAuditoriasOff();
+		auditoriaDAO.closeTransaction();
+		return result;
+	}
+
+	public List<Auditoria> listAuditoriasPorUnidade(Unidade unidade) {
+		auditoriaDAO.beginTransaction();
+		List<Auditoria> result = auditoriaDAO.listaAuditoriaslistaPorUnidade(unidade);
 		auditoriaDAO.closeTransaction();
 		return result;
 	}
