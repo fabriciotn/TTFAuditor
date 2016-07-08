@@ -49,13 +49,11 @@
 
 				<p:columnGroup>
 					<h:form>
-						<h:outputText value="Instituição: "
-							style="font-size:1em; font-weight:bold;" />
 						<p:commandLink action="cadastrarEstabelecimentos.xhtml"
 							ajax="false" target="blank">
 							<h:outputText
-								value="#{auditoriaMB.auditoria.estabelecimento.nomeFantasia}"
-								style="font-size:1em; font-weight:bold;" />
+								value="Instituição: #{auditoriaMB.auditoria.estabelecimento.nomeFantasia}"
+								style="padding:5px 5px 5px 10px;margin: 10px 0px;border: 1px solid;background-color: #FFBABA; color:#D8000C; white-space:pre-wrap; word-wrap:break-word; font-size:1.2em; font-weight:bold;"/>
 							<f:param name="estabelecimento_id"
 								value="#{auditoriaMB.auditoria.estabelecimento.id}" />
 						</p:commandLink>
