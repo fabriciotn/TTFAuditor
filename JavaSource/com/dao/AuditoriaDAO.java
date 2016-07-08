@@ -38,7 +38,7 @@ public class AuditoriaDAO extends GenericDAO<Auditoria> {
 		TypedQuery<Auditoria> typedQuery = getEm().createQuery(
 			      "SELECT a "+
 			      "FROM Auditoria a "+
-			      "WHERE a.estabelecimento in(SELECT e FROM Estabelecimento WHERE Unidade = :unidade)", 
+			      "WHERE a.estabelecimento in(SELECT e.id FROM Estabelecimento e WHERE e.unidade = :unidade)", 
 			      Auditoria.class);
 		typedQuery.setParameter("unidade", unidade);
 		List<Auditoria> results = typedQuery.getResultList();

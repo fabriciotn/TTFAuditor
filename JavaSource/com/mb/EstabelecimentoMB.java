@@ -155,7 +155,11 @@ public class EstabelecimentoMB extends AbstractMB implements Serializable {
 	}
 
 	private void loadEstabelecimentos() {
-		estabelecimentos = getEstabelecimentoFacade().listAll();
+		if(usuarioLogado.isGestor()){
+			estabelecimentos = getEstabelecimentoFacade().listaEstabelecimentoPorUnidade(usuarioLogado.getUnidade());
+		}else{
+			estabelecimentos = getEstabelecimentoFacade().listAll();
+		}
 	}
 
 	public void resetEstabelecimento() {

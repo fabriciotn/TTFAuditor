@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 
 import com.dao.EstabelecimentoDAO;
 import com.model.Estabelecimento;
+import com.model.Unidade;
 
 public class EstabelecimentoFacade implements Serializable {
 
@@ -91,6 +92,13 @@ public class EstabelecimentoFacade implements Serializable {
 	public List<Estabelecimento> listAll() {
 		estabelecimentoDAO.beginTransaction();
 		List<Estabelecimento> result = estabelecimentoDAO.findAllAsc();
+		estabelecimentoDAO.closeTransaction();
+		return result;
+	}
+	
+	public List<Estabelecimento> listaEstabelecimentoPorUnidade(Unidade unidade) {
+		estabelecimentoDAO.beginTransaction();
+		List<Estabelecimento> result = estabelecimentoDAO.listaEstabelecimentoPorUnidade(unidade);
 		estabelecimentoDAO.closeTransaction();
 		return result;
 	}
