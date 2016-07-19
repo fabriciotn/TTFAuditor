@@ -79,7 +79,7 @@
 
 
 							<p:column style="text-align: center; width:5em;"
-								rendered="#{userMB.usuarioLogado.admin}">
+								rendered="#{!userMB.usuarioLogado.auditor}">
 								<f:facet name="header">
 									<h:outputText value="IMPORTAR" />
 								</f:facet>
