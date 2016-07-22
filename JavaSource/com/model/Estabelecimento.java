@@ -1,6 +1,8 @@
 package com.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -74,6 +77,9 @@ public class Estabelecimento implements Serializable{
 	private boolean bercario;
 	@OneToOne
 	private Unidade unidade;
+	
+	@Transient
+	private List<String> camposNaoPreenchidos;
 	
 	public int getId() {
 		return id;
@@ -357,6 +363,109 @@ public class Estabelecimento implements Serializable{
 	public void setProvedorDoEstab(String provedorDoEstab) {
 		this.provedorDoEstab = provedorDoEstab;
 	}
+	
+	public List<String> getCamposNaoPreenchidos() {
+		camposNaoPreenchidos = new ArrayList<String>();
+		
+		if(cnpj == null || cnpj.isEmpty())
+			camposNaoPreenchidos.add("CNPJ");
+		
+		if(razaoSocial == null || razaoSocial.isEmpty())
+			camposNaoPreenchidos.add("Razão Social");
+		
+		if(nomeFantasia == null || nomeFantasia.isEmpty())
+			camposNaoPreenchidos.add("Nome Fantasia");
+		
+		if(cnes == null || cnes.isEmpty())
+			camposNaoPreenchidos.add("CNES");
+		
+		if(endereco == null || endereco.isEmpty())
+			camposNaoPreenchidos.add("Endereço");
+		
+		if(complementoEndereco == null || complementoEndereco.isEmpty())
+			camposNaoPreenchidos.add("Complemento do Endereço");
+		
+		if(cidade == null || cidade.isEmpty())
+			camposNaoPreenchidos.add("Cidade");
+		
+		if(uf == null || uf.isEmpty())
+			camposNaoPreenchidos.add("UF");
+		
+		if(cep == null || cep.isEmpty())
+			camposNaoPreenchidos.add("CEP");
+		
+		if(telefone1 == null || telefone1.isEmpty())
+			camposNaoPreenchidos.add("Telefone 1");
+		
+		if(telefone2 == null || telefone2.isEmpty())
+			camposNaoPreenchidos.add("Telefone 2");
+		
+		if(telefone3 == null || telefone3.isEmpty())
+			camposNaoPreenchidos.add("Telefone 3");
+		
+		if(telefone4 == null || telefone4.isEmpty())
+			camposNaoPreenchidos.add("Telefone 4");
+		
+		if(site == null || site.isEmpty())
+			camposNaoPreenchidos.add("Site");
+		
+		if(email == null || email.isEmpty())
+			camposNaoPreenchidos.add("E-mail");
+		
+		if(nomeRtAgenciaTransfusional == null || nomeRtAgenciaTransfusional.isEmpty())
+			camposNaoPreenchidos.add("Nome do RT da Agencia Transfusional");
+		
+		if(CrmRtAgenciaTransfusional == null || CrmRtAgenciaTransfusional.isEmpty())
+			camposNaoPreenchidos.add("CRM do RT da Agencia Transfusional");
+		
+		if(nomeResponsavelAT == null || nomeResponsavelAT.isEmpty())
+			camposNaoPreenchidos.add("Nome do Responsavel pela AT");
+		
+		if(diretorTecnico == null || diretorTecnico.isEmpty())
+			camposNaoPreenchidos.add("Diretor Tecnico");
+		
+		if(diretorClinico == null || diretorClinico.isEmpty())
+			camposNaoPreenchidos.add("Diretor Clinico");
+		
+		if(diretorOuGerenteAdm == null || diretorOuGerenteAdm.isEmpty())
+			camposNaoPreenchidos.add("Diretor ou Gerente ADM");
+		
+		if(provedorDoEstab == null || provedorDoEstab.isEmpty())
+			camposNaoPreenchidos.add("Provedor do Estabelecimento");
+		
+		if(cargoResponsavelAT == null || cargoResponsavelAT.isEmpty())
+			camposNaoPreenchidos.add("Cargo do responsavel pela AT");
+		
+		if(tipoServico == null || tipoServico.isEmpty())
+			camposNaoPreenchidos.add("Tipo do Serviço");
+		
+		if(observacao == null || observacao.isEmpty())
+			camposNaoPreenchidos.add("Observação");
+		
+		if(horarioDeFuncionamento == null || horarioDeFuncionamento.isEmpty())
+			camposNaoPreenchidos.add("Horário de funcionamento");
+		
+		if(numeroDeFuncionarios == 0)
+			camposNaoPreenchidos.add("Número de Funcionários");
+		
+		if(mediaDeTransfusoes == 0)
+			camposNaoPreenchidos.add("Media de Transfusões");
+		
+		if(mediaDeReacoesImediatas == 0)
+			camposNaoPreenchidos.add("Media de Reações Imediatas");
+		
+		if(mediaCirurgiaGrandePorte == 0)
+			camposNaoPreenchidos.add("Media de cirurgia de grande porte");
+		
+		if(numeroLeitosCti == 0)
+			camposNaoPreenchidos.add("Número de leitos no cti");
+		
+		if(numeroDeLeitos == 0)
+			camposNaoPreenchidos.add("Número de leitos");
+		
+		return camposNaoPreenchidos;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
