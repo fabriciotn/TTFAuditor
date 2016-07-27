@@ -42,3 +42,20 @@ Arquivos para serem alterados no Deploy:
 	
 	5 - BAT 1_backup.bat
 		Corrigir o caminho do servidor: 10.14.124.14
+		
+##########################################
+Se precisar reinstalar o TOMCAT. 
+Mudar a configuração do arquivo server.xml para:
+	<Connector compressableMimeType="text/html,text/xml,text/css,text/javascript, application/x-javascript,application/javascript"
+		compression="on"
+		compressionMinSize="128"
+		connectionTimeout="20000"
+		noCompressionUserAgents="gozilla, traviata"
+		port="8080"
+		redirectPort="8443" protocol="HTTP/1.1" />
+
+No monitor do tomcat, aba Java, mudar os parâmetros:
+	Initial memory pool: para 512
+	Maximum memory pool: para 1024
+	
+Criar pasta IntegracaoAuditoria dentro do WEB-INF, compartilhar e dar permissão para todos.
