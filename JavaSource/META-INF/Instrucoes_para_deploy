@@ -20,6 +20,8 @@ Arquivos para serem alterados no Deploy:
 	5 - BAT 1_backup.bat
 		Corrigir o caminho do servidor: 10.14.124.14
 		
+	6 - Se não existir, criar usuário user: integra pass: root no MySql do servidor, com permissão de fazer backup apenas
+		
 		
 ###### COMPILAR PARA LOCAL (OFF-LINE) ######
 	1 - web.xml

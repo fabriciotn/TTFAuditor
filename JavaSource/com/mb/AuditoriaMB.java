@@ -535,7 +535,7 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 	public void copiaArquivosParaServidor(String caminhoOrigem){
 		File origem = new File(caminhoOrigem);
-		File destino = new File("\\\\10.12.175.208\\IntegracaoAuditoria\\" + origem.getName());
+		File destino = new File("\\\\10.14.124.14\\IntegracaoAuditoria\\" + origem.getName());
 		if(!destino.exists())
 			destino.mkdirs();
 			
