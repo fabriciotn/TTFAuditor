@@ -10,6 +10,8 @@
 		<p:growl id="messages" />
 
 		<img src="images/logo.png" width="150px" border="0" />
+		<h:outputText value="Módulo OFF-LINE" rendered="#{userMB.offLine}"
+			style="font-size: 1.2em; color: red; font-weight:bold;"/>
 
 		<p:menubar>
 			<p:menuitem value="#{msg.inicio}" outcome="home.xhtml"
