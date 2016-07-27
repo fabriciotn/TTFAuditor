@@ -14,7 +14,7 @@ Arquivos para serem alterados no Deploy:
 		Alterar a linha de senha do BD de produção; 
 		
 	4 - AuditoriaMB.java
-		Corrigir o método copiaArquivosParaServidor(...) mudando o caminho do banco (servidor) para o 10.14.124.14
+		Corrigir o método copiaArquivosParaServidor(...) mudando o caminho do servidor para o 200.198.51.90
 		OBS.: Lembrar de compartilhar a pasta IntegracaoAuditoria dentro do servidor
 	
 	5 - BAT 1_backup.bat
@@ -37,7 +37,7 @@ Arquivos para serem alterados no Deploy:
 		Alterar a linha de senha do BD local: root; 
 		
 	4 - AuditoriaMB.java
-		Corrigir o método copiaArquivosParaServidor(...) mudando o caminho do banco (servidor) para o 10.14.124.14
+		Corrigir o método copiaArquivosParaServidor(...) mudando o caminho do servidor para o 200.198.51.90
 		OBS.: Lembrar de compartilhar a pasta IntegracaoAuditoria dentro do servidor
 	
 	5 - BAT 1_backup.bat
