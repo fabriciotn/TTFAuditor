@@ -436,7 +436,10 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 				}
 			}
 		}else if(usuarioLogado.isGestor()){
-			auditorias = getAuditoriaFacade().listAuditoriasPorUnidade(usuarioLogado.getUnidade());
+			if(isOffLine())
+				auditorias = getAuditoriaFacade().listAuditoriasOffPorUnidade(usuarioLogado.getUnidade());
+			else
+				auditorias = getAuditoriaFacade().listAuditoriasPorUnidade(usuarioLogado.getUnidade());
 		}
 	}
 
@@ -534,17 +537,42 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	}
 
 	public void copiaArquivosParaServidor(String caminhoOrigem){
-		File origem = new File(caminhoOrigem);
-		File destino = new File("\\\\200.198.51.90\\IntegracaoAuditoria\\" + origem.getName());
-		if(!destino.exists())
-			destino.mkdirs();
+		
+		String comando1 = "NET USE J: /DELETE";
+		String comando2 = "NET USE J: \\\\200.198.51.90\\IntegracaoAuditoria /USER:hemominas\\sistemas \"H&m0$i$@2011\"";
+		Runtime runtime1 = Runtime.getRuntime();
+		try {
+			Process p = runtime1.exec(comando1);
+			p.waitFor();
+			p.destroy();
 			
+			p = runtime1.exec(comando2);
+			p.waitFor();
+			p.destroy();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		File origem = new File(caminhoOrigem);
+		File destino = new File("J:\\" + origem.getName());
+		if(!destino.exists())
+			if(destino.mkdirs())
+				System.out.println("Caminho criado!");
+			else
+				System.out.println("Erro ao criar caminho!");
+		
 		String comando = "xcopy \"" + caminhoOrigem + "\" "+ destino.getPath() + " /Y /S /E";
 		System.out.println("Executando: " + comando);
 		
 		Runtime runtime = Runtime.getRuntime();
 		try {
 			Process p = runtime.exec(comando);
+			p.waitFor();
+			p.destroy();
+			
+			p = runtime1.exec(comando1);
 			p.waitFor();
 			p.destroy();
 		} catch (IOException e) {

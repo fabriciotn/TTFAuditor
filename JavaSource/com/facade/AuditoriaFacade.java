@@ -97,4 +97,10 @@ public class AuditoriaFacade implements Serializable {
 		return result;
 	}
 
+	public List<Auditoria> listAuditoriasOffPorUnidade(Unidade unidade) {
+		auditoriaDAO.beginTransaction();
+		List<Auditoria> result = auditoriaDAO.listaAuditoriasOfflistaPorUnidade(unidade);
+		auditoriaDAO.closeTransaction();
+		return result;
+	}
 }

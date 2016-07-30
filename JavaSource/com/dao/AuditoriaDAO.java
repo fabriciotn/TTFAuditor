@@ -44,4 +44,16 @@ public class AuditoriaDAO extends GenericDAO<Auditoria> {
 		List<Auditoria> results = typedQuery.getResultList();
 		return results;
 	}
+
+	public List<Auditoria> listaAuditoriasOfflistaPorUnidade(Unidade unidade) {
+		TypedQuery<Auditoria> typedQuery = getEm().createQuery(
+			      "SELECT a "+
+			      "FROM Auditoria a "+
+			      "WHERE a.estabelecimento in(SELECT e.id FROM Estabelecimento e WHERE e.unidade = :unidade) " +
+			      "AND a.offLine = 1", 
+			      Auditoria.class);
+		typedQuery.setParameter("unidade", unidade);
+		List<Auditoria> results = typedQuery.getResultList();
+		return results;
+	}
 }
