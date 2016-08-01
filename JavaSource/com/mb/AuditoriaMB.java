@@ -538,21 +538,14 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 	public void copiaArquivosParaServidor(String caminhoOrigem){
 		
-		String comando1 = "NET USE J: /DELETE";
-		String comando2 = "NET USE J: \\\\200.198.51.90\\IntegracaoAuditoria /USER:hemominas\\sistemas \"H&m0$i$@2011\"";
-		Runtime runtime1 = Runtime.getRuntime();
-		try {
-			Process p = runtime1.exec(comando1);
-			p.waitFor();
-			p.destroy();
-			
-			p = runtime1.exec(comando2);
-			p.waitFor();
-			p.destroy();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		String deletaMapeamento = "NET USE J: /DELETE /YES";
+		String mapeiaJSemUsuarioDeRede = "NET USE J: \\\\200.198.51.90\\IntegracaoAuditoria";// /USER:hemominas\\sistemas \"H&m0$i$@2011\"";
+		String mapeiaJComUsuarioDeRede = "NET USE J: \\\\200.198.51.90\\IntegracaoAuditoria /USER:hemominas\\sistemas \"H&m0$i$@2011\"";
+		
+		executaComandoDOS(deletaMapeamento);
+		if(executaComandoDOS(mapeiaJComUsuarioDeRede) != 0){
+			if(executaComandoDOS(mapeiaJSemUsuarioDeRede) != 0)
+				throw new RuntimeException("Problema ao mapear a unidade de rede no servidor!");
 		}
 		
 		File origem = new File(caminhoOrigem);
@@ -561,25 +554,11 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			if(destino.mkdirs())
 				System.out.println("Caminho criado!");
 			else
-				System.out.println("Erro ao criar caminho!");
+				throw new RuntimeException("Problema ao criar o caminho no servidor!");
 		
-		String comando = "xcopy \"" + caminhoOrigem + "\" "+ destino.getPath() + " /Y /S /E";
-		System.out.println("Executando: " + comando);
-		
-		Runtime runtime = Runtime.getRuntime();
-		try {
-			Process p = runtime.exec(comando);
-			p.waitFor();
-			p.destroy();
-			
-			p = runtime1.exec(comando1);
-			p.waitFor();
-			p.destroy();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		String copiaArquivosParaServidor = "xcopy \"" + caminhoOrigem + "\" "+ destino.getPath() + " /Y /S /E";
+		executaComandoDOS(copiaArquivosParaServidor);
+		executaComandoDOS(deletaMapeamento);
 		
 		System.out.println("fim");
 		moveArquivo(origem);
@@ -650,5 +629,26 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		}
 
 		return "/restrito/home.xhtml";
+	}
+	
+	private int executaComandoDOS(String comando){
+		System.out.println("Executando comando: " + comando);
+		
+		Runtime runtime = Runtime.getRuntime();
+		int retorno = -1;
+		try {
+			Process p = runtime.exec(comando);
+			retorno = p.waitFor();
+			p.destroy();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
+		if(retorno != 0)
+			System.out.println("Erro a execução do comando acima!");
+		
+		return retorno;
 	}
 }
