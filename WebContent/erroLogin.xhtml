@@ -1,12 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<ui:composition template="/WEB-INF/templates/template.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
 
-	<ui:define name="conteudo">
+<f:loadBundle basename="messages" var="msg" />
+<h:head>
+	<title>#{msg.tituloPagina}</title>
+	<link rel="icon" href="images/ttf.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="images/ttf.ico" type="image/x-icon" />
+</h:head>
+
+<h:body style="font-family: arial; margin: 0;">
+		<ui:insert name="menu">
+		</ui:insert>
+
+		<br />
+
+		<f:loadBundle basename="messages" var="msg" />
 		<f:loadBundle basename="messages" var="msg" />
 		<center>
 			<div id="header" align="center">
@@ -20,6 +33,12 @@
 				</h:form>
 			</div>
 		</center>
-	</ui:define>
 
-</ui:composition>
+		<br />
+		<br />
+		<br />
+		<div id="footer"
+			style="text-align: center; background-color: #62470d; font-size: 0.8em; height: 1.5em; color: white; position: fixed; bottom: 0; width: 100%; margin: 0; padding-top: 0.8em">
+			#{msg.rodapePagina} - #{msg.versao}</div>
+</h:body>
+</html>
