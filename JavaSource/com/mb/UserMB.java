@@ -72,7 +72,7 @@ public class UserMB extends AbstractMB implements Serializable {
 	}
 
 	private void habilitaMenuPreparacao() {
-		if (!usuarioLogado.isMenuCadAuditorias() && !usuarioLogado.isMenuCadPerguntas() && !usuarioLogado.isMenuCadQuestionarios()) {
+		if (usuarioLogado != null && !usuarioLogado.isMenuCadAuditorias() && !usuarioLogado.isMenuCadPerguntas() && !usuarioLogado.isMenuCadQuestionarios()) {
 			menuPreparacao = false;
 		} else {
 			menuPreparacao = true;
@@ -80,7 +80,7 @@ public class UserMB extends AbstractMB implements Serializable {
 	}
 
 	private void habilitaMenuAuditorias() {
-		if (!usuarioLogado.isMenuAuditar() && !usuarioLogado.isMenuCadAuditorias() && !usuarioLogado.isMenuCadPerguntas()
+		if (usuarioLogado != null && !usuarioLogado.isMenuAuditar() && !usuarioLogado.isMenuCadAuditorias() && !usuarioLogado.isMenuCadPerguntas()
 				&& !usuarioLogado.isMenuCadQuestionarios()) {
 			menuAuditorias = false;
 		} else {
@@ -89,7 +89,7 @@ public class UserMB extends AbstractMB implements Serializable {
 	}
 
 	private void habilitaMenuCadastros() {
-		if (!usuarioLogado.isMenuCadUnidades() && !usuarioLogado.isMenuCadEstabelecimentos()) {
+		if (usuarioLogado != null && !usuarioLogado.isMenuCadUnidades() && !usuarioLogado.isMenuCadEstabelecimentos()) {
 			menuCadastro = false;
 		} else {
 			menuCadastro = true;
