@@ -25,6 +25,19 @@ public class AuditoriaFacade implements Serializable {
 		auditoriaDAO.save(auditoria);
 		auditoriaDAO.commitAndCloseTransaction();
 	}
+	
+	public void updateObservacaoAuditoria(Auditoria auditoria) {
+		auditoriaDAO.beginTransaction();
+		Auditoria persistedAuditoria = auditoriaDAO.find(auditoria.getId());
+		if(persistedAuditoria != null){
+			persistedAuditoria.setObservacoesGerais(auditoria.getObservacoesGerais());
+			persistedAuditoria.setUser(auditoria.getUser());
+		}else{
+			persistedAuditoria = auditoria;
+		}
+		auditoriaDAO.update(persistedAuditoria);
+		auditoriaDAO.commitAndCloseTransaction();
+	}
 
 	public void updateAuditoria(Auditoria auditoria) {
 		auditoriaDAO.beginTransaction();

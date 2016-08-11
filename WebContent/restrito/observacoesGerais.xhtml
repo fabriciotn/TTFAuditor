@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:loadBundle basename="messages" var="msg" />
+
+<ui:param
+	value="#{auditoriaMB.colocaAuditoriaMBNaSessao(request.getParameter('auditoria_id'))}"
+	name="auditoria" />
+
+<h:head>
+</h:head>
+
+<h:body style="font-family: arial; margin: 0;">
+	<center>
+		<h:form acceptcharset="ISO-8859-1" id="form1">
+			<p:panel id="basic"
+				header="OBSERVAÇÕES GERAIS - Cód: #{auditoria.codigo}">
+
+				<h:inputHidden value="#{auditoriaMB.auditoria.id}" />
+
+				<p:editor id="editor" widgetVar="editorWidget"
+					value="#{auditoriaMB.auditoria.observacoesGerais}" width="600"
+					height="380" />
+				<h:panelGrid columns="1" style="margin-top: 10px;">
+					<p:commandButton value="Enviar" icon="ui-icon-disk"
+						actionListener="#{auditoriaMB.updateObservacaoesAuditoria}"
+						oncomplete="javascript:window.parent.location.reload();">
+						<f:param name="auditoria_id" value="#{auditoria.id}" />
+					</p:commandButton>
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+	</center>
+</h:body>
+</html>

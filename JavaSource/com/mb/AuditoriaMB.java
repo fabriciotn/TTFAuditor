@@ -377,6 +377,22 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public void updateObservacaoesAuditoria() {
+		try {
+			auditoria.setUser(usuarioLogado);
+			getAuditoriaFacade().updateObservacaoAuditoria(auditoria);
+			closeDialog();
+			displayInfoMessageToUser("Atualizado com sucesso!");
+			loadAuditorias();
+			resetAuditoria();
+
+		} catch (Exception e) {
+			keepDialogOpen();
+			displayErrorMessageToUser("Ocorreu algum problema. Tente novamente!");
+			e.printStackTrace();
+		}
+	}
 
 	public void deleteAuditoria() {
 		try {
@@ -445,6 +461,13 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 
 	public void resetAuditoria() {
 		auditoria = new Auditoria();
+	}
+	
+	public Auditoria colocaAuditoriaMBNaSessao(int auditoria_id){
+		if(auditoria == null && auditoria_id != 0){
+			auditoria = getAuditoriaFacade().findAuditoria(auditoria_id);
+		}
+		return auditoria;
 	}
 
 	public Auditoria pesquisaAuditoria() {

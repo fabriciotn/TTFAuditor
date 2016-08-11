@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorioAuditoriaGeral" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7adbdca9-ad59-4558-b92d-4f18ba3d8086">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="65"/>
 	<parameter name="id_auditoria" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -18,7 +18,8 @@
 		<![CDATA[SELECT A.CODIGO,
  A.TIPO,
  A.DATADAVERIFICACAO,
- E.NOMEFANTASIA
+ E.NOMEFANTASIA,
+ A.OBSERVACOESGERAIS
 FROM AUDITORIA A,
  ESTABELECIMENTO E
 WHERE A.ID = $P{id_auditoria}
@@ -34,6 +35,9 @@ AND A.ESTABELECIMENTO_ID = E.ID]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="NOMEFANTASIA" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="OBSERVACOESGERAIS" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
@@ -189,6 +193,29 @@ AND A.ESTABELECIMENTO_ID = E.ID]]>
 			</textField>
 		</band>
 	</pageFooter>
+	<summary>
+		<band height="267">
+			<break>
+				<reportElement x="0" y="3" width="100" height="1" uuid="df65fddd-c6d3-46ff-886a-1c048e0fca7a"/>
+			</break>
+			<image>
+				<reportElement x="10" y="10" width="181" height="63" uuid="87bcb94b-3b24-41fa-82f2-a06c2d5a74dd"/>
+				<imageExpression><![CDATA[$P{caminho_imagem}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="254" y="17" width="339" height="40" uuid="f74a32fa-0ce2-4953-8d02-d46cba75f7d6"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VERIFICAÇÃO DE AGÊNCIA TRANSFUSIONAL E ASSISTÊNCIA HEMOTERÁPICA]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="9" y="90" width="787" height="177" uuid="1d1dfaf4-a99f-409b-8b61-a00b92d83f17"/>
+				<textElement markup="html"/>
+				<textFieldExpression><![CDATA[$F{OBSERVACOESGERAIS}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
 	<noData>
 		<band height="32">
 			<staticText>

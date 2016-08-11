@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -57,6 +58,10 @@ public class Auditoria implements Serializable{
 	joinColumns = @JoinColumn(name = "auditoria_id"), 
 	inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> auditores;
+	
+	@Lob
+	private String observacoesGerais;
+	
 	/*
 	 * Visita ou Revisita
 	 */
@@ -134,6 +139,14 @@ public class Auditoria implements Serializable{
 
 	public void setOffLine(boolean offLine) {
 		this.offLine = offLine;
+	}
+
+	public String getObservacoesGerais() {
+		return observacoesGerais;
+	}
+
+	public void setObservacoesGerais(String observacoesGerais) {
+		this.observacoesGerais = observacoesGerais;
 	}
 
 	@Override
