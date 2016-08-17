@@ -34,7 +34,7 @@
 				color:#4F8A10; white-space:pre-wrap; word-wrap:break-word; font-size:1.5em; font-weight:bold;"
 				rendered="#{auditoriaMB.quantidadeDePerguntasNaoRespondidas == 0}" />
 
-			<p:lightBox iframe="true" id="lb1" height="500px" widgetVar="lb1" style="float: right;">
+			<p:lightBox iframe="true" id="lb1" height="500px" widgetVar="lb1" style="float: right;" rendered="#{!userMB.offLine}">
 				<h:outputLink value="observacoesGerais.xhtml">
 					<p:graphicImage value="/images/observacoes.png" width="40em"/>
 					<h:outputText value="OBSERVAÇÕES GERAIS" style="padding:10px 10px 0px 0px; float:right;
