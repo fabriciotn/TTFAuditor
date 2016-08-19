@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="caracterizacaoSubReport" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="4a22c07f-7fbc-41d0-a38b-67126b5b8e97">
-	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="16"/>
 	<style name="table">
@@ -64,6 +64,7 @@
      Estabelecimento.`cirurgiaGrandePorte` AS Estabelecimento_cirurgiaGrandePorte,
      Estabelecimento.`cnes` AS Estabelecimento_cnes,
      Estabelecimento.`cnpj` AS Estabelecimento_cnpj,
+     Estabelecimento.`alvaraSanitario` AS Alvara_sanitario,
      Estabelecimento.`complementoEndereco` AS Estabelecimento_complementoEndereco,
      Estabelecimento.`cti` AS Estabelecimento_cti,
      Estabelecimento.`ctiNeoNatal` AS Estabelecimento_ctiNeoNatal,
@@ -111,6 +112,7 @@ WHERE
 	<field name="Estabelecimento_cirurgiaGrandePorte" class="java.lang.Boolean"/>
 	<field name="Estabelecimento_cnes" class="java.lang.String"/>
 	<field name="Estabelecimento_cnpj" class="java.lang.String"/>
+	<field name="Alvara_sanitario" class="java.lang.String"/>
 	<field name="Estabelecimento_complementoEndereco" class="java.lang.String"/>
 	<field name="Estabelecimento_cti" class="java.lang.Boolean"/>
 	<field name="Estabelecimento_ctiNeoNatal" class="java.lang.Boolean"/>
@@ -120,8 +122,8 @@ WHERE
 	<field name="Estabelecimento_horarioDeFuncionamento" class="java.lang.String"/>
 	<field name="Estabelecimento_maternidade" class="java.lang.Boolean"/>
 	<field name="Estabelecimento_mediaCirurgiaGrandePorte" class="java.lang.Integer"/>
-	<field name="Estabelecimento_mediaDeReacoesImediatas" class="java.lang.Integer"/>
-	<field name="Estabelecimento_mediaDeTransfusoes" class="java.lang.Integer"/>
+	<field name="Estabelecimento_mediaDeReacoesImediatas" class="java.lang.String"/>
+	<field name="Estabelecimento_mediaDeTransfusoes" class="java.lang.String"/>
 	<field name="Estabelecimento_nomeFantasia" class="java.lang.String"/>
 	<field name="Estabelecimento_nomeResponsavelAT" class="java.lang.String"/>
 	<field name="Estabelecimento_nomeRtAgenciaTransfusional" class="java.lang.String"/>
@@ -210,7 +212,7 @@ WHERE
 				<textFieldExpression><![CDATA[$F{Estabelecimento_cnpj} == null || $F{Estabelecimento_cnpj}.isEmpty() ? $F{Estabelecimento_cnpj} : $F{Estabelecimento_cnpj}.substring(0,2) + "." + $F{Estabelecimento_cnpj}.substring(2,5) + "." + $F{Estabelecimento_cnpj}.substring(5,8) + "/" + $F{Estabelecimento_cnpj}.substring(8,12) + "-" + $F{Estabelecimento_cnpj}.substring(12,14)]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement uuid="84bb1a47-5c39-4eab-ac90-300d3f089b0c" x="593" y="113" width="203" height="15"/>
+				<reportElement uuid="84bb1a47-5c39-4eab-ac90-300d3f089b0c" x="593" y="113" width="58" height="15"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{Estabelecimento_cnes}]]></textFieldExpression>
 			</textField>
@@ -637,6 +639,18 @@ WHERE
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="ca1ec4fa-8478-4b31-b028-8ca94fa89649" x="711" y="113" width="85" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Alvara_sanitario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="8f666e7b-11b4-490b-9c81-d09298676fa0" x="654" y="113" width="58" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Alvará San:]]></text>
+			</staticText>
 		</band>
 	</title>
 </jasperReport>
