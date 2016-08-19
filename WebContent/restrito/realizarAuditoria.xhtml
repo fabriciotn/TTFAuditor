@@ -74,12 +74,13 @@
 							value="#{auditoriaMB.auditoria.estabelecimento.camposNaoPreenchidos.size()}"
 							style="padding:3px;margin-left:-8px;vertical-align: 10px;
 									background-color: #CD0000; color:#FFFFFF; border-radius:100%;
-									word-wrap:break-word;font-size:0.8em;font-weight:bold;">
+									word-wrap:break-word;font-size:0.8em;font-weight:bold;"
+									rendered="#{auditoriaMB.auditoria.estabelecimento.camposNaoPreenchidos.size() != 0}">
 							<f:convertNumber minIntegerDigits="2" />
 						</h:outputText>
 						<p:tooltip for="alert"
 							value="Campos não preenchidos: #{auditoriaMB.auditoria.estabelecimento.camposNaoPreenchidos}"
-							style="color:#8B0000; word-wrap:break-word; font-size:0.9em;" />
+							style="color:#8B0000; word-wrap:break-word; font-size:0.9em;"/>
 					</h:form>
 				</p:columnGroup>
 

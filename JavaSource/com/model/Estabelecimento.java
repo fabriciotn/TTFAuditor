@@ -448,17 +448,8 @@ public class Estabelecimento implements Serializable{
 		if(numeroDeFuncionarios == 0)
 			camposNaoPreenchidos.add("Número de Funcionários");
 		
-		if(mediaDeTransfusoes == 0)
-			camposNaoPreenchidos.add("Media de Transfusões");
-		
 		if(mediaDeReacoesImediatas == 0)
 			camposNaoPreenchidos.add("Media de Reações Imediatas");
-		
-		if(mediaCirurgiaGrandePorte == 0)
-			camposNaoPreenchidos.add("Media de cirurgia de grande porte");
-		
-		if(numeroLeitosCti == 0)
-			camposNaoPreenchidos.add("Número de leitos no cti");
 		
 		if(numeroDeLeitos == 0)
 			camposNaoPreenchidos.add("Número de leitos");
