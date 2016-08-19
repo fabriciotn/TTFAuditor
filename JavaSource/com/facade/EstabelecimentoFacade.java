@@ -74,6 +74,7 @@ public class EstabelecimentoFacade implements Serializable {
 			persistedEstabelecimento.setPediatria(estabelecimento.isPediatria());
 			persistedEstabelecimento.setBercario(estabelecimento.isBercario());
 			persistedEstabelecimento.setObservacao(estabelecimento.getObservacao());
+			persistedEstabelecimento.setAlvaraSanitario(estabelecimento.getAlvaraSanitario());
 		}else{
 			persistedEstabelecimento = estabelecimento;
 		}

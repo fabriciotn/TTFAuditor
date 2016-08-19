@@ -161,6 +161,15 @@
 										size="40" maxlength="255">
 										<f:ajax event="blur" render="@this" />
 									</p:inputText>
+									
+									<h:outputText value="Alvará Sanitário: " />
+									<p:inputText
+										value="#{estabelecimentoMB.estabelecimento.alvaraSanitario}"
+										required="false"
+										requiredMessage="O campo Alvará Sanitário é obrigatório!" size="40"
+										maxlength="255" converter="toUpperCaseConverter">
+										<f:ajax event="blur" render="@this" />
+									</p:inputText>
 
 									<h:outputText value="N. de Leitos: " />
 									<p:spinner id="leitos"
@@ -286,14 +295,14 @@
 										min="0" max="999999" size="13" />
 
 									<h:outputText value="Média de transfusões (mês): " />
-									<p:spinner id="mediaTransfusoes"
+									<p:inputText id="mediaTransfusoes"
 										value="#{estabelecimentoMB.estabelecimento.mediaDeTransfusoes}"
-										min="0" max="999999" size="13" />
+										size="20" />
 
 									<h:outputText value="Média de reações imediatas (mês): " />
-									<p:spinner id="mediaReacoes"
+									<p:inputText id="mediaReacoes"
 										value="#{estabelecimentoMB.estabelecimento.mediaDeReacoesImediatas}"
-										min="0" max="999999" size="13" />
+										size="20" />
 								</h:panelGrid>
 							</p:tab>
 

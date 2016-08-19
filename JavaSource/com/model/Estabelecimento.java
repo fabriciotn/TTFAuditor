@@ -46,6 +46,7 @@ public class Estabelecimento implements Serializable{
 	private String telefone4;
 	private String site;
 	private String email;
+	private String alvaraSanitario;
 	private int numeroDeLeitos;
 	private String nomeRtAgenciaTransfusional;
 	private String CrmRtAgenciaTransfusional;
@@ -59,8 +60,8 @@ public class Estabelecimento implements Serializable{
 	private String observacao;
 	private String horarioDeFuncionamento;
 	private int numeroDeFuncionarios;
-	private int mediaDeTransfusoes;
-	private int mediaDeReacoesImediatas;
+	private String mediaDeTransfusoes;
+	private String mediaDeReacoesImediatas;
 	private boolean prontoAtendimento;
 	private boolean blocoCirurgico;
 	private boolean cirurgiaGrandePorte;
@@ -147,6 +148,12 @@ public class Estabelecimento implements Serializable{
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
+	public String getAlvaraSanitario() {
+		return alvaraSanitario;
+	}
+	public void setAlvaraSanitario(String alvaraSanitario) {
+		this.alvaraSanitario = alvaraSanitario;
+	}
 	public String getTelefone1() {
 		return telefone1;
 	}
@@ -231,16 +238,16 @@ public class Estabelecimento implements Serializable{
 	public void setNumeroDeFuncionarios(int numeroDeFuncionarios) {
 		this.numeroDeFuncionarios = numeroDeFuncionarios;
 	}
-	public int getMediaDeTransfusoes() {
+	public String getMediaDeTransfusoes() {
 		return mediaDeTransfusoes;
 	}
-	public void setMediaDeTransfusoes(int mediaDeTransfusoes) {
+	public void setMediaDeTransfusoes(String mediaDeTransfusoes) {
 		this.mediaDeTransfusoes = mediaDeTransfusoes;
 	}
-	public int getMediaDeReacoesImediatas() {
+	public String getMediaDeReacoesImediatas() {
 		return mediaDeReacoesImediatas;
 	}
-	public void setMediaDeReacoesImediatas(int mediaDeReacoesImediatas) {
+	public void setMediaDeReacoesImediatas(String mediaDeReacoesImediatas) {
 		this.mediaDeReacoesImediatas = mediaDeReacoesImediatas;
 	}
 	public boolean isProntoAtendimento() {
@@ -394,6 +401,9 @@ public class Estabelecimento implements Serializable{
 		if(cep == null || cep.isEmpty())
 			camposNaoPreenchidos.add("CEP");
 		
+		if(alvaraSanitario == null || alvaraSanitario.isEmpty())
+			camposNaoPreenchidos.add("Alvará Sanitário");
+		
 		if(telefone1 == null || telefone1.isEmpty())
 			camposNaoPreenchidos.add("Telefone 1");
 		
@@ -448,8 +458,11 @@ public class Estabelecimento implements Serializable{
 		if(numeroDeFuncionarios == 0)
 			camposNaoPreenchidos.add("Número de Funcionários");
 		
-		if(mediaDeReacoesImediatas == 0)
+		if(mediaDeReacoesImediatas == null || mediaDeReacoesImediatas.isEmpty())
 			camposNaoPreenchidos.add("Media de Reações Imediatas");
+		
+		if(mediaDeTransfusoes == null || mediaDeTransfusoes.isEmpty())
+			camposNaoPreenchidos.add("Media de Transfusões");
 		
 		if(numeroDeLeitos == 0)
 			camposNaoPreenchidos.add("Número de leitos");
