@@ -156,7 +156,10 @@ public class UserFacade implements Serializable {
 		ArrayList<String> addressList = new ArrayList<String>();
 		addressList.add(user.getEmail());
 		
-		new Email().enviaEmail("reset de senha", "nova senha: " + senha, addressList);
+		new Email().enviaEmail("Recuperação de senha - TTFAuditor", 
+				"Sua nova senha é: <b>" + senha + "</b> e deve ser alterada no primeiro acesso." +
+				"<br><br><br>###### ESTE E-MAIL É AUTOMÁTICO E NAO DEVE SER RESPONDIDO! ######"
+				, addressList);
 		
 		System.out.println("Senha alterada para " + senha);
 	}
