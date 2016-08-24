@@ -75,4 +75,10 @@ public class LoginMB extends AbstractMB implements Serializable {
 
 		return error;
 	}
+	
+	public String recuperaSenha(){
+		UserFacade userFacade = new UserFacade();
+		userFacade.resetaSenha(login);
+		return "/index.html";
+	}
 }

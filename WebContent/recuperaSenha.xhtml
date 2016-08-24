@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<f:loadBundle basename="messages" var="msg" />
+<h:head>
+	<title>#{msg.tituloPagina}</title>
+	<link rel="icon" href="images/ttf.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="images/ttf.ico" type="image/x-icon" />
+</h:head>
+
+<h:body style="font-family: arial; margin: 0;">
+	<ui:insert name="menu">
+	</ui:insert>
+
+	<br />
+	<br />
+	<br />
+	<center>
+		<br /> <br /> <img name="logo" src="images/logo.png" width="350px" />
+		<br /> <br />
+		<f:loadBundle basename="messages" var="msg" />
+		<p:panelGrid columns="2" style="text-align:center;">
+			<f:facet name="header">
+				#{msg.recuperaSenha}
+			</f:facet>
+			<br />
+			<h:form>
+				<p:growl id="messages" showDetail="true" />
+				<br />
+				<h:outputLabel for="login" value="#{msg.loginUserName}" />
+				<p:inputText id="login" value="#{loginMB.login}" required="true"
+					label="login">
+					<f:validateLength minimum="2" />
+					<p:clientValidator />
+				</p:inputText>
+				<br />
+				<br />
+				<p:commandButton value="Recuperar minha senha" ajax="false"
+					icon="ui-icon-check" action="#{loginMB.recuperaSenha}" />
+
+				<p:outputPanel deferred="true" style="text-align:center;">
+
+					<p><small>Atenção! Será enviado um e-mail para o endereço cadastrado
+						em seu perfil.</small></p>
+				</p:outputPanel>
+			</h:form>
+		</p:panelGrid>
+	</center>
+
+	<br />
+	<br />
+	<br />
+	<div id="footer"
+		style="text-align: center; background-color: #62470d; font-size: 0.8em; height: 1.5em; color: white; position: fixed; bottom: 0; width: 100%; margin: 0; padding-top: 0.8em">
+		#{msg.rodapePagina} - #{msg.versao}</div>
+</h:body>
+</html>

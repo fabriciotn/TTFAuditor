@@ -1,13 +1,16 @@
 package com.facade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import com.dao.UserDAO;
+import com.email.Email;
 import com.model.User;
 import com.util.ADAuthenticator;
 import com.util.Criptografia;
+import com.util.GeradorDeSenha;
 
 public class UserFacade implements Serializable {
 
@@ -136,5 +139,25 @@ public class UserFacade implements Serializable {
 
 		userDAO.update(userFind);
 		userDAO.commitAndCloseTransaction();
+	}
+
+	public void resetaSenha(String login) {
+		userDAO.beginTransaction();
+		User user = userDAO.findUserByLogin(login);
+		if(user == null){
+			throw new RuntimeException("Usuário não existe no sistema!");
+		}
+		
+		String senha = GeradorDeSenha.gera();
+		
+		user.setPasswordSemCriptografia(senha);
+		updateUsuario(user);
+		
+		ArrayList<String> addressList = new ArrayList<String>();
+		addressList.add(user.getEmail());
+		
+		new Email().enviaEmail("reset de senha", "nova senha: " + senha, addressList);
+		
+		System.out.println("Senha alterada para " + senha);
 	}
 }

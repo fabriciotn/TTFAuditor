@@ -18,12 +18,12 @@ import com.sun.mail.util.MailSSLSocketFactory;
 public class Email {
 	
 	//Configuração da conta de envio
-	private final String username = "gtc.sistemas";
-	private final String password = "hem0m@il";
-	private final String fromAddress = "gtc.sistemas@hemominas.mg.gov.br";
-	private final String fromName = "Gerenciador de tarefas - Hemominas";
-	private final String host = "mail.hemominas.mg.gov.br";
-	private final String port = "587";
+	private final String username = "recuperasenhas@ttfinformatica.com.br";
+	private final String password = "TTFAuditorADM";
+	private final String fromAddress = "recuperasenhas@ttfinformatica.com.br";
+	private final String fromName = "TTF Auditor - Recuperação de senha";
+	private final String host = "email-ssl.com.br";//"smtp.ttfinformatica.com.br";
+	private final String port = "465";
 	
 	
 	/**
@@ -47,7 +47,7 @@ public class Email {
 			e1.printStackTrace();
 		}
 		sf.setTrustAllHosts(true);
-		props.put("mail.smtp.ssl.enable", "false");
+		props.put("mail.smtp.ssl.enable", "true");
 		props.put("mail.smtp.ssl.socketFactory", sf);
 		props.put("mail.smtp.socketFactory.class", sf);
 
@@ -62,11 +62,8 @@ public class Email {
 			session.setDebug(true);
 			message.setFrom(new InternetAddress(fromAddress, fromName));
 
-			//envia para gtc.sistemas também. Os outros endereços estão em CCO
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(fromAddress));
-			
 			for(String email : addressList){
-				message.addRecipients(Message.RecipientType.BCC, InternetAddress.parse(email.toString()));
+				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email.toString()));
 			}
 			
 			message.setSubject(assunto);
