@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import javax.faces.bean.SessionScoped;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -59,6 +60,9 @@ public class Resposta implements Serializable{
 	private Auditoria auditoria;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataDaResposta;
+	
+	@Column(name="pergunta_original")
+	private int idDaPerguntaOriginal;
 
 	public Flag getTipoDeResposta() {
 		return tipoDeResposta;
@@ -154,6 +158,14 @@ public class Resposta implements Serializable{
 
 	public void setAuditoria(Auditoria auditoria) {
 		this.auditoria = auditoria;
+	}
+
+	public int getIdDaPerguntaOriginal() {
+		return idDaPerguntaOriginal;
+	}
+
+	public void setIdDaPerguntaOriginal(int idDaPerguntaOriginal) {
+		this.idDaPerguntaOriginal = idDaPerguntaOriginal;
 	}
 
 	@Override
