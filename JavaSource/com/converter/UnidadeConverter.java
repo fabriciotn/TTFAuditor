@@ -10,6 +10,11 @@ import javax.faces.convert.FacesConverter;
 import com.facade.UnidadeFacade;
 import com.model.Unidade;
 
+/**
+ * Classe responsável pela conversão as unidades.
+ * @author TTF Informática
+ *
+ */
 @FacesConverter(forClass = com.model.Unidade.class, value="unidadeConverter")
 public class UnidadeConverter implements Converter{
 

@@ -7,6 +7,11 @@ import javax.persistence.TypedQuery;
 import com.model.Auditoria;
 import com.model.Unidade;
 
+/**
+ * Classe de acesso ao BD - Auditoria
+ * @author TTF Informática
+ *
+ */
 public class AuditoriaDAO extends GenericDAO<Auditoria> {
 
 	private static final long serialVersionUID = 1L;
@@ -15,25 +20,35 @@ public class AuditoriaDAO extends GenericDAO<Auditoria> {
 		super(Auditoria.class);
 	}
 
+	/**
+	 * Método para deletar auditoria
+	 * @param auditoria
+	 */
 	public void delete(Auditoria auditoria) {
 		super.delete(auditoria.getId(), Auditoria.class);
 	}
 	
 
-	/*
-	 * PESQUISA AUDITORIAS OFFLINE QUE A DATA SEJA >= A DATA ATUAL
+	/**
+	 * Método para listar todas auditorias Off-line
+	 * @return List<Auditoria> listaDeAuditoriasOff
 	 */
 	public List<Auditoria> listaAuditoriasOff() {
 		TypedQuery<Auditoria> typedQuery = getEm().createQuery(
 			      "SELECT a "+
 			      "FROM Auditoria a "+
 			      "WHERE a.offLine=1 ORDER BY a.dataDaVerificacao desc",
-			      //+"AND a.dataDaVerificacao >= DATE_FORMAT(sysdate(),'%Y-%m-%d')", 
+			      //+"AND a.dataDaVerificacao >= DATE_FORMAT(sysdate(),'%Y-%m-%d')", //PESQUISA AUDITORIAS OFFLINE QUE A DATA SEJA >= A DATA ATUAL
 			      Auditoria.class);
 		List<Auditoria> results = typedQuery.getResultList();
 		return results;
 	}
 
+	/**
+	 * Método para listar auditorias por unidade
+	 * @param unidade
+	 * @return List<Auditoria> listaDeAuditoriasPorUnidade
+	 */
 	public List<Auditoria> listaAuditoriaslistaPorUnidade(Unidade unidade) {
 		TypedQuery<Auditoria> typedQuery = getEm().createQuery(
 			      "SELECT a "+
@@ -45,6 +60,11 @@ public class AuditoriaDAO extends GenericDAO<Auditoria> {
 		return results;
 	}
 
+	/**
+	 * Método para listar auditorias Off-line por unidade
+	 * @param unidade
+	 * @return List<Auditoria> listaDeAuditoriasOffPorUnidade
+	 */
 	public List<Auditoria> listaAuditoriasOfflistaPorUnidade(Unidade unidade) {
 		TypedQuery<Auditoria> typedQuery = getEm().createQuery(
 			      "SELECT a "+

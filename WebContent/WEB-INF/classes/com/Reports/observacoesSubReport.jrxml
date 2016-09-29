@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="indiceSubReport" pageWidth="802" pageHeight="555" orientation="Landscape" columnWidth="802" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="988640e0-45c9-4094-bceb-5c69268bd788">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="caminho_imagem" class="java.lang.String">
+		<defaultValueExpression><![CDATA["/Users/fabriciotn/Documents/workspace/TTFAuditor/WebContent/images/logoHemominas.png"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="id_auditoria" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="observacao" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+     auditoria.`id` AS auditoria_id,
+     auditoria.`codigo` AS auditoria_codigo,
+     auditoria.`dataDaVerificacao` AS auditoria_dataDaVerificacao,
+     auditoria.`tipo` AS auditoria_tipo,
+     auditoria.`estabelecimento_id` AS auditoria_estabelecimento_id,
+     auditoria.`user_id` AS auditoria_user_id,
+     estabelecimento.`nomeFantasia` AS estabelecimento_nomeFantasia,
+     estabelecimento.`razaoSocial` AS estabelecimento_razaoSocial,
+     estabelecimento.`unidade_id` AS estabelecimento_unidade_id,
+     unidade.`nome` AS unidade_nome
+FROM
+     `estabelecimento` estabelecimento INNER JOIN `auditoria` auditoria ON estabelecimento.`id` = auditoria.`estabelecimento_id`
+     INNER JOIN `unidade` unidade ON estabelecimento.`unidade_id` = unidade.`id`
+WHERE
+     auditoria.`id` = $P{id_auditoria}]]>
+	</queryString>
+	<field name="auditoria_id" class="java.lang.Integer"/>
+	<field name="auditoria_codigo" class="java.lang.String"/>
+	<field name="auditoria_dataDaVerificacao" class="java.sql.Timestamp"/>
+	<field name="auditoria_tipo" class="java.lang.String"/>
+	<field name="auditoria_estabelecimento_id" class="java.lang.Integer"/>
+	<field name="auditoria_user_id" class="java.lang.Integer"/>
+	<field name="estabelecimento_nomeFantasia" class="java.lang.String"/>
+	<field name="estabelecimento_razaoSocial" class="java.lang.String"/>
+	<field name="estabelecimento_unidade_id" class="java.lang.Integer"/>
+	<field name="unidade_nome" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="536" splitType="Stretch">
+			<image>
+				<reportElement x="10" y="12" width="181" height="63" uuid="d42084ee-798a-425e-8a09-9e05de5a47a8"/>
+				<imageExpression><![CDATA[$P{caminho_imagem}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="202" y="10" width="418" height="65" uuid="5bd345c8-f9f6-4a5e-8e35-2b8f040cd1bc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VERIFICAÇÃO DE AGÊNCIA TRANSFUSIONAL E ASSISTÊNCIA HEMOTERÁPICA]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="10" y="87" width="778" height="439" uuid="6fad154b-3966-44a8-a8dc-0fa8c50db66b"/>
+				<textElement markup="html"/>
+				<textFieldExpression><![CDATA[$P{observacao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

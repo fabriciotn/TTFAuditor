@@ -7,6 +7,11 @@ import javax.faces.convert.FacesConverter;
 
 import com.model.Role;
 
+/**
+ * Classe de conversão das permissões.
+ * @author TTF Informática
+ *
+ */
 @FacesConverter(forClass = com.model.Role.class, value="roleConverter")
 public class RoleConverter implements Converter {
 

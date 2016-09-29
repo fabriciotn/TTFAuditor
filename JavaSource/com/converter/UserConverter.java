@@ -10,6 +10,11 @@ import javax.faces.convert.FacesConverter;
 import com.facade.UserFacade;
 import com.model.User;
 
+/**
+ * Classe responsável pela conversão dos usuários.
+ * @author TTF Informática
+ *
+ */
 @FacesConverter(forClass = com.model.User.class, value="userConverter")
 public class UserConverter implements Converter{
 

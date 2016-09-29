@@ -5,6 +5,11 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+/**
+ * Classe responsável pelas conversões de letras minúsculas para maiúsculas.
+ * @author TTF Informática
+ *
+ */
 @FacesConverter("toUpperCaseConverter")
 public class ToUpperCaseConverter implements Converter {
 

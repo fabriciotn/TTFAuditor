@@ -10,6 +10,11 @@ import javax.faces.convert.FacesConverter;
 import com.facade.EstabelecimentoFacade;
 import com.model.Estabelecimento;
 
+/**
+ * Classe de conversão dos estabelecimentos.
+ * @author TTF Informática
+ *
+ */
 @FacesConverter(forClass = com.model.Estabelecimento.class, value="estabelecimentoConverter")
 public class EstabelecimetoConverter implements Converter{
 

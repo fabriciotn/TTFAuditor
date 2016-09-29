@@ -10,6 +10,11 @@ import javax.faces.convert.FacesConverter;
 import com.facade.AuditoriaFacade;
 import com.model.Auditoria;
 
+/**
+ * Classe de conversão de auditorias
+ * @author TTF Informática
+ *
+ */
 @FacesConverter(forClass = com.model.Auditoria.class, value="auditoriaConverter")
 public class AuditoriaConverter implements Converter{
 

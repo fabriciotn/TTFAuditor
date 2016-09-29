@@ -1,0 +1,61 @@
+Arquivos para serem alterados no Deploy:
+
+###### COMPILAR PARA SERVIDOR (ON-LINE) ######
+	1 - web.xml
+		Verificar o tema. Deve ser o papper-grinder
+		
+	2 - messages.properties
+		Verificar se o módulo está on Ex. (modulo=on e #modulo=off)
+		Inserir o servidor de banco correto: 10.14.124.14
+		Inserir a senha correta do banco de dados:
+		
+	3 - persistence.xml
+		Alterar a linha da URL do BD para o servidor correto: 10.14.124.14
+		Alterar a linha de senha do BD de produção; 
+		
+	4 - AuditoriaMB.java
+		Corrigir o método copiaArquivosParaServidor(...) mudando o caminho do servidor para o 200.198.51.90
+		OBS.: Lembrar de compartilhar a pasta IntegracaoAuditoria dentro do servidor
+	
+	5 - BAT 1_backup.bat
+		Corrigir o caminho do servidor: 10.14.124.14
+		
+	6 - Se não existir, criar usuário user: integra pass: root no MySql do servidor, com permissão de fazer backup apenas
+		
+		
+###### COMPILAR PARA LOCAL (OFF-LINE) ######
+	1 - web.xml
+		Verificar o tema. Deve ser o sunny (para ficar com visual diferente)
+		
+	2 - messages.properties
+		Verificar se o módulo está off Ex. (#modulo=on e modulo=off)
+		Inserir o servidor de banco local localhost
+		Inserir a senha correta do banco de dados: root
+		
+	3 - persistence.xml
+		Alterar a linha da URL do BD para o servidor local: localhost
+		Alterar a linha de senha do BD local: root; 
+		
+	4 - AuditoriaMB.java
+		Corrigir o método copiaArquivosParaServidor(...) mudando o caminho do servidor para o 200.198.51.90
+		OBS.: Lembrar de compartilhar a pasta IntegracaoAuditoria dentro do servidor
+	
+	5 - BAT 1_backup.bat
+		Corrigir o caminho do servidor: 10.14.124.14
+		
+##########################################
+Se precisar reinstalar o TOMCAT. 
+Mudar a configuração do arquivo server.xml para:
+	<Connector compressableMimeType="text/html,text/xml,text/css,text/javascript, application/x-javascript,application/javascript"
+		compression="on"
+		compressionMinSize="128"
+		connectionTimeout="20000"
+		noCompressionUserAgents="gozilla, traviata"
+		port="8080"
+		redirectPort="8443" protocol="HTTP/1.1" />
+
+No monitor do tomcat, aba Java, mudar os parâmetros:
+	Initial memory pool: para 512
+	Maximum memory pool: para 1024
+	
+Criar pasta IntegracaoAuditoria dentro do WEB-INF, compartilhar e dar permissão para todos.

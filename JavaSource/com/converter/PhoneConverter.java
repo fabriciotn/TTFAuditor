@@ -6,6 +6,11 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.swing.text.MaskFormatter;
 
+/**
+ * Classe para conversão dos números de telefone. Inclui as máscaras dos campos, de acordo com a quantidade de dígitos.
+ * @author TTF Informática
+ *
+ */
 @FacesConverter("phoneConverter")
 public class PhoneConverter implements Converter {
 

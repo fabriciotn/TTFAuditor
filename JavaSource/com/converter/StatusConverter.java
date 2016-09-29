@@ -7,6 +7,11 @@ import javax.faces.convert.FacesConverter;
 
 import com.model.Status;
 
+/**
+ * Classe de conversão dos Status.
+ * @author TTF Informática
+ *
+ */
 @FacesConverter(forClass = com.model.Status.class, value="statusConverter")
 public class StatusConverter implements Converter {
 

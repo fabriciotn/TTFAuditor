@@ -6,6 +6,11 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.swing.text.MaskFormatter;
 
+/**
+ * Classe de conversão do CNPJ. Inclui as máscaras do campo.
+ * @author TTF Informática
+ *
+ */
 @FacesConverter("cnpjConverter")
 public class CnpjConverter implements Converter{
 

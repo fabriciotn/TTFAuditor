@@ -10,6 +10,11 @@ import javax.faces.convert.FacesConverter;
 import com.facade.QuestionarioFacade;
 import com.model.Questionario;
 
+/**
+ * Classe de conversão dos questionários.
+ * @author TTF Informática
+ *
+ */
 @FacesConverter(forClass = com.model.Questionario.class, value="questionarioConverter")
 public class QuestionarioConverter implements Converter{
 
