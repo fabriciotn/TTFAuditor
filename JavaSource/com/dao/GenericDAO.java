@@ -15,6 +15,13 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+/**
+ * Classe abstrata para acesso ao banco de dados.
+ * Todas as classes DAO herdam desta classe genérica.
+ * @author TTF Informática
+ *
+ * @param <T>
+ */
 abstract class GenericDAO<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -25,6 +32,9 @@ abstract class GenericDAO<T> implements Serializable {
 
 	private Class<T> entityClass;
 
+	/**
+	 * Abre conexão com o Banco de Dados.
+	 */
 	public void beginTransaction() {
 		try {
 			em = emf.createEntityManager();
@@ -38,18 +48,30 @@ abstract class GenericDAO<T> implements Serializable {
 		return em;
 	}
 
+	/**
+	 * Realiza o commit
+	 */
 	public void commit() {
 		em.getTransaction().commit();
 	}
 
+	/**
+	 * Realiza o rollback
+	 */
 	public void rollback() {
 		em.getTransaction().rollback();
 	}
 
+	/**
+	 * Fecha a conexão
+	 */
 	public void closeTransaction() {
 		em.close();
 	}
 
+	/**
+	 * Realiza o commit e fecha a transação
+	 */
 	public void commitAndCloseTransaction() {
 		commit();
 		closeTransaction();
@@ -68,28 +90,58 @@ abstract class GenericDAO<T> implements Serializable {
 		this.entityClass = entityClass;
 	}
 
+	/**
+	 * Salva a entidade recebida via parâmetro
+	 * @param entity
+	 */
 	public void save(T entity) {
 		em.persist(entity);
 	}
 
+	/**
+	 * Exclui a entidade recebida via parâmetro, de acordo com o ID.
+	 * @param id
+	 * @param classe
+	 */
 	public void delete(Object id, Class<T> classe) {
 		T entityToBeRemoved = em.getReference(classe, id);
 		 
         em.remove(entityToBeRemoved);
 	}
 
+	/**
+	 * Realiza o update da entidade recebida via parâmetro.
+	 * @param entity
+	 * @return 
+	 */
 	public T update(T entity) {
 		return em.merge(entity);
 	}
 
+	/**
+	 * Realiza a busca de um registro de acordo com o ID.
+	 * @param entityID
+	 * @return registroBuscado
+	 */
 	public T find(int entityID) {
 		return em.find(entityClass, entityID);
 	}
 
+	/**
+	 * Realiza a busca de um registro de acordo com o ID.
+	 * @param entityID
+	 * @return registroBuscado
+	 */
 	public T findReferenceOnly(int entityID) {
 		return em.getReference(entityClass, entityID);
 	}
 
+	/**
+	 * Lista todos os registros da entidade
+	 * Ordenando de forma ascendente, de acordo com o campo passado via parâmetro
+	 * @param campo
+	 * @return List<T> ListaDeRegistros
+	 */
 	public List<T> findAllAsc(String campo) {
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityClass);
@@ -99,6 +151,11 @@ abstract class GenericDAO<T> implements Serializable {
 		return em.createQuery(select).getResultList();
 	}
 	
+	/**
+	 * Lista todos os registros da entidade
+	 * Ordenando de forma ascendente, de acordo com o ID
+	 * @return List<T> ListaDeRegistros
+	 */
 	public List<T> findAllAsc() {
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityClass);
@@ -108,6 +165,11 @@ abstract class GenericDAO<T> implements Serializable {
 		return em.createQuery(select).getResultList();
 	}
 	
+	/**
+	 * Lista todos os registros da entidade
+	 * Ordenando de forma descendente, de acordo com o ID
+	 * @return List<T> ListaDeRegistros
+	 */
 	public List<T> findAllDesc() {
 		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 		CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityClass);
@@ -117,9 +179,12 @@ abstract class GenericDAO<T> implements Serializable {
 		return em.createQuery(select).getResultList();
 	}
 	
-
-	// Using the unchecked because JPA does not have a
-	// query.getSingleResult()<T> method
+	/**
+	 * Using the unchecked because JPA does not have a query.getSingleResult()<T> method
+	 * @param namedQuery
+	 * @param parameters
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	protected T findOneResult(String namedQuery, Map<String, Object> parameters) {
 		T result = null;
@@ -150,8 +215,13 @@ abstract class GenericDAO<T> implements Serializable {
 		}
 	}
 	
-	public Query selectComQuery(String q){
-		Query query = em.createQuery(q);
+	/**
+	 * Método utilizado para realizar uma consulta SQL de acordo com a query recebia via parâmetro
+	 * @param sql
+	 * @return query
+	 */
+	public Query selectComQuery(String sql){
+		Query query = em.createQuery(sql);
 		return query;
 	}
 }

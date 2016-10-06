@@ -6,6 +6,11 @@ import javax.persistence.TypedQuery;
 
 import com.model.Resposta;
 
+/**
+ * Classe de acesso ao BD - Resposta
+ * @author TTF Informática
+ *
+ */
 public class RespostaDAO extends GenericDAO<Resposta> {
 
 	private static final long serialVersionUID = 1L;
@@ -19,7 +24,9 @@ public class RespostaDAO extends GenericDAO<Resposta> {
 	}
 	
 	/**
-	 * PESQUISA RESPOSTAS PELO ID DA AUDITORIA
+	 * Método para realizar a pesquisa de respostas de acordo com o ID da auditoria
+	 * @param auditoria_id
+	 * @return
 	 */
 	public List<Resposta> listaRespostasPorIdDaAuditoria(int auditoria_id) {
 		TypedQuery<Resposta> typedQuery = getEm().createQuery(
