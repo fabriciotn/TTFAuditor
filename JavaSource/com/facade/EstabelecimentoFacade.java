@@ -11,6 +11,11 @@ import com.dao.EstabelecimentoDAO;
 import com.model.Estabelecimento;
 import com.model.Unidade;
 
+/**
+ * Classe fachada para acesso ao banco de dados.
+ * @author TTF Informática
+ *
+ */
 public class EstabelecimentoFacade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -18,12 +23,20 @@ public class EstabelecimentoFacade implements Serializable {
 	private EstabelecimentoDAO estabelecimentoDAO = new EstabelecimentoDAO();
 	private static SessionFactory factory; 
 
+	/**
+	 * Cria um novo estabelecimento
+	 * @param estabelecimento
+	 */
 	public void createEstabelecimento(Estabelecimento estabelecimento) {
 		estabelecimentoDAO.beginTransaction();
 		estabelecimentoDAO.save(estabelecimento);
 		estabelecimentoDAO.commitAndCloseTransaction();
 	}
 
+	/**
+	 * Atualiza Estabelecimento
+	 * @param estabelecimento
+	 */
 	public void updateEstabelecimento(Estabelecimento estabelecimento) {
 		estabelecimentoDAO.beginTransaction();
 		Estabelecimento persistedEstabelecimento = estabelecimentoDAO.find(estabelecimento.getId());
@@ -83,6 +96,11 @@ public class EstabelecimentoFacade implements Serializable {
 		estabelecimentoDAO.commitAndCloseTransaction();
 	}
 
+	/**
+	 * Reaiza a busca de um estabelecimento de acordo com o ID
+	 * @param estabelecimentoId
+	 * @return estabelecimento
+	 */
 	public Estabelecimento findEstabelecimento(int estabelecimentoId) {
 		estabelecimentoDAO.beginTransaction();
 		Estabelecimento estabelecimento = estabelecimentoDAO.find(estabelecimentoId);
@@ -90,6 +108,10 @@ public class EstabelecimentoFacade implements Serializable {
 		return estabelecimento;
 	}
 
+	/**
+	 * Busca todos os Estebelecimentos
+	 * @return listaDeEstabelecimentos
+	 */
 	public List<Estabelecimento> listAll() {
 		estabelecimentoDAO.beginTransaction();
 		List<Estabelecimento> result = estabelecimentoDAO.findAllAsc();
@@ -97,6 +119,11 @@ public class EstabelecimentoFacade implements Serializable {
 		return result;
 	}
 	
+	/**
+	 * Busca todos os Estabelecimentos de acordo com a unidade
+	 * @param unidade
+	 * @return listaDeEstabelecimentosPorUnidade
+	 */
 	public List<Estabelecimento> listaEstabelecimentoPorUnidade(Unidade unidade) {
 		estabelecimentoDAO.beginTransaction();
 		List<Estabelecimento> result = estabelecimentoDAO.listaEstabelecimentoPorUnidade(unidade);
@@ -104,6 +131,10 @@ public class EstabelecimentoFacade implements Serializable {
 		return result;
 	}
 
+	/**
+	 * Deleta um estabelecimento
+	 * @param estabelecimento
+	 */
 	public void deleteEstabelecimento(Estabelecimento estabelecimento) {
 		estabelecimentoDAO.beginTransaction();
 		Estabelecimento persistedEstabelecimento = estabelecimentoDAO.findReferenceOnly(estabelecimento
@@ -112,6 +143,11 @@ public class EstabelecimentoFacade implements Serializable {
 		estabelecimentoDAO.commitAndCloseTransaction();
 	}
 
+	/**
+	 * Realiza uma consulta de acordo com a query passada por parâmetro
+	 * @param sql
+	 * @return listaDeObjetos
+	 */
 	public List<Object[]> buscaComQuery(String sql) {
 		estabelecimentoDAO.beginTransaction();
 		Query query = estabelecimentoDAO.selectComQuery(sql);

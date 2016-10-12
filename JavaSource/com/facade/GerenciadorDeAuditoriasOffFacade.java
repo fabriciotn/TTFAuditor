@@ -7,6 +7,12 @@ import java.util.List;
 import com.dao.GerenciadorDeAuditoriasOffDAO;
 import com.model.GerenciadorDeAuditoriasOff;
 
+/**
+ * Classe não utilizada.
+ * Será utilizada quando o sistema passar a realizar a integração via WebServices 
+ * @author TTF Informática
+ *
+ */
 public class GerenciadorDeAuditoriasOffFacade implements Serializable {
 
 	private static final long serialVersionUID = 1L;

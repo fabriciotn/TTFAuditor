@@ -12,6 +12,11 @@ import com.dao.RespostaDAO;
 import com.model.Flag;
 import com.model.Resposta;
 
+/**
+ * Classe fachada para acesso ao banco de dados.
+ * @author TTF Informática
+ *
+ */
 public class RespostaFacade implements Serializable {
 
 	private static final long		serialVersionUID	= 1L;
@@ -23,12 +28,20 @@ public class RespostaFacade implements Serializable {
 
 	private Resposta persistedResposta;
 
+	/**
+	 * Cria uma nova resposta
+	 * @param resposta
+	 */
 	public void createResposta(Resposta resposta) {
 		respostaDAO.beginTransaction();
 		respostaDAO.save(resposta);
 		respostaDAO.commitAndCloseTransaction();
 	}
 
+	/**
+	 * Atualiza uma resposta
+	 * @param resposta
+	 */
 	public void updateResposta(Resposta resposta) {
 		respostaDAO.beginTransaction();
 		
@@ -63,6 +76,11 @@ public class RespostaFacade implements Serializable {
 		respostaDAO.commitAndCloseTransaction();
 	}
 
+	/**
+	 * Realiza a busca de uma resposta de acordo com o ID
+	 * @param respostaId
+	 * @return resposta
+	 */
 	public Resposta findResposta(int respostaId) {
 		if (resposta == null) {
 			respostaDAO.beginTransaction();
@@ -73,6 +91,10 @@ public class RespostaFacade implements Serializable {
 		return resposta;
 	}
 
+	/**
+	 * Busca todas as respostas
+	 * @return listaDeRespostas
+	 */
 	public List<Resposta> listAll() {
 		respostaDAO.beginTransaction();
 		List<Resposta> result = respostaDAO.findAllAsc();
@@ -80,6 +102,11 @@ public class RespostaFacade implements Serializable {
 		return result;
 	}
 	
+	/**
+	 * Lista todas as repostas de uma auditoria pelo ID da auditoria
+	 * @param auditoria_id
+	 * @return listaDeRespostasPorIdDaAuditoria
+	 */
 	public List<Resposta> listaRespostasPorIdDaAuditoria(int auditoria_id) {
 		respostaDAO.beginTransaction();
 		List<Resposta> result = respostaDAO.listaRespostasPorIdDaAuditoria(auditoria_id);
@@ -87,6 +114,10 @@ public class RespostaFacade implements Serializable {
 		return result;
 	}
 
+	/**
+	 * Deleta uma resposta
+	 * @param resposta
+	 */
 	public void deleteResposta(Resposta resposta) {
 		respostaDAO.beginTransaction();
 		Resposta persistedResposta = respostaDAO.findReferenceOnly(resposta.getId());
@@ -94,6 +125,11 @@ public class RespostaFacade implements Serializable {
 		respostaDAO.commitAndCloseTransaction();
 	}
 
+	/**
+	 * Realiza a busca de acordo com a query recebida via parâmetro
+	 * @param sql
+	 * @return listaDeObjetos
+	 */
 	public List<Object[]> buscaComQuery(String sql) {
 		respostaDAO.beginTransaction();
 		Query query = respostaDAO.selectComQuery(sql);

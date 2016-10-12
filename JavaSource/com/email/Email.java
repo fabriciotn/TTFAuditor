@@ -15,6 +15,11 @@ import javax.mail.internet.MimeMessage;
 
 import com.sun.mail.util.MailSSLSocketFactory;
 
+/**
+ * Classe que realiza o envio de e-mails
+ * @author TTF Informática
+ *
+ */
 public class Email {
 	
 	//Configuração da conta de envio

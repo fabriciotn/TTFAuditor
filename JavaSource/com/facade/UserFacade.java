@@ -12,11 +12,23 @@ import com.util.ADAuthenticator;
 import com.util.Criptografia;
 import com.util.GeradorDeSenha;
 
+/**
+ * Classe fachada para acesso ao banco de dados.
+ * @author TTF Informática
+ *
+ */
 public class UserFacade implements Serializable {
 
 	private static final long	serialVersionUID	= 1L;
 	private UserDAO				userDAO				= new UserDAO();
 
+	/**
+	 * Verifica se o usuário e senha são válidos
+	 * @param login
+	 * @param password
+	 * @param service
+	 * @return User
+	 */
 	public User isValidLogin(String login, String password, boolean service) {
 		if(!service)
 			password = Criptografia.criptografa(password);
@@ -46,6 +58,12 @@ public class UserFacade implements Serializable {
 		return user;
 	}
 
+	/**
+	 * Método para realizar a validação LDAP, no Active Directory
+	 * @param login
+	 * @param password
+	 * @return usuario
+	 */
 	public User validaAD(String login, String password) {
 		// instanciando a classe ADAuthenticator para fazer
 		// a validação do Login e senha no servidor do AD
@@ -56,12 +74,21 @@ public class UserFacade implements Serializable {
 		return usuarioAd;
 	}
 
+	/**
+	 * Cria um novo usuário
+	 * @param user
+	 */
 	public void createUsuario(User user) {
 		userDAO.beginTransaction();
 		userDAO.save(user);
 		userDAO.commitAndCloseTransaction();
 	}
 
+	/**
+	 * Busca um usuário de acordo com o ID
+	 * @param userId
+	 * @return usuario
+	 */
 	public User findUsuario(int userId) {
 		userDAO.beginTransaction();
 		User user = userDAO.find(userId);
@@ -69,6 +96,10 @@ public class UserFacade implements Serializable {
 		return user;
 	}
 
+	/**
+	 * Lista todos os usuários
+	 * @return listaDeUsuarios
+	 */
 	public List<User> listAll() {
 		userDAO.beginTransaction();
 		List<User> result = userDAO.findAllAsc();
@@ -76,6 +107,10 @@ public class UserFacade implements Serializable {
 		return result;
 	}
 
+	/**
+	 * Atualiza um usuário específicos
+	 * @param user
+	 */
 	public void updateUsuario(User user) {
 		userDAO.beginTransaction();
 		User userFind = userDAO.find(user.getId());
@@ -141,6 +176,11 @@ public class UserFacade implements Serializable {
 		userDAO.commitAndCloseTransaction();
 	}
 
+	/**
+	 * Método para realizar a alteração de senha de um usuário.
+	 * Realiza a alteração da senha e envia para o e-mail do usuário.
+	 * @param login
+	 */
 	public void resetaSenha(String login) {
 		userDAO.beginTransaction();
 		User user = userDAO.findUserByLogin(login);

@@ -10,6 +10,11 @@ import org.hibernate.SessionFactory;
 import com.dao.QuestionarioDAO;
 import com.model.Questionario;
 
+/**
+ * Classe fachada para acesso ao banco de dados.
+ * @author TTF Informática
+ *
+ */
 public class QuestionarioFacade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -17,12 +22,20 @@ public class QuestionarioFacade implements Serializable {
 	private QuestionarioDAO questionarioDAO = new QuestionarioDAO();
 	private static SessionFactory factory; 
 
+	/**
+	 * Cria um novo questionário
+	 * @param questionario
+	 */
 	public void createQuestionario(Questionario questionario) {
 		questionarioDAO.beginTransaction();
 		questionarioDAO.save(questionario);
 		questionarioDAO.commitAndCloseTransaction();
 	}
 
+	/**
+	 * Atualiza um questionário
+	 * @param questionario
+	 */
 	public void updateQuestionario(Questionario questionario) {
 		questionarioDAO.beginTransaction();
 		Questionario persistedQuestionario = questionarioDAO.find(questionario.getId());
@@ -36,6 +49,11 @@ public class QuestionarioFacade implements Serializable {
 		questionarioDAO.commitAndCloseTransaction();
 	}
 
+	/**
+	 * Busca um questionário de acordo com o ID
+	 * @param questionarioId
+	 * @return questionario
+	 */
 	public Questionario findQuestionario(int questionarioId) {
 		questionarioDAO.beginTransaction();
 		Questionario questionario = questionarioDAO.find(questionarioId);
@@ -43,6 +61,10 @@ public class QuestionarioFacade implements Serializable {
 		return questionario;
 	}	
 
+	/**
+	 * Busca todos os questionários
+	 * @return listaDeQuestionarios
+	 */
 	public List<Questionario> listAll() {
 		questionarioDAO.beginTransaction();
 		List<Questionario> result = questionarioDAO.findAllAsc();
@@ -50,6 +72,10 @@ public class QuestionarioFacade implements Serializable {
 		return result;
 	}
 
+	/**
+	 * Deleta um questionário
+	 * @param questionario
+	 */
 	public void deleteQuestionario(Questionario questionario) {
 		questionarioDAO.beginTransaction();
 		Questionario persistedQuestionario = questionarioDAO.findReferenceOnly(questionario
@@ -58,6 +84,11 @@ public class QuestionarioFacade implements Serializable {
 		questionarioDAO.commitAndCloseTransaction();
 	}
 
+	/**
+	 * Realiza a busca de acordo com a query passada via parâmetro
+	 * @param sql
+	 * @return listaDeObjetos
+	 */
 	public List<Object[]> buscaComQuery(String sql) {
 		questionarioDAO.beginTransaction();
 		Query query = questionarioDAO.selectComQuery(sql);

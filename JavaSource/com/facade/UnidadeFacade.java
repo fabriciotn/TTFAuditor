@@ -10,6 +10,11 @@ import org.hibernate.SessionFactory;
 import com.dao.UnidadeDAO;
 import com.model.Unidade;
 
+/**
+ * Classe fachada para acesso ao banco de dados.
+ * @author TTF Informática
+ *
+ */
 public class UnidadeFacade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -17,12 +22,20 @@ public class UnidadeFacade implements Serializable {
 	private UnidadeDAO unidadeDAO = new UnidadeDAO();
 	private static SessionFactory factory; 
 
+	/**
+	 * Cria uma nova unidade
+	 * @param unidade
+	 */
 	public void createUnidade(Unidade unidade) {
 		unidadeDAO.beginTransaction();
 		unidadeDAO.save(unidade);
 		unidadeDAO.commitAndCloseTransaction();
 	}
 
+	/**
+	 * Atualiza uma unidade
+	 * @param unidade
+	 */
 	public void updateUnidade(Unidade unidade) {
 		unidadeDAO.beginTransaction();
 		Unidade persistedUnidade = unidadeDAO.find(unidade.getId());
@@ -42,6 +55,11 @@ public class UnidadeFacade implements Serializable {
 		unidadeDAO.commitAndCloseTransaction();
 	}
 
+	/**
+	 * Busca uma unidade de acordo com o ID
+	 * @param unidadeId
+	 * @return
+	 */
 	public Unidade findUnidade(int unidadeId) {
 		unidadeDAO.beginTransaction();
 		Unidade unidade = unidadeDAO.find(unidadeId);
@@ -49,6 +67,10 @@ public class UnidadeFacade implements Serializable {
 		return unidade;
 	}
 
+	/**
+	 * Lista todas as unidades
+	 * @return listaDeUnidades
+	 */
 	public List<Unidade> listAll() {
 		unidadeDAO.beginTransaction();
 		List<Unidade> result = unidadeDAO.findAllAsc();
@@ -56,6 +78,10 @@ public class UnidadeFacade implements Serializable {
 		return result;
 	}
 
+	/**
+	 * Deleta uma unidade
+	 * @param unidade
+	 */
 	public void deleteUnidade(Unidade unidade) {
 		unidadeDAO.beginTransaction();
 		Unidade persistedUnidade = unidadeDAO.findReferenceOnly(unidade
@@ -64,6 +90,11 @@ public class UnidadeFacade implements Serializable {
 		unidadeDAO.commitAndCloseTransaction();
 	}
 
+	/**
+	 * Realiza a busca de acordo com a query passada via parâmetro
+	 * @param sql
+	 * @return listaDeObjetos
+	 */
 	public List<Object[]> buscaComQuery(String sql) {
 		unidadeDAO.beginTransaction();
 		Query query = unidadeDAO.selectComQuery(sql);
