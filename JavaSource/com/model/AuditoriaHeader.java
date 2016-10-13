@@ -2,6 +2,12 @@ package com.model;
 
 import java.util.Date;
 
+/**
+ * Classe modelo para o Header de auditorias
+ * Não é utilizado hoje. Será utilizado somente quando o sistema passar a trabalhar com o WebServices
+ * @author TTF Informática
+ *
+ */
 public class AuditoriaHeader {
 
 	private int id;

@@ -28,6 +28,11 @@ import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+/**
+ * Classe modelo para Auditorias
+ * @author TTF Informática
+ *
+ */
 @Entity
 @BatchSize(size = 500)
 @XmlRootElement

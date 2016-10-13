@@ -3,9 +3,13 @@ package com.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * Classe para realizar a criptografia das senhas.
+ * Utiliza a codificação SHA-256
+ * @author TTF Informática
+ *
+ */
 public class Criptografia {
-
-	
 
 	public static String criptografa(String senha){
 		MessageDigest md;

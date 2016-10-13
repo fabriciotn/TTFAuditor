@@ -10,6 +10,11 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.BatchSize;
 
+/**
+ * Classe de modelo para os parâmetros
+ * @author TTF Informática
+ *
+ */
 @Entity
 @RequestScoped
 @BatchSize(size = 500)

@@ -15,6 +15,11 @@ import javax.naming.ldap.LdapContext;
 import com.model.Role;
 import com.model.User;
 
+/**
+ * Classe que realiza efetivamente a conexão ao Active Directory
+ * @author TTF Informática
+ *
+ */
 public class ADAuthenticator {
 
     private String domain;

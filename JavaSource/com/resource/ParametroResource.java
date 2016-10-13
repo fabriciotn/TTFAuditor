@@ -13,6 +13,11 @@ import com.facade.ParametrosFacade;
 import com.model.Parametros;
 import com.thoughtworks.xstream.XStream;
 
+/**
+ * Classe responsável pelos métodos por serializar e deserializar Parâmetros
+ * @author TTF Informática
+ *
+ */
 public class ParametroResource {
 
 	private String caminho;

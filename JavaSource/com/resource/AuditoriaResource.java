@@ -14,6 +14,11 @@ import com.facade.AuditoriaFacade;
 import com.model.Auditoria;
 import com.thoughtworks.xstream.XStream;
 
+/**
+ * Classe responsável pelos métodos por serializar e deserializar Auditorias
+ * @author TTF Informática
+ *
+ */
 public class AuditoriaResource {
 
 	private String caminho;
@@ -26,9 +31,7 @@ public class AuditoriaResource {
 
 	/**
 	 * Cria um arquivo XML de acordo com o id da auditoria passada
-	 * 
 	 * @param caminho
-	 * 
 	 * @param idAuditoria
 	 */
 	public void serializaAuditoria(Auditoria auditoria) {

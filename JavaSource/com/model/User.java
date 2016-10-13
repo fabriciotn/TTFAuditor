@@ -33,6 +33,11 @@ import org.hibernate.annotations.BatchSize;
 
 import com.util.Criptografia;
 
+/**
+ * Classe de modelo para usuário
+ * @author TTF Informática
+ *
+ */
 @Entity
 @Table(name = "USERS")
 @NamedQuery(name = "User.findUserByLogin", query = "select u from User u where u.login = :login")

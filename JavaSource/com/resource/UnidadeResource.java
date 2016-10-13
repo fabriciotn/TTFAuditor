@@ -14,6 +14,11 @@ import com.facade.UnidadeFacade;
 import com.model.Unidade;
 import com.thoughtworks.xstream.XStream;
 
+/**
+ * Classe responsável pelos métodos por serializar e deserializar Unidades
+ * @author TTF Informática
+ *
+ */
 public class UnidadeResource {
 
 	private String caminho;

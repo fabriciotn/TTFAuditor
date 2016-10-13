@@ -1,5 +1,10 @@
 package com.util;
 
+/**
+ * Classe para gerar senhas automáticas
+ * @author TTF Informática
+ *
+ */
 public class GeradorDeSenha {
 
 	public static String gera() {

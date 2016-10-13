@@ -16,6 +16,11 @@ import com.facade.EstabelecimentoFacade;
 import com.model.Estabelecimento;
 import com.thoughtworks.xstream.XStream;
 
+/**
+ * Classe responsável pelos métodos por serializar e deserializar Estabelecimentos
+ * @author TTF Informática
+ *
+ */
 public class EstabelecimentoResource {
 
 	private EstabelecimentoFacade estabelecimentoFacade = new EstabelecimentoFacade();

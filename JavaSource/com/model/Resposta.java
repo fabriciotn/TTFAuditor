@@ -25,6 +25,11 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.annotations.BatchSize;
 
+/**
+ * Classe de modelo para resposta
+ * @author TTF Informática
+ *
+ */
 @Entity
 @SessionScoped
 @BatchSize(size = 500)

@@ -4,6 +4,11 @@ import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.context.FacesContext;
 
+/**
+ * Classe referente a exibição de mensagens no sistema
+ * @author TTF Informática
+ *
+ */
 public class JSFMessageUtil {
 	public void sendInfoMessageToUser(String message) {
 		FacesMessage facesMessage = createMessage(FacesMessage.SEVERITY_INFO, message);

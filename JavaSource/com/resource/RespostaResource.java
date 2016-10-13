@@ -16,6 +16,11 @@ import com.facade.RespostaFacade;
 import com.model.Resposta;
 import com.thoughtworks.xstream.XStream;
 
+/**
+ * Classe responsável pelos métodos por serializar e deserializar Respostas
+ * @author TTF Informática
+ *
+ */
 public class RespostaResource {
 
 	private RespostaFacade respostaFacade = new RespostaFacade();

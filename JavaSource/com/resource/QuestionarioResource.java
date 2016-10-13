@@ -14,6 +14,11 @@ import com.facade.QuestionarioFacade;
 import com.model.Questionario;
 import com.thoughtworks.xstream.XStream;
 
+/**
+ * Classe responsável pelos métodos por serializar e deserializar Questionários
+ * @author TTF Informática
+ *
+ */
 public class QuestionarioResource {
 
 	private String caminho;

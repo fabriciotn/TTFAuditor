@@ -9,13 +9,26 @@ import com.model.Resposta;
 import com.resource.EstabelecimentoResource;
 import com.resource.RespostaResource;
 
+/**
+ * Classe responsável por importar os XML's
+ * @author TTF Informática
+ *
+ */
 public class ImportaXml {
 	
+	/**
+	 * Importa o XML de estabelecimento
+	 * @param caminho
+	 */
 	public void importaEstabelecimentoParaServidor(String caminho){
 		new EstabelecimentoFacade().updateEstabelecimento(new EstabelecimentoResource().deserializaEstabelecimento(caminho));
 		moveArquivo(new File(caminho));
 	}
 	
+	/**
+	 * Importa o XML de respostas
+	 * @param caminho
+	 */
 	public void importaRespostaParaServidor(String caminho){
 		List<Resposta> respostas = new RespostaResource().deserializaListaDeRespostas(caminho);
 		for (Resposta resposta : respostas) {
@@ -25,6 +38,10 @@ public class ImportaXml {
 		moveArquivo(new File(caminho));
 	}
 	
+	/**
+	 * Move os arquivos após realizar a leitura
+	 * @param file
+	 */
 	public void moveArquivo(File file){
 		String fullPath = file.getAbsolutePath().replace(file.getName(), "") + "\\importados";
 		File newDir = new File(fullPath);

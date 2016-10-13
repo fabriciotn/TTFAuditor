@@ -14,6 +14,11 @@ import com.facade.UserFacade;
 import com.model.User;
 import com.thoughtworks.xstream.XStream;
 
+/**
+ * Classe responsável pelos métodos por serializar e deserializar Usuários
+ * @author TTF Informática
+ *
+ */
 public class UsuarioResource {
 
 	private String caminho;

@@ -17,6 +17,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.BatchSize;
 
+/**
+ * Classe de modelo para Estabelecimento
+ * @author TTF Informática
+ *
+ */
 @Entity
 @BatchSize(size = 500)
 @XmlRootElement

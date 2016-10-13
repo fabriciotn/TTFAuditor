@@ -4,6 +4,11 @@ import com.model.Auditoria;
 import com.resource.EstabelecimentoResource;
 import com.resource.RespostaResource;
 
+/**
+ * Classe responsável pela exportação dos arquivos XML
+ * @author TTF Informática
+ *
+ */
 public class ExportaXml {
 	
 	private String caminho;

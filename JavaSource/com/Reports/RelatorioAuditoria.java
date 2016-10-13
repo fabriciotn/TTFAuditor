@@ -14,12 +14,23 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.util.JRLoader;
 
-/* Primeira parte */
+/**
+ * Classe responsável pela geração do Relatório de auditorias
+ * @author TTF Informática
+ *
+ */
 public class RelatorioAuditoria {
 
 	private Connection connection;
 	Calendar data = Calendar.getInstance();
 
+	/**
+	 * Metodo resposável pela geração do relatório de auditorias
+	 * @param usuarioLogado
+	 * @param id_auditoria
+	 * @param id_estabelecimento
+	 * @return arrayDeBytes
+	 */
 	public byte[] imprimeRelatorio(String usuarioLogado, int id_auditoria, int id_estabelecimento) {
 		byte[] relatorio = null;
 		try {
@@ -49,6 +60,10 @@ public class RelatorioAuditoria {
 		return relatorio;
 	}
 
+	/**
+	 * Realiza a conexão com o banco exclusivamente para o relatório
+	 * @return Connection
+	 */
 	public Connection getConection() {
 		ResourceBundle bundle = ResourceBundle.getBundle("messages");
 		String senhaBanco = bundle.getString("senhaBanco");
