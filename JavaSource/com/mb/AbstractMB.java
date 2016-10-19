@@ -4,6 +4,11 @@ import org.primefaces.context.RequestContext;
 
 import com.util.JSFMessageUtil;
 
+/**
+ * Superclasse para gestão das mensagens nos Manegeds Beans
+ * @author TTF Informática
+ *
+ */
 public class AbstractMB {
 	private static final String KEEP_DIALOG_OPENED = "KEEP_DIALOG_OPENED";
 

@@ -30,6 +30,11 @@ import com.model.Questionario;
 import com.model.Resposta;
 import com.model.User;
 
+/**
+ * Managed Bean para gestão das Auditorias
+ * @author TTF Informática
+ *
+ */
 @RequestScoped
 @ManagedBean
 public class AuditoriaMB extends AbstractMB implements Serializable {
@@ -51,6 +56,9 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 	private boolean offLine;
 	private Parametros parametros;
 
+	/**
+	 * Construtor
+	 */
 	public AuditoriaMB() {
 		usuarioLogado = (User) FacesContext.getCurrentInstance()
 				.getExternalContext().getSessionMap().get("user");
@@ -70,6 +78,12 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		this.offLine = offLine;
 	}
 
+	/**
+	 * Método responsável por verificar se uma pergunta pode ser alterada,
+	 * de acordo com a data em relação ao parâmetro.
+	 * @param dataDaResposta
+	 * @return true or false
+	 */
 	public boolean podeEditar(Date dataDaResposta) {
 		if (dataDaResposta == null) {
 			podeEditar = false;
@@ -101,6 +115,9 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return podeEditar;
 	}
 
+	/**
+	 * Conta perguntas respondidas e não respondidas
+	 */
 	private void contaPerguntas() {
 		quantidadeDePerguntasNaoRespondidas = 0;
 		quantidadeDePerguntasRespondidas = 0;
@@ -160,6 +177,10 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return true;
 	}
 
+	/**
+	 * Método para retornar a aba corrente
+	 * @return currentTab
+	 */
 	public int getCurrentTab() {
 		if (FacesContext.getCurrentInstance().getExternalContext()
 				.getSessionMap().get("currentTab") != null)
@@ -168,10 +189,17 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return currentTab;
 	}
 
+	/**
+	 * Seta a aba corrente
+	 */
 	public void setCurrentTab(int currentTab) {
 		this.currentTab = currentTab;
 	}
 
+	/**
+	 * Método para controlar a mudança de abas
+	 * @param event
+	 */
 	public void onTabChange(org.primefaces.event.TabChangeEvent event) {
 		String titulo = event.getTab().getTitle();
 
@@ -196,6 +224,11 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		request.getSession().setAttribute("currentTab", currentTab);
 	}
 
+	/**
+	 * Método para buscar resposatas de uma auditoria, buscando pelo id do questionário
+	 * @param questionario_id
+	 * @return listaDeResposta
+	 */
 	public List<Resposta> pegaRespostas(java.lang.Integer questionario_id) {
 		respostas = new ArrayList<Resposta>();
 
@@ -206,6 +239,10 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return respostas;
 	}
 
+	/**
+	 * Busca usuário logado
+	 * @return
+	 */
 	public User getUsuarioLogado() {
 		if (auditoriaFacade == null) {
 			auditoriaFacade = new AuditoriaFacade();
@@ -253,6 +290,9 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		this.auditoria = auditoria;
 	}
 
+	/**
+	 * Gera o relatório de Auditorias
+	 */
 	public void visualizarRelatorio() {
 		RelatorioAuditoria relat = new RelatorioAuditoria();
 		byte[] b = relat.imprimeRelatorio(usuarioLogado.getName(),
@@ -277,6 +317,10 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		FacesContext.getCurrentInstance().responseComplete();
 	}
 
+	/**
+	 * Cria auditoria
+	 * @return paginaDeSucessoOuErro
+	 */
 	public String createAuditoria() {
 		try {
 			auditoria.setUser(usuarioLogado);
@@ -296,6 +340,10 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return "/restrito/cadastrarAuditoria.xhtml";
 	}
 
+	/**
+	 * Método para adicionar perguntas à auditoria
+	 * @param auditoria
+	 */
 	private void adicionaPerguntas(Auditoria auditoria) {
 		List<Pergunta> perguntas = new PerguntaMB().getAllPerguntas();
 		int idQuestionarioAnterior = 0;
@@ -338,6 +386,11 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		updateAuditoria();
 	}
 
+	/**
+	 * Método para incluir pergunta "Responsável" à auditoria
+	 * @param questionario
+	 * @return resposta
+	 */
 	private Resposta incluiPerguntaNomeDoResponsavel(Questionario q) {
 		Resposta resposta = new Resposta();
 		resposta.setPergunta("RESPONSÁVEL");
@@ -349,6 +402,11 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return resposta;
 	}
 
+	/**
+	 * Método para incluir pergunta "Observação" à auditoria
+	 * @param questionario
+	 * @return resposta
+	 */
 	private Resposta incluiPerguntaObservacao(Questionario q) {
 		Resposta resposta = new Resposta();
 		resposta.setPergunta("CONSIDERAÇÕES FINAIS");
@@ -360,6 +418,9 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return resposta;
 	}
 
+	/**
+	 * Atualiza auditoria
+	 */
 	public void updateAuditoria() {
 		try {
 			if (auditoria.getId() == 0) {
@@ -379,6 +440,9 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		}
 	}
 	
+	/**
+	 * Atualiza Observações da Auditoria
+	 */
 	public void updateObservacaoesAuditoria() {
 		try {
 			auditoria.setUser(usuarioLogado);
@@ -395,6 +459,9 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		}
 	}
 
+	/**
+	 * Deleta auditoria
+	 */
 	public void deleteAuditoria() {
 		try {
 			getAuditoriaFacade().deleteAuditoria(auditoria);
@@ -410,6 +477,10 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		}
 	}
 
+	/**
+	 * Deleta auditoria de acordo com o id
+	 * @param id
+	 */
 	public void deleteAuditoria(String id) {
 		int idAuditoria = Integer.parseInt(id);
 		auditoria = auditoriaFacade.findAuditoria(idAuditoria);
@@ -431,6 +502,9 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return auditorias;
 	}
 
+	/**
+	 * Carrega auditorias
+	 */
 	private void loadAuditorias() {
 		if (usuarioLogado.isAdmin())
 			if (isOffLine())
@@ -464,6 +538,11 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		auditoria = new Auditoria();
 	}
 	
+	/**
+	 * Inclui auditoria na sessão
+	 * @param auditoria_id
+	 * @return auditoria
+	 */
 	public Auditoria colocaAuditoriaMBNaSessao(int auditoria_id){
 		if(auditoria == null && auditoria_id != 0){
 			auditoria = getAuditoriaFacade().findAuditoria(auditoria_id);
@@ -471,6 +550,10 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return auditoria;
 	}
 
+	/**
+	 * Pesquisa auditoria
+	 * @return
+	 */
 	public Auditoria pesquisaAuditoria() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) facesContext.getExternalContext()
@@ -483,10 +566,17 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return auditoria;
 	}
 
+	/**
+	 * Pega data de hoje
+	 * @return dataDeHoje
+	 */
 	public Date getHoje() {
 		return new Date();
 	}
 
+	/**
+	 * Chama o método para geração dos arquivos XML
+	 */
 	public void geraArquivosXml() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ServletContext scontext = (ServletContext) facesContext
@@ -506,6 +596,10 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		copiaArquivosParaServidor(diretorio.getPath());
 	}
 
+	/**
+	 * Chama os métodos para leitura dos arquivos XML
+	 * @return
+	 */
 	private boolean leArquivosXml() {
 		ImportaXml xml = new ImportaXml();
 
@@ -539,6 +633,11 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return true;
 	}
 
+	/**
+	 * Em um sistema configurado como módulo On-line, 
+	 * este método recebe os dados do notebook e realiza a atualização no servidor
+	 * @return paginaASerExibida
+	 */
 	public String importaDadosDoLocalNoServidor() {
 		if (leArquivosXml()) {
 			closeDialog();
@@ -551,6 +650,11 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return "/restrito/importaDoLocalParaOServidor.xhtml";
 	}
 
+	/**
+	 * Em um sistema configurado como módulo Off-line,
+	 * este método envia os dados para o servidor
+	 * @return
+	 */
 	public String enviaDadosParaOServidor() {
 		geraArquivosXml();
 
@@ -560,6 +664,15 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return "/restrito/home.xhtml";
 	}
 
+	/**
+	 * Método para realizar a cópia dos arquivos XML do notebook para o servidor
+	 * ATENÇÃO: Sempre lembrar de atualizar o camiho do diretório de recebimento dos dados.
+	 * Caso seja necessário mudar o servidor, este caminho deve ser alterado.
+	 * Em caso de dificuldades de envio/recebimento,
+	 * deve ser verificado as permissões na pasta IntegraçãoAuditoria dento do servidor.
+	 * Método pode quebrar caso a senha seja alterada
+	 * @param caminhoOrigem
+	 */
 	public void copiaArquivosParaServidor(String caminhoOrigem){
 		
 		String deletaMapeamento = "NET USE J: /DELETE /YES";
@@ -588,7 +701,10 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		moveArquivo(origem);
 	}
 	
-	
+	/**
+	 * Troca os arquivos de pasta após realizar a leitura
+	 * @param file
+	 */
 	public void moveArquivo(File file){
 		String fullPath = file.getAbsolutePath().replace(file.getName(), "") + "\\exportados";
 		File newDir = new File(fullPath);
@@ -615,6 +731,11 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		}
 	}
 
+	/**
+	 * Em um sistema configurado como módulo Off-line,
+	 * realiza a chamada das Bat's locais que atualizam a base do notebook.
+	 * @return
+	 */
 	public String importaDoServidorParaLocal() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ServletContext scontext = (ServletContext) facesContext
@@ -655,6 +776,11 @@ public class AuditoriaMB extends AbstractMB implements Serializable {
 		return "/restrito/home.xhtml";
 	}
 	
+	/**
+	 * Método para executar comandos do MS-DOS
+	 * @param comando
+	 * @return sucesso
+	 */
 	private int executaComandoDOS(String comando){
 		System.out.println("Executando comando: " + comando);
 		
