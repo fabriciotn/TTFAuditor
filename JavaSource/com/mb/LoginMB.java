@@ -50,6 +50,13 @@ public class LoginMB extends AbstractMB implements Serializable {
 		return realizarLogin(home, error);
 	}
 
+	/**
+	 * Método responsável por receber os dados de login e senha da página,
+	 * preparar e invocar o método que realiza o login.
+	 * @param paginaHome
+	 * @param paginaDeError
+	 * @return pagina
+	 */
 	private String realizarLogin(String home, String error) {
 		ResourceBundle bundle = ResourceBundle.getBundle("messages");
 
@@ -76,6 +83,10 @@ public class LoginMB extends AbstractMB implements Serializable {
 		return error;
 	}
 	
+	/**
+	 * Método para invocar o reset de senha
+	 * @return paginaInicial
+	 */
 	public String recuperaSenha(){
 		UserFacade userFacade = new UserFacade();
 		userFacade.resetaSenha(login);

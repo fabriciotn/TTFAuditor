@@ -19,6 +19,11 @@ import com.model.Questionario;
 import com.model.User;
 import com.util.Criptografia;
 
+/**
+ * Managed Bean para gestão dos usuários
+ * @author TTF Informática
+ *
+ */
 @RequestScoped
 @ManagedBean(name = "userMB")
 public class UserMB extends AbstractMB implements Serializable {
@@ -38,6 +43,10 @@ public class UserMB extends AbstractMB implements Serializable {
 	private List<Questionario>	questionarios;
 	private boolean offLine;
 
+	/**
+	 * Verifica se o método é off-line
+	 * @return
+	 */
 	public boolean isOffLine() {
 		return offLine;
 	}
@@ -60,6 +69,9 @@ public class UserMB extends AbstractMB implements Serializable {
 			throw new RuntimeException("Problemas com usuário");
 	}
 
+	/**
+	 * Carrega os questionários de acordo com a permissão do usuário
+	 */
 	private void loadQuestionarios() {
 		if (questionarios == null) {
 			questionarios = new ArrayList<Questionario>();
@@ -256,6 +268,9 @@ public class UserMB extends AbstractMB implements Serializable {
 		}
 	}
 
+	/**
+	 * Método para realizar a troca da senha do usuário logado
+	 */
 	public void mudarMinhaSenha() {
 		if (usuarioLogado.getPassword().equals(Criptografia.criptografa(senhaDigitada))) {
 			usuarioLogado.setPasswordSemCriptografia(getNovasenha());

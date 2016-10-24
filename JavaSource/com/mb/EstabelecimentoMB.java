@@ -14,6 +14,11 @@ import com.model.Estabelecimento;
 import com.model.User;
 import com.util.RetiraMascaras;
 
+/**
+ * Managed Bean para gestão dos Estabelecimentos
+ * @author TTF Informática
+ *
+ */
 @RequestScoped
 @ManagedBean
 public class EstabelecimentoMB extends AbstractMB implements Serializable {
@@ -26,7 +31,10 @@ public class EstabelecimentoMB extends AbstractMB implements Serializable {
 	private User					usuarioLogado;
 	private boolean					mostrar;
 
-	public void teste() {
+	/**
+	 * Método responsável por verificar e adicionar o estabelecimento recebido via GET na sessão.
+	 */
+	public void colocaEstabelecimentoNaSessao() {
 		int estabelecimento_id = 0;
 		String idEmString = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("estabelecimento_id");
 		
