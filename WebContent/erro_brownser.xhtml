@@ -1,13 +1,17 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<ui:composition template="/WEB-INF/templates/template.xhtml"
-	xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
 
-	<ui:define name="conteudo">
-		<f:loadBundle basename="messages" var="msg" />
+<f:loadBundle basename="messages" var="msg" />
+<h:head>
+	<title>#{msg.tituloPagina}</title>
+	</h:head>
+	<h:body>
+
 		<center>
 			<div id="header" align="center">
 				<br /> <br /> <br /> <img name="logo"
@@ -15,6 +19,5 @@
 				<h1>Seu navegador ainda não está homologado! <br/>Por favor, utilize o Google Chrome.</h1>
 			</div>
 		</center>
-	</ui:define>
-
-</ui:composition>
+	</h:body>
+</html>
